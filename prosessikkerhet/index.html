@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Prosessikkerhet Vg2</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: kontrollrom-inspirert – fast toppstripe med fremdrift, modulliste til venstre som en tagliste i et P&ID, lesekolonne på ~68 tegn. */
+:root{
+  --bg:#F2F4F3; --panel:#FFFFFF; --ink:#18232B; --muted:#55636B; --line:#D3DADB;
+  --accent:#C2410C; --accent-soft:#FBE7DC; --steel:#2F5D73; --steel-soft:#E1ECF0;
+  --ok:#2E7D4F; --ok-soft:#DFF1E6; --warn:#B7791F; --warn-soft:#FBF0D9; --bad:#B42318; --bad-soft:#FBE3E1;
+  --ghs:#D7261E; --water:#A9D3E8;
+  --f-display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --top-h:56px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12181C; --panel:#1A2228; --ink:#E6ECEE; --muted:#9AA8AF; --line:#2C3840;
+  --accent:#F08A4B; --accent-soft:#3A2418; --steel:#7FB3CB; --steel-soft:#1C2F38;
+  --ok:#6CCB93; --ok-soft:#173326; --warn:#E8B860; --warn-soft:#3A2E15; --bad:#F2857B; --bad-soft:#3D1E1B;
+  --ghs:#F0544B; --water:#2A5C74; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12181C; --panel:#1A2228; --ink:#E6ECEE; --muted:#9AA8AF; --line:#2C3840;
+  --accent:#F08A4B; --accent-soft:#3A2418; --steel:#7FB3CB; --steel-soft:#1C2F38;
+  --ok:#6CCB93; --ok-soft:#173326; --warn:#E8B860; --warn-soft:#3A2E15; --bad:#F2857B; --bad-soft:#3D1E1B;
+  --ghs:#F0544B; --water:#2A5C74; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--ink)}
+a{color:var(--steel)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* Toppstripe */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--ink);color:var(--bg);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+.top-in{max-width:1180px;margin:0 auto;height:var(--top-h);display:flex;align-items:center;gap:16px}
+.brand{font-family:var(--f-display);font-weight:700;font-size:1.35rem;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap}
+.brand span{color:var(--accent)}
+.home-link{font-family:var(--f-mono);font-size:.78rem;color:var(--bg);opacity:.8;text-decoration:none;white-space:nowrap;border:1px solid color-mix(in srgb,var(--bg) 40%,transparent);border-radius:4px;padding:3px 8px}
+.home-link:hover{opacity:1}
+.prog{flex:1;display:flex;align-items:center;gap:10px;min-width:0;justify-content:flex-end}
+.prog-bar{width:min(220px,30vw);height:8px;background:color-mix(in srgb,var(--bg) 25%,transparent);border-radius:4px;overflow:hidden}
+.prog-fill{height:100%;background:var(--accent);width:0;transition:width .4s}
+.prog-txt{font-family:var(--f-mono);font-size:.78rem;white-space:nowrap;opacity:.9}
+
+/* Ramme */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:260px minmax(0,1fr);gap:40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 80px}
+nav.side{position:sticky;top:calc(var(--top-h) + env(safe-area-inset-top,0px) + 24px);align-self:start}
+.side h2{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;font-weight:500}
+.side ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.side a{display:grid;grid-template-columns:52px 1fr 18px;align-items:center;gap:8px;padding:8px 10px;border-radius:6px;text-decoration:none;color:var(--ink);font-size:.95rem;line-height:1.3}
+.side a:hover{background:var(--steel-soft)}
+.side a[aria-current="page"]{background:var(--ink);color:var(--bg)}
+.tag{font-family:var(--f-mono);font-size:.72rem;font-weight:500;border:1.5px solid currentColor;border-radius:3px;padding:1px 4px;text-align:center;color:var(--steel)}
+.side a[aria-current="page"] .tag{color:var(--accent)}
+.chk{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--line)}
+.chk.done{background:var(--ok);border-color:var(--ok)}
+.side .sep{height:1px;background:var(--line);margin:8px 0}
+
+/* Innhold */
+main{min-width:0}
+section.mod{max-width:72ch}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);display:flex;gap:12px;flex-wrap:wrap}
+.eyebrow .t{color:var(--muted)}
+h1,h2,h3{font-family:var(--f-display);line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.2rem,5vw,3.3rem);font-weight:700;margin:8px 0 14px;letter-spacing:.005em}
+h2{font-size:1.75rem;font-weight:600;margin:40px 0 10px}
+h3{font-size:1.3rem;font-weight:600;margin:26px 0 6px}
+p{margin:0 0 14px}
+.lead{font-size:1.15rem;color:var(--muted)}
+ul.b,ol.b{padding-left:22px;margin:0 0 14px}
+ul.b li,ol.b li{margin-bottom:6px}
+strong{font-weight:700}
+.goals{background:var(--steel-soft);border-radius:8px;padding:16px 20px;margin:20px 0}
+.goals h3{margin:0 0 6px;font-size:1.05rem;font-family:var(--f-mono);font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--steel)}
+.goals ul{margin:0;padding-left:20px}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 16px;margin:18px 0;border-radius:0 6px 6px 0}
+.callout.steel{border-color:var(--steel);background:var(--steel-soft)}
+.def{display:grid;grid-template-columns:minmax(120px,30%) 1fr;gap:0;border-top:1px solid var(--line);margin:14px 0}
+.def>div{padding:9px 10px 9px 0;border-bottom:1px solid var(--line)}
+.def>div:nth-child(odd){font-weight:700}
+.tbl{overflow-x:auto;margin:14px 0}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.num{font-variant-numeric:tabular-nums;font-family:var(--f-mono)}
+
+/* Aktivitetsbokser */
+.act{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px;margin:24px 0}
+.act-h{display:flex;gap:10px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.act-h .lbl{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;background:var(--ink);color:var(--bg);padding:3px 8px;border-radius:3px}
+.act-h h3{margin:0;font-size:1.25rem}
+details{border:1px solid var(--line);border-radius:6px;padding:10px 14px;margin:10px 0;background:var(--bg)}
+summary{cursor:pointer;font-weight:700;color:var(--steel)}
+details[open] summary{margin-bottom:8px}
+textarea{width:100%;min-height:90px;font:inherit;font-size:.95rem;padding:10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);resize:vertical}
+select{font:inherit;font-size:.95rem;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);max-width:100%}
+.btn{font-family:var(--f-display);font-weight:600;font-size:1.05rem;letter-spacing:.04em;text-transform:uppercase;border:0;border-radius:6px;padding:9px 18px;cursor:pointer;background:var(--ink);color:var(--bg)}
+.btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn.acc{background:var(--accent);color:#fff}
+.btn:hover{filter:brightness(1.1)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.fb{margin-top:12px;padding:10px 14px;border-radius:6px;font-size:.95rem}
+.fb.ok{background:var(--ok-soft);color:var(--ink);border-left:4px solid var(--ok)}
+.fb.bad{background:var(--bad-soft);color:var(--ink);border-left:4px solid var(--bad)}
+.fb.mid{background:var(--warn-soft);color:var(--ink);border-left:4px solid var(--warn)}
+
+/* Quiz */
+.quiz{margin:16px 0 0;display:flex;flex-direction:column;gap:18px}
+.q fieldset{border:0;padding:0;margin:0}
+.q legend{font-weight:700;margin-bottom:8px;padding:0}
+.q legend .qn{font-family:var(--f-mono);color:var(--accent);margin-right:6px;font-weight:500}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:6px;margin-bottom:6px;cursor:pointer;background:var(--bg)}
+.opt:hover{border-color:var(--steel)}
+.opt input{margin-top:5px;accent-color:var(--accent)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.q .why{font-size:.9rem;color:var(--muted);margin-top:4px}
+
+/* GHS */
+.ghs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin-top:12px}
+.ghs{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;min-width:0}
+.dia{width:104px;height:104px;display:block}
+
+/* P&ID-skisse */
+.pid-wrap{overflow-x:auto;margin-top:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.pid{display:block;width:100%;min-width:620px;height:auto;font-family:var(--f-mono)}
+.pid text{fill:var(--ink);font-size:11px}
+.pid .lbl2{fill:var(--muted);font-size:10.5px}
+.pid .ln{stroke:var(--ink);stroke-width:2;fill:none}
+.pid .vessel{fill:var(--panel);stroke:var(--ink);stroke-width:2.5}
+.pid .valve{fill:var(--panel);stroke:var(--ink);stroke-width:2}
+.pid g.lay{--c:var(--ink)}
+.pid g.reg{--c:var(--steel)} .pid g.alm{--c:var(--warn)} .pid g.trp{--c:var(--bad)} .pid g.psv{--c:var(--accent)}
+.pid g.lay .sig{stroke:var(--c);stroke-width:1.8;stroke-dasharray:5 4;fill:none}
+.pid g.lay .imp{stroke:var(--c);stroke-width:2;fill:none}
+.pid g.lay .bub{fill:var(--panel);stroke:var(--c);stroke-width:2}
+.pid g.lay .box{fill:var(--panel);stroke:var(--c);stroke-width:2}
+.pid g.lay .bt{fill:var(--c);font-size:10.5px;font-weight:500}
+.pid g.lay .vl{fill:var(--panel);stroke:var(--c);stroke-width:2}
+.pid g.lay.on .bub,.pid g.lay.on .box,.pid g.lay.on .vl{fill:var(--c)}
+.pid g.lay.on .bt{fill:var(--panel)}
+.pid g.lay .tg{fill:var(--c);font-size:10.5px;font-weight:500}
+.pid g.lay.on .sig{stroke-width:3}
+.pid g.lay.dead{opacity:.35}
+.pid .pv{font-family:var(--f-display);font-size:26px;font-weight:700}
+.pid .gas{fill:var(--accent-soft)}
+.ladder{display:flex;flex-direction:column;gap:4px;margin-top:14px;font-size:.92rem}
+.ladder div{display:grid;grid-template-columns:70px 14px 1fr;gap:10px;align-items:center;padding:5px 10px;border-radius:5px;border:1px solid var(--line);background:var(--bg)}
+.ladder .sw{width:14px;height:14px;border-radius:3px}
+.ladder div.hit{border-color:var(--ink);font-weight:700}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:10px;font-size:.85rem}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:22px;height:0;border-top:2.5px dashed;display:inline-block}
+.ghs .code{font-family:var(--f-mono);font-size:.75rem;color:var(--muted)}
+.ghs select{width:100%}
+
+/* Brennbarhetsområde */
+.range-wrap{margin-top:8px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.scale{position:relative;height:34px;border-radius:6px;overflow:hidden;display:flex;margin-top:8px;font-family:var(--f-mono);font-size:.72rem}
+.scale div{display:grid;place-items:center;color:var(--ink)}
+.readout{font-family:var(--f-mono);font-size:1.6rem;margin-top:10px;font-variant-numeric:tabular-nums}
+.state{display:inline-block;font-family:var(--f-display);font-weight:700;font-size:1.15rem;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-left:8px;vertical-align:middle}
+.state.ok{background:var(--ok-soft);color:var(--ok)}
+.state.bad{background:var(--bad-soft);color:var(--bad)}
+.state.mid{background:var(--warn-soft);color:var(--warn)}
+
+/* Reaktor */
+.bars{display:grid;grid-template-columns:110px 1fr 60px;gap:8px 10px;align-items:center;margin-top:12px;font-size:.92rem}
+.bar{height:16px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;transition:width .2s}
+
+/* Risikomatrise */
+.matrix{display:grid;grid-template-columns:auto repeat(5,minmax(0,1fr));gap:3px;margin-top:12px;font-size:.8rem}
+.matrix .ax{font-family:var(--f-mono);color:var(--muted);display:grid;place-items:center;padding:4px;text-align:center}
+.cell{aspect-ratio:1.6;border:0;border-radius:4px;cursor:pointer;font-family:var(--f-mono);font-size:.85rem;color:#18232B;max-width:100%}
+.cell.sel{outline:3px solid var(--ink);outline-offset:1px}
+.lo{background:#9BD3AE}.me{background:#F3D27A}.hi{background:#F0A07C}.vh{background:#E5675C}
+
+/* Bowtie */
+.bowtie{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin-top:12px}
+.bt-col{display:flex;flex-direction:column;gap:6px;min-width:0}
+.bt-item{background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:6px 8px;font-size:.85rem}
+.bt-item.cause{border-left:4px solid var(--steel)}
+.bt-item.cons{border-left:4px solid var(--bad)}
+.bt-item b{font-family:var(--f-mono);font-size:.7rem;color:var(--muted);font-weight:500;display:block;text-transform:uppercase;letter-spacing:.06em}
+.knot{width:110px;height:110px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;text-align:center;font-family:var(--f-display);font-weight:700;font-size:1rem;line-height:1.1;padding:10px}
+.bt-bar{font-family:var(--f-mono);font-size:.7rem;background:var(--ink);color:var(--bg);padding:3px 6px;border-radius:3px;align-self:flex-start}
+
+/* Caser */
+.case{border:1px solid var(--line);border-radius:10px;background:var(--panel);margin:22px 0;overflow:hidden}
+.case-h{background:var(--ink);color:var(--bg);padding:14px 20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+.case-h h3{margin:0;font-size:1.5rem}
+.case-h .meta{font-family:var(--f-mono);font-size:.8rem;opacity:.85}
+.case-b{padding:18px 20px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:14px}
+.fact{border-top:3px solid var(--accent);padding-top:6px}
+.fact b{display:block;font-family:var(--f-display);font-size:1.5rem;line-height:1.1}
+.fact span{font-size:.82rem;color:var(--muted)}
+.chklist label{display:flex;gap:10px;align-items:flex-start;padding:5px 0;cursor:pointer}
+.chklist input{margin-top:5px;accent-color:var(--accent)}
+
+/* Scenario */
+.scene{background:var(--steel-soft);border-radius:8px;padding:14px 16px;margin:10px 0;font-size:1rem}
+.choices{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.choices button{text-align:left;font:inherit;font-size:.97rem;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);cursor:pointer}
+.choices button:hover{border-color:var(--steel)}
+
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:48px;padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap}
+.score{font-family:var(--f-display);font-size:2.4rem;font-weight:700}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:20px 0}
+.home-card{display:flex;flex-direction:column;gap:6px;padding:14px 16px;background:var(--panel);border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink)}
+.home-card:hover{border-color:var(--steel)}
+.home-card .h{font-family:var(--f-display);font-size:1.25rem;font-weight:600;line-height:1.15}
+.home-card .m{font-family:var(--f-mono);font-size:.75rem;color:var(--muted)}
+.mob-nav{display:none}
+
+
+/* Nivåsimulering og arbeidsark */
+.pid .water{fill:var(--water)}
+.pid .tankbg{fill:var(--panel)}
+.pid .tankol{fill:none;stroke:var(--ink);stroke-width:2.5}
+.pid .mark{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3}
+.pid .flow{stroke:var(--water);stroke-width:5;fill:none;stroke-dasharray:8 8;animation:fl .8s linear infinite}
+.pid .off{display:none}
+.pid .pump{fill:var(--panel);stroke:var(--ink);stroke-width:2}
+.pid .pump.run{fill:var(--steel-soft);stroke:var(--steel)}
+.pid .pump.trip{stroke:var(--bad)}
+.pid .pvs{paint-order:stroke;stroke:var(--panel);stroke-width:5px;stroke-linejoin:round}
+.pid g.lay.on .imp{stroke-width:3.5}
+@keyframes fl{to{stroke-dashoffset:-16}}
+.btn.sm{font-size:.95rem;padding:7px 12px}
+.btn:disabled{opacity:.4;cursor:not-allowed;filter:none}
+.nv-ctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:14px}
+.nv-ctl fieldset{border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:0;min-width:0;display:flex;flex-direction:column;gap:8px}
+.nv-ctl legend{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:0 4px}
+.nv-ctl label.cb{display:flex;gap:8px;align-items:flex-start;cursor:pointer;font-size:.93rem;line-height:1.35}
+.nv-ctl label.cb input{margin-top:3px;accent-color:var(--accent)}
+.nv-status{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;align-items:center;margin-top:14px;font-size:.93rem}
+.nv-status .state{font-size:.95rem;margin:0;justify-self:start}
+.nv-log{list-style:none;margin:6px 0 0;padding:8px 10px;max-height:150px;overflow:auto;border:1px solid var(--line);border-radius:6px;background:var(--bg);font-size:.85rem;display:flex;flex-direction:column;gap:3px}
+.nv-log:empty::before{content:"Ingen hendelser ennå. Start simuleringen.";color:var(--muted)}
+.nv-log .num{color:var(--muted);margin-right:6px}
+.ws table{min-width:640px}
+.ws td.c,.ws th.c{text-align:center}
+.ws input[type=text]{width:100%;min-width:110px;font:inherit;font-size:.9rem;padding:6px 8px;border:1px solid var(--line);border-radius:5px;background:var(--bg);color:var(--ink)}
+.ws input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent)}
+.ws h3{margin-top:22px}
+@media (prefers-reduced-motion:reduce){.pid .flow{animation:none}}
+
+.sja table{min-width:780px}
+.sja td{padding:6px}
+.sja textarea.cell{min-height:58px;font-family:var(--f-body);font-size:.88rem;line-height:1.35;padding:6px 8px;min-width:110px}
+.sja select{font-size:.9rem;padding:4px}
+.sja .c{text-align:center}
+.sja-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+.sja input[type=text]{width:100%;font:inherit;font-size:.95rem;padding:7px 9px;border:1px solid var(--line);border-radius:5px;background:var(--bg);color:var(--ink);margin-top:4px}
+.seg{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.risk{display:inline-block;min-width:34px;text-align:center;border-radius:4px;padding:3px 6px;font-family:var(--f-mono);color:#18232B}
+.risk.none{color:var(--muted)}
+.del{background:none;border:1px solid var(--line);border-radius:4px;color:var(--muted);cursor:pointer;width:30px;height:30px;font:inherit;font-size:1.1rem}
+.del:hover{border-color:var(--bad);color:var(--bad)}
+@media (max-width:860px){
+  .wrap{grid-template-columns:minmax(0,1fr);gap:0;padding-block:20px 60px}
+  nav.side{display:none}
+  .mob-nav{display:block;margin-bottom:18px}
+  .mob-nav select{width:100%;font-size:1rem;padding:10px}
+  .prog-bar{display:none}
+  .brand{font-size:1.15rem}
+  .bowtie{grid-template-columns:minmax(0,1fr)}
+  .knot{margin:0 auto}
+  .def{grid-template-columns:1fr}
+  .def>div:nth-child(odd){border-bottom:0;padding-bottom:0}
+  body{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="home-link" href="../" title="Til forsiden av Kjemiprosess læringslab">← Læringslab</a><div class="brand">Prosess<span>sikkerhet</span></div>
+    <div class="prog" aria-label="Fremdrift">
+      <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+      <div class="prog-txt" id="progTxt">0 av 7 moduler</div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="side" aria-label="Moduler">
+    <h2>Kursinnhold</h2>
+    <ol id="navList"></ol>
+  </nav>
+
+  <main id="main">
+    <div class="mob-nav"><label for="mobSel" class="eyebrow" style="margin-bottom:6px">Gå til modul</label><select id="mobSel"></select></div>
+
+<!-- ============ START ============ -->
+<section class="mod" data-id="start">
+  <div class="eyebrow"><span>Vg2 kjemiprosess- og laboratoriefag</span><span class="t">Ca. 7 timer</span></div>
+  <h1>Prosessikkerhet: Hvordan vi hindrer at det smeller</h1>
+  <p class="lead">Et nettkurs om farlige stoffer, prosessfarer, barrierer og hva vi kan lære av storulykker. Kurset er laget for deg som skal jobbe som operatør i et prosessanlegg eller som laborant.</p>
+
+  <div class="callout steel">
+    <p style="margin:0"><strong>Slik bruker du kurset:</strong> Ta modulene i rekkefølge. Hver modul har fagtekst, en eller flere aktiviteter og en kort quiz. Når du har bestått quizen (minst 3 av 4 riktige), blir modulen markert som fullført. Til slutt tar du en avsluttende prøve. Fremdriften lagres i nettleseren din.</p>
+  </div>
+
+  <div class="home-grid" id="homeGrid"></div>
+
+  <h2>Til læreren</h2>
+  <p>Kurset er bygd rundt disse kompetansemålene i læreplanen for Vg2 kjemiprosess- og laboratoriefag (KPL02-01):</p>
+  <ul class="b">
+    <li><strong>Produksjon og tjenester:</strong> kjøre prosesser sikkert og i henhold til prosedyrer for drift og HMS; bruke, tegne og forklare flytskjemaer og forriglingsmatriser; gjøre rede for start- og stopp-prosedyrer; identifisere og korrigere avvik.</li>
+    <li><strong>Kjemisk teknologi:</strong> forklare hvordan kjemiske og fysiske forhold påvirker kjemiske reaksjoner og produksjonsprosesser; anvende grunnleggende fysikk og kjemi til å forklare prosesser og utstyr.</li>
+  </ul>
+  <div class="tbl"><table>
+    <thead><tr><th>Modul</th><th>Tema</th><th>Tid</th><th>Forslag til arbeidsform</th></tr></thead>
+    <tbody>
+      <tr><td class="num">M-01</td><td>Hva er prosessikkerhet?</td><td class="num">35 min</td><td>Individuelt, felles oppsummering</td></tr>
+      <tr><td class="num">M-02</td><td>Farlige stoffer og merking</td><td class="num">50 min</td><td>Ta med et ekte sikkerhetsdatablad fra skolens stoffkartotek</td></tr>
+      <tr><td class="num">M-03</td><td>Brann og eksplosjon</td><td class="num">50 min</td><td>Kan kobles til demonstrasjon av flammepunkt</td></tr>
+      <tr><td class="num">M-04</td><td>Trykk, temperatur og løpske reaksjoner</td><td class="num">90 min</td><td>Inkluderer aktivitet på skolens anlegg: simulering i klassen, arbeidsarket og funksjonstesten ute på anlegget</td></tr>
+      <tr><td class="num">M-05</td><td>Barrierer og risikoanalyse</td><td class="num">90 min</td><td>HAZOP- og SJA-oppgaven egner seg godt i grupper på 3–4. SJA-en har én jobb for kjemiprosess og én for laboratorium</td></tr>
+      <tr><td class="num">M-06</td><td>Storulykker: Hva kan vi lære?</td><td class="num">60 min</td><td>Del klassen i ekspertgrupper per case</td></tr>
+      <tr><td class="num">M-07</td><td>Din rolle: Avvik, endringer og varsling</td><td class="num">40 min</td><td>Scenarioene kan brukes som klassediskusjon</td></tr>
+      <tr><td class="num">Prøve</td><td>Avsluttende prøve, 12 spørsmål</td><td class="num">20 min</td><td>Individuelt</td></tr>
+    </tbody>
+  </table></div>
+  <p>Svarene elevene skriver i tekstfeltene blir ikke sendt noe sted. Be elevene kopiere refleksjonssvarene inn i sin egen logg eller innlevering hvis du vil vurdere dem.</p>
+</section>
+
+<!-- ============ M1 ============ -->
+<section class="mod" data-id="m1" hidden>
+  <div class="eyebrow"><span>Modul M-01</span><span class="t">Ca. 35 min</span></div>
+  <h1>Hva er prosessikkerhet?</h1>
+  <p class="lead">I et prosessanlegg er det store mengder energi og farlige stoffer innestengt i rør, tanker og reaktorer. Prosessikkerhet handler om å holde dem der.</p>
+
+  <div class="goals"><h3>Etter denne modulen skal du kunne</h3><ul>
+    <li>forklare forskjellen på personsikkerhet og prosessikkerhet</li>
+    <li>forklare hva et tap av inneslutning er</li>
+    <li>nevne regelverk og myndigheter som gjelder for prosessindustrien i Norge</li>
+  </ul></div>
+
+  <h2>To typer sikkerhet</h2>
+  <p>Når vi snakker om sikkerhet på jobben, tenker de fleste på å ikke snuble, ikke klemme fingrene og bruke vernebriller. Dette er <strong>personsikkerhet</strong>. Det handler om skader som rammer én person, ofte her og nå.</p>
+  <p><strong>Prosessikkerhet</strong> handler om noe annet: å hindre at farlige stoffer eller energi slipper ut av prosessen. Når det går galt, kan det bli brann, eksplosjon eller giftutslipp som rammer mange mennesker, miljøet og hele anlegget.</p>
+
+  <div class="tbl"><table>
+    <thead><tr><th></th><th>Personsikkerhet</th><th>Prosessikkerhet</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Typisk hendelse</strong></td><td>Fall, kutt, klemskade, sprut i øyet</td><td>Lekkasje, brann, eksplosjon, giftutslipp</td></tr>
+      <tr><td><strong>Hvor ofte</strong></td><td>Relativt ofte</td><td>Sjelden</td></tr>
+      <tr><td><strong>Konsekvens</strong></td><td>Oftest én person</td><td>Kan ramme mange, også utenfor anlegget</td></tr>
+      <tr><td><strong>Typiske tiltak</strong></td><td>Verneutstyr, rydding, opplæring</td><td>Riktig design, trykkavlastning, alarmer, forriglinger, vedlikehold, prosedyrer</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout">
+    <p style="margin:0"><strong>Viktig poeng:</strong> Et anlegg kan ha svært få personskader og likevel være nær en storulykke. Mange av de verste ulykkene skjedde på anlegg som var stolte av lav skadestatistikk. God personsikkerhet betyr ikke automatisk god prosessikkerhet.</p>
+  </div>
+
+  <h2>Tap av inneslutning</h2>
+  <p>Det viktigste begrepet i prosessikkerhet er <strong>tap av inneslutning</strong> (på engelsk <em>loss of containment</em>). Det betyr at et stoff kommer ut av rør, tank eller utstyr der det skal være. Nesten alle storulykker starter slik.</p>
+  <p>Vanlige årsaker er:</p>
+  <ul class="b">
+    <li><strong>Overtrykk</strong>: trykket blir høyere enn utstyret tåler.</li>
+    <li><strong>Overfylling</strong>: en tank eller kolonne fylles for mye.</li>
+    <li><strong>Korrosjon og slitasje</strong>: rør og pakninger blir svakere over tid.</li>
+    <li><strong>Feil under vedlikehold</strong>: en flens er ikke tett, en ventil står åpen.</li>
+    <li><strong>Feil betjening</strong>: feil ventil åpnes, feil rekkefølge ved oppstart.</li>
+  </ul>
+
+  <h2>Hvem passer på?</h2>
+  <p>I Norge gjelder flere regelverk for prosessindustrien. Du trenger ikke kunne dem utenat, men du bør vite at de finnes:</p>
+  <div class="def">
+    <div>Arbeidsmiljøloven</div><div>Gjelder alle arbeidsplasser. Arbeidsgiver skal sørge for et fullt forsvarlig arbeidsmiljø. Arbeidstilsynet fører tilsyn.</div>
+    <div>Storulykkeforskriften</div><div>Gjelder virksomheter som har store mengder farlige stoffer. Den bygger på EUs Seveso-direktiv, oppkalt etter en ulykke i Italia i 1976. DSB (Direktoratet for samfunnssikkerhet og beredskap) har tilsyn sammen med andre etater.</div>
+    <div>Internkontroll­forskriften</div><div>Virksomheten skal ha et system for å kartlegge farer, vurdere risiko og følge opp HMS.</div>
+    <div>Havindustri­tilsynet</div><div>Fører tilsyn med petroleumsvirksomheten og landanlegg som Kårstø og Mongstad. Het tidligere Petroleumstilsynet.</div>
+  </div>
+
+  <div class="act">
+    <div class="act-h"><span class="lbl">Refleksjon</span><h3>Se deg rundt</h3></div>
+    <p>Tenk på skolens prosessanlegg eller laboratorium. Nevn ett eksempel på en personsikkerhetsfare og ett eksempel på en prosessikkerhetsfare.</p>
+    <label for="r1" class="eyebrow t" style="margin-bottom:4px">Ditt svar</label>
+    <textarea id="r1" placeholder="Personsikkerhet: … Prosessikkerhet: …"></textarea>
+    <details><summary>Vis eksempler</summary>
+      <p><strong>Personsikkerhet:</strong> glatt gulv ved vasken, varme overflater på en varmeveksler, glass som kan knuse.</p>
+      <p style="margin:0"><strong>Prosessikkerhet:</strong> en kolonne med brennbar væske som kan få overtrykk, en lekkasje av ammoniakk fra et kuldeanlegg, en reaksjon i en kolbe som kan løpe løpsk.</p>
+    </details>
+  </div>
+
+  <div class="act"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m1"></div></div>
+  <div class="pager"></div>
+</section>
+
+<!-- ============ M2 ============ -->
+<section class="mod" data-id="m2" hidden>
+  <div class="eyebrow"><span>Modul M-02</span><span class="t">Ca. 50 min</span></div>
+  <h1>Farlige stoffer og merking</h1>
+  <p class="lead">Du kan ikke beskytte deg mot en fare du ikke vet om. Merking og sikkerhetsdatablad forteller deg hva stoffet kan gjøre og hvordan du håndterer det.</p>
+
+  <div class="goals"><h3>Etter denne modulen skal du kunne</h3><ul>
+    <li>kjenne igjen de ni farepiktogrammene i CLP og forklare hva de betyr</li>
+    <li>forklare H-setninger, P-setninger og signalordene «Fare» og «Advarsel»</li>
+    <li>finne riktig informasjon i et sikkerhetsdatablad</li>
+    <li>bruke tiltakshierarkiet for å velge riktige vernetiltak</li>
+  </ul></div>
+
+  <h2>CLP: Felles merking i hele Europa</h2>
+  <p>CLP-forordningen (Classification, Labelling and Packaging) bygger på FNs globale system GHS. Alle farlige kjemikalier skal merkes på samme måte i hele EU/EØS. En CLP-etikett inneholder:</p>
+  <ul class="b">
+    <li><strong>Farepiktogram</strong>: rød ruter med svart symbol på hvit bunn.</li>
+    <li><strong>Signalord</strong>: «Fare» for de alvorligste farene, «Advarsel» for mindre alvorlige.</li>
+    <li><strong>H-setninger</strong> (Hazard): beskriver faren. Eksempel: H225 «Meget brannfarlig væske og damp».</li>
+    <li><strong>P-setninger</strong> (Precautionary): forteller hva du skal gjøre. Eksempel: P210 «Holdes vekk fra varme, varme overflater, gnister, åpen flamme og andre antennelseskilder».</li>
+    <li>Produktnavn og leverandørens navn, adresse og telefonnummer.</li>
+  </ul>
+  <p>H-setningene er gruppert: <span class="num">H2xx</span> er fysiske farer (brann, eksplosjon), <span class="num">H3xx</span> er helsefarer og <span class="num">H4xx</span> er miljøfarer.</p>
+
+  <div class="act">
+    <div class="act-h"><span class="lbl">Aktivitet</span><h3>Hva betyr piktogrammet?</h3></div>
+    <p>Velg riktig betydning for hvert av de ni piktogrammene, og trykk «Sjekk svar». Tegningene er forenklet, men har de samme symbolene som du finner på ekte etiketter.</p>
+    <div class="ghs-grid" id="ghsGrid"></div>
+    <div class="row" style="margin-top:16px"><button class="btn" id="ghsCheck">Sjekk svar</button><button class="btn alt" id="ghsReset">Prøv igjen</button></div>
+    <div id="ghsFb"></div>
+  </div>
+
+  <h2>Sikkerhetsdatabladet (SDS)</h2>
+  <p>Leverandøren skal gi deg et sikkerhetsdatablad for alle farlige kjemikalier. Det har alltid 16 avsnitt i samme rekkefølge. Arbeidsgiver skal ha et <strong>stoffkartotek</strong> med oppdaterte datablader for alle farlige kjemikalier på arbeidsplassen.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Avsnitt</th><th>Innhold</th><th>Når trenger du det?</th></tr></thead>
+    <tbody>
+      <tr><td class="num">2</td><td>Fareidentifikasjon</td><td>Hvilke farer har stoffet?</td></tr>
+      <tr><td class="num">4</td><td>Førstehjelpstiltak</td><td>Noen har fått stoffet i øyet eller på huden</td></tr>
+      <tr><td class="num">5</td><td>Brannbekjempelse</td><td>Hvilket slokkemiddel kan brukes?</td></tr>
+      <tr><td class="num">6</td><td>Tiltak ved utilsiktet utslipp</td><td>Det har lekket ut</td></tr>
+      <tr><td class="num">7</td><td>Håndtering og lagring</td><td>Hvordan og sammen med hva stoffet kan lagres</td></tr>
+      <tr><td class="num">8</td><td>Eksponeringskontroll og personlig verneutstyr</td><td>Grenseverdier, hansker, åndedrettsvern</td></tr>
+      <tr><td class="num">9</td><td>Fysiske og kjemiske egenskaper</td><td>Flammepunkt, kokepunkt, damptrykk</td></tr>
+      <tr><td class="num">10</td><td>Stabilitet og reaktivitet</td><td>Hva stoffet ikke må blandes med</td></tr>
+      <tr><td class="num">13</td><td>Disponering</td><td>Hvordan avfallet skal håndteres</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Tiltakshierarkiet</h2>
+  <p>Når du skal jobbe med et farlig stoff, velger du tiltak i denne rekkefølgen. Tiltakene øverst er mest effektive fordi de fjerner eller reduserer faren, mens verneutstyr bare beskytter den som har det på.</p>
+  <ol class="b">
+    <li><strong>Eliminering</strong>: trengs stoffet i det hele tatt?</li>
+    <li><strong>Substitusjon</strong>: bytt til et mindre farlig stoff. Arbeidsgiver har plikt til å vurdere dette (substitusjonsplikten).</li>
+    <li><strong>Tekniske tiltak</strong>: lukkede systemer, avtrekksskap, punktavsug, ventilasjon.</li>
+    <li><strong>Administrative tiltak</strong>: prosedyrer, opplæring, begrenset arbeidstid, merking.</li>
+    <li><strong>Personlig verneutstyr</strong>: hansker, briller, visir, åndedrettsvern. Siste forsvarslinje.</li>
+  </ol>
+
+  <div class="act">
+    <div class="act-h"><span class="lbl">Oppgave</span><h3>Les et ekte datablad</h3></div>
+    <p>Finn sikkerhetsdatabladet for <strong>aceton</strong> i skolens stoffkartotek (eller spør læreren). Svar på spørsmålene:</p>
+    <ol class="b">
+      <li>Hvilke piktogrammer og hvilket signalord har aceton?</li>
+      <li>Hva er flammepunktet? I hvilket avsnitt fant du det?</li>
+      <li>Hvilke hansker anbefales?</li>
+      <li>Hva skal du gjøre hvis aceton kommer i øynene?</li>
+    </ol>
+    <label for="r2" class="eyebrow t" style="margin-bottom:4px">Dine svar</label>
+    <textarea id="r2"></textarea>
+    <details><summary>Vis løsningsforslag</summary>
+      <p>Aceton har vanligvis piktogrammene <strong>flamme</strong> og <strong>utropstegn</strong> og signalordet <strong>«Fare»</strong>. H-setninger er typisk H225 (meget brannfarlig), H319 (gir alvorlig øyeirritasjon) og H336 (kan gi døsighet eller svimmelhet).</p>
+      <p>Flammepunktet er omtrent <strong class="num">−20 °C</strong> (avsnitt 9). Det betyr at aceton avgir nok damp til å kunne antennes selv i et kaldt rom.</p>
+      <p>Mange vanlige engangshansker av nitril beskytter dårlig mot aceton. Databladet anbefaler ofte butylgummi. Sjekk avsnitt 8 i ditt datablad, fordi anbefalingen varierer.</p>
+      <p style="margin:0">Ved øyekontakt: skyll med vann i flere minutter, fjern kontaktlinser hvis det er lett, og fortsett å skylle (avsnitt 4).</p>
+    </details>
+  </div>
+
+  <div class="act"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m2"></div></div>
+  <div class="pager"></div>
+</section>
+
+<!-- ============ M3 ============ -->
+<section class="mod" data-id="m3" hidden>
+  <div class="eyebrow"><span>Modul M-03</span><span class="t">Ca. 50 min</span></div>
+  <h1>Brann og eksplosjon</h1>
+  <p class="lead">Brann og eksplosjon er den vanligste typen storulykke i prosessindustrien. For å forhindre dem må du forstå hva som skal til for at noe brenner.</p>
+
+  <div class="goals"><h3>Etter denne modulen skal du kunne</h3><ul>
+    <li>forklare branntrekanten og hvordan vi bruker den til å forebygge</li>
+    <li>forklare flammepunkt, selvantennelsestemperatur og eksplosjonsgrenser</li>
+    <li>nevne vanlige tennkilder i et prosessanlegg</li>
+    <li>forklare hva ATEX-soner er</li>
+  </ul></div>
+
+  <h2>Branntrekanten</h2>
+  <p>For at noe skal brenne, trengs tre ting samtidig:</p>
+  <ul class="b">
+    <li><strong>Brensel</strong>: en brennbar gass, damp, væske, støv eller fast stoff.</li>
+    <li><strong>Oksygen</strong>: vanligvis fra luft (ca. 21 % oksygen), men også oksiderende stoffer kan levere oksygen.</li>
+    <li><strong>Tennkilde</strong>: noe som gir nok energi til å starte forbrenningen.</li>
+  </ul>
+  <p>Fjerner du én av de tre, kan det ikke brenne. Hele brannforebyggingen i et anlegg handler om dette: Vi holder brenselet innestengt, vi bruker nitrogen for å fortrenge oksygen i tanker (inertisering), og vi kontrollerer tennkildene.</p>
+
+  <h2>Viktige begreper</h2>
+  <div class="def">
+    <div>Flammepunkt</div><div>Den laveste temperaturen der en væske avgir så mye damp at dampen kan antennes av en tennkilde. Jo lavere flammepunkt, desto farligere. Bensin har flammepunkt rundt −40 °C, etanol rundt 13 °C og diesel over 55 °C.</div>
+    <div>Selvantennelses­temperatur</div><div>Temperaturen der et stoff antennes av seg selv, uten gnist eller flamme. En varm overflate, som et damprør eller en eksosmanifold, kan være nok.</div>
+    <div>Nedre eksplosjons­grense (LEL)</div><div>Den laveste konsentrasjonen av gass eller damp i luft som kan antennes. Under denne er blandingen for «mager».</div>
+    <div>Øvre eksplosjons­grense (UEL)</div><div>Den høyeste konsentrasjonen som kan antennes. Over denne er blandingen for «fet», det er for lite oksygen.</div>
+  </div>
+  <p>Gassdetektorer i anlegg viser ofte <strong>% LEL</strong>. Hvis en detektor viser 20 % LEL, betyr det at konsentrasjonen er en femtedel av nedre eksplosjonsgrense. Vanlige alarmgrenser er 20 % LEL (varsel) og 40–60 % LEL (nedstengning), men dette varierer mellom anlegg.</p>
+
+  <div class="act">
+    <div class="act-h"><span class="lbl">Aktivitet</span><h3>Propan i luft</h3></div>
+    <p>Propan har nedre eksplosjonsgrense på ca. <span class="num">2,1 %</span> og øvre på ca. <span class="num">9,5 %</span> (volumprosent i luft). Flytt glideren og se hva som skjer.</p>
+    <div class="range-wrap">
+      <label for="propan" class="eyebrow t">Propankonsentrasjon i luft</label>
+      <input type="range" id="propan" min="0" max="15" step="0.1" value="1">
+      <div class="scale" aria-hidden="true">
+        <div style="width:14%;background:var(--ok-soft)">For mager</div>
+        <div style="width:49.3%;background:var(--bad-soft)">Brennbar</div>
+        <div style="flex:1;background:var(--warn-soft)">For fet</div>
+      </div>
+      <div class="readout"><span id="propVal">1,0 %</span> <span class="state ok" id="propState">For mager</span></div>
+      <div class="num" style="font-size:.9rem;color:var(--muted)" id="propLel">Detektor viser: 48 % LEL</div>
+      <p id="propTxt" style="margin-top:10px"></p>
+    </div>
+  </div>
+
+  <h2>Tennkilder</h2>
+  <p>I et prosessanlegg finnes mange mulige tennkilder: åpen flamme, sveising og sliping (varmt arbeid), gnister fra elektrisk utstyr, statisk elektrisitet, varme overflater, mobiltelefoner og verktøy som slår gnister mot stål. Derfor krever varmt arbeid alltid en <strong>arbeidstillatelse</strong> og gassmåling før og under jobben.</p>
+  <p><strong>Statisk elektrisitet</strong> er en lumsk tennkilde. Når en væske med lav ledningsevne strømmer gjennom et rør eller fylles i en tank, kan det bygges opp ladning. Derfor skal fat og tanker <strong>jordes og potensialutlignes</strong> før du tapper brennbare væsker.</p>
+
+  <h2>ATEX-soner</h2>
+  <p>Områder der det kan oppstå en eksplosiv atmosfære deles inn i soner. Utstyr som brukes i sonene må være godkjent for det (Ex-merket).</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Gass/damp</th><th>Støv</th><th>Eksplosiv atmosfære finnes …</th><th>Eksempel</th></tr></thead>
+    <tbody>
+      <tr><td class="num">Sone 0</td><td class="num">Sone 20</td><td>hele tiden eller i lange perioder</td><td>Inne i en tank med brennbar væske</td></tr>
+      <tr><td class="num">Sone 1</td><td class="num">Sone 21</td><td>sannsynligvis av og til under normal drift</td><td>Rundt en påfyllingsåpning</td></tr>
+      <tr><td class="num">Sone 2</td><td class="num">Sone 22</td><td>sjelden, og bare i korte perioder</td><td>Rundt flenser og ventiler som normalt er tette</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout steel"><p style="margin:0"><strong>Støv kan også eksplodere.</strong> Mel, sukker, trestøv, metallpulver og mange organiske pulvere kan danne eksplosive støvskyer. Et tynt lag støv på bjelker og hyller kan virvles opp av en liten første eksplosjon og gi en mye større andre eksplosjon. Godt renhold er et sikkerhetstiltak.</p></div>
+
+  <div class="act"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m3"></div></div>
+  <div class="pager"></div>
+</section>
+
+<!-- ============ M4 ============ -->
+<section class="mod" data-id="m4" hidden>
+  <div class="eyebrow"><span>Modul M-04</span><span class="t">Ca. 90 min</span></div>
+  <h1>Trykk, temperatur og løpske reaksjoner</h1>
+  <p class="lead">Trykk og temperatur er de viktigste prosessparameterne du overvåker som operatør. Når de kommer ut av kontroll, kan utstyret svikte.</p>
+
+  <div class="goals"><h3>Etter denne modulen skal du kunne</h3><ul>
+    <li>forklare hvordan overtrykk kan oppstå i et prosessanlegg</li>
+    <li>beskrive virkemåten til sikkerhetsventil og sprengplate</li>
+    <li>kartlegge regulering, alarmer og mekanisk sikring på skolens anlegg</li>
+    <li>forklare hvorfor en eksoterm reaksjon kan løpe løpsk</li>
+  </ul></div>
+
+  <h2>Hvordan oppstår overtrykk?</h2>
+  <p>Alt trykkutstyr har et <strong>designtrykk</strong>, det høyeste trykket det er laget for å tåle. Overtrykk kan oppstå når:</p>
+  <ul class="b">
+    <li>en ventil på utløpet stenges mens pumpen fortsatt går (blokkert utløp)</li>
+    <li>væske som er stengt inne mellom to ventiler varmes opp og utvider seg (termisk ekspansjon)</li>
+    <li>en kolonne eller tank fylles helt opp med væske</li>
+    <li>en varmeveksler får for mye varme, eller kjølingen svikter</li>
+    <li>en kjemisk reaksjon går fortere enn planlagt og lager gass eller varme</li>
+    <li>det oppstår brann rundt utstyret</li>
+  </ul>
+  <p>Husk sammenhengen fra gasslovene: For en gass i et lukket volum øker trykket når temperaturen øker. Og når væske koker, blir den til gass som tar mye større plass.</p>
+
+  <h2>Trykkavlastning</h2>
+  <p>Den siste tekniske barrieren mot overtrykk er trykkavlastningsutstyr. Det skal slippe ut trykket på en kontrollert måte, til fakkel, skrubber eller et trygt sted, før utstyret sprekker.</p>
+  <div class="def">
+    <div>Sikkerhetsventil (PSV)</div><div>En fjærbelastet ventil som åpner når trykket når et innstilt åpningstrykk, og lukker igjen når trykket faller. På flytskjemaer merkes den ofte med tag som <span class="num">PSV-101</span>.</div>
+    <div>Sprengplate</div><div>En tynn metallplate som sprekker ved et bestemt trykk. Den kan ikke lukke seg igjen og må byttes etterpå. Brukes ofte der stoffet er etsende eller klebrig.</div>
+    <div>Vakuumventil</div><div>Beskytter tanker mot undertrykk. En atmosfærisk tank kan bli trykket sammen hvis den tømmes eller kjøles uten at luft eller nitrogen slipper inn.</div>
+  </div>
+  <div class="callout"><p style="margin:0"><strong>Regel du aldri skal bryte:</strong> En sikkerhetsventil skal aldri blokkeres, fjernes eller stenges av uten godkjent arbeidstillatelse og andre tiltak på plass. Det var nettopp en manglende sikkerhetsventil som startet Piper Alpha-ulykken (modul M-06).</p></div>
+
+  <h2>Lag på lag: Slik sikres en trykktank</h2>
+  <p>En trykktank er ikke beskyttet av én ting, men av flere lag som slår inn etter hverandre når trykket stiger. Hvert lag har sin egen måler. Det er viktig, fordi hvis alle lagene brukte samme måler, ville én feil på måleren slå ut alle lagene samtidig.</p>
+  <ol class="b">
+    <li><strong>Regulering (PIC-101):</strong> Holder trykket på settpunktet i normal drift ved å åpne eller strupe reguleringsventilen PCV-101.</li>
+    <li><strong>Høy alarm (PAH-102):</strong> Egen trykkmåler gir alarm i kontrollrommet. Operatøren skal finne årsaken og gripe inn.</li>
+    <li><strong>Høy-høy-alarm med nedstengning (PAHH-103):</strong> Egen måler koblet til sikkerhetssystemet (SIS). Det stenger nødavstengningsventilen XV-101 automatisk, uten at noen trenger å gjøre noe.</li>
+    <li><strong>Mekanisk sikring (PSV-101):</strong> Sikkerhetsventilen åpner av fjærkraft alene. Den trenger verken strøm, instrumentluft eller signal, og er derfor siste tekniske barriere.</li>
+  </ol>
+
+  <div class="act">
+    <div class="act-h"><span class="lbl">Aktivitet</span><h3>Øk trykket i tanken</h3></div>
+    <p>Flytt glideren og se hvilke lag som slår inn. Prøv deretter å krysse av for at PT-101 svikter, og øk trykket igjen.</p>
+    <div class="pid-wrap">
+      <svg class="pid" id="pid" viewBox="0 0 720 340" role="img" aria-label="Flytskjema av trykktank V-101 med regulering, høy alarm, høy-høy-alarm med nedstengning og sikkerhetsventil">
+        <!-- Prosesslinjer -->
+        <line class="ln" x1="20" y1="290" x2="300" y2="290"/>
+        <polygon class="ln" points="294,285 300,290 294,295" style="fill:var(--ink)"/>
+        <text x="20" y="282">Innløp</text>
+        <polyline class="ln" points="410,100 410,80 700,80"/>
+        <polygon class="ln" points="694,75 700,80 694,85" style="fill:var(--ink)"/>
+        <text x="712" y="70" text-anchor="end">Til prosess</text>
+        <line class="ln" x1="330" y1="100" x2="330" y2="72"/>
+        <!-- Tank -->
+        <rect class="vessel" x="300" y="100" width="140" height="220" rx="28"/>
+        <text x="370" y="140" text-anchor="middle" style="font-weight:500">V-101</text>
+        <text x="370" y="208" text-anchor="middle" class="pv" id="pvText">5,0 bar</text>
+        <text x="370" y="226" text-anchor="middle" class="lbl2">faktisk trykk</text>
+
+        <!-- PSV -->
+        <g class="lay psv" id="gPsv">
+          <line class="imp" x1="318" y1="60" x2="110" y2="60"/>
+          <polygon class="imp" points="116,55 110,60 116,65" style="fill:var(--c)"/>
+          <polygon class="vl" points="322,72 338,72 330,60"/>
+          <polygon class="vl" points="318,52 318,68 330,60"/>
+          <polyline class="imp" points="330,60 330,52 324,48 336,44 324,40 336,36 330,32 330,26"/>
+          <text x="344" y="44" class="tg">PSV-101</text>
+          <text x="344" y="57" class="lbl2">åpner ved 10 bar</text>
+          <text x="110" y="52" class="lbl2">Til fakkel</text>
+        </g>
+
+        <!-- Regulering -->
+        <g class="lay reg" id="gReg">
+          <line class="imp" x1="440" y1="150" x2="488" y2="150"/>
+          <circle class="bub" cx="510" cy="150" r="22"/>
+          <text class="bt" x="510" y="147" text-anchor="middle">PT</text><text class="bt" x="510" y="160" text-anchor="middle">101</text>
+          <line class="sig" x1="532" y1="150" x2="618" y2="150"/>
+          <circle class="bub" cx="640" cy="150" r="22"/>
+          <line class="imp" x1="618" y1="150" x2="662" y2="150"/>
+          <text class="bt" x="640" y="145" text-anchor="middle">PIC</text><text class="bt" x="640" y="164" text-anchor="middle">101</text>
+          <line class="sig" x1="640" y1="128" x2="640" y2="104"/>
+          <polygon class="vl" points="628,72 628,88 640,80"/><polygon class="vl" points="652,72 652,88 640,80"/>
+          <line class="imp" x1="640" y1="80" x2="640" y2="94"/>
+          <rect class="box" x="632" y="94" width="16" height="10"/>
+          <text x="620" y="72" text-anchor="end" class="tg">PCV-101</text>
+          <text x="575" y="190" class="lbl2" id="picRead">PIC viser 5,0 bar</text>
+        </g>
+
+        <!-- Høy alarm -->
+        <g class="lay alm" id="gAlm">
+          <line class="imp" x1="440" y1="250" x2="488" y2="250"/>
+          <circle class="bub" cx="510" cy="250" r="22"/>
+          <text class="bt" x="510" y="247" text-anchor="middle">PAH</text><text class="bt" x="510" y="260" text-anchor="middle">102</text>
+          <line class="sig" x1="532" y1="250" x2="588" y2="250"/>
+          <rect class="box" x="588" y="236" width="124" height="28" rx="4"/>
+          <text class="bt" x="650" y="254" text-anchor="middle">Alarm til operatør</text>
+        </g>
+
+        <!-- Høy-høy med nedstengning -->
+        <g class="lay trp" id="gTrp">
+          <line class="imp" x1="252" y1="190" x2="300" y2="190"/>
+          <circle class="bub" cx="230" cy="190" r="22"/>
+          <text class="bt" x="230" y="187" text-anchor="middle">PAHH</text><text class="bt" x="230" y="200" text-anchor="middle">103</text>
+          <line class="sig" x1="208" y1="190" x2="180" y2="190"/>
+          <rect class="box" x="110" y="176" width="70" height="28" rx="4"/>
+          <text class="bt" x="145" y="194" text-anchor="middle">SIS</text>
+          <text class="lbl2" x="145" y="168" text-anchor="middle">sikkerhetssystem</text>
+          <line class="sig" x1="145" y1="204" x2="145" y2="262"/>
+          <rect class="box" x="137" y="262" width="16" height="10"/>
+          <line class="imp" x1="145" y1="272" x2="145" y2="290"/>
+          <polygon class="vl" points="133,282 133,298 145,290"/><polygon class="vl" points="157,282 157,298 145,290"/>
+          <text class="tg" x="145" y="315" text-anchor="middle">XV-101</text>
+          <text class="lbl2" x="145" y="328" text-anchor="middle">nødavstengning</text>
+        </g>
+      </svg>
+    </div>
+    <div class="legend">
+      <span><i style="border-color:var(--steel)"></i>Regulering</span>
+      <span><i style="border-color:var(--warn)"></i>Høy alarm</span>
+      <span><i style="border-color:var(--bad)"></i>Høy-høy og nedstengning</span>
+      <span><i style="border-color:var(--accent);border-top-style:solid"></i>Mekanisk sikring</span>
+      <span><i style="border-color:var(--muted)"></i>Stiplet = elektrisk signal</span>
+    </div>
+
+    <label for="tankP" class="eyebrow t" style="margin-top:16px;display:block">Trykk i tanken</label>
+    <input type="range" id="tankP" min="0" max="11" step="0.1" value="5">
+    <label style="display:flex;gap:8px;align-items:center;margin-top:6px;cursor:pointer"><input type="checkbox" id="ptFail" style="accent-color:var(--accent)"> PT-101 svikter og viser fast 5,0 bar</label>
+    <div class="ladder" id="ladder">
+      <div data-p="10"><span class="num">10,0 bar</span><span class="sw" style="background:var(--accent)"></span><span>Designtrykk. PSV-101 åpner mot fakkel</span></div>
+      <div data-p="8.5"><span class="num">8,5 bar</span><span class="sw" style="background:var(--bad)"></span><span>PAHH-103: SIS stenger XV-101</span></div>
+      <div data-p="7.5"><span class="num">7,5 bar</span><span class="sw" style="background:var(--warn)"></span><span>PAH-102: alarm til operatør</span></div>
+      <div data-p="5"><span class="num">5,0 bar</span><span class="sw" style="background:var(--steel)"></span><span>Settpunkt for PIC-101</span></div>
+    </div>
+    <div class="fb mid" id="pidFb"></div>
+
+    <details><summary>Hva betyr bokstavene i taggene?</summary>
+      <div class="tbl"><table>
+        <thead><tr><th>Bokstav</th><th>Betydning</th><th>Eksempel</th></tr></thead>
+        <tbody>
+          <tr><td class="num">P</td><td>Trykk (pressure)</td><td>Første bokstav sier hva som måles</td></tr>
+          <tr><td class="num">T</td><td>Transmitter, sender målesignalet</td><td>PT-101</td></tr>
+          <tr><td class="num">I</td><td>Indikering, verdien vises</td><td>PIC-101</td></tr>
+          <tr><td class="num">C</td><td>Kontroll, regulering</td><td>PIC-101</td></tr>
+          <tr><td class="num">A</td><td>Alarm</td><td>PAH-102</td></tr>
+          <tr><td class="num">H / HH</td><td>Høy / høy-høy</td><td>PAHH-103</td></tr>
+          <tr><td class="num">V / XV / PSV</td><td>Ventil / avstengningsventil / trykksikkerhetsventil</td><td>PCV-101, XV-101, PSV-101</td></tr>
+        </tbody>
+      </table></div>
+      <p style="margin:0">En sirkel med strek gjennom (som PIC-101) betyr at instrumentet vises i kontrollrommet. Tallene er løpenumre som binder instrumentene til en sløyfe.</p>
+    </details>
+    <details><summary>Spørsmål til diskusjon</summary>
+      <ol class="b" style="margin:0">
+        <li>Hvorfor skal ikke XV-101 åpne seg igjen av seg selv når trykket faller?</li>
+        <li>Hvorfor er settpunktene lagt i rekkefølgen 5 – 7,5 – 8,5 – 10 bar? Hva skjer hvis PAHH ligger over åpningstrykket til PSV-en?</li>
+        <li>Hvilket lag er det eneste som virker ved strømbrudd?</li>
+        <li>Hvilke av lagene er forebyggende barrierer, og hvilke er konsekvensreduserende, hvis topphendelsen er «tanken revner»?</li>
+      </ol>
+    </details>
+  </div>
+
+  <h2>På skolens anlegg: Nivåsikring av vanntank</h2>
+  <p>Det samme prinsippet med lag på lag brukes for nivå. På skolens anlegg pumper en pumpe vann inn i en tank. Fire lag skal hindre at tanken blir overfylt:</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Lag</th><th>Instrument</th><th>Hva det gjør</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Regulering</strong></td><td class="num">LT + LIC + LCV</td><td>Måler nivået hele tiden og styrer reguleringsventilen på innløpet slik at nivået holder seg på settpunktet. Pumpen går med fast turtall.</td></tr>
+      <tr><td><strong>Høy alarm</strong></td><td class="num">LAH</td><td>Gir alarm når nivået blir høyt. Operatøren skal finne årsaken og gripe inn.</td></tr>
+      <tr><td><strong>Høy-høy-alarm</strong></td><td class="num">LAHH</td><td>Stopper pumpen automatisk. Pumpen kan ikke startes igjen før LAHH er tilbakestilt.</td></tr>
+      <tr><td><strong>Mekanisk sikring</strong></td><td>Overløp</td><td>Et rør i toppen av tanken leder vannet bort til sluk. Det virker uten strøm, signal eller operatør.</td></tr>
+    </tbody>
+  </table></div>
+  <p>Aktiviteten har to deler. Del A er en simulering du gjør i klassen. Del B er et arbeidsark du fyller ut ute på anlegget, med en funksjonstest dere gjør selv.</p>
+
+  <div class="act">
+    <div class="act-h"><span class="lbl">Del A</span><h3>Simulering: Hold tanken unna overfylling</h3></div>
+    <p>Taggene i skissen er de samme som på tank 1 på skolens anlegg. Settpunktene er eksempler, og i del B finner du de ekte settpunktene. Gjør oppgavene i rekkefølge, og les hendelsesloggen underveis.</p>
+    <ol class="b">
+      <li>Start simuleringen. Se at reguleringen holder nivået nær settpunktet.</li>
+      <li>Lukk utløpsventilen HV-201 helt. Klarer reguleringen seg alene?</li>
+      <li>Åpne HV-201 igjen til ca. 40 %, og vent til nivået er stabilt. Kryss av for at LT-12075 henger. Strup deretter HV-201 til ca. 15 %, slik at forbruket går ned. Hva skjer med nivået, og hvorfor endrer ikke LCV-12022 stilling? Når LAH gir alarm: stopp pumpen som operatør.</li>
+      <li>Start pumpen igjen uten å rette feilen, og ikke grip inn. Hvilket lag stopper pumpen nå? Prøv å starte pumpen før du har tilbakestilt LAHH.</li>
+      <li>Kryss også av for at LAHH-12076 er defekt, og start pumpen. Hva er nå den eneste barrieren som er igjen?</li>
+      <li>Trykk «Nullstill». Kryss av for at LT-12075 henger og at alle lagene bruker samme måler. Start, strup HV-201 til ca. 15 %, og ikke grip inn. Hvorfor kommer det ingen alarm?</li>
+    </ol>
+    <div class="pid-wrap">
+      <svg class="pid" id="nvSvg" viewBox="0 0 720 395" role="img" aria-label="Flytskjema av vanntank T-12051 med pumpe P-12002 med fast turtall, nivåregulering LIC-12094 med reguleringsventil LCV-12022, høy alarm LAH-12077, høy-høy-alarm LAHH-12076 som stopper pumpen, og overløp til sluk">
+        <defs><clipPath id="nvClip"><rect x="321" y="41" width="138" height="298" rx="11"/></clipPath></defs>
+        <!-- Innløp -->
+        <line class="ln" x1="20" y1="280" x2="320" y2="280"/>
+        <polygon points="313,275 320,280 313,285" style="fill:var(--ink)"/>
+        <line class="flow off" id="nvFlowIn" x1="190" y1="280" x2="241" y2="280"/><line class="flow off" id="nvFlowIn2" x1="269" y1="280" x2="312" y2="280"/>
+        <text x="20" y="270">Fra forråd</text>
+        <!-- Pumpe -->
+        <circle class="pump" id="nvPump" cx="170" cy="280" r="18"/>
+        <polygon points="162,270 162,290 183,280" style="fill:var(--ink)"/>
+        <line class="ln" x1="170" y1="254" x2="170" y2="262"/>
+        <rect class="valve" x="158" y="236" width="24" height="18"/>
+        <text x="170" y="249" text-anchor="middle">M</text>
+        <text x="170" y="316" text-anchor="middle" style="font-weight:500">P-12002</text>
+        <text x="170" y="330" text-anchor="middle" class="lbl2" id="nvPumpTxt">går, fast turtall</text>
+        <!-- Tank -->
+        <rect class="tankbg" x="320" y="40" width="140" height="300" rx="12"/>
+        <rect class="water" id="nvWater" x="320" y="190" width="140" height="150" clip-path="url(#nvClip)"/>
+        <line class="mark" x1="326" y1="55" x2="454" y2="55"/><text x="452" y="51" text-anchor="end" class="lbl2">Overløp 95 %</text>
+        <line class="mark" x1="326" y1="70" x2="454" y2="70"/><text x="452" y="83" text-anchor="end" class="lbl2">LAHH 90 %</text>
+        <line class="mark" x1="326" y1="100" x2="454" y2="100"/><text x="452" y="113" text-anchor="end" class="lbl2">LAH 80 %</text>
+        <line class="mark" x1="326" y1="190" x2="454" y2="190"/><text x="452" y="186" text-anchor="end" class="lbl2">SP 50 %</text>
+        <rect class="tankol" x="320" y="40" width="140" height="300" rx="12"/>
+        <text x="390" y="32" text-anchor="middle" style="font-weight:500">T-12051 · Tank 1</text>
+        <text x="390" y="150" text-anchor="middle" class="pv pvs" id="nvPv">50 %</text>
+        <text x="390" y="166" text-anchor="middle" class="lbl2 pvs">faktisk nivå</text>
+        <!-- Utløp -->
+        <polyline class="ln" points="390,340 390,365 700,365"/>
+        <polygon points="693,360 700,365 693,370" style="fill:var(--ink)"/>
+        <polyline class="flow off" id="nvFlowOut" points="390,344 390,365 545,365"/>
+        <polygon class="valve" points="548,357 548,373 560,365"/><polygon class="valve" points="572,357 572,373 560,365"/>
+        <line class="ln" x1="560" y1="365" x2="560" y2="350"/><line class="ln" x1="552" y1="350" x2="568" y2="350"/>
+        <text x="560" y="342" text-anchor="middle">HV-201</text>
+        <text x="700" y="388" text-anchor="end">Til forbruk</text>
+        <text x="560" y="388" text-anchor="middle" class="lbl2" id="nvValveTxt">40 % åpen</text>
+        <!-- Overløp -->
+        <g class="lay psv" id="nvOfl">
+          <polyline class="imp" points="320,55 285,55 285,124"/>
+          <polygon points="280,118 285,127 290,118" style="fill:var(--c)"/>
+          <polyline class="flow off" id="nvFlowOfl" points="318,55 285,55 285,118"/>
+          <text x="277" y="92" text-anchor="end" class="tg">Overløp</text>
+          <text x="277" y="106" text-anchor="end" class="lbl2">til sluk</text>
+        </g>
+        <!-- Regulering -->
+        <g class="lay reg" id="nvReg">
+          <line class="imp" x1="320" y1="200" x2="272" y2="200"/>
+          <circle class="bub" cx="250" cy="200" r="21"/>
+          <text class="bt" x="250" y="197" text-anchor="middle">LT</text><text class="bt" x="250" y="210" text-anchor="middle">12075</text>
+          <line class="sig" x1="229" y1="200" x2="191" y2="200"/>
+          <circle class="bub" cx="170" cy="200" r="21"/>
+          <line class="imp" x1="149" y1="200" x2="191" y2="200"/>
+          <text class="bt" x="170" y="195" text-anchor="middle">LIC</text><text class="bt" x="170" y="213" text-anchor="middle">12094</text>
+          <polyline class="sig" points="170,221 170,228 255,228 255,258"/>
+          <rect class="box" x="247" y="258" width="16" height="9"/>
+          <line class="imp" x1="255" y1="267" x2="255" y2="280"/>
+          <polygon class="vl" points="243,272 243,288 255,280"/><polygon class="vl" points="267,272 267,288 255,280"/>
+          <text x="255" y="304" text-anchor="middle" class="tg">LCV-12022</text>
+          <text x="255" y="318" text-anchor="middle" class="lbl2" id="nvLcvTxt">40 % åpen</text>
+          <text x="216" y="172" text-anchor="middle" class="lbl2" id="nvLicTxt">LIC viser 50 %</text>
+        </g>
+        <!-- Høy alarm -->
+        <g class="lay alm" id="nvAlm">
+          <line class="imp" x1="460" y1="100" x2="489" y2="100"/>
+          <circle class="bub" cx="510" cy="100" r="21"/>
+          <text class="bt" x="510" y="97" text-anchor="middle">LAH</text><text class="bt" x="510" y="110" text-anchor="middle">12077</text>
+          <line class="sig" x1="510" y1="121" x2="510" y2="150"/>
+          <rect class="box" x="450" y="150" width="120" height="26" rx="4"/>
+          <text class="bt" x="510" y="167" text-anchor="middle">Alarm til operatør</text>
+        </g>
+        <!-- Høy-høy -->
+        <g class="lay trp" id="nvTrp">
+          <line class="imp" x1="460" y1="70" x2="579" y2="70"/>
+          <circle class="bub" cx="600" cy="70" r="21"/>
+          <text class="bt" x="600" y="67" text-anchor="middle">LAHH</text><text class="bt" x="600" y="80" text-anchor="middle">12076</text>
+          <polyline class="sig" points="600,49 600,16 100,16 100,245 158,245"/>
+          <text x="106" y="128" class="tg">Stopper</text><text x="106" y="141" class="tg">P-12002</text>
+        </g>
+      </svg>
+    </div>
+    <div class="legend">
+      <span><i style="border-color:var(--steel)"></i>Regulering</span>
+      <span><i style="border-color:var(--warn)"></i>Høy alarm</span>
+      <span><i style="border-color:var(--bad)"></i>Høy-høy og pumpestopp</span>
+      <span><i style="border-color:var(--accent);border-top-style:solid"></i>Mekanisk sikring</span>
+    </div>
+
+    <div class="row" style="margin-top:14px">
+      <button class="btn acc" type="button" id="nvRun">Start simulering</button>
+      <button class="btn alt" type="button" id="nvReset">Nullstill</button>
+      <span class="num" style="color:var(--muted);font-size:.85rem" id="nvTime">Simulert tid 00:00</span>
+    </div>
+
+    <div class="nv-ctl">
+      <fieldset>
+        <legend>Operatør</legend>
+        <label for="nvValve" style="font-size:.93rem">Utløpsventil HV-201: <span class="num" id="nvValveVal">40 %</span></label>
+        <input type="range" id="nvValve" min="0" max="100" step="5" value="40">
+        <div class="row">
+          <button class="btn sm" type="button" id="nvStop">Stopp pumpe</button>
+          <button class="btn sm" type="button" id="nvStart">Start pumpe</button>
+          <button class="btn sm alt" type="button" id="nvRst">Tilbakestill LAHH</button>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Feil i anlegget</legend>
+        <label class="cb"><input type="checkbox" id="nvFLt"> LT-12075 henger og viser fast verdi</label>
+        <label class="cb"><input type="checkbox" id="nvFLahh"> LAHH-12076 er defekt</label>
+        <label class="cb"><input type="checkbox" id="nvFCommon"> LAH og LAHH bruker samme måler som LT-12075</label>
+      </fieldset>
+    </div>
+
+    <div class="nv-status" aria-live="polite">
+      <span>LIC-12094 regulering</span><span class="state ok" id="nvSReg">Regulerer</span>
+      <span>LAH-12077 høy alarm</span><span class="state ok" id="nvSAlm">Normal</span>
+      <span>LAHH-12076 høy-høy</span><span class="state ok" id="nvSTrp">Normal</span>
+      <span>Overløp</span><span class="state ok" id="nvSOfl">Tørt</span>
+    </div>
+    <div class="fb ok" id="nvFb"></div>
+    <div class="eyebrow t" style="margin-top:14px">Hendelseslogg</div>
+    <ol class="nv-log" id="nvLog"></ol>
+
+    <details><summary>Hva lærer vi av simuleringen?</summary>
+      <ul class="b" style="margin:0">
+        <li>Reguleringen tar seg av vanlige forstyrrelser, som at forbruket endres. Den er ikke laget for å fange opp sin egen målefeil.</li>
+        <li>En måler som henger, er lumsk fordi ingenting skjer med en gang. Nivået stiger først når noe annet endrer seg, for eksempel at forbruket går ned. Da ser LIC-12094 ingen endring og lar LCV-12022 stå som før.</li>
+        <li>LAH gir operatøren tid til å gripe inn før automatikken må gjøre det.</li>
+        <li>LAHH stopper pumpen og «låser» stoppet. Det tvinger noen til å finne årsaken før pumpen startes igjen.</li>
+        <li>Overløpet virker selv når alt annet har sviktet, men vannet havner et sted. For vann er det greit. For et kjemikalie ville det vært et utslipp.</li>
+        <li>Hvis alle lagene bruker samme måler, kan én feil slå ut alle lagene på en gang. Dette kalles en <strong>felles feil</strong>. Derfor skal LAHH ha sin egen måler.</li>
+      </ul>
+    </details>
+  </div>
+
+  <div class="callout steel">
+    <p style="margin:0"><strong>Fra virkeligheten: Buncefield, England, 11. desember 2005.</strong> En stor lagertank med bensin ble fylt i flere timer uten at noen merket det. Nivåmåleren hadde hengt seg opp og viste et fast nivå, og den uavhengige høynivåbryteren som skulle stoppe fyllingen, virket ikke. Bensin rant ut over toppen, fordampet og dannet en stor gassky som eksploderte. Over 40 personer ble skadet, og bygninger i området ble ødelagt. Det er nesten det samme som oppgave 5 i simuleringen.</p>
+  </div>
+
+  <div class="act ws">
+    <div class="act-h"><span class="lbl">Del B</span><h3>Arbeidsark: Kartlegg nivåsikringen på skolens anlegg</h3></div>
+    <div class="callout" style="margin-top:4px"><p style="margin:0"><strong>Sikkerhet:</strong> Følg skolens prosedyre for anlegget. Du skal ikke endre settpunkter, koble ut sikringer eller overstyre noe.</p></div>
+
+    <h3>1. Finn instrumentene</h3>
+    <p>Finn instrumentene på anlegget og fyll inn tabellen. Bruk flytskjemaet for anlegget og skiltene på utstyret. Settpunktene finner du i styresystemet eller i dokumentasjonen.</p>
+    <div class="tbl"><table id="wsMap"></table></div>
+
+    <h3>2. Tegn flytskjema</h3>
+    <p>Tegn et enkelt flytskjema av tanken på papir eller i et tegneprogram. Ta med pumpen, tanken, utløpet, overløpet og de tre instrumentene med de ekte taggene. Tegn signallinjene stiplet, og vis med pil hvor signalet fra LAHH går.</p>
+
+    <h3>3. Forriglingsmatrise</h3>
+    <p>Sett kryss der en årsak gir en virkning på skolens anlegg.</p>
+    <div class="tbl"><table id="wsCE"></table></div>
+    <details><summary>Vis typisk løsning</summary>
+      <p style="margin:0">Typisk gir LAH bare alarm. LAHH gir alarm, stopper pumpen og må tilbakestilles manuelt. En nødstopp gjør det samme som LAHH. Sammenlign med dokumentasjonen for anlegget, for skolens anlegg kan være laget annerledes. Hvis det er forskjell, diskuter hvorfor.</p>
+    </details>
+
+    <h3>4. Funksjonstest</h3>
+    <p>Sett reguleringen i manuell, og fyll tanken kontrollert ved å åpne LCV-12022 litt. Les av nivået når hvert lag slår inn, og sammenlign med settpunktet fra punkt 1. Én elev følger med på nivået hele tiden og er klar til å stoppe pumpen hvis et lag ikke slår inn som forventet. Sett reguleringen tilbake i automatisk når dere er ferdige.</p>
+    <div class="tbl"><table id="wsTest"></table></div>
+
+    <h3>5. Refleksjon</h3>
+    <ol class="b">
+      <li>Har LAHH sin egen måler, eller bruker den signalet fra LT? Hva betyr det for sikkerheten?</li>
+      <li>Hvor går vannet fra overløpet? Er overløpet stort nok til å ta unna alt pumpen kan levere?</li>
+      <li>Hva ville du endret hvis tanken inneholdt et brennbart eller giftig stoff i stedet for vann?</li>
+      <li>Hvor ofte bør LAH og LAHH testes, og hvorfor er det viktig?</li>
+      <li>Hvilken stilling går reguleringsventilen til hvis den mister signal eller instrumentluft? Er det den tryggeste stillingen for denne tanken?</li>
+    </ol>
+    <label for="wsRefl" class="eyebrow t" style="margin-bottom:4px">Dine svar</label>
+    <textarea id="wsRefl" data-ws="refl" style="min-height:130px"></textarea>
+    <details><summary>Vis løsningsforslag</summary>
+      <ol class="b" style="margin:0">
+        <li>Hvis LAHH bruker samme måler som LT, kan én målefeil slå ut både reguleringen og pumpestoppet (felles feil). LAHH bør ha sin egen måler, gjerne med et annet måleprinsipp, for eksempel en flottør- eller vibrasjonsbryter når LT er en trykkmåler.</li>
+        <li>Overløpet må tåle minst like mye vann som pumpen kan levere på full fart, ellers stiger nivået likevel. Vannet bør gå til sluk eller oppsamling der det ikke gjør skade.</li>
+        <li>Overløp til sluk er ikke greit for kjemikalier. Da må overløpet gå til en lukket oppsamlingstank, og tanken bør stå i et oppsamlingskar som rommer hele innholdet. Det kan også trengs flere uavhengige nivåbrytere og gassdetektorer.</li>
+        <li>Sikkerhetsfunksjoner testes etter et fast program, og testen dokumenteres. En bryter som aldri testes, kan ha vært defekt lenge uten at noen vet det. Dette kalles en <strong>skjult feil</strong>, og det var en av årsakene til Buncefield-ulykken.</li>
+        <li>Ventilen bør ha en <strong>feilsikker stilling</strong>. For en ventil på innløpet til en tank er det tryggest at den stenger ved tap av signal eller luft (luft for å åpne, fjær stenger), slik at tanken ikke fylles ukontrollert. Sjekk skiltet på ventilen eller dokumentasjonen. Merk også at pumpen da går mot stengt ventil, og ikke bør gjøre det lenge.</li>
+      </ol>
+    </details>
+
+    <div class="row" style="margin-top:16px">
+      <button class="btn" type="button" id="wsCopy">Kopier svarene mine</button>
+      <span id="wsMsg" style="font-size:.9rem;color:var(--muted)">Svarene lagres bare i denne nettleseren. Kopier dem inn i loggen eller innleveringen din.</span>
+    </div>
+    <textarea id="wsOut" hidden readonly style="margin-top:10px;min-height:160px" aria-label="Svarene dine som tekst"></textarea>
+  </div>
+
+  <h2>Løpske reaksjoner</h2>
+  <p>Mange reaksjoner i prosessindustrien er <strong>eksoterme</strong>: de avgir varme. Reaktoren har kjøling som fjerner varmen. Så lenge kjølingen fjerner like mye varme som reaksjonen lager, er temperaturen stabil.</p>
+  <p>Problemet er at reaksjonsfarten øker veldig raskt med temperaturen. En vanlig tommelfingerregel er at <strong>reaksjonsfarten omtrent dobles for hver 10 °C</strong> temperaturen stiger. Kjølingen øker derimot bare litt når temperaturen øker. Hvis temperaturen først har passert et visst punkt, lager reaksjonen mer varme enn kjølingen klarer å fjerne. Da stiger temperaturen enda mer, reaksjonen går enda fortere, og så videre. Dette kalles en <strong>løpsk reaksjon</strong> (på engelsk <em>runaway reaction</em>).</p>
+
+  <div class="act">
+    <div class="act-h"><span class="lbl">Aktivitet</span><h3>Hold reaktoren under kontroll</h3></div>
+    <p>En forenklet modell: Varmen fra reaksjonen dobles for hver 10 °C. Kjølesystemet kan fjerne opptil 10 varmeenheter. Flytt glideren og finn temperaturen der reaktoren går over i løpsk tilstand.</p>
+    <label for="temp" class="eyebrow t">Reaktortemperatur</label>
+    <input type="range" id="temp" min="20" max="90" step="1" value="40">
+    <div class="readout"><span id="tempVal">40 °C</span> <span class="state ok" id="tempState">Stabil</span></div>
+    <div class="bars">
+      <div>Varme produsert</div><div class="bar"><i id="barGen" style="background:var(--accent)"></i></div><div class="num" id="genVal">4,0</div>
+      <div>Kjølekapasitet</div><div class="bar"><i id="barCool" style="background:var(--steel)"></i></div><div class="num">10,0</div>
+    </div>
+    <p id="tempTxt" style="margin-top:12px"></p>
+    <details><summary>Hva lærer vi av dette?</summary>
+      <p style="margin:0">Det er liten forskjell mellom «stabil» og «ute av kontroll», bare noen få grader. Derfor har reaktorer høytemperaturalarm, automatisk stopp av tilførsel (forrigling), nødkjøling og ofte mulighet for å tilsette et stoff som stopper reaksjonen. Som operatør må du reagere raskt på en temperatur som stiger, og aldri tilsette reaktanter fortere enn prosedyren sier. Hvis for mye reaktant samles opp uten å reagere, for eksempel fordi temperaturen er for lav, kan alt reagere på en gang senere.</p>
+    </details>
+  </div>
+
+  <div class="act"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m4"></div></div>
+  <div class="pager"></div>
+</section>
+
+<!-- ============ M5 ============ -->
+<section class="mod" data-id="m5" hidden>
+  <div class="eyebrow"><span>Modul M-05</span><span class="t">Ca. 90 min</span></div>
+  <h1>Barrierer og risikoanalyse</h1>
+  <p class="lead">Ingen enkeltbarriere er perfekt. Derfor bygger vi flere lag med beskyttelse, og vi bruker systematiske metoder for å finne ut hva som kan gå galt.</p>
+
+  <div class="goals"><h3>Etter denne modulen skal du kunne</h3><ul>
+    <li>forklare risiko som sannsynlighet og konsekvens, og bruke en risikomatrise</li>
+    <li>forklare sveitserostmodellen og sløyfediagram (bowtie)</li>
+    <li>skille mellom tekniske, organisatoriske og operasjonelle barrierer</li>
+    <li>gjennomføre en enkel HAZOP med guideord</li>
+    <li>utarbeide en sikker jobbanalyse (SJA)</li>
+  </ul></div>
+
+  <h2>Hva er risiko?</h2>
+  <p>Risiko består av to deler: <strong>hvor sannsynlig</strong> det er at noe skjer, og <strong>hvor alvorlig konsekvensen</strong> blir hvis det skjer. En hendelse som skjer ofte men gir små skader, og en hendelse som skjer svært sjelden men kan drepe mange, kan begge ha høy risiko.</p>
+
+  <div class="act">
+    <div class="act-h"><span class="lbl">Aktivitet</span><h3>Plasser hendelsen i risikomatrisen</h3></div>
+    <p>Velg en hendelse, og klikk på ruten der du mener den hører hjemme. Det finnes ikke ett fasitsvar, men sammenlign med forslaget.</p>
+    <label for="riskEv" class="eyebrow t">Hendelse</label>
+    <select id="riskEv" style="width:100%;margin-bottom:6px">
+      <option value="0">Søl av fortynnet saltsyre (0,1 M) på laboratoriebenken</option>
+      <option value="1">Lekkasje fra en pakning på en pumpe med brennbar væske</option>
+      <option value="2">Stor tank med giftig gass revner</option>
+      <option value="3">Operatør brenner seg på uisolert damprør</option>
+    </select>
+    <div class="matrix" id="matrix" role="grid" aria-label="Risikomatrise"></div>
+    <div class="row" style="justify-content:space-between;font-family:var(--f-mono);font-size:.75rem;color:var(--muted);margin-top:4px"><span>Konsekvens →</span><span>1 = ubetydelig · 5 = katastrofal</span></div>
+    <div id="riskFb"></div>
+  </div>
+
+  <h2>Barrierer</h2>
+  <p>En <strong>barriere</strong> er et tiltak som skal stoppe en uønsket hendelse eller begrense skaden. Vi deler dem gjerne i tre typer:</p>
+  <div class="def">
+    <div>Tekniske</div><div>Utstyr og systemer: sikkerhetsventil, gassdetektor, nødavstengningsventil, forrigling, brannvegg, oppsamlingskar under tanker.</div>
+    <div>Organisatoriske</div><div>Hvordan arbeidet er organisert: arbeidstillatelsessystem, bemanning, opplæring, vedlikeholdsprogram, ledelse.</div>
+    <div>Operasjonelle</div><div>Det folk faktisk gjør: følge prosedyren, gjøre gassmåling, sjekke at ventiler står riktig, gi god skiftoverlevering, reagere på alarmer.</div>
+  </div>
+  <p>En <strong>forrigling</strong> (på engelsk <em>interlock</em>) er en automatisk funksjon som hindrer farlige tilstander. Eksempel: Hvis nivået i en tank når høy-høy-nivå (LAHH), stenger innløpsventilen automatisk. En <strong>forriglingsmatrise</strong> (cause &amp; effect-diagram) viser i en tabell hvilke signaler (årsaker) som utløser hvilke handlinger (virkninger). Skissen av trykktanken i <a href="#m4">modul M-04</a> viser et eksempel: PAHH-103 (årsak) stenger XV-101 (virkning).</p>
+
+  <h3>Sveitserostmodellen</h3>
+  <p>Psykologen James Reason sammenlignet barrierene med skiver av sveitserost. Hver skive har hull, fordi ingen barriere er perfekt. Noen hull skyldes feil som noen gjør her og nå. Andre er skjulte svakheter som har ligget der lenge: en detektor som ikke er testet, en prosedyre som er utdatert, for lite folk på skiftet. En ulykke skjer når hullene i alle skivene står på linje samtidig.</p>
+
+  <h3>Sløyfediagram (bowtie)</h3>
+  <p>Et sløyfediagram viser en hendelse i midten (topphendelsen). Til venstre er årsakene og de <strong>forebyggende barrierene</strong> som skal hindre at hendelsen skjer. Til høyre er konsekvensene og de <strong>konsekvensreduserende barrierene</strong> som skal begrense skaden.</p>
+  <div class="act" style="overflow-x:auto">
+    <div class="act-h"><span class="lbl">Eksempel</span><h3>Overfylling av lagertank med bensin</h3></div>
+    <div class="bowtie">
+      <div class="bt-col">
+        <div class="bt-item cause"><b>Årsak</b>Nivåmåler viser feil</div>
+        <span class="bt-bar">Uavhengig høynivåbryter (LAHH) stenger innløp</span>
+        <div class="bt-item cause"><b>Årsak</b>Operatør glemmer å stoppe fylling</div>
+        <span class="bt-bar">Høynivåalarm + prosedyre for fylling</span>
+        <div class="bt-item cause"><b>Årsak</b>Feil tank valgt</div>
+        <span class="bt-bar">Merking + dobbeltsjekk av ventiloppstilling</span>
+      </div>
+      <div class="knot">Tank over­fylles</div>
+      <div class="bt-col">
+        <span class="bt-bar">Oppsamlingskar rundt tanken</span>
+        <div class="bt-item cons"><b>Konsekvens</b>Bensin renner ut og fordamper</div>
+        <span class="bt-bar">Gassdetektor + nødavstengning</span>
+        <div class="bt-item cons"><b>Konsekvens</b>Gassky antennes, eksplosjon</div>
+        <span class="bt-bar">Brannvann, skum, beredskap</span>
+        <div class="bt-item cons"><b>Konsekvens</b>Brann sprer seg til andre tanker</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Sikker jobbanalyse (SJA)</h2>
+  <p>Før en jobb som er ny, sjelden eller risikofylt, gjennomfører de som skal gjøre jobben en <strong>SJA</strong>. Dere går gjennom jobben trinn for trinn, spør «hva kan gå galt her?» og bestemmer tiltak og ansvar før dere starter. SJA brukes ofte sammen med en arbeidstillatelse.</p>
+  <h3>Slik lager dere en SJA</h3>
+  <ol class="b">
+    <li><strong>Beskriv jobben.</strong> Hva skal gjøres, hvor, og hvem deltar? Alle som skal gjøre jobben, skal være med på SJA-en.</li>
+    <li><strong>Finn underlaget.</strong> Prosedyre, flytskjema, sikkerhetsdatablad og arbeidstillatelse.</li>
+    <li><strong>Del jobben i trinn.</strong> Skriv trinnene i den rekkefølgen de skal gjøres.</li>
+    <li><strong>Finn farene i hvert trinn.</strong> Spør: Hva kan gå galt? Hvem kan bli skadet?</li>
+    <li><strong>Vurder risikoen</strong> med sannsynlighet (S) og konsekvens (K), som i risikomatrisen over.</li>
+    <li><strong>Bestem tiltak og hvem som er ansvarlig.</strong> Bruk tiltakshierarkiet fra modul M-02: fjern faren først, bruk verneutstyr sist.</li>
+    <li><strong>Konkluder.</strong> Er risikoen akseptabel med tiltakene? Hvis ikke, skal jobben ikke starte.</li>
+  </ol>
+  <div class="callout"><p style="margin:0">En SJA gjelder bare for jobben slik den ble planlagt. Hvis noe endrer seg underveis, for eksempel nytt utstyr, andre folk eller en uventet lekkasje, skal dere stoppe og vurdere på nytt.</p></div>
+
+  <div class="act sja">
+    <div class="act-h"><span class="lbl">Gruppeoppgave</span><h3>Lag en SJA</h3></div>
+    <p>Jobb i grupper på 3–4. Velg en av jobbene, og fyll ut SJA-skjemaet. Den første raden er et eksempel som dere kan endre eller slette.</p>
+    <div class="seg" id="sjaSeg">
+      <button type="button" class="btn alt sm" data-case="pakning" aria-pressed="true">Kjemiprosess: Bytte pakning</button>
+      <button type="button" class="btn alt sm" data-case="syre" aria-pressed="false">Laboratorium: Fortynne svovelsyre</button>
+    </div>
+    <div class="scene" id="sjaCase"></div>
+
+    <div class="sja-meta">
+      <div><label for="sjaWho" class="eyebrow t">Deltakere</label><input type="text" id="sjaWho" placeholder="Navn på alle i gruppa"></div>
+      <div><label for="sjaDate" class="eyebrow t">Dato</label><input type="text" id="sjaDate" placeholder="dd.mm.åååå"></div>
+    </div>
+
+    <h3>Trinn, farer og tiltak</h3>
+    <p style="font-size:.92rem;color:var(--muted)">S = sannsynlighet og K = konsekvens, fra 1 til 5. Risikoen regnes ut og fargelegges som i risikomatrisen.</p>
+    <div class="tbl"><table id="sjaTbl"></table></div>
+    <button type="button" class="btn sm" id="sjaAdd">+ Legg til trinn</button>
+
+    <h3>Før jobben starter</h3>
+    <div class="chklist" id="sjaChk"></div>
+
+    <h3>Konklusjon</h3>
+    <div class="chklist">
+      <label><input type="radio" name="sjaConcl" id="sjaOk" value="ok"> Risikoen er akseptabel med tiltakene. Jobben kan starte.</label>
+      <label><input type="radio" name="sjaConcl" id="sjaNo" value="no"> Risikoen er ikke akseptabel. Jobben kan ikke starte før flere tiltak er på plass.</label>
+    </div>
+
+    <details><summary>Vis løsningsforslag</summary><div id="sjaSol"></div></details>
+    <details><summary>Spørsmål til diskusjon</summary>
+      <ol class="b" style="margin:0">
+        <li>Hvilket trinn fikk høyest risiko? Er dere enige i gruppa?</li>
+        <li>Hvilke av tiltakene deres er tekniske, hvilke er administrative, og hvilke er verneutstyr? Kunne noen av dem vært flyttet høyere opp i tiltakshierarkiet?</li>
+        <li>Hva gjør dere hvis dere oppdager noe underveis som ikke står i SJA-en?</li>
+      </ol>
+    </details>
+
+    <div class="row" style="margin-top:16px">
+      <button class="btn" type="button" id="sjaCopy">Kopier SJA-en</button>
+      <button class="btn alt" type="button" id="sjaClear">Tøm skjemaet</button>
+      <span id="sjaMsg" style="font-size:.9rem;color:var(--muted)">Skjemaet lagres bare i denne nettleseren.</span>
+    </div>
+    <textarea id="sjaOut" hidden readonly style="margin-top:10px;min-height:160px" aria-label="SJA-en som tekst"></textarea>
+  </div>
+
+
+  <h2>HAZOP</h2>
+  <p>HAZOP (Hazard and Operability study) er en systematisk gjennomgang av et anlegg ved hjelp av flytskjemaet (P&amp;ID). Et team går gjennom anlegget del for del (en <strong>node</strong>) og kombinerer en prosessparameter med et <strong>guideord</strong> for å finne mulige avvik.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Guideord</th><th>Betydning</th><th>Eksempel på avvik</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Ingen</strong></td><td>Helt fravær</td><td>Ingen strømning</td></tr>
+      <tr><td><strong>Mer</strong></td><td>Økning</td><td>Mer trykk, høyere temperatur</td></tr>
+      <tr><td><strong>Mindre</strong></td><td>Reduksjon</td><td>Mindre kjølevann</td></tr>
+      <tr><td><strong>Omvendt</strong></td><td>Motsatt retning</td><td>Tilbakestrømning</td></tr>
+      <tr><td><strong>I tillegg til</strong></td><td>Noe ekstra</td><td>Vann i hydrokarbonstrømmen</td></tr>
+      <tr><td><strong>Deler av</strong></td><td>Ufullstendig</td><td>Feil sammensetning</td></tr>
+      <tr><td><strong>Annet enn</strong></td><td>Noe helt annet</td><td>Feil stoff levert</td></tr>
+    </tbody>
+  </table></div>
+  <p>For hvert avvik spør teamet: Hva kan være <strong>årsaken</strong>? Hva blir <strong>konsekvensen</strong>? Hvilke <strong>barrierer</strong> finnes allerede? Trengs det nye <strong>tiltak</strong>?</p>
+
+  <div class="act">
+    <div class="act-h"><span class="lbl">Gruppeoppgave</span><h3>Mini-HAZOP på en varmeveksler</h3></div>
+    <p>En pumpe sender etanol (flammepunkt ca. 13 °C) gjennom en varmeveksler der den varmes med damp til 70 °C, før den går videre til en destillasjonskolonne. Det er en temperaturmåler (TT) på utløpet og en reguleringsventil på dampen.</p>
+    <p>Bruk guideordene <strong>Ingen strømning</strong>, <strong>Mer temperatur</strong> og <strong>Omvendt strømning</strong>. Finn mulig årsak, konsekvens og tiltak for hvert avvik.</p>
+    <label for="r5" class="eyebrow t" style="margin-bottom:4px">Gruppens svar</label>
+    <textarea id="r5" style="min-height:140px"></textarea>
+    <details><summary>Vis løsningsforslag</summary>
+      <div class="tbl"><table>
+        <thead><tr><th>Avvik</th><th>Mulig årsak</th><th>Konsekvens</th><th>Tiltak</th></tr></thead>
+        <tbody>
+          <tr><td>Ingen strømning</td><td>Pumpen stopper, ventil stengt, filter tett</td><td>Etanolen i veksleren varmes opp mens den står stille. Den kan koke og gi overtrykk.</td><td>Lavstrømsalarm, forrigling som stenger dampen når pumpen stopper, PSV på veksleren</td></tr>
+          <tr><td>Mer temperatur</td><td>Dampventilen henger åpen, feil på temperaturmåler</td><td>Etanolen fordamper, høyere trykk, mer damp til kolonnen. Ved lekkasje: brannfare.</td><td>Høytemperaturalarm, uavhengig temperaturbryter som stenger dampen, kalibrering av måler</td></tr>
+          <tr><td>Omvendt strømning</td><td>Pumpen stopper og kolonnen har høyere trykk</td><td>Stoff fra kolonnen strømmer tilbake og kan forurense eller overfylle forrådstanken</td><td>Tilbakeslagsventil, trykkovervåking</td></tr>
+        </tbody>
+      </table></div>
+    </details>
+  </div>
+
+  <div class="act"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m5"></div></div>
+  <div class="pager"></div>
+</section>
+
+<!-- ============ M6 ============ -->
+<section class="mod" data-id="m6" hidden>
+  <div class="eyebrow"><span>Modul M-06</span><span class="t">Ca. 60 min</span></div>
+  <h1>Storulykker: Hva kan vi lære?</h1>
+  <p class="lead">Mye av regelverket og mange av rutinene du skal følge i jobben din, finnes fordi noen har lært av en ulykke. Her ser vi på fire av dem.</p>
+
+  <div class="goals"><h3>Etter denne modulen skal du kunne</h3><ul>
+    <li>beskrive hendelsesforløpet i kjente storulykker</li>
+    <li>peke på hvilke barrierer som sviktet, med sveitserostmodellen</li>
+    <li>knytte lærdommene til ditt eget arbeid som operatør eller laborant</li>
+  </ul></div>
+  <p>Les casene. For hvert case: kryss av for barrierene du mener sviktet, og trykk «Sjekk». Tips til læreren: Del klassen i fire ekspertgrupper som presenterer hvert sitt case.</p>
+
+  <article class="case">
+    <div class="case-h"><h3>Piper Alpha</h3><span class="meta">Nordsjøen, britisk sektor · 6. juli 1988</span></div>
+    <div class="case-b">
+      <div class="facts"><div class="fact"><b>167</b><span>omkom</span></div><div class="fact"><b>Olje og gass</b><span>Produksjons­plattform</span></div></div>
+      <p>På dagskiftet ble sikkerhetsventilen på kondensatpumpe A fjernet for vedlikehold. Åpningen ble dekket med en midlertidig blindflens som ikke var helt tett. Arbeidet ble ikke ferdig, og arbeidstillatelsen ble lagt på kontrollrommet uten at nattskiftet fikk tydelig beskjed om at sikkerhetsventilen manglet.</p>
+      <p>Om kvelden stoppet pumpe B. Nattskiftet startet pumpe A for å holde produksjonen i gang. Kondensat lekket ut ved blindflensen og antente. Eksplosjonen ødela brannvegger. Rørledninger fra nabofelt fortsatte å sende gass til plattformen, og høytrykks gassrør revnet i brannen. Mange av dem som omkom hadde samlet seg i boligmodulen i påvente av evakueringsordre.</p>
+      <h3>Hvilke barrierer sviktet?</h3>
+      <div class="chklist" data-case="piper">
+        <label><input type="checkbox" value="1"> Arbeidstillatelsessystemet og skiftoverleveringen</label>
+        <label><input type="checkbox" value="1"> Kontroll av at utstyr var klart før oppstart</label>
+        <label><input type="checkbox" value="0"> Merking av kjemikalier med CLP-piktogrammer</label>
+        <label><input type="checkbox" value="1"> Brannvegger dimensjonert for eksplosjon</label>
+        <label><input type="checkbox" value="1"> Nedstenging av gasstilførsel fra andre plattformer</label>
+      </div>
+      <button class="btn" data-check="piper">Sjekk</button><div class="fb-slot"></div>
+      <details><summary>Lærdom for deg</summary><p style="margin:0">Skiftoverlevering er en barriere. Du skal alltid vite status på utstyr før du starter det. Etter Piper Alpha ble arbeidstillatelsessystemer og krav til sikker evakuering kraftig skjerpet i hele Nordsjøen.</p></details>
+    </div>
+  </article>
+
+  <article class="case">
+    <div class="case-h"><h3>Bhopal</h3><span class="meta">India · 2.–3. desember 1984</span></div>
+    <div class="case-b">
+      <div class="facts"><div class="fact"><b>Tusenvis</b><span>omkom de første dagene</span></div><div class="fact"><b>MIC</b><span>metylisocyanat, svært giftig</span></div></div>
+      <p>Fabrikken til Union Carbide produserte plantevernmidler og lagret store mengder metylisocyanat (MIC) i tanker. Om natten kom vann inn i en av tankene. MIC reagerer eksotermt med vann. Temperaturen og trykket steg raskt, og omkring 40 tonn giftig gass slapp ut over byen der folk sov.</p>
+      <p>Flere sikkerhetssystemer var ute av drift eller for små: kjøleanlegget for tanken var slått av, skrubberen som skulle nøytralisere gassen var ikke i drift eller for liten, og fakkelen var ute av drift for vedlikehold. Fabrikken hadde også kuttet i bemanning og opplæring, og folk i byen visste ikke hva de skulle gjøre.</p>
+      <h3>Hvilke barrierer sviktet?</h3>
+      <div class="chklist" data-case="bhopal">
+        <label><input type="checkbox" value="1"> Kjøling av lagertanken</label>
+        <label><input type="checkbox" value="1"> Skrubber og fakkel</label>
+        <label><input type="checkbox" value="1"> Bemanning, opplæring og vedlikehold</label>
+        <label><input type="checkbox" value="0"> Jording av fat for å hindre statisk elektrisitet</label>
+        <label><input type="checkbox" value="1"> Varsling og beredskap for befolkningen</label>
+      </div>
+      <button class="btn" data-check="bhopal">Sjekk</button><div class="fb-slot"></div>
+      <details><summary>Lærdom for deg</summary><p style="margin:0">En barriere som er slått av eller ute av drift, finnes ikke. Det er farlig å lagre store mengder av et svært farlig mellomprodukt. Bhopal er en viktig grunn til at storulykkeregelverket krever informasjon til naboer og beredskapsplaner.</p></details>
+    </div>
+  </article>
+
+  <article class="case">
+    <div class="case-h"><h3>Texas City</h3><span class="meta">USA, BP-raffineri · 23. mars 2005</span></div>
+    <div class="case-b">
+      <div class="facts"><div class="fact"><b>15</b><span>omkom</span></div><div class="fact"><b>ca. 180</b><span>skadet</span></div></div>
+      <p>Under oppstart av en destillasjonskolonne (raffinatsplitter) ble kolonnen fylt med brennbar væske langt over normalt nivå. Nivåmåleren viste feil, og en høynivåalarm virket ikke. Ventilen på utløpet var stengt i flere timer, i strid med prosedyren. Operatørene hadde jobbet mange dager på rad med lange skift.</p>
+      <p>Da kolonnen ble full, gikk væske ut gjennom trykkavlastningen til en gammel avblåsningstank med åpent utløp rett til luft (ikke til fakkel). Det kom en fontene av brennbar væske ut av toppen. Gasskyen ble antent, trolig av en bil som sto på tomgang. De som omkom, satt i midlertidige brakker som var plassert for nær anlegget.</p>
+      <h3>Hvilke barrierer sviktet?</h3>
+      <div class="chklist" data-case="texas">
+        <label><input type="checkbox" value="1"> Nivåmåling og høynivåalarm</label>
+        <label><input type="checkbox" value="1"> Å følge oppstartsprosedyren</label>
+        <label><input type="checkbox" value="1"> Trygg avlastning (til fakkel i stedet for åpent til luft)</label>
+        <label><input type="checkbox" value="1"> Plassering av brakker langt fra fareområdet</label>
+        <label><input type="checkbox" value="1"> Arbeidstid og hviletid for operatørene</label>
+      </div>
+      <button class="btn" data-check="texas">Sjekk</button><div class="fb-slot"></div>
+      <details><summary>Lærdom for deg</summary><p style="margin:0">Oppstart og nedkjøring er de farligste fasene, selv om de varer kort. Stol ikke blindt på ett instrument: sammenlign med andre målinger og med det du forventer ut fra hvor mye du har pumpet inn. Granskingen viste også at BP hadde målt sikkerhet med personskadestatistikk og oversett prosessikkerheten.</p></details>
+    </div>
+  </article>
+
+  <article class="case">
+    <div class="case-h"><h3>Vest Tank, Sløvåg</h3><span class="meta">Gulen, Vestland · 24. mai 2007</span></div>
+    <div class="case-b">
+      <div class="facts"><div class="fact"><b>0</b><span>omkom</span></div><div class="fact"><b>Mange</b><span>naboer meldte om helseplager</span></div></div>
+      <p>Bedriften behandlet en type bensin (kokerbensin) med natronlut for å fjerne svovelforbindelser, i tanker som ikke var bygd for prosessen. Prosessen ga sterk lukt og avgasser, og det ble gjort endringer uten god risikovurdering. Under arbeid i en tank oppsto det en eksplosjon og brann i to tanker. Ingen omkom, men mange i nærområdet meldte senere om helseplager.</p>
+      <p>Granskingen viste at det manglet forståelse for kjemien og farene i prosessen, at endringene ikke var risikovurdert, og at myndighetene ikke hadde fanget opp hva som foregikk. Ulykken førte til skjerpet tilsyn med slike virksomheter i Norge.</p>
+      <h3>Hvilke barrierer sviktet?</h3>
+      <div class="chklist" data-case="vest">
+        <label><input type="checkbox" value="1"> Risikovurdering før endring i prosessen (endringsledelse)</label>
+        <label><input type="checkbox" value="1"> Kjemisk kompetanse om stoffene og reaksjonene</label>
+        <label><input type="checkbox" value="1"> Utstyr egnet for prosessen</label>
+        <label><input type="checkbox" value="0"> Hviletidsbestemmelser for offshorearbeidere</label>
+      </div>
+      <button class="btn" data-check="vest">Sjekk</button><div class="fb-slot"></div>
+      <details><summary>Lærdom for deg</summary><p style="margin:0">Det er ikke bare store, avanserte anlegg som kan få alvorlige ulykker. Hver gang noe endres – nye stoffer, nye mengder, nytt utstyr, ny fremgangsmåte – må risikoen vurderes på nytt. Kjemikompetansen du får i dette faget, er en del av barrieren.</p></details>
+    </div>
+  </article>
+
+  <div class="act">
+    <div class="act-h"><span class="lbl">Refleksjon</span><h3>Fellesnevnere</h3></div>
+    <p>Hva har disse ulykkene til felles? Skriv minst tre punkter, og ta med ett du kan bruke på skolens anlegg eller laboratorium.</p>
+    <label for="r6" class="eyebrow t" style="margin-bottom:4px">Ditt svar</label>
+    <textarea id="r6"></textarea>
+    <details><summary>Vis forslag</summary>
+      <ul class="b" style="margin:0">
+        <li>Ingen av ulykkene hadde én enkelt årsak. Flere barrierer sviktet samtidig.</li>
+        <li>Mange av svakhetene var kjent på forhånd, men ble ikke fulgt opp.</li>
+        <li>Vedlikehold, oppstart og endringer var kritiske øyeblikk.</li>
+        <li>Kommunikasjon og overlevering var ofte et svakt punkt.</li>
+        <li>Press for å holde produksjonen i gang eller spare penger påvirket valgene.</li>
+      </ul>
+    </details>
+  </div>
+
+  <div class="act"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m6"></div></div>
+  <div class="pager"></div>
+</section>
+
+<!-- ============ M7 ============ -->
+<section class="mod" data-id="m7" hidden>
+  <div class="eyebrow"><span>Modul M-07</span><span class="t">Ca. 40 min</span></div>
+  <h1>Din rolle: Avvik, endringer og varsling</h1>
+  <p class="lead">Du er selv en av barrierene. Det du ser, sier og gjør hver dag har mye å si for om anlegget er trygt.</p>
+
+  <div class="goals"><h3>Etter denne modulen skal du kunne</h3><ul>
+    <li>forklare hva et avvik og en tilløpshendelse er, og hvorfor de skal rapporteres</li>
+    <li>forklare hvorfor endringer må vurderes før de gjennomføres</li>
+    <li>handle riktig i typiske situasjoner i et anlegg eller laboratorium</li>
+  </ul></div>
+
+  <h2>Avvik og tilløp</h2>
+  <p>Et <strong>avvik</strong> er når noe ikke er som det skal: en prosedyre ble ikke fulgt, en måler viser feil, en ventil står feil. En <strong>tilløpshendelse</strong> (nestenulykke) er en hendelse som kunne ført til skade, men som ikke gjorde det.</p>
+  <p>Tilløpshendelser er gratis lærdom. De viser hvor hullene i osten er, før de står på linje. Derfor skal de rapporteres, selv om ingenting skjedde. Målet med rapporteringen er å lære og forbedre, ikke å finne noen å straffe.</p>
+
+  <h2>Endringer må vurderes</h2>
+  <p>Mange ulykker har skjedd etter en endring som virket liten: en ny pakning av annet materiale, en midlertidig slange, et nytt råstoff fra en annen leverandør, en ventil som ble flyttet. Bedrifter har derfor et system for <strong>endringsledelse</strong> (på engelsk <em>management of change</em>). Før en endring gjennomføres, skal den risikovurderes, godkjennes og dokumenteres. Tegninger og prosedyrer skal oppdateres, og de som jobber der, skal få beskjed.</p>
+
+  <h2>Alarmer og start/stopp</h2>
+  <p>En alarm er et signal om at du må handle. Har du mange alarmer samtidig, eller alarmer som går hele tiden uten at noe er galt, blir det lett å overse den som er viktig. Rapporter alarmer som går unødvendig, slik at de kan rettes.</p>
+  <p>Følg alltid prosedyren ved <strong>oppstart og nedkjøring</strong>. Det er i disse fasene anlegget er minst stabilt og flest ting kan gå galt. Er du usikker, stopp og spør.</p>
+
+  <div class="callout"><p style="margin:0"><strong>Du har rett og plikt til å stoppe arbeidet</strong> hvis du mener det er fare for liv eller helse. Ingen jobb er så viktig at den ikke kan gjøres trygt.</p></div>
+
+  <div class="act">
+    <div class="act-h"><span class="lbl">Scenario</span><h3>Hva gjør du?</h3></div>
+    <div id="scenarios"></div>
+  </div>
+
+  <div class="act"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m7"></div></div>
+  <div class="pager"></div>
+</section>
+
+<!-- ============ PRØVE ============ -->
+<section class="mod" data-id="prove" hidden>
+  <div class="eyebrow"><span>Avsluttende prøve</span><span class="t">12 spørsmål · ca. 20 min</span></div>
+  <h1>Avsluttende prøve</h1>
+  <p class="lead">Spørsmålene dekker alle modulene. Du må ha minst 9 av 12 riktige for å bestå. Svar på alle spørsmålene før du leverer.</p>
+  <div class="act"><div class="quiz" data-quiz="prove"></div></div>
+  <div id="certBox"></div>
+  <div class="pager"></div>
+</section>
+
+  </main>
+</div>
+
+<script>
+(function(){
+const MODS=[
+  {id:"start",tag:"START",t:"Om kurset"},
+  {id:"m1",tag:"M-01",t:"Hva er prosessikkerhet?",min:35},
+  {id:"m2",tag:"M-02",t:"Farlige stoffer og merking",min:50},
+  {id:"m3",tag:"M-03",t:"Brann og eksplosjon",min:50},
+  {id:"m4",tag:"M-04",t:"Trykk, temperatur og løpske reaksjoner",min:90},
+  {id:"m5",tag:"M-05",t:"Barrierer og risikoanalyse",min:90},
+  {id:"m6",tag:"M-06",t:"Storulykker: Hva kan vi lære?",min:60},
+  {id:"m7",tag:"M-07",t:"Din rolle: Avvik, endringer og varsling",min:40},
+  {id:"prove",tag:"PRØVE",t:"Avsluttende prøve",min:20}
+];
+
+/* ---------- Lagring ---------- */
+const KEY="prosessikkerhet-vg2-v1";
+let state={done:{}};
+try{const s=localStorage.getItem(KEY); if(s) state=JSON.parse(s)||state; if(!state.done) state.done={};}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+
+/* ---------- Navigasjon ---------- */
+const navList=document.getElementById("navList"), mobSel=document.getElementById("mobSel"), homeGrid=document.getElementById("homeGrid");
+function buildNav(){
+  navList.innerHTML=""; mobSel.innerHTML=""; homeGrid.innerHTML="";
+  MODS.forEach((m,i)=>{
+    if(m.id==="prove"){const s=document.createElement("li");s.innerHTML='<div class="sep"></div>';navList.appendChild(s);}
+    const li=document.createElement("li");
+    const done=state.done[m.id];
+    li.innerHTML='<a href="#'+m.id+'" data-nav="'+m.id+'"><span class="tag">'+m.tag+'</span><span>'+m.t+'</span>'+(m.id==="start"?'<span></span>':'<span class="chk'+(done?' done':'')+'" aria-label="'+(done?'Fullført':'Ikke fullført')+'"></span>')+'</a>';
+    navList.appendChild(li);
+    const o=document.createElement("option");o.value=m.id;o.textContent=m.tag+"  "+m.t+(done?"  ✓":"");mobSel.appendChild(o);
+    if(m.id!=="start"){
+      const a=document.createElement("a");a.className="home-card";a.href="#"+m.id;
+      a.innerHTML='<span class="tag" style="align-self:flex-start">'+m.tag+'</span><span class="h">'+m.t+'</span><span class="m">'+m.min+' min'+(done?' · fullført ✓':'')+'</span>';
+      homeGrid.appendChild(a);
+    }
+  });
+  const n=["m1","m2","m3","m4","m5","m6","m7"].filter(k=>state.done[k]).length;
+  document.getElementById("progFill").style.width=(n/7*100)+"%";
+  document.getElementById("progTxt").textContent=n+" av 7 moduler"+(state.done.prove?" · prøve bestått":"");
+  markCurrent();
+}
+function current(){const h=location.hash.replace("#","");return MODS.some(m=>m.id===h)?h:"start";}
+function markCurrent(){
+  const c=current();
+  navList.querySelectorAll("a").forEach(a=>{if(a.dataset.nav===c)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");});
+  mobSel.value=c;
+}
+function show(){
+  const c=current();
+  document.querySelectorAll("section.mod").forEach(s=>s.hidden=s.dataset.id!==c);
+  markCurrent();
+}
+mobSel.addEventListener("change",()=>{location.hash=mobSel.value;});
+window.addEventListener("hashchange",()=>{show();window.scrollTo(0,0);});
+
+/* Pager */
+document.querySelectorAll("section.mod").forEach(sec=>{
+  const pg=sec.querySelector(".pager"); if(!pg) return;
+  const i=MODS.findIndex(m=>m.id===sec.dataset.id);
+  const prev=MODS[i-1], next=MODS[i+1];
+  pg.innerHTML=(prev?'<a class="btn alt" href="#'+prev.id+'" style="text-decoration:none">← '+prev.tag+'</a>':'<span></span>')+(next?'<a class="btn" href="#'+next.id+'" style="text-decoration:none">'+next.tag+' →</a>':'');
+});
+const startSec=document.querySelector('section[data-id="start"]');
+const sb=document.createElement("div");sb.className="row";sb.style.marginTop="24px";sb.innerHTML='<a class="btn acc" href="#m1" style="text-decoration:none">Start kurset →</a>';
+startSec.insertBefore(sb,startSec.querySelector(".home-grid"));
+
+/* ---------- Quiz ---------- */
+const Q={
+m1:[
+ {q:"Hva handler prosessikkerhet først og fremst om?",o:["Å bruke riktig verneutstyr","Å hindre at farlige stoffer eller energi slipper ut av prosessen","Å holde skadestatistikken lav","Å rydde arbeidsplassen"],a:1,w:"Prosessikkerhet handler om å holde stoffene og energien innestengt (inneslutning)."},
+ {q:"Hva betyr «tap av inneslutning»?",o:["At et stoff kommer ut av rør eller utstyr der det skal være","At et anlegg stenges ned","At en arbeider mister verneutstyret","At en prøve blir forurenset"],a:0,w:"Nesten alle storulykker starter med et tap av inneslutning."},
+ {q:"Et anlegg har svært få personskader. Hva kan du si om prosessikkerheten?",o:["Den er også god","Den er dårlig","Personskadestatistikken sier lite om prosessikkerheten","Den trenger ikke vurderes"],a:2,w:"Flere storulykker, blant annet Texas City, skjedde på anlegg med lav personskadestatistikk."},
+ {q:"Hvilket regelverk gjelder spesielt for virksomheter med store mengder farlige stoffer?",o:["Matloven","Storulykkeforskriften","Veitrafikkloven","Plan- og bygningsloven"],a:1,w:"Storulykkeforskriften bygger på EUs Seveso-direktiv."}
+],
+m2:[
+ {q:"Hva forteller en H-setning?",o:["Hvordan du skal beskytte deg","Hvilken fare stoffet har","Hvem som produserte stoffet","Hvor stoffet skal lagres"],a:1,w:"H står for hazard (fare). P-setninger forteller hva du skal gjøre."},
+ {q:"Hvilket signalord brukes for de alvorligste farene?",o:["Advarsel","Forsiktig","Fare","Stopp"],a:2,w:"«Fare» brukes for de alvorligste farekategoriene, «Advarsel» for mindre alvorlige."},
+ {q:"I hvilket avsnitt i sikkerhetsdatabladet finner du flammepunktet?",o:["Avsnitt 2","Avsnitt 4","Avsnitt 8","Avsnitt 9"],a:3,w:"Avsnitt 9 er fysiske og kjemiske egenskaper."},
+ {q:"Hvilket tiltak står øverst i tiltakshierarkiet (mest effektivt)?",o:["Personlig verneutstyr","Opplæring","Eliminering eller substitusjon","Avtrekksskap"],a:2,w:"Å fjerne eller bytte ut stoffet fjerner faren. Verneutstyr er siste forsvarslinje."}
+],
+m3:[
+ {q:"Hvilke tre ting må være til stede for at noe skal brenne?",o:["Brensel, oksygen og tennkilde","Brensel, vann og trykk","Oksygen, nitrogen og varme","Gass, væske og fast stoff"],a:0,w:"Dette er branntrekanten. Fjern én av dem, så kan det ikke brenne."},
+ {q:"En gassdetektor viser 50 % LEL. Hva betyr det?",o:["Halve rommet er fylt med gass","Konsentrasjonen er halvparten av nedre eksplosjonsgrense","Gassen er 50 % brennbar","Det er 50 % oksygen i lufta"],a:1,w:"% LEL viser hvor nær du er nedre eksplosjonsgrense."},
+ {q:"Hvorfor skal fat jordes før du tapper brennbar væske?",o:["For å hindre korrosjon","For å hindre at statisk elektrisitet gir gnist","For å holde fatet kaldt","Det er bare et krav for metallfat uten innhold"],a:1,w:"Strømmende væske kan bygge opp statisk ladning som kan gi en gnist."},
+ {q:"I hvilken sone finnes en eksplosiv gassatmosfære hele tiden eller i lange perioder?",o:["Sone 0","Sone 1","Sone 2","Sone 22"],a:0,w:"Sone 0 for gass, sone 20 for støv."}
+],
+m4:[
+ {q:"Hva gjør en sikkerhetsventil (PSV)?",o:["Regulerer strømningen","Åpner ved et innstilt trykk og slipper ut overtrykk","Stenger tilførselen ved lav temperatur","Måler trykket"],a:1,w:"PSV åpner ved innstilt åpningstrykk og lukker når trykket faller."},
+ {q:"Hva er forskjellen mellom sprengplate og sikkerhetsventil?",o:["Sprengplaten lukker seg igjen","Sprengplaten kan ikke lukke seg igjen og må byttes","Det er ingen forskjell","Sprengplaten brukes bare mot undertrykk"],a:1,w:"En sprengplate er engangs: den sprekker og må byttes."},
+ {q:"Tommelfingerregelen sier at reaksjonsfarten omtrent dobles for hver …",o:["1 °C","10 °C","50 °C","100 °C"],a:1,w:"Derfor kan noen få grader gjøre stor forskjell."},
+ {q:"Væske er stengt inne mellom to stengte ventiler og blir varmet opp av sola. Hva er faren?",o:["Væsken fryser","Termisk ekspansjon gir høyt trykk","Ventilene korroderer","Ingen fare"],a:1,w:"Væske utvider seg ved oppvarming. Innestengt væske kan gi svært høyt trykk."}
+],
+m5:[
+ {q:"Hva består risiko av?",o:["Bare sannsynlighet","Bare konsekvens","Sannsynlighet og konsekvens","Antall ansatte"],a:2,w:"Risiko vurderes ut fra hvor sannsynlig noe er og hvor alvorlig det blir."},
+ {q:"Hva viser sveitserostmodellen?",o:["At én god barriere er nok","At ulykker skjer når svakhetene i flere barrierer står på linje","At ost er farlig i laboratoriet","At barrierer aldri svikter"],a:1,w:"Hver barriere har hull. Ulykken skjer når hullene står på linje."},
+ {q:"I et sløyfediagram (bowtie): hvor står de forebyggende barrierene?",o:["Til høyre for topphendelsen","Til venstre for topphendelsen, mellom årsak og hendelse","I midten","De er ikke med"],a:1,w:"Venstre side forebygger. Høyre side begrenser konsekvensene."},
+ {q:"I HAZOP kombinerer du guideordet «Mer» med en parameter. Hvilket avvik får du?",o:["Ingen strømning","Høyere trykk eller temperatur","Feil stoff","Tilbakestrømning"],a:1,w:"«Mer» + trykk = høyere trykk, «Mer» + temperatur = høyere temperatur."}
+],
+m6:[
+ {q:"Hva startet ulykken på Piper Alpha?",o:["Lynnedslag","En pumpe ble startet mens sikkerhetsventilen var fjernet","En skipskollisjon","Vann i en MIC-tank"],a:1,w:"Nattskiftet visste ikke at sikkerhetsventilen var fjernet."},
+ {q:"Hvorfor ble Bhopal-ulykken så alvorlig?",o:["Flere sikkerhetssystemer var ute av drift, og befolkningen var ikke varslet","Fabrikken lå langt fra folk","Gassen var ufarlig","Det var bare én barriere som sviktet"],a:0,w:"Kjøling, skrubber og fakkel virket ikke, og beredskapen for befolkningen var svak."},
+ {q:"Hva var et viktig problem i Texas City?",o:["Kolonnen ble overfylt under oppstart, og avlastningen gikk åpent til luft","Feil merking av kjemikalier","Støveksplosjon i et kornsilo","Fjernet sikkerhetsventil"],a:0,w:"Overfylling, feil nivåmåling og en gammel avblåsningstank med utløp til luft."},
+ {q:"Hva er den viktigste lærdommen fra Vest Tank i Sløvåg?",o:["Endringer i prosessen må risikovurderes","Offshore er farligere enn på land","Bensin brenner ikke","Små bedrifter trenger ikke HMS"],a:0,w:"Endringene ble gjort uten god risikovurdering og kjemisk forståelse."}
+],
+m7:[
+ {q:"Hvorfor skal tilløpshendelser rapporteres?",o:["For å finne noen å straffe","For å lære og rette svakheter før det skjer en ulykke","Det er ikke nødvendig når ingen ble skadet","Bare for å fylle ut statistikk"],a:1,w:"Tilløp viser hvor hullene i barrierene er."},
+ {q:"Du vil bytte en pakning til en av et annet materiale fordi den er lettere å få tak i. Hva gjør du?",o:["Bytter den, det er bare en pakning","Melder det som en endring som skal vurderes og godkjennes","Spør en kollega og gjør det","Venter til neste HAZOP"],a:1,w:"Også små endringer kan påvirke sikkerheten. Bruk endringsledelse."},
+ {q:"Når er risikoen ofte størst i et prosessanlegg?",o:["Ved stabil drift","Ved oppstart og nedkjøring","Om natten","Når anlegget er stengt"],a:1,w:"Oppstart og nedkjøring er de minst stabile fasene."},
+ {q:"Du mener en jobb er farlig å utføre. Hva har du rett til?",o:["Ingenting, du må gjøre som du får beskjed om","Å stoppe arbeidet og si fra","Å gå hjem uten å si fra","Å gjøre jobben raskere"],a:1,w:"Du har rett og plikt til å stoppe arbeid ved fare for liv og helse."}
+]};
+Q.prove=[
+ Q.m1[1],Q.m2[0],Q.m2[3],Q.m3[0],Q.m3[1],Q.m4[0],Q.m4[2],Q.m5[1],Q.m5[3],Q.m6[0],
+ {q:"En operatør ser at nivåmåleren i en kolonne står stille på samme verdi mens det pumpes inn. Hva er riktig?",o:["Stole på måleren","Sammenligne med andre målinger og mengden som er pumpet inn, og si fra","Øke pumpefarten","Slå av alarmen"],a:1,w:"Et instrument kan vise feil. Kryssjekk og rapporter, slik lærdommen fra Texas City viser."},
+ Q.m7[1]
+];
+
+function renderQuiz(box){
+  const id=box.dataset.quiz, qs=Q[id];
+  box.innerHTML="";
+  qs.forEach((it,qi)=>{
+    const d=document.createElement("div");d.className="q";
+    let h='<fieldset><legend><span class="qn">'+String(qi+1).padStart(2,"0")+'</span>'+it.q+'</legend>';
+    it.o.forEach((o,oi)=>{const iid=id+"-"+qi+"-"+oi;h+='<label class="opt" for="'+iid+'"><input type="radio" id="'+iid+'" name="'+id+"-"+qi+'" value="'+oi+'"><span>'+o+'</span></label>';});
+    h+='<div class="why" hidden></div></fieldset>';
+    d.innerHTML=h;box.appendChild(d);
+  });
+  const row=document.createElement("div");row.className="row";
+  row.innerHTML='<button class="btn acc" type="button">'+(id==="prove"?"Lever prøven":"Sjekk svarene")+'</button><button class="btn alt" type="button">Prøv på nytt</button>';
+  box.appendChild(row);
+  const fb=document.createElement("div");box.appendChild(fb);
+  const [chk,rst]=row.querySelectorAll("button");
+  chk.addEventListener("click",()=>{
+    let score=0,missing=0;
+    qs.forEach((it,qi)=>{
+      const sel=box.querySelector('input[name="'+id+"-"+qi+'"]:checked');
+      if(!sel){missing++;return;}
+    });
+    if(missing){fb.className="fb mid";fb.textContent="Du har ikke svart på "+missing+(missing===1?" spørsmål":" spørsmål")+" ennå.";return;}
+    qs.forEach((it,qi)=>{
+      const sel=box.querySelector('input[name="'+id+"-"+qi+'"]:checked');
+      const opts=box.querySelectorAll('input[name="'+id+"-"+qi+'"]');
+      opts.forEach((inp,oi)=>{const l=inp.closest(".opt");l.classList.remove("right","wrong");if(oi===it.a)l.classList.add("right");else if(inp===sel)l.classList.add("wrong");});
+      const why=opts[0].closest("fieldset").querySelector(".why");why.hidden=false;why.textContent=it.w;
+      if(+sel.value===it.a) score++;
+    });
+    const need=id==="prove"?9:3, pass=score>=need;
+    fb.className="fb "+(pass?"ok":"bad");
+    fb.innerHTML='<span class="score">'+score+' / '+qs.length+'</span><br>'+(pass?(id==="prove"?"Gratulerer, du har bestått prøven!":"Bestått. Modulen er markert som fullført."):"Ikke bestått ennå. Les forklaringene, gå tilbake til fagteksten og prøv på nytt.");
+    if(pass){state.done[id]=true;save();buildNav();if(id==="prove")showCert(score);}
+  });
+  rst.addEventListener("click",()=>renderQuiz(box));
+}
+document.querySelectorAll(".quiz").forEach(renderQuiz);
+
+function showCert(score){
+  const n=["m1","m2","m3","m4","m5","m6","m7"].filter(k=>state.done[k]).length;
+  document.getElementById("certBox").innerHTML='<div class="callout steel"><p style="margin:0"><strong>Kursbevis:</strong> Du har bestått den avsluttende prøven med '+score+' av 12 riktige og fullført '+n+' av 7 moduler. Ta et skjermbilde av denne siden og lever til læreren din.</p></div>';
+}
+if(state.done.prove) document.getElementById("certBox").innerHTML='<div class="callout steel"><p style="margin:0"><strong>Du har allerede bestått prøven.</strong> Du kan ta den på nytt hvis du vil øve.</p></div>';
+
+/* ---------- GHS ---------- */
+const GHS=[
+ {c:"GHS01",s:"Eksploderende bombe",a:"Eksplosiv"},
+ {c:"GHS02",s:"Flamme",a:"Brannfarlig"},
+ {c:"GHS03",s:"Flamme over sirkel",a:"Oksiderende"},
+ {c:"GHS04",s:"Gassflaske",a:"Gass under trykk"},
+ {c:"GHS05",s:"Væske som etser hånd og metall",a:"Etsende"},
+ {c:"GHS06",s:"Dødningehode med korslagte knokler",a:"Akutt giftig"},
+ {c:"GHS07",s:"Utropstegn",a:"Helsefarlig, irriterende"},
+ {c:"GHS08",s:"Silhuett av person med stjerne på brystet",a:"Alvorlig helsefare (f.eks. kreft, arvestoff)"},
+ {c:"GHS09",s:"Dødt tre og død fisk",a:"Miljøfarlig"}
+];
+function star(cx,cy,R,r,n){let p=[];for(let i=0;i<n*2;i++){const a=Math.PI*i/n-Math.PI/2,rr=i%2?r:R;p.push((cx+rr*Math.cos(a)).toFixed(1)+","+(cy+rr*Math.sin(a)).toFixed(1));}return p.join(" ");}
+const K='stroke="#111" stroke-linecap="round" fill="none"';
+const GHS_SYM={
+ GHS01:'<circle cx="43" cy="62" r="10"/><path d="M50 53 L53 50" '+K+' stroke-width="3"/>'+
+   '<path d="M56 46 L63 34 M59 50 L71 44 M61 56 L73 57 M53 43 L54 30 M58 62 L68 68" '+K+' stroke-width="3"/>'+
+   '<polygon points="64,28 69,31 65,35"/><polygon points="74,41 77,47 71,46"/><polygon points="49,27 54,24 54,30"/><polygon points="72,66 76,72 70,71"/><rect x="33" y="74" width="30" height="3"/>',
+ GHS02:'<path d="M50 24 C56 33 63 39 61 50 C65 47 66 43 65 39 C71 46 72 58 64 66 L36 66 C29 59 29 49 36 42 C36 48 39 51 43 52 C40 42 44 32 50 24 Z"/><rect x="34" y="69" width="32" height="4"/>',
+ GHS03:'<path d="M50 26 C54 33 58 37 57 44 C60 42 60 39 60 37 C64 42 64 49 59 53 L41 53 C37 49 37 43 41 39 C41 43 43 45 46 46 C44 39 46 32 50 26 Z"/><circle cx="50" cy="61" r="9" fill="none" stroke="#111" stroke-width="4.5"/><rect x="34" y="73" width="32" height="4"/>',
+ GHS04:'<rect x="29" y="53" width="38" height="15" rx="7.5"/><rect x="66" y="56.5" width="6" height="8"/><rect x="71" y="54" width="4" height="13" rx="1"/>',
+ GHS05:'<rect x="34" y="26" width="8" height="20" rx="2" transform="rotate(35 38 36)"/><rect x="58" y="26" width="8" height="20" rx="2" transform="rotate(-35 62 36)"/>'+
+   '<circle cx="45" cy="50" r="2.4"/><circle cx="44" cy="56" r="2"/><circle cx="55" cy="50" r="2.4"/><circle cx="56" cy="56" r="2"/>'+
+   '<path d="M28 61 H48 V68 H28 Z M41 61 a4 4 0 0 0 -8 0 Z" fill-rule="evenodd"/>'+
+   '<path d="M53 68 V62 C53 60 55 59 57 59 L60 59 C61 61 63 61 64 59 L70 59 C72 59 73 60 73 62 V68 Z"/><rect x="26" y="71" width="48" height="3"/>',
+ GHS06:'<path d="M35 64 L65 78 M35 78 L65 64" '+K+' stroke-width="5"/><circle cx="35" cy="64" r="3"/><circle cx="65" cy="78" r="3"/><circle cx="35" cy="78" r="3"/><circle cx="65" cy="64" r="3"/>'+
+   '<circle cx="50" cy="42" r="13"/><rect x="43" y="49" width="14" height="10" rx="2"/><circle cx="45" cy="41" r="3.6" fill="#fff"/><circle cx="55" cy="41" r="3.6" fill="#fff"/><polygon points="50,46 48,50 52,50" fill="#fff"/><path d="M47 55 V59 M50 55 V59 M53 55 V59" stroke="#fff" stroke-width="1.3"/>',
+ GHS07:'<rect x="45.5" y="25" width="9" height="34" rx="3"/><circle cx="50" cy="68" r="5.5"/>',
+ GHS08:'<circle cx="50" cy="29" r="7"/><path d="M31 76 L31 57 C31 46 39 40 50 40 C61 40 69 46 69 57 L69 76 Z"/><polygon fill="#fff" points="'+star(50,59,10,3.8,8)+'"/>',
+ GHS09:'<rect x="24" y="72" width="52" height="2.5"/><path d="M36 72 V38 M36 54 L28 46 M36 49 L44 41 M36 44 L30 36 M36 60 L42 55" '+K+' stroke-width="3"/>'+
+   '<path d="M48 64 C52 58 62 58 67 64 C62 70 52 70 48 64 Z"/><polygon points="66,64 74,59 74,69"/><path d="M51.5 62.5 L54.5 65.5 M54.5 62.5 L51.5 65.5" stroke="#fff" stroke-width="1.3"/>'
+};
+const ghsGrid=document.getElementById("ghsGrid");
+function buildGhs(){
+  const opts=GHS.map(g=>g.a).slice().sort((a,b)=>a.localeCompare(b,"nb"));
+  ghsGrid.innerHTML="";
+  GHS.forEach((g,i)=>{
+    const d=document.createElement("div");d.className="ghs";
+    d.innerHTML='<svg class="dia" viewBox="0 0 100 100" role="img" aria-label="Piktogram '+g.c+'"><path d="M50 5 L95 50 L50 95 L5 50 Z" fill="#fff" stroke="var(--ghs)" stroke-width="7"/><g fill="#111" stroke="none">'+GHS_SYM[g.c]+'</g></svg><span class="code">'+g.c+'</span><select id="ghs'+i+'" aria-label="Betydning for '+g.c+'"><option value="">Velg …</option>'+opts.map(o=>'<option>'+o+'</option>').join("")+'</select>';
+    ghsGrid.appendChild(d);
+  });
+  document.getElementById("ghsFb").innerHTML="";
+}
+buildGhs();
+document.getElementById("ghsCheck").addEventListener("click",()=>{
+  let ok=0;
+  GHS.forEach((g,i)=>{const s=document.getElementById("ghs"+i);const r=s.value===g.a;if(r)ok++;s.style.borderColor=r?"var(--ok)":"var(--bad)";s.style.borderWidth="2px";});
+  const fb=document.getElementById("ghsFb");
+  fb.className="fb "+(ok===9?"ok":ok>=6?"mid":"bad");
+  fb.textContent=ok+" av 9 riktige. "+(ok===9?"Supert! Du kjenner alle piktogrammene.":"Grønn ramme er riktig, rød er feil. Se på de røde og prøv igjen.");
+});
+document.getElementById("ghsReset").addEventListener("click",buildGhs);
+
+/* ---------- Propan ---------- */
+const pr=document.getElementById("propan");
+function upProp(){
+  const v=+pr.value, LEL=2.1, UEL=9.5;
+  document.getElementById("propVal").textContent=v.toFixed(1).replace(".",",")+" %";
+  const st=document.getElementById("propState"), tx=document.getElementById("propTxt");
+  document.getElementById("propLel").textContent="Detektor viser: "+(v>=LEL?"over 100 % LEL":Math.round(v/LEL*100)+" % LEL");
+  if(v<LEL){st.className="state "+(v/LEL>=0.2?"mid":"ok");st.textContent=v/LEL>=0.2?"For mager, men alarm":"For mager";
+    tx.textContent=v/LEL>=0.2?"Blandingen kan ikke antennes ennå, men konsentrasjonen er over en typisk alarmgrense på 20 % LEL. Lekkasjen må finnes og stoppes, og tennkilder må fjernes.":"Det er for lite propan til at blandingen kan brenne. Men en lekkasje som fortsetter, vil raskt øke konsentrasjonen.";}
+  else if(v<=UEL){st.className="state bad";st.textContent="Brennbar";tx.textContent="Blandingen kan antennes av en gnist. I et lukket rom eller et område med mye utstyr kan det bli en eksplosjon.";}
+  else{st.className="state mid";st.textContent="For fet";tx.textContent="Det er for lite oksygen til at blandingen kan brenne her. Men den er fortsatt farlig: i kanten av skyen, der gassen blandes med luft, vil konsentrasjonen være innenfor brennbart område. Ventilering vil også føre blandingen gjennom det brennbare området.";}
+}
+pr.addEventListener("input",upProp);upProp();
+
+/* ---------- Reaktor ---------- */
+const tp=document.getElementById("temp");
+function upTemp(){
+  const T=+tp.value, gen=Math.pow(2,(T-20)/10), cool=10;
+  document.getElementById("tempVal").textContent=T+" °C";
+  document.getElementById("genVal").textContent=gen.toFixed(1).replace(".",",");
+  document.getElementById("barGen").style.width=Math.min(100,gen/20*100)+"%";
+  document.getElementById("barCool").style.width=(cool/20*100)+"%";
+  const st=document.getElementById("tempState"), tx=document.getElementById("tempTxt");
+  if(gen<cool*0.7){st.className="state ok";st.textContent="Stabil";tx.textContent="Kjølingen fjerner mer enn nok varme. Temperaturen er under kontroll.";}
+  else if(gen<=cool){st.className="state mid";st.textContent="Lite margin";tx.textContent="Kjølingen klarer så vidt å følge med. En liten forstyrrelse, som lavere kjølevannsstrøm, kan være nok til å miste kontrollen.";}
+  else{st.className="state bad";st.textContent="Løpsk";tx.textContent="Reaksjonen lager mer varme enn kjølingen fjerner. Temperaturen stiger, reaksjonen går fortere, og det blir enda varmere. Trykket kan stige raskt.";}
+}
+tp.addEventListener("input",upTemp);upTemp();
+
+/* ---------- Trykktank ---------- */
+const tP=document.getElementById("tankP"), pf=document.getElementById("ptFail");
+function nb(v){return v.toFixed(1).replace(".",",");}
+function upTank(){
+  const p=+tP.value, fail=pf.checked;
+  document.getElementById("pvText").textContent=nb(p)+" bar";
+  document.getElementById("picRead").textContent="PIC viser "+(fail?"5,0":nb(p))+" bar";
+  const reg=document.getElementById("gReg");
+  reg.classList.toggle("dead",fail); reg.classList.toggle("on",!fail&&p>6);
+  document.getElementById("gAlm").classList.toggle("on",p>=7.5);
+  document.getElementById("gTrp").classList.toggle("on",p>=8.5);
+  document.getElementById("gPsv").classList.toggle("on",p>=10);
+  document.querySelectorAll("#ladder div").forEach(d=>d.classList.toggle("hit",p>=+d.dataset.p));
+  let t;
+  if(p<6) t="Normal drift. PIC-101 holder trykket nær settpunktet ved å åpne eller strupe PCV-101.";
+  else if(p<7.5) t="Trykket stiger. PIC-101 åpner PCV-101 mer for å slippe ut gass. Ingen alarm ennå.";
+  else if(p<8.5) t="PAH-102 gir alarm. Operatøren må finne årsaken og gripe inn, for eksempel redusere tilførselen.";
+  else if(p<10) t="PAHH-103 har løst ut. SIS stenger XV-101 automatisk, uavhengig av operatøren og reguleringen. Ventilen må tilbakestilles manuelt etter at årsaken er funnet.";
+  else t="PSV-101 åpner av fjærkraft og slipper gass til fakkel. Den trenger verken strøm, signal eller instrumentluft."+(p>10.5?" Trykket er nå over designtrykket. Hvis PSV-en ikke åpner, kan tanken revne. Derfor testes sikkerhetsventiler jevnlig.":"");
+  if(fail&&p>5.5) t="PT-101 viser fortsatt 5,0 bar, så PIC-101 tror alt er normalt og gjør ingenting. "+(p<7.5?"Ingen andre lag har slått inn ennå.":"Men de andre lagene har egne målere og ser det faktiske trykket. ")+(p>=7.5?t:"");
+  const fb=document.getElementById("pidFb");
+  fb.className="fb "+(p<7.5&&!(fail&&p>5.5)?"ok":p<8.5?"mid":"bad");
+  fb.textContent=t;
+}
+tP.addEventListener("input",upTank); pf.addEventListener("change",upTank); upTank();
+
+/* ---------- Nivåsimulering ---------- */
+(function(){
+  const E=id=>document.getElementById(id);
+  const sec=document.querySelector('section[data-id="m4"]');
+  let S, timer=null;
+  function init(){S={L:50,t:0,pumpOn:true,trip:false,lah:false,ofl:false,stuck:E("nvFLt").checked?50:null,speed:0.4,lcv:0.4,qin:0,qout:0};E("nvLog").innerHTML="";}
+  function fmt(t){const m=Math.floor(t/60),s=Math.floor(t%60);return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");}
+  function log(msg){const li=document.createElement("li");li.innerHTML='<span class="num">'+fmt(S.t)+'</span>'+msg;E("nvLog").prepend(li);}
+  function meas(){const lt=E("nvFLt").checked?S.stuck:S.L;const c=E("nvFCommon").checked;return{lt:lt,lah:c?lt:S.L,lahh:c?lt:S.L};}
+  function step(dt){
+    const v=+E("nvValve").value/100, m=meas();
+    const lcv=Math.max(0,Math.min(1,0.4+0.06*(50-m.lt)));
+    const run=S.pumpOn&&!S.trip;
+    S.lcv=lcv; S.qin=run?3*lcv:0; S.qout=S.L>0.05?1.5*v:0; S.speed=S.qin/3;
+    S.L+=(S.qin-S.qout)*dt; S.t+=dt;
+    const was=S.ofl; S.ofl=false;
+    if(S.L>95){S.ofl=true;S.L=95;} if(S.L<0)S.L=0;
+    if(S.ofl&&!was)log("Vannet renner i overløpet til sluk.");
+    if(!S.ofl&&was)log("Overløpet slutter å renne.");
+    const m2=meas();
+    if(!S.lah&&m2.lah>=80){S.lah=true;log("LAH-12077: Høyt nivå. Alarm til operatør.");}
+    if(S.lah&&m2.lah<78){S.lah=false;log("LAH-12077: Alarmen er borte.");}
+    if(!S.trip&&!E("nvFLahh").checked&&m2.lahh>=90){S.trip=true;S.pumpOn=false;log("LAHH-12076: Høy-høy nivå. P-12002 stoppet automatisk.");}
+  }
+  function chip(id,cls,txt){const el=E(id);el.className="state "+cls;el.textContent=txt;}
+  function render(){
+    const m=meas(), ltF=E("nvFLt").checked, lahhF=E("nvFLahh").checked, com=E("nvFCommon").checked;
+    const w=E("nvWater"); w.setAttribute("y",340-3*S.L); w.setAttribute("height",3*S.L);
+    E("nvPv").textContent=Math.round(S.L)+" %";
+    E("nvLicTxt").textContent="LIC viser "+Math.round(m.lt)+" %";
+    const run=S.pumpOn&&!S.trip;
+    const pump=E("nvPump"); pump.classList.toggle("run",run); pump.classList.toggle("trip",S.trip);
+    E("nvPumpTxt").textContent=S.trip?"stoppet av LAHH":!S.pumpOn?"stoppet av operatør":"går, fast turtall";
+    E("nvLcvTxt").textContent=S.lcv<0.005?"stengt":Math.round(S.lcv*100)+" % åpen";
+    E("nvFlowIn").classList.toggle("off",!(S.qin>0.02&&timer));E("nvFlowIn2").classList.toggle("off",!(S.qin>0.02&&timer));
+    E("nvFlowOut").classList.toggle("off",!(S.qout>0.02&&timer));
+    E("nvFlowOfl").classList.toggle("off",!S.ofl);
+    E("nvReg").classList.toggle("dead",ltF);
+    E("nvAlm").classList.toggle("on",S.lah);
+    E("nvTrp").classList.toggle("on",S.trip); E("nvTrp").classList.toggle("dead",lahhF);
+    E("nvOfl").classList.toggle("on",S.ofl);
+    const v=E("nvValve").value; E("nvValveVal").textContent=v+" %"; E("nvValveTxt").textContent=v==="0"?"stengt":v+" % åpen";
+    chip("nvSReg",ltF?"bad":run?"ok":"mid",ltF?"Målefeil":run?"Regulerer":"Pumpe stoppet");
+    chip("nvSAlm",S.lah?"mid":"ok",S.lah?"Alarm":"Normal");
+    chip("nvSTrp",S.trip?"bad":lahhF?"bad":"ok",S.trip?"Utløst, pumpe stoppet":lahhF?"Defekt":"Normal");
+    chip("nvSOfl",S.ofl?"bad":"ok",S.ofl?"Renner":"Tørt");
+    E("nvStop").disabled=!S.pumpOn; E("nvStart").disabled=S.pumpOn||S.trip; E("nvRst").disabled=!S.trip;
+    E("nvRun").textContent=timer?"Pause":(S.t>0?"Fortsett":"Start simulering");
+    E("nvTime").textContent="Simulert tid "+fmt(S.t);
+    let t,c="ok";
+    if(S.ofl){c="bad";t=(com&&ltF)?"Ingen alarm har gått, fordi alle lagene ser den samme feilaktige målingen. Bare overløpet virker, fordi det ikke trenger noen måler. Dette er en felles feil.":"Overløpet tar unna vannet fordi både reguleringen og LAHH har sviktet. Det virker uten strøm og signal, men vannet havner i sluket. Var det et kjemikalie, ville det vært et utslipp.";}
+    else if(S.trip){c="bad";t="LAHH-12076 har stoppet P-12002. Pumpen kan ikke startes før LAHH er tilbakestilt, og du bør finne årsaken før du starter igjen.";}
+    else if(S.lah){c="mid";t=S.pumpOn?"LAH-12077 gir alarm. Som operatør skal du gripe inn nå: stopp pumpen og finn årsaken.":"Pumpen er stoppet av operatøren. Nivået synker hvis utløpet er åpent.";}
+    else if(ltF&&S.L>m.lt+4){c="mid";t="LT-12075 viser "+Math.round(m.lt)+" %, men det faktiske nivået er "+Math.round(S.L)+" %. Reguleringen tror nivået er for lavt og holder LCV-12022 åpen.";}
+    else if(!S.pumpOn){c="mid";t="Pumpen er stoppet av operatøren.";}
+    else if(E("nvValve").value==="0"&&S.speed<0.05){t="Utløpet er stengt. LIC-12094 har stengt LCV-12022, og nivået står stille. Reguleringen klarer denne forstyrrelsen alene.";}
+    else t="Normal drift. LIC-12094 justerer reguleringsventilen LCV-12022 slik at nivået holder seg nær settpunktet på 50 %.";
+    const fb=E("nvFb"); fb.className="fb "+c; fb.textContent=t;
+  }
+  function tick(){if(sec.hidden){pause();return;}for(let i=0;i<10;i++)step(0.05);render();}
+  function pause(){if(timer){clearInterval(timer);timer=null;}render();}
+  E("nvRun").addEventListener("click",()=>{if(timer)pause();else{timer=setInterval(tick,100);if(S.t===0)log("Simuleringen er startet. Normal drift.");render();}});
+  E("nvReset").addEventListener("click",()=>{pause();E("nvValve").value=40;init();render();});
+  E("nvValve").addEventListener("input",render);
+  E("nvValve").addEventListener("change",()=>log("HV-201 satt til "+E("nvValve").value+" %."));
+  E("nvStop").addEventListener("click",()=>{S.pumpOn=false;log("Operatøren stopper P-12002.");render();});
+  E("nvStart").addEventListener("click",()=>{S.pumpOn=true;log("Operatøren starter P-12002.");render();});
+  E("nvRst").addEventListener("click",()=>{if(meas().lahh>=90){log("Kan ikke tilbakestille: LAHH ser fortsatt høy-høy nivå.");}else{S.trip=false;log("LAHH-12076 tilbakestilt. Pumpen må startes manuelt.");}render();});
+  E("nvFLt").addEventListener("change",e=>{if(e.target.checked){S.stuck=S.L;log("LT-12075 henger og viser fast "+Math.round(S.L)+" %.");}else log("LT-12075 virker igjen.");render();});
+  E("nvFLahh").addEventListener("change",e=>{log(e.target.checked?"LAHH-12076 er defekt.":"LAHH-12076 virker igjen.");render();});
+  E("nvFCommon").addEventListener("change",e=>{log(e.target.checked?"LAH og LAHH bruker nå signalet fra LT-12075.":"LAH og LAHH har egne målere igjen.");render();});
+  init();render();
+})();
+
+/* ---------- Arbeidsark ---------- */
+(function(){
+  const E=id=>document.getElementById(id);
+  const WKEY=KEY+"-ark"; let ws={};
+  try{ws=JSON.parse(localStorage.getItem(WKEY))||{};}catch(e){}
+  const MAPR=[["Regulering","LT / LIC / LCV"],["Høy alarm","LAH"],["Høy-høy-alarm","LAHH"],["Mekanisk sikring","Overløp"]];
+  const MAPC=["Tag på anlegget","Måleprinsipp eller type","Settpunkt eller høyde","Hva skjer når den slår inn?"];
+  const MAPP=["Tag","f.eks. trykk, radar, flottør","% eller cm",""];
+  const CER=["LAH","LAHH","Nødstopp (hvis anlegget har det)"];
+  const CEC=["Alarm i styresystemet","Pumpen stopper","Må tilbakestilles manuelt"];
+  const TR=["LAH gir alarm","LAHH stopper pumpen","Pumpen kan ikke startes før LAHH er tilbakestilt","Overløpet begynner å renne (hvis dere tester det)"];
+  const TC=["Forventet nivå","Observert nivå"];
+  const esc=s=>String(s).replace(/"/g,"&quot;");
+  E("wsMap").innerHTML='<thead><tr><th>Funksjon</th>'+MAPC.map(c=>'<th>'+c+'</th>').join("")+'</tr></thead><tbody>'+MAPR.map((r,i)=>'<tr><td><strong>'+r[0]+'</strong><br><span class="num" style="font-size:.85rem">'+r[1]+'</span></td>'+MAPC.map((c,j)=>'<td><input type="text" id="ws-map-'+i+'-'+j+'" data-ws="map-'+i+'-'+j+'" placeholder="'+MAPP[j]+'" aria-label="'+esc(r[0]+": "+c)+'"></td>').join("")+'</tr>').join("")+'</tbody>';
+  E("wsCE").innerHTML='<thead><tr><th>Årsak</th>'+CEC.map(c=>'<th class="c">'+c+'</th>').join("")+'</tr></thead><tbody>'+CER.map((r,i)=>'<tr><td><strong>'+r+'</strong></td>'+CEC.map((c,j)=>'<td class="c"><input type="checkbox" id="ws-ce-'+i+'-'+j+'" data-ws="ce-'+i+'-'+j+'" aria-label="'+esc(r+" gir: "+c)+'"></td>').join("")+'</tr>').join("")+'</tbody>';
+  E("wsTest").innerHTML='<thead><tr><th>Funksjon</th>'+TC.map(c=>'<th>'+c+'</th>').join("")+'<th class="c">Ok?</th></tr></thead><tbody>'+TR.map((r,i)=>'<tr><td>'+r+'</td>'+TC.map((c,j)=>'<td><input type="text" id="ws-t-'+i+'-'+j+'" data-ws="t-'+i+'-'+j+'" aria-label="'+esc(r+": "+c)+'"></td>').join("")+'<td class="c"><select id="ws-t-'+i+'-ok" data-ws="t-'+i+'-ok" aria-label="'+esc(r+": ok")+'"><option value="">–</option><option>Ja</option><option>Nei</option></select></td></tr>').join("")+'</tbody>';
+  document.querySelectorAll(".ws [data-ws]").forEach(el=>{
+    const k=el.dataset.ws;
+    if(ws[k]!==undefined){if(el.type==="checkbox")el.checked=!!ws[k];else el.value=ws[k];}
+    el.addEventListener("input",()=>{ws[k]=el.type==="checkbox"?el.checked:el.value;try{localStorage.setItem(WKEY,JSON.stringify(ws));}catch(e){}});
+  });
+  const val=id=>{const el=E(id);return el.type==="checkbox"?el.checked:el.value.trim();};
+  function text(){
+    let t="NIVÅSIKRING PÅ SKOLENS ANLEGG\n\n1. Instrumenter\n";
+    MAPR.forEach((r,i)=>{t+="- "+r[0]+" ("+r[1]+"): "+MAPC.map((c,j)=>c+": "+(val("ws-map-"+i+"-"+j)||"–")).join("; ")+"\n";});
+    t+="\n3. Forriglingsmatrise\n";
+    CER.forEach((r,i)=>{const x=CEC.filter((c,j)=>val("ws-ce-"+i+"-"+j));t+="- "+r+": "+(x.length?x.join(", "):"ingen kryss")+"\n";});
+    t+="\n4. Funksjonstest\n";
+    TR.forEach((r,i)=>{t+="- "+r+": forventet "+(val("ws-t-"+i+"-0")||"–")+", observert "+(val("ws-t-"+i+"-1")||"–")+", ok: "+(val("ws-t-"+i+"-ok")||"–")+"\n";});
+    t+="\n5. Refleksjon\n"+(E("wsRefl").value.trim()||"–")+"\n";
+    return t;
+  }
+  function fallback(t){const o=E("wsOut");o.hidden=false;o.value=t;o.focus();o.select();E("wsMsg").textContent="Teksten er merket. Kopier den med Ctrl+C (Cmd+C på Mac).";}
+  E("wsCopy").addEventListener("click",()=>{
+    const t=text();
+    try{navigator.clipboard.writeText(t).then(()=>{E("wsMsg").textContent="Kopiert. Lim inn i loggen eller innleveringen din.";},()=>fallback(t));}catch(e){fallback(t);}
+  });
+})();
+
+/* ---------- Risikomatrise ---------- */
+const mx=document.getElementById("matrix");
+const SUG=[{p:3,k:1,t:"Forslag: høy sannsynlighet (det skjer ofte), lav konsekvens. Gir lav til middels risiko. Tiltak: bruk vernebriller og ha søleutstyr tilgjengelig."},
+ {p:3,k:4,t:"Forslag: middels sannsynlighet, alvorlig konsekvens (brann). Høy risiko. Tiltak: vedlikehold av pumper, gassdetektorer, lekkasjeoppsamling og kontroll av tennkilder."},
+ {p:1,k:5,t:"Forslag: svært lav sannsynlighet, men katastrofal konsekvens. Selv om den er sjelden, krever den mange og sterke barrierer. Dette er typisk for storulykker."},
+ {p:3,k:2,t:"Forslag: middels sannsynlighet, liten til moderat konsekvens. Middels risiko. Tiltak: isolere røret (teknisk tiltak er bedre enn å si «vær forsiktig»)."}];
+function cls(p,k){const r=p*k;return r>=15?"vh":r>=8?"hi":r>=4?"me":"lo";}
+function buildMx(){
+  mx.innerHTML="";
+  for(let p=5;p>=1;p--){
+    const ax=document.createElement("div");ax.className="ax";ax.textContent=p===5?"S 5":"S "+p;mx.appendChild(ax);
+    for(let k=1;k<=5;k++){const b=document.createElement("button");b.type="button";b.className="cell "+cls(p,k);b.dataset.p=p;b.dataset.k=k;b.textContent=p*k;b.setAttribute("aria-label","Sannsynlighet "+p+", konsekvens "+k);mx.appendChild(b);}
+  }
+  const e=document.createElement("div");e.className="ax";e.textContent="";mx.appendChild(e);
+  for(let k=1;k<=5;k++){const a=document.createElement("div");a.className="ax";a.textContent="K "+k;mx.appendChild(a);}
+}
+buildMx();
+mx.addEventListener("click",e=>{
+  const b=e.target.closest(".cell");if(!b)return;
+  mx.querySelectorAll(".cell").forEach(c=>c.classList.remove("sel"));b.classList.add("sel");
+  const s=SUG[+document.getElementById("riskEv").value], p=+b.dataset.p, k=+b.dataset.k;
+  const d=Math.abs(p-s.p)+Math.abs(k-s.k);
+  const fb=document.getElementById("riskFb");
+  fb.className="fb "+(d===0?"ok":d<=2?"mid":"bad");
+  fb.innerHTML="<strong>Du valgte S"+p+" × K"+k+" = "+(p*k)+".</strong> "+(d===0?"Samme som forslaget. ":d<=2?"Nær forslaget. ":"Ganske langt fra forslaget. Diskuter gjerne hvorfor. ")+s.t;
+});
+document.getElementById("riskEv").addEventListener("change",()=>{mx.querySelectorAll(".cell").forEach(c=>c.classList.remove("sel"));document.getElementById("riskFb").innerHTML="";});
+const legend=document.createElement("div");legend.className="row";legend.style.cssText="margin-top:8px;font-size:.8rem;gap:12px";
+legend.innerHTML='<span style="font-family:var(--f-mono);color:var(--muted)">S = sannsynlighet ↑</span><span class="cell lo" style="aspect-ratio:auto;padding:2px 8px;cursor:default">Lav</span><span class="cell me" style="aspect-ratio:auto;padding:2px 8px;cursor:default">Middels</span><span class="cell hi" style="aspect-ratio:auto;padding:2px 8px;cursor:default">Høy</span><span class="cell vh" style="aspect-ratio:auto;padding:2px 8px;cursor:default">Svært høy</span>';
+mx.after(legend);
+
+/* ---------- SJA ---------- */
+(function(){
+  const E=id=>document.getElementById(id);
+  const C={
+    pakning:{t:"Bytte pakning i flens ved LCV-12022",
+      d:"Det er en lekkasje i flensen mellom pumpe P-12002 og reguleringsventil LCV-12022 ved tank 1. Pakningen skal byttes.",
+      f:["Røret er fylt med vann og står under trykk når P-12002 går.","Motorbryteren til P-12002 kan låses med personlig hengelås.","Det er stengeventiler før og etter flensen, og en dreneringsventil.","Flensen sitter ca. 1,2 meter over gulvet."],
+      n:"Forutsetningene er eksempler. Sjekk dem mot anlegget og flytskjemaet.",
+      ex:{trinn:"Stoppe P-12002 og låse motorbryteren",fare:"Pumpen blir startet av noen andre mens vi jobber",s:"2",k:"4",tiltak:"Personlig hengelås og merkelapp på bryteren. Prøv å starte for å sjekke at pumpen ikke går.",ansv:"Den som gjør jobben"},
+      chk:["Arbeidstillatelsen er godkjent","P-12002 er stoppet, låst og merket","Ventilene er stengt og sikret","Røret er tømt og trykkløst","Riktig ny pakning og riktig verktøy er klart","Verneutstyr: vernebriller, hansker og vernesko","Læreren og andre på anlegget vet at jobben pågår"],
+      sol:[
+        ["Forberede: hente arbeidstillatelse, verktøy og ny pakning","Feil pakning eller verktøy, ny lekkasje etterpå","Sjekk pakningstype og dimensjon mot dokumentasjonen. Gå gjennom SJA-en med alle som deltar."],
+        ["Stoppe P-12002 og låse motorbryteren","Pumpen blir startet av noen andre","Personlig hengelås og merkelapp. Prøvestart for å sjekke at den ikke går."],
+        ["Stenge ventilene, tømme og trykkavlaste røret","Restrykk og vann som spruter, glatt gulv","Steng og merk ventilene. Åpne dreneringsventilen og sjekk at det ikke kommer mer vann. Bøtte og mopp klar."],
+        ["Løsne boltene og ta ut den gamle pakningen","Restvann i ansiktet, klemskade mellom flensene, verktøy som sklir","Løsne boltene på siden som vender bort fra deg først. Riktig verktøy, vernebriller og hansker. Ikke ha fingrene mellom flensene."],
+        ["Montere ny pakning og trekke til boltene","Pakningen sitter skjevt eller boltene er ujevnt trukket til, og det lekker","Sentrer pakningen. Trekk til boltene i kryss i flere runder."],
+        ["Fjerne lås, åpne ventilene, starte og sjekke","Lekkasje ved oppstart, noen står fortsatt ved utstyret","Sjekk at alle er ferdige og at verktøyet er fjernet. Åpne ventilene sakte, start pumpen og se etter lekkasje."],
+        ["Rydde og avslutte","Glatt gulv, verktøy som er glemt igjen","Tørk opp og rydd. Avslutt arbeidstillatelsen og si fra at anlegget er klart."]]},
+    syre:{t:"Fortynne konsentrert svovelsyre",
+      d:"Dere skal lage 1,0 L 1,0 M svovelsyre (H₂SO₄) fra konsentrert svovelsyre (ca. 96 %, tetthet 1,84 g/mL). Det trengs ca. 56 mL konsentrert syre.",
+      f:["Konsentrert svovelsyre er sterkt etsende (H314).","Det utvikles mye varme når syren blandes med vann.","Arbeidet gjøres i avtrekkskap.","Det finnes øyedusj og nøddusj i laboratoriet."],
+      n:"Sjekk sikkerhetsdatabladet for syren dere har, og skolens prosedyre.",
+      ex:{trinn:"Tilsette syren til vannet",fare:"Kraftig varmeutvikling kan få løsningen til å koke og sprute",s:"3",k:"4",tiltak:"Alltid syre i vann. Tilsett sakte under omrøring med kolben i isbad. Visir og syrefaste hansker.",ansv:"Den som tilsetter syren"},
+      chk:["Sikkerhetsdatabladet er lest (avsnitt 2, 4, 7 og 8)","Avtrekkskapet virker","Vernebriller eller visir, syrefaste hansker og labfrakk","Veien til øyedusj og nøddusj er fri","Søleutstyr og nøytraliseringsmiddel er klart","Isbad er klart","Flaske og etikett til den ferdige løsningen er klar"],
+      sol:[
+        ["Lese sikkerhetsdatabladet og finne fram utstyr","Vet ikke hva man skal gjøre hvis noe skjer","Les avsnitt 2, 4, 7 og 8. Sjekk hvor øyedusj og nøddusj er."],
+        ["Fylle ca. 600 mL vann i en 1 L målekolbe og sette den i isbad","Kolben velter eller knuser","Fest kolben med klemme. Sjekk glasset for sprekker."],
+        ["Måle opp 56 mL konsentrert syre i målesylinder","Søl og sprut på hud og i øyne, damp","Gjør det i avtrekkskap. Visir, syrefaste hansker og labfrakk. Hell fra en liten flaske."],
+        ["Tilsette syren til vannet","Kraftig varmeutvikling, koking og sprut","Syre i vann, aldri vann i syre. Tilsett sakte under omrøring med kolben i isbad."],
+        ["Avkjøle og fylle opp til merket","Feil konsentrasjon hvis løsningen er varm","Vent til løsningen har romtemperatur før dere fyller opp til merket."],
+        ["Overføre til flaske og merke den","Flasken kan forveksles med noe annet","Etikett med navn, konsentrasjon, farepiktogram, dato og hvem som laget den."],
+        ["Rydde og håndtere søl og avfall","Syrerester på utstyr og benk","Skyll utstyret med mye vann. Nøytraliser søl. Følg skolens rutine for avfall."]]}
+  };
+  const SKEY=KEY+"-sja";
+  const blank=()=>({trinn:"",fare:"",s:"",k:"",tiltak:"",ansv:""});
+  const fresh=c=>({rows:[Object.assign({},C[c].ex),blank(),blank()],chk:{},concl:"",who:"",date:""});
+  let st={cur:"pakning",d:{}};
+  try{const v=JSON.parse(localStorage.getItem(SKEY));if(v&&v.d)st=v;}catch(e){}
+  Object.keys(C).forEach(c=>{if(!st.d[c])st.d[c]=fresh(c);});
+  const save=()=>{try{localStorage.setItem(SKEY,JSON.stringify(st));}catch(e){}};
+  const esc=t=>String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+  const D=()=>st.d[st.cur];
+  function riskHtml(r){if(!r.s||!r.k)return '<span class="risk none">–</span>';const p=+r.s,k=+r.k;return '<span class="risk '+cls(p,k)+'">'+(p*k)+'</span>';}
+  function sel(i,f,v){return '<select data-i="'+i+'" data-f="'+f+'" aria-label="'+(f==="s"?"Sannsynlighet":"Konsekvens")+' trinn '+(i+1)+'"><option value="">–</option>'+[1,2,3,4,5].map(n=>'<option'+(String(n)===v?' selected':'')+'>'+n+'</option>').join("")+'</select>';}
+  function ta(i,f,v,ph){return '<textarea class="cell" data-i="'+i+'" data-f="'+f+'" placeholder="'+ph+'" aria-label="'+ph+' trinn '+(i+1)+'">'+esc(v)+'</textarea>';}
+  function table(){
+    const rows=D().rows;
+    E("sjaTbl").innerHTML='<thead><tr><th>#</th><th>Trinn</th><th>Fare</th><th class="c">S</th><th class="c">K</th><th class="c">Risiko</th><th>Tiltak</th><th>Ansvarlig</th><th></th></tr></thead><tbody>'+
+      rows.map((r,i)=>'<tr><td class="num">'+(i+1)+'</td><td>'+ta(i,"trinn",r.trinn,"Trinn")+'</td><td>'+ta(i,"fare",r.fare,"Fare")+'</td><td class="c">'+sel(i,"s",r.s)+'</td><td class="c">'+sel(i,"k",r.k)+'</td><td class="c" id="sjaR'+i+'">'+riskHtml(r)+'</td><td>'+ta(i,"tiltak",r.tiltak,"Tiltak")+'</td><td>'+ta(i,"ansv",r.ansv,"Ansvarlig")+'</td><td><button type="button" class="del" data-del="'+i+'" aria-label="Slett trinn '+(i+1)+'">×</button></td></tr>').join("")+'</tbody>';
+  }
+  function render(){
+    const c=C[st.cur], d=D();
+    document.querySelectorAll("#sjaSeg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.case===st.cur?"true":"false"));
+    E("sjaCase").innerHTML='<strong>'+c.t+'</strong><p style="margin:6px 0">'+c.d+'</p><div class="eyebrow t">Forutsetninger</div><ul class="b" style="margin:4px 0 6px">'+c.f.map(x=>'<li>'+x+'</li>').join("")+'</ul><span style="font-size:.88rem;color:var(--muted)">'+c.n+'</span>';
+    E("sjaWho").value=d.who; E("sjaDate").value=d.date;
+    table();
+    E("sjaChk").innerHTML=c.chk.map((x,i)=>'<label><input type="checkbox" data-chk="'+i+'"'+(d.chk[i]?' checked':'')+'> '+x+'</label>').join("");
+    E("sjaOk").checked=d.concl==="ok"; E("sjaNo").checked=d.concl==="no";
+    E("sjaSol").innerHTML='<div class="tbl"><table><thead><tr><th>#</th><th>Trinn</th><th>Fare</th><th>Tiltak</th></tr></thead><tbody>'+c.sol.map((r,i)=>'<tr><td class="num">'+(i+1)+'</td><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>').join("")+'</tbody></table></div><p style="margin:0">Dette er ett forslag. Deres SJA kan ha andre trinn og flere farer, og det er bra. Det viktigste er at hver fare har et tiltak og en ansvarlig.</p>';
+    E("sjaOut").hidden=true;
+  }
+  E("sjaSeg").addEventListener("click",e=>{const b=e.target.closest("button[data-case]");if(!b)return;st.cur=b.dataset.case;save();render();});
+  E("sjaTbl").addEventListener("input",e=>{const t=e.target;if(t.dataset.i===undefined)return;const r=D().rows[+t.dataset.i];r[t.dataset.f]=t.value;if(t.dataset.f==="s"||t.dataset.f==="k")E("sjaR"+t.dataset.i).innerHTML=riskHtml(r);save();});
+  E("sjaTbl").addEventListener("click",e=>{const b=e.target.closest("[data-del]");if(!b)return;D().rows.splice(+b.dataset.del,1);if(!D().rows.length)D().rows.push(blank());save();table();});
+  E("sjaAdd").addEventListener("click",()=>{D().rows.push(blank());save();table();const t=E("sjaTbl").querySelectorAll('textarea[data-f="trinn"]');t[t.length-1].focus();});
+  E("sjaChk").addEventListener("change",e=>{const i=e.target.dataset.chk;if(i===undefined)return;D().chk[i]=e.target.checked;save();});
+  ["sjaOk","sjaNo"].forEach(id=>E(id).addEventListener("change",e=>{D().concl=e.target.value;save();}));
+  E("sjaWho").addEventListener("input",e=>{D().who=e.target.value;save();});
+  E("sjaDate").addEventListener("input",e=>{D().date=e.target.value;save();});
+  let clearArmed=false;
+  E("sjaClear").addEventListener("click",()=>{
+    if(!clearArmed){clearArmed=true;E("sjaClear").textContent="Trykk igjen for å tømme";E("sjaMsg").textContent="Alt dere har skrevet for denne jobben blir slettet.";setTimeout(()=>{clearArmed=false;E("sjaClear").textContent="Tøm skjemaet";},4000);return;}
+    clearArmed=false;E("sjaClear").textContent="Tøm skjemaet";st.d[st.cur]=fresh(st.cur);save();render();E("sjaMsg").textContent="Skjemaet er tømt.";
+  });
+  function text(){
+    const c=C[st.cur],d=D();
+    let t="SIKKER JOBBANALYSE (SJA)\nJobb: "+c.t+"\nDeltakere: "+(d.who||"–")+"\nDato: "+(d.date||"–")+"\n\n";
+    d.rows.forEach((r,i)=>{if(!(r.trinn||r.fare||r.tiltak))return;t+=(i+1)+". "+(r.trinn||"–")+"\n   Fare: "+(r.fare||"–")+"\n   Risiko: S"+(r.s||"–")+" × K"+(r.k||"–")+(r.s&&r.k?" = "+(r.s*r.k):"")+"\n   Tiltak: "+(r.tiltak||"–")+"\n   Ansvarlig: "+(r.ansv||"–")+"\n";});
+    t+="\nFør jobben starter:\n"+c.chk.map((x,i)=>(d.chk[i]?"[x] ":"[ ] ")+x).join("\n");
+    t+="\n\nKonklusjon: "+(d.concl==="ok"?"Risikoen er akseptabel. Jobben kan starte.":d.concl==="no"?"Risikoen er ikke akseptabel. Jobben kan ikke starte.":"–")+"\n";
+    return t;
+  }
+  function fallback(t){const o=E("sjaOut");o.hidden=false;o.value=t;o.focus();o.select();E("sjaMsg").textContent="Teksten er merket. Kopier den med Ctrl+C (Cmd+C på Mac).";}
+  E("sjaCopy").addEventListener("click",()=>{const t=text();try{navigator.clipboard.writeText(t).then(()=>{E("sjaMsg").textContent="Kopiert. Lim inn i loggen eller innleveringen deres.";},()=>fallback(t));}catch(e){fallback(t);}});
+  render();
+})();
+
+/* ---------- Caser ---------- */
+document.querySelectorAll("[data-check]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const list=document.querySelector('.chklist[data-case="'+btn.dataset.check+'"]');
+    let right=0,total=0,wrong=0;
+    list.querySelectorAll("input").forEach(i=>{const should=i.value==="1";if(should)total++;if(i.checked&&should)right++;if(i.checked&&!should)wrong++;
+      i.parentElement.style.color=should?"var(--ok)":(i.checked?"var(--bad)":"");});
+    const fb=btn.nextElementSibling;
+    fb.className="fb fb-slot "+(right===total&&!wrong?"ok":"mid");
+    fb.textContent=right===total&&!wrong?"Riktig! Du fant alle barrierene som sviktet.":"Du fant "+right+" av "+total+" barrierer"+(wrong?", og krysset av for "+wrong+" som ikke var en del av denne ulykken":"")+". Grønn tekst er barrierer som sviktet.";
+  });
+});
+
+/* ---------- Scenarioer ---------- */
+const SC=[
+ {s:"Du er operatør på kveldsskift. Du hører en susende lyd og kjenner lukt av løsemiddel ved en pumpe. Gassdetektoren har ikke gått.",c:[
+   {t:"Finner verktøy og prøver å stramme flensen selv.",ok:0,f:"Ikke start reparasjon på utstyr under trykk uten tillatelse og sikring. Du kan utsette deg selv for fare, og verktøy kan gi gnister."},
+   {t:"Går bort fra stedet mot vinden, varsler kontrollrommet og følger instruksen for lekkasje.",ok:1,f:"Riktig. Kom deg i sikkerhet, varsle med en gang og la kontrollrommet starte riktige tiltak, som å isolere lekkasjen og fjerne tennkilder."},
+   {t:"Venter og ser om detektoren går, siden det kanskje bare er lukt.",ok:0,f:"Detektoren kan sitte et annet sted eller være defekt. Sansene dine er også en barriere. Varsle med en gang."}]},
+ {s:"Ved skiftbytte sier operatøren som går av at «alt er greit». Du ser i loggen at en ventil har vært i manuell stilling for vedlikehold, men det står ikke om arbeidet er ferdig.",c:[
+   {t:"Spør kollegaen før hun går, og sjekker status for arbeidstillatelsen.",ok:1,f:"Riktig. Dette er nøyaktig den typen uklarhet som førte til Piper Alpha. Avklar før du overtar ansvaret."},
+   {t:"Går ut fra at arbeidet er ferdig og setter ventilen i automatisk.",ok:0,f:"Farlig antagelse. Utstyret kan være åpent eller mangle deler. Avklar alltid status."},
+   {t:"Lar ventilen stå og tar det opp på morgenmøtet.",ok:0,f:"Bedre enn å gjette, men uklar status kan gi problemer i løpet av natten. Avklar det før skiftet ditt starter."}]},
+ {s:"I laboratoriet skal du lage en løsning. Du oppdager at flasken med reagenset mangler etikett, men du «er ganske sikker» på hva det er.",c:[
+   {t:"Bruker det, du har jo sett flasken før.",ok:0,f:"Et umerket kjemikalie er et ukjent kjemikalie. Feil stoff kan gi farlige reaksjoner."},
+   {t:"Setter flasken til side, melder avvik og bruker en merket flaske.",ok:1,f:"Riktig. Umerkede kjemikalier skal ikke brukes. Avviket må meldes, slik at det blir fulgt opp."},
+   {t:"Lukter på flasken for å sjekke.",ok:0,f:"Lukt aldri direkte på kjemikalier. Det kan være giftig eller etsende."}]},
+ {s:"Produksjonen ligger bak plan. Skiftlederen foreslår å hoppe over et trinn i oppstartsprosedyren for å spare en halv time.",c:[
+   {t:"Gjør som skiftlederen sier, det er hans ansvar.",ok:0,f:"Du er også ansvarlig for egne handlinger. Prosedyrer for oppstart finnes fordi oppstart er en kritisk fase."},
+   {t:"Sier tydelig fra at du ikke er komfortabel med å hoppe over trinnet, og foreslår å følge prosedyren eller få endringen vurdert.",ok:1,f:"Riktig. Si fra på en saklig måte. Hvis prosedyren er feil eller unødvendig, skal den endres gjennom endringsledelse, ikke hoppes over."},
+   {t:"Hopper over trinnet, men skriver det i loggen.",ok:0,f:"Å dokumentere et brudd gjør det ikke trygt. Texas City-ulykken skjedde under en oppstart der prosedyren ikke ble fulgt."}]}
+];
+const scBox=document.getElementById("scenarios");
+SC.forEach((sc,si)=>{
+  const d=document.createElement("div");d.style.marginBottom="22px";
+  d.innerHTML='<div class="eyebrow">Situasjon '+(si+1)+' av '+SC.length+'</div><div class="scene">'+sc.s+'</div><div class="choices">'+sc.c.map((c,ci)=>'<button type="button" data-ci="'+ci+'">'+c.t+'</button>').join("")+'</div><div></div>';
+  const fb=d.lastElementChild;
+  d.querySelectorAll(".choices button").forEach(b=>b.addEventListener("click",()=>{
+    const c=sc.c[+b.dataset.ci];
+    d.querySelectorAll(".choices button").forEach(x=>{x.style.borderColor="";x.style.borderWidth="";});
+    b.style.borderColor=c.ok?"var(--ok)":"var(--bad)";b.style.borderWidth="2px";
+    fb.className="fb "+(c.ok?"ok":"bad");fb.textContent=c.f;
+  }));
+  scBox.appendChild(d);
+});
+
+buildNav();show();
+})();
+</script>
+
+</body>
+</html>
