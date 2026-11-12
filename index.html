@@ -112,7 +112,7 @@ const AREAS={prod:["Produksjon og tjenester","var(--a1)"],tek:["Kjemisk teknolog
 const TOPICS=[
   {t:"Prosessikkerhet",href:"prosessikkerhet/",live:true,areas:["prod","tek"],
    d:"Farlige stoffer, brann og eksplosjon, løpske reaksjoner, barrierer og læring fra storulykker. 7 moduler og en avsluttende prøve.",
-   storeKey:"prosessikkerhet-vg2-v1",modules:8},
+   storeKey:"prosessikkerhet-vg2-v1",modules:7},
   {t:"Prosessutstyr og enhetsoperasjoner",areas:["tek"],d:"Pumper, ventiler, varmevekslere, reaktorer og separasjon som destillasjon, filtrering og ekstraksjon."},
   {t:"Måling og regulering",areas:["tek"],d:"Givere, reguleringssløyfer og hvordan prosessen holdes stabil."},
   {t:"Flytskjema og P&ID",areas:["prod","tek"],d:"Lese og tegne flytskjema, kjenne igjen symboler og følge en prosess på tegning."},
@@ -122,7 +122,7 @@ const TOPICS=[
 ];
 function progress(tp){
   if(!tp.storeKey) return null;
-  try{const s=JSON.parse(localStorage.getItem(tp.storeKey)||"{}");return Object.values(s.done||{}).filter(Boolean).length;}catch(e){return null}
+  try{const s=JSON.parse(localStorage.getItem(tp.storeKey)||"{}");return Object.entries(s.done||{}).filter(([k,v])=>v&&/^m\d/.test(k)).length;}catch(e){return null}
 }
 function render(f){
   const g=document.getElementById("grid");g.innerHTML="";
@@ -131,7 +131,7 @@ function render(f){
     const chips=tp.areas.map(a=>`<span class="chip" style="--c:${AREAS[a][1]}">${AREAS[a][0]}</span>`).join("");
     let status;
     if(tp.live){const n=progress(tp);const pct=n==null?0:Math.round(100*n/tp.modules);
-      status=`<span class="pill">Åpent</span>${n?`<span class="bar" aria-hidden="true"><i style="width:${pct}%"></i></span><span>${n}/${tp.modules} fullført</span>`:"<span>Ikke startet</span>"}`;}
+      status=`<span class="pill">Åpent</span>${n?`<span class="bar" aria-hidden="true"><i style="width:${pct}%"></i></span><span>${n}/${tp.modules} moduler fullført</span>`:"<span>Ikke startet</span>"}`;}
     else status=`<span class="pill soon">Kommer</span>`;
     const title=tp.live?`<a href="${tp.href}">${tp.t}</a>`:tp.t;
     el.innerHTML=`<div class="chips">${chips}</div><h3>${title}</h3><p>${tp.d}</p><div class="status">${status}</div>`;
