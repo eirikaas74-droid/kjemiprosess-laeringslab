@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bransjelære – Kjemiprosess læringslab</title>
+<meta name="description" content="Prosessindustrien i Norge, verdikjeder, yrker, rettigheter og plikter i arbeidslivet, og bransjen i grønn omstilling. Vg2 kjemiprosess- og laboratoriefag.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F2F4F3; --panel:#FFFFFF; --ink:#18232B; --muted:#55636B; --line:#D3DADB;
+  --accent:#C2410C; --steel:#2F5D73; --steel-soft:#E1ECF0; --ok:#2E7D4F; --ok-soft:#DFF1E6; --bad:#B42318; --bad-soft:#FBE3E1;
+  --t-fag:#2F5D73; --t-fags:#E1ECF0; --t-sim:#C2410C; --t-sims:#FBE7DC; --t-int:#7A4E9C; --t-ints:#EFE6F5;
+  --t-opp:#0F766E; --t-opps:#D7F0EC; --t-grp:#A16207; --t-grps:#FBF0D9; --t-test:#B42318; --t-tests:#FBE3E1; --t-pra:#2E7D4F; --t-pras:#DFF1E6;
+  --cr-bg:#111A20; --cr-grid:#1E2A32; --cr-ink:#E6ECEE; --cr-muted:#8FA0A8; --cr-pipe:#5D7B8A; --cr-flow:#F08A4B; --cr-ok:#6CCB93; --cr-liq:#3E7F9E;
+  --f-display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#12181C; --panel:#1A2228; --ink:#E6ECEE; --muted:#9AA8AF; --line:#2C3840;
+  --accent:#F08A4B; --steel:#7FB3CB; --steel-soft:#1C2F38; --ok:#6CCB93; --ok-soft:#173326; --bad:#F2857B; --bad-soft:#3D1E1B;
+  --t-fag:#7FB3CB; --t-fags:#1C2F38; --t-sim:#F08A4B; --t-sims:#3A2418; --t-int:#C4A0E0; --t-ints:#2B2236;
+  --t-opp:#5EC8BA; --t-opps:#123330; --t-grp:#E8B860; --t-grps:#3A2E15; --t-test:#F2857B; --t-tests:#3D1E1B; --t-pra:#6CCB93; --t-pras:#173326;
+  --cr-bg:#0B1115; --cr-grid:#18232A; color-scheme:dark}}
+*{box-sizing:border-box}
+html{scroll-padding-top:64px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6}
+a{color:var(--steel)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.08;margin:0;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+button{font:inherit;color:inherit}
+
+/* Nettstedsstripe */
+.sitebar{background:var(--cr-bg);border-bottom:1px solid var(--cr-grid);font-family:var(--f-mono);font-size:.8rem}
+.sitebar .wrap{display:flex;justify-content:space-between;align-items:center;height:42px}
+.sitebar a{color:var(--cr-ink);text-decoration:none}
+.sitebar a:hover{color:var(--cr-flow)}
+.sitebar span{color:var(--cr-muted);text-transform:uppercase;letter-spacing:.08em}
+.sitebar span b{color:var(--cr-flow);font-weight:500}
+
+/* Hero */
+.hero{background:var(--cr-bg);color:var(--cr-ink);
+  background-image:linear-gradient(var(--cr-grid) 1px,transparent 1px),linear-gradient(90deg,var(--cr-grid) 1px,transparent 1px);background-size:28px 28px}
+.hero-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:center;padding:40px 0 48px}
+.eyebrow{font-family:var(--f-mono);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cr-flow)}
+.hero h1{font-size:clamp(2.6rem,6vw,4.4rem);text-transform:uppercase;margin:10px 0 14px;font-weight:700}
+.hero h1 em{font-style:normal;color:var(--cr-flow)}
+.hero p{color:var(--cr-muted);font-size:1.08rem;max-width:48ch}
+.chain{width:100%;height:auto;display:block}
+.chain .box{fill:#172229;stroke:var(--cr-pipe);stroke-width:2}
+.chain .pipe{fill:none;stroke:var(--cr-pipe);stroke-width:4;stroke-linecap:round}
+.chain .flow{fill:none;stroke:var(--cr-flow);stroke-width:2;stroke-dasharray:6 12;animation:flow 1.2s linear infinite}
+.chain text{font-family:var(--f-mono);font-size:10px;fill:var(--cr-muted);letter-spacing:.06em;text-anchor:middle}
+.chain .big{font-family:var(--f-display);font-size:15px;fill:var(--cr-ink);letter-spacing:.02em;font-weight:600}
+.chain .smoke{fill:#E8E2D8;opacity:0;animation:smoke 3s ease-out infinite}
+@keyframes flow{to{stroke-dashoffset:-18}}
+@keyframes smoke{0%{opacity:0;transform:translateY(0)}25%{opacity:.5}100%{opacity:0;transform:translateY(-26px)}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+/* Delnavigasjon */
+.dnav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.dnav .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:thin}
+.dnav a{flex:none;font-size:.86rem;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:4px 12px;white-space:nowrap}
+.dnav a b{font-family:var(--f-mono);font-weight:500;color:var(--muted);margin-right:4px}
+.dnav a.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.dnav a.on b{color:var(--bg)}
+
+/* Oversikt */
+.over{padding:36px 0 8px}
+.ogrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.ocard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:inherit;display:grid;gap:4px;border-top:4px solid var(--steel)}
+.ocard:hover{border-color:var(--steel)}
+.ocard span{font-family:var(--f-mono);font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.ocard b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;line-height:1.1}
+.ocard.test{border-top-color:var(--t-test)}
+
+/* Deler */
+section.del{padding:52px 0 24px;border-bottom:1px solid var(--line)}
+.dhead{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 18px;align-items:end;margin-bottom:26px}
+.dno{font-family:var(--f-display);font-size:4.6rem;line-height:.8;font-weight:700;color:var(--accent);grid-row:span 2}
+.dhead .eyebrow{color:var(--muted)}
+.dhead h2{font-size:clamp(1.6rem,6vw,2.8rem);hyphens:auto;overflow-wrap:break-word;text-transform:uppercase;font-weight:700}
+.lede{font-size:1.12rem;max-width:66ch;margin-bottom:22px;color:var(--muted)}
+
+.fag{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:32px;align-items:start}
+.prose{display:grid;gap:14px;max-width:68ch}
+.prose h3{font-size:1.6rem;font-weight:600;margin-top:14px}
+.prose ul,.prose ol{margin:0;padding-left:22px;display:grid;gap:6px}
+.prose strong{font-weight:700}
+.side{display:grid;gap:14px;position:sticky;top:70px}
+.fact{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.fact .k{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.fact .v{font-family:var(--f-display);font-size:2.2rem;font-weight:700;line-height:1;color:var(--accent);margin:4px 0}
+.fact p{font-size:.88rem;color:var(--muted)}
+.gloss{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:.9rem}
+.gloss h4{font-family:var(--f-mono);font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.gloss dl{display:grid;grid-template-columns:1fr 1fr;gap:3px 10px;margin:0}
+.gloss dt{font-weight:700}
+.gloss dd{margin:0;font-family:var(--f-mono);font-size:.82rem;color:var(--steel)}
+.callout{border-left:4px solid var(--accent);background:var(--panel);padding:12px 16px;border-radius:0 10px 10px 0}
+.callout b{font-family:var(--f-display);font-size:1.15rem;display:block;margin-bottom:2px}
+.src{font-size:.82rem;color:var(--muted)}
+
+/* Kjede-figur i fagtekst */
+.vk{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0}
+.vk span{background:var(--steel-soft);color:var(--steel);border-radius:6px;padding:3px 9px;font-size:.88rem;font-weight:700}
+.vk i{font-style:normal;color:var(--muted)}
+
+/* Aktiviteter */
+.akts{display:grid;gap:18px;margin-top:34px}
+.akt{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;border-top:4px solid var(--c)}
+.akt>header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.akt .ty{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--c);background:var(--cs);border-radius:4px;padding:2px 8px}
+.akt h3{font-size:1.65rem;font-weight:600;width:100%}
+.akt .intro{color:var(--muted);max-width:70ch;margin-bottom:14px}
+.akt.fag-t{--c:var(--t-fag);--cs:var(--t-fags)}
+.akt.sim{--c:var(--t-sim);--cs:var(--t-sims)}
+.akt.int{--c:var(--t-int);--cs:var(--t-ints)}
+.akt.opp{--c:var(--t-opp);--cs:var(--t-opps)}
+.akt.grp{--c:var(--t-grp);--cs:var(--t-grps)}
+.akt.test{--c:var(--t-test);--cs:var(--t-tests)}
+.akt.pra{--c:var(--t-pra);--cs:var(--t-pras)}
+
+/* Prosessviser */
+.pv{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(250px,1fr);gap:18px;align-items:start}
+.pvfig{background:var(--cr-bg);border-radius:12px;overflow:hidden;
+  background-image:linear-gradient(var(--cr-grid) 1px,transparent 1px),linear-gradient(90deg,var(--cr-grid) 1px,transparent 1px);background-size:22px 22px}
+.pvfig svg{width:100%;height:auto;display:block;--spd:1}
+.pvfig .eq{fill:#172229;stroke:var(--cr-pipe);stroke-width:2}
+.pvfig .pu{cursor:pointer}
+.pvfig .pu:hover .eq,.pvfig .pu:focus .eq{stroke:var(--cr-ink)}
+.pvfig .pu.on .eq{stroke:var(--cr-flow);stroke-width:3}
+.pvfig .pu:focus{outline:none}
+.pvfig .plbl{font-family:var(--f-mono);font-size:8.5px;fill:var(--cr-muted);text-anchor:middle;letter-spacing:.05em}
+.pvfig .pu.on .plbl{fill:var(--cr-flow)}
+.pvfig .det{fill:none;stroke:var(--cr-pipe);stroke-width:1.4}
+.pvfig .liq{fill:var(--cr-liq);opacity:.8}
+.pvfig .glow{transition:fill .4s,opacity .4s}
+.pvfig .pp{fill:none;stroke:var(--cr-pipe);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.pvfig .pf{fill:none;stroke:var(--cr-flow);stroke-width:2;stroke-dasharray:6 12;stroke-linecap:round;animation:flow calc(1.2s / var(--spd)) linear infinite}
+.pvfig .pf.gas{stroke:#E8E2D8;opacity:.75}
+.pvfig .pf.by{stroke:var(--cr-ok)}
+.pvfig .pf.cw{stroke:#7FB3CB}
+.pvfig .pf.waste{stroke:#8FA0A8;opacity:.7}
+.pvfig .slbl{font-family:var(--f-mono);font-size:8px;fill:var(--cr-muted)}
+.pvfig .po rect{fill:rgba(255,255,255,.04);stroke:var(--cr-flow);stroke-width:1.2}
+.pvfig .po text{font-family:var(--f-body);font-size:10px;fill:var(--cr-ink);text-anchor:middle;font-weight:700}
+.pvfig .spin{animation:spin calc(2s / var(--spd)) linear infinite;transform-box:fill-box;transform-origin:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pvstep{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px 12px;border-top:1px solid var(--cr-grid);color:var(--cr-ink);font-size:.92rem;min-height:64px}
+.pvstep button{border:1px solid var(--cr-pipe);background:transparent;color:var(--cr-ink);border-radius:8px;width:36px;height:36px;cursor:pointer;font-size:1rem}
+.pvstep button:hover{border-color:var(--cr-flow);color:var(--cr-flow)}
+.pvstep b{color:var(--cr-flow);font-family:var(--f-mono);font-weight:500;font-size:.78rem;display:block;letter-spacing:.06em}
+.pvside{display:grid;gap:12px}
+.ctrl{display:grid;gap:2px}
+.ctrl label{display:flex;justify-content:space-between;font-size:.9rem;font-weight:700}
+.ctrl output{font-family:var(--f-mono);font-weight:500;color:var(--accent)}
+.ctrl input[type=range]{width:100%;accent-color:var(--accent)}
+.ctrl small{color:var(--muted);font-size:.78rem;display:flex;justify-content:space-between}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.kpi{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+.kpi span{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:block}
+.kpi b{font-family:var(--f-display);font-size:1.45rem;font-weight:700;line-height:1.1}
+.kpi b small{font-family:var(--f-mono);font-size:.72rem;font-weight:400;color:var(--muted);margin-left:3px}
+.kpi.ok{border-color:var(--ok)} .kpi.ok b{color:var(--ok)}
+.kpi.bad{border-color:var(--bad)} .kpi.bad b{color:var(--bad)}
+.pvnote{display:grid;gap:6px;font-size:.88rem}
+.pvnote p{border-left:3px solid var(--accent);padding:2px 0 2px 10px}
+.pvnote p.good{border-color:var(--ok)}
+.pvinfo{font-size:.88rem;background:var(--bg);border:1px dashed var(--line);border-radius:10px;padding:10px 12px;color:var(--muted)}
+.pvinfo b{color:var(--ink);display:block;font-family:var(--f-display);font-size:1.1rem}
+
+/* Lean-spillet */
+.lg{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(260px,1fr);gap:18px;align-items:start}
+.lgfloor{background:var(--cr-bg);border-radius:12px;color:var(--cr-ink);overflow:hidden}
+.lgfloor svg{width:100%;height:auto;display:block}
+.lgfloor .stn{fill:#172229;stroke:var(--cr-pipe);stroke-width:2}
+.lgfloor .stn.neck{stroke:var(--cr-flow);stroke-width:3}
+.lgfloor text{font-family:var(--f-mono);fill:var(--cr-muted);font-size:9px}
+.lgfloor .sname{fill:var(--cr-ink);font-family:var(--f-display);font-size:14px;font-weight:600}
+.lgfloor .dot{fill:#E8E2D8}
+.lgfloor .dot.err{fill:var(--cr-flow)}
+.lgfloor .pbar{fill:var(--cr-grid)} .lgfloor .pfill{fill:var(--cr-ok)}
+.lgfloor .arr{stroke:var(--cr-pipe);stroke-width:2;fill:none;marker-end:url(#ah)}
+.lghud{display:flex;gap:14px;flex-wrap:wrap;padding:10px 14px;border-top:1px solid var(--cr-grid);font-family:var(--f-mono);font-size:.8rem;color:var(--cr-muted)}
+.lghud b{color:var(--cr-ink);font-weight:500}
+.lgplan{display:grid;gap:8px}
+.lgplan h4{font-family:var(--f-mono);font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.chg{display:grid;grid-template-columns:20px 1fr;gap:8px;border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--bg);cursor:pointer;font-size:.9rem}
+.chg:has(input:checked){border-color:var(--c);background:var(--cs)}
+.chg.used{opacity:.55}
+.chg input{margin-top:3px;accent-color:var(--accent)}
+.chg b{display:block}
+.chg small{color:var(--muted);display:block;font-size:.82rem;line-height:1.4}
+.chg em{font-style:normal;font-family:var(--f-mono);font-size:.68rem;border:1px solid var(--line);border-radius:3px;padding:0 5px;background:var(--panel)}
+.lgtable{width:100%;border-collapse:collapse;font-size:.86rem;margin-top:14px}
+.lgtable th,.lgtable td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.lgtable th{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.lgtable td.n{font-family:var(--f-mono);text-align:right;white-space:nowrap}
+.lgtable .up{color:var(--ok)} .lgtable .dn{color:var(--bad)}
+.lgmsg{border-radius:10px;padding:12px 14px;background:var(--bg);border:1px solid var(--line);font-size:.93rem;display:grid;gap:8px}
+.lgmsg.win{border-color:var(--ok);background:var(--ok-soft)}
+.tblwrap{overflow-x:auto;max-width:100%}
+.lg>*,.pv>*{min-width:0}
+
+/* 5 hvorfor og OEE */
+.why5{display:grid;gap:10px}
+.wlev{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg)}
+.wlev .wq{font-weight:700;margin-bottom:6px}
+.wlev .wq small{font-family:var(--f-mono);font-weight:400;color:var(--accent);margin-right:6px}
+.wfound{font-size:.9rem;color:var(--ok);font-weight:700;margin-top:6px}
+.oee{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.oee label{display:grid;gap:4px;font-weight:700;font-size:.9rem}
+.oee input{font:inherit;width:100%;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:7px 10px}
+.oee input.ok{border-color:var(--ok);background:var(--ok-soft)} .oee input.bad{border-color:var(--bad);background:var(--bad-soft)}
+.casebox{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:.93rem}
+.casebox ul{margin:4px 0 0;padding-left:20px}
+
+.btn{border:1px solid var(--c,var(--steel));background:var(--c,var(--steel));color:var(--panel);border-radius:8px;padding:7px 14px;cursor:pointer;font-weight:700;font-size:.92rem}
+.btn.ghost{background:transparent;color:var(--c,var(--steel))}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.res{font-weight:700}
+.res.ok{color:var(--ok)} .res.bad{color:var(--bad)}
+
+/* Quiz */
+.q{border-top:1px solid var(--line);padding:14px 0}
+.q:first-child{border-top:none;padding-top:4px}
+.q .qt{font-weight:700;margin-bottom:8px}
+.q .qt small{font-family:var(--f-mono);font-weight:400;color:var(--muted);margin-right:6px}
+.opts{display:grid;gap:6px}
+.opt{text-align:left;border:1.5px solid var(--line);background:var(--bg);border-radius:8px;padding:8px 12px;cursor:pointer;line-height:1.4}
+.opt:hover:not([disabled]){border-color:var(--c)}
+.opt[disabled]{cursor:default}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.fb{margin-top:8px;font-size:.93rem;padding:8px 12px;border-radius:8px;background:var(--bg)}
+.fb b{display:block}
+.score{font-family:var(--f-display);font-size:1.6rem;font-weight:700}
+
+/* Match */
+.match{display:grid;gap:8px}
+.mrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 28px;gap:10px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:var(--bg)}
+.mrow b{font-weight:700}
+.mrow small{display:block;color:var(--muted);font-size:.82rem}
+select{font:inherit;font-size:.92rem;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:6px 8px;width:100%}
+.mark{font-weight:700;text-align:center}
+.mark.ok{color:var(--ok)} .mark.bad{color:var(--bad)}
+.mrow .why{grid-column:1/-1;font-size:.88rem;color:var(--muted);display:none}
+.mrow.done .why{display:block}
+
+/* Rekkefølge */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tabs button{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:4px 14px;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.ord{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ord h4{font-family:var(--f-mono);font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.pool,.chainlist{display:grid;gap:6px;align-content:start;min-height:60px}
+.pool button{text-align:left;border:1.5px dashed var(--c);background:var(--cs);border-radius:8px;padding:7px 11px;cursor:pointer}
+.chainlist{counter-reset:s;padding:0;margin:0;list-style:none}
+.chainlist li{counter-increment:s;display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);background:var(--bg);border-radius:8px;padding:7px 11px}
+.chainlist li::before{content:counter(s);font-family:var(--f-mono);font-size:.78rem;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--c);color:var(--panel);flex:none}
+.chainlist li.ok{border-color:var(--ok);background:var(--ok-soft)}
+.chainlist li.bad{border-color:var(--bad);background:var(--bad-soft)}
+.chainlist li button{margin-left:auto;border:none;background:none;cursor:pointer;color:var(--muted);font-size:1.1rem;line-height:1}
+.empty-hint{color:var(--muted);font-size:.9rem;font-style:italic}
+
+/* Sortering */
+.sort{display:grid;gap:8px}
+.srow{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg)}
+.srow p{margin-bottom:8px}
+.sbtns{display:flex;gap:6px;flex-wrap:wrap}
+.sbtns button{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:3px 12px;cursor:pointer;font-size:.86rem}
+.sbtns button:hover:not([disabled]){border-color:var(--c)}
+.sbtns button.right{border-color:var(--ok);background:var(--ok-soft);font-weight:700}
+.sbtns button.wrong{border-color:var(--bad);background:var(--bad-soft);text-decoration:line-through}
+.srow .why{font-size:.88rem;color:var(--muted);margin-top:6px}
+
+/* Arbeidsark */
+.sheet{display:grid;gap:12px}
+.sheet label{display:grid;gap:4px;font-weight:700;font-size:.95rem}
+.sheet label span{font-weight:400;color:var(--muted);font-size:.86rem}
+textarea,input[type=text]{font:inherit;font-size:.95rem;width:100%;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:8px 10px}
+textarea{min-height:64px;resize:vertical}
+.saved{font-family:var(--f-mono);font-size:.76rem;color:var(--muted)}
+
+/* Gruppe */
+.steps{counter-reset:st;display:grid;gap:10px;padding:0;margin:0;list-style:none}
+.steps li{counter-increment:st;display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start}
+.steps li::before{content:counter(st);font-family:var(--f-display);font-weight:700;font-size:1.3rem;width:34px;height:34px;border-radius:8px;display:grid;place-items:center;background:var(--cs);color:var(--c)}
+.roles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:12px}
+.role{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg);font-size:.92rem}
+.role b{font-family:var(--f-display);font-size:1.15rem;display:block}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.flip{border:1.5px solid var(--line);border-radius:10px;background:var(--bg);padding:14px;min-height:100px;cursor:pointer;text-align:left;display:grid;align-content:center;gap:4px}
+.flip .w{font-family:var(--f-display);font-size:1.3rem;font-weight:600}
+.flip .h{font-size:.78rem;color:var(--muted);font-family:var(--f-mono)}
+.flip.open{border-color:var(--c);background:var(--cs)}
+.flip .d{font-size:.9rem;display:none}
+.flip.open .d{display:block}
+.flip.open .h{display:none}
+
+/* Simulering */
+.simgrid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;align-items:start}
+.meas{display:grid;gap:8px}
+.meas label{display:grid;grid-template-columns:22px 1fr;gap:10px;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg);cursor:pointer}
+.meas label:has(input:checked){border-color:var(--c);background:var(--cs)}
+.meas input{margin-top:4px;width:18px;height:18px;accent-color:var(--accent)}
+.meas b{display:block}
+.meas small{color:var(--muted);font-size:.84rem;display:block}
+.meas .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.meas .tags span{font-family:var(--f-mono);font-size:.7rem;border:1px solid var(--line);border-radius:3px;padding:0 6px;background:var(--panel)}
+.panel{background:var(--cr-bg);color:var(--cr-ink);border-radius:12px;padding:16px 18px;font-family:var(--f-mono);font-size:.84rem;position:sticky;top:70px}
+.panel h4{font-family:var(--f-mono);font-size:.72rem;font-weight:500;letter-spacing:.14em;color:var(--cr-flow);margin-bottom:10px}
+.gauge{margin-bottom:12px}
+.gauge .lab{display:flex;justify-content:space-between;color:var(--cr-muted);margin-bottom:4px}
+.gauge .lab b{color:var(--cr-ink);font-weight:500}
+.bar{height:14px;border-radius:4px;background:var(--cr-grid);overflow:hidden;position:relative}
+.bar i{display:block;height:100%;background:var(--cr-liq);transition:width .4s}
+.bar i.warn{background:var(--cr-flow)}
+.bar i.good{background:var(--cr-ok)}
+.bar .goal{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--cr-ink)}
+.log{border-top:1px solid var(--cr-grid);margin-top:12px;padding-top:10px;color:var(--cr-muted);display:grid;gap:4px;font-size:.8rem;line-height:1.5}
+.log .hi{color:var(--cr-ok)} .log .lo{color:var(--cr-flow)}
+
+/* Lærer */
+.teacher{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.teacher .box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:grid;gap:10px;align-content:start}
+.teacher h3{font-size:1.5rem}
+.teacher ul{margin:0;padding-left:20px;display:grid;gap:5px;font-size:.94rem}
+footer{padding:28px 0 44px;color:var(--muted);font-size:.86rem}
+
+@media (max-width:900px){.pv,.lg{grid-template-columns:1fr}.hero-in{grid-template-columns:1fr}.fag{grid-template-columns:1fr}.side{position:static;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}.simgrid{grid-template-columns:1fr}.panel{position:static}.teacher{grid-template-columns:1fr}}
+@media (max-width:600px){.ord{grid-template-columns:1fr}.mrow{grid-template-columns:1fr 28px}.mrow select{grid-column:1}.dno{font-size:3.4rem}.akt{padding:16px}}
+@media print{.dnav,.sitebar,.hero .chain{display:none}.hero{background:none;color:#000}.akt{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<div class="sitebar"><div class="wrap"><a href="../">← Alle ressurser</a><span>Kjemiprosess <b>læringslab</b></span></div></div>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <div>
+      <div class="eyebrow">Vg2 kjemiprosess- og laboratoriefag · Tema</div>
+      <h1>Bransje<em>lære</em></h1>
+      <p>Hvem lager hva i Norge, og hvordan? Her lærer du om prosessindustrien og laboratoriene du kan jobbe i, veien fra lærling til fagarbeider, rettighetene og pliktene dine i arbeidslivet, og hvordan bransjen skal kutte utslippene.</p>
+    </div>
+    <!-- Verdikjede: råvare → prosess → produkt → kunde -->
+    <svg class="chain" viewBox="0 0 520 220" role="img" aria-label="Tegning av en verdikjede: råvare, prosessanlegg med laboratorium, produkt og kunde">
+      <path class="pipe" d="M96 120 H150 M262 120 H316 M412 120 H440"/>
+      <path class="flow" d="M96 120 H150 M262 120 H316 M412 120 H440"/>
+      <rect class="box" x="16" y="88" width="80" height="64" rx="8"/>
+      <path d="M30 140 l14-26 12 16 10-12 16 22z" fill="var(--cr-pipe)"/>
+      <text x="56" y="172">RÅVARE</text>
+      <rect class="box" x="150" y="70" width="112" height="100" rx="6"/>
+      <rect x="164" y="40" width="12" height="30" fill="#172229" stroke="var(--cr-pipe)" stroke-width="2"/>
+      <circle class="smoke" cx="170" cy="34" r="5"/><circle class="smoke" cx="172" cy="34" r="4" style="animation-delay:1.4s"/>
+      <rect x="190" y="88" width="22" height="64" rx="11" fill="none" stroke="var(--cr-pipe)" stroke-width="2"/>
+      <circle cx="236" cy="132" r="13" fill="none" stroke="var(--cr-flow)" stroke-width="2"/>
+      <path d="M231 104 h10 M233 104 v10 l-6 10 h18 l-6 -10 v-10" fill="none" stroke="var(--cr-ok)" stroke-width="1.8"/>
+      <text x="206" y="190">PROSESS + LAB</text>
+      <rect class="box" x="316" y="92" width="96" height="56" rx="8"/>
+      <rect x="332" y="106" width="28" height="28" rx="3" fill="var(--cr-liq)"/><rect x="366" y="106" width="28" height="28" rx="3" fill="var(--cr-liq)" opacity=".6"/>
+      <text x="364" y="168">PRODUKT</text>
+      <circle class="box" cx="474" cy="120" r="32"/>
+      <path d="M458 112h32M462 112v16h24v-16M468 104h12" fill="none" stroke="var(--cr-ink)" stroke-width="2"/>
+      <text x="474" y="170">KUNDE</text>
+      <text class="big" x="260" y="214">RÅVARE  →  VERDI  →  EKSPORT</text>
+    </svg>
+  </div>
+</header>
+
+<nav class="dnav" aria-label="Deler i temaet"><div class="wrap" id="dnav">
+  <a href="#d1"><b>1</b>Prosessindustrien</a>
+  <a href="#d2"><b>2</b>Fra råvare til produkt</a>
+  <a href="#d3"><b>3</b>Yrker og veien videre</a>
+  <a href="#d4"><b>4</b>Arbeidslivet</a>
+  <a href="#d5"><b>5</b>Bransjen i omstilling</a>
+  <a href="#d6"><b>6</b>Lean</a>
+  <a href="#prove"><b>✓</b>Prøv deg</a>
+  <a href="#laerer"><b>i</b>For lærere</a>
+</div></nav>
+
+<main>
+<section class="over"><div class="wrap">
+  <div class="ogrid">
+    <a class="ocard" href="#d1"><span>Del 1</span><b>Prosessindustrien i Norge</b></a>
+    <a class="ocard" href="#d2"><span>Del 2</span><b>Fra råvare til produkt</b></a>
+    <a class="ocard" href="#d3"><span>Del 3</span><b>Yrker og veien videre</b></a>
+    <a class="ocard" href="#d4"><span>Del 4</span><b>Arbeidslivet: rettigheter og plikter</b></a>
+    <a class="ocard" href="#d5"><span>Del 5</span><b>Bransjen i omstilling</b></a>
+    <a class="ocard" href="#d6"><span>Del 6</span><b>Kontinuerlig forbedring med lean</b></a>
+    <a class="ocard test" href="#prove"><span>Egentest</span><b>Prøv deg i bransjelære</b></a>
+  </div>
+</div></section>
+
+<!-- ======================= DEL 1 ======================= -->
+<section class="del" id="d1"><div class="wrap">
+  <div class="dhead"><span class="dno">1</span><span class="eyebrow">Del 1 · Produksjon og tjenester</span><h2>Prosessindustrien i Norge</h2></div>
+  <p class="lede">Prosessindustrien gjør råvarer om til nye stoffer og materialer i store, automatiserte anlegg som går døgnet rundt. Det er her du kan jobbe med fagbrev i kjemiprosessfaget eller laboratoriefaget.</p>
+  <div class="fag">
+    <div class="prose">
+      <h3>Hva er prosessindustri?</h3>
+      <p>I <strong>prosessindustrien</strong> endres råvarene kjemisk eller fysisk: Malm blir metall, naturgass blir gjødsel, tømmer blir cellulose og råolje blir bensin. Produktet blir laget i en <strong>kontinuerlig prosess</strong>, der stoffene strømmer gjennom tanker, reaktorer, ovner, kolonner og varmevekslere. Det skiller prosessindustrien fra <strong>vareproduserende industri</strong>, der man setter sammen deler til en ferdig ting, som en båt eller en vaskemaskin.</p>
+      <p>Typisk for bransjen er:</p>
+      <ul>
+        <li><strong>Døgnkontinuerlig drift.</strong> Det tar lang tid og koster mye å stoppe og starte en ovn eller en reaktor. Derfor går anleggene hele døgnet, og de ansatte jobber skift.</li>
+        <li><strong>Høy grad av automatisering.</strong> Prosessen styres fra et kontrollrom. Operatørene følger med på skjermer, gjør endringer og går runder ute i anlegget.</li>
+        <li><strong>Mye energi.</strong> Mange prosesser trenger høy temperatur eller strøm til elektrolyse. Derfor kalles deler av bransjen <strong>kraftforedlende industri</strong>.</li>
+        <li><strong>Laboratoriet er en del av produksjonen.</strong> Prøver tas hele tiden for å styre prosessen og kontrollere at produktet holder kvaliteten kunden krever.</li>
+      </ul>
+      <h3>Bransjene</h3>
+      <ul>
+        <li><strong>Metallindustri:</strong> aluminium, silisium og ferrolegeringer, nikkel og sink.</li>
+        <li><strong>Kjemisk industri:</strong> mineralgjødsel, plastråvarer, maling og spesialkjemikalier.</li>
+        <li><strong>Raffinerier og gassanlegg:</strong> drivstoff og gassprodukter fra olje og gass.</li>
+        <li><strong>Mineralsk industri:</strong> sement, kalk og andre mineralprodukter.</li>
+        <li><strong>Treforedling og bioraffinerier:</strong> papir, cellulose og kjemikalier fra tre.</li>
+        <li><strong>Farmasøytisk industri:</strong> legemidler og virkestoffer.</li>
+      </ul>
+      <p>I tillegg trenger <strong>vannverk og renseanlegg</strong>, <strong>sykehuslaboratorier</strong>, <strong>analyselaboratorier</strong> og <strong>næringsmiddelindustrien</strong> folk med den samme kompetansen.</p>
+      <h3>Hvorfor ligger industrien der den ligger?</h3>
+      <p>Mange av de store verkene ligger innerst i fjorder og i små kommuner. Det har tre grunner. De ble bygd der det var <strong>vannkraft</strong>, fordi strømmen var vanskelig å transportere langt. De trengte <strong>havn</strong> for å ta inn råvarer og sende ut produkter. Og råvarene, som <strong>tømmer, kvarts og gass</strong>, fantes i nærheten. Mange steder er verket fortsatt den største arbeidsplassen, en <strong>hjørnesteinsbedrift</strong>.</p>
+      <div class="callout"><b>Historie: Hydro og salpeteren</b>Norsk Hydro ble stiftet i 1905 for å lage kunstgjødsel av luft med billig strøm fra fossene ved Notodden og Rjukan. Det var starten på den kraftforedlende industrien i Norge.</div>
+    </div>
+    <aside class="side">
+      <div class="fact"><div class="k">Sysselsatte (2021)</div><div class="v">37 500</div><p>personer jobbet i norsk prosessindustri. Omsetningen var 221 milliarder kroner, og mye gikk til eksport.</p><p class="src">Kilde: Menon Economics 2023</p></div>
+      <div class="fact"><div class="k">Arbeidsmåte</div><div class="v">24/7</div><p>De fleste prosessanlegg går døgnet rundt hele året, med skiftlag som tar over for hverandre.</p></div>
+      <div class="gloss"><h4>Fagord norsk – engelsk</h4><dl>
+        <dt>prosessindustri</dt><dd>process industry</dd>
+        <dt>råvare</dt><dd>raw material</dd>
+        <dt>kontrollrom</dt><dd>control room</dd>
+        <dt>skiftarbeid</dt><dd>shift work</dd>
+        <dt>hjørnesteinsbedrift</dt><dd>key local employer</dd>
+      </dl></div>
+    </aside>
+  </div>
+
+  <div class="akts">
+    <article class="akt int" id="d1/bedrifter">
+      <header><span class="ty">Interaktiv øvelse</span><h3>Hvem lager hva?</h3></header>
+      <p class="intro">Koble bedriften til det den produserer. Velg produkt i hver rad og trykk «Sjekk svarene».</p>
+      <div class="match" id="match"></div>
+      <div class="row"><button class="btn" id="matchCheck">Sjekk svarene</button><button class="btn ghost" id="matchReset">Prøv igjen</button><span class="res" id="matchRes" aria-live="polite"></span></div>
+    </article>
+
+    <article class="akt opp" id="d1/bedriftsprofil">
+      <header><span class="ty">Oppgave · arbeidsark</span><h3>Bedriftsprofil: en prosessbedrift nær deg</h3></header>
+      <p class="intro">Velg en prosessbedrift eller et laboratorium i fylket ditt, gjerne et sted du kan få læreplass. Bruk bedriftens nettside, årsrapport og gjerne en telefon til personalavdelingen. Svarene lagres bare i denne nettleseren, så kopier dem inn i innleveringen din.</p>
+      <div class="sheet" data-sheet="profil">
+        <label>Bedrift og sted<input type="text" data-k="navn"></label>
+        <label>Hva produserer eller analyserer bedriften?<span>Hovedprodukt, biprodukter og hvem kundene er.</span><textarea data-k="produkt"></textarea></label>
+        <label>Hvilke råvarer og hvor mye energi bruker de?<textarea data-k="ravare"></textarea></label>
+        <label>Hvilke enhetsoperasjoner eller analyser finner du?<span>For eksempel reaktor, destillasjon, filtrering, titrering.</span><textarea data-k="prosess"></textarea></label>
+        <label>Antall ansatte, skiftordning og lærlinger<span>Hvilke fagbrev tar de inn lærlinger i?</span><textarea data-k="ansatte"></textarea></label>
+        <label>Hva er bedriftens største miljøutfordring, og hva gjør de med den?<textarea data-k="miljo"></textarea></label>
+        <div class="row"><button class="btn" data-copy>Kopier svarene</button><span class="saved" aria-live="polite"></span></div>
+      </div>
+    </article>
+
+    <article class="akt test" id="d1/quiz">
+      <header><span class="ty">Egentest</span><h3>Sjekk deg selv: prosessindustrien</h3></header>
+      <div class="quiz" data-quiz="q1"></div>
+    </article>
+  </div>
+</div></section>
+
+<!-- ======================= DEL 2 ======================= -->
+<section class="del" id="d2"><div class="wrap">
+  <div class="dhead"><span class="dno">2</span><span class="eyebrow">Del 2 · Kjemisk teknologi</span><h2>Fra råvare til produkt</h2></div>
+  <p class="lede">En verdikjede viser alle stegene fra råvaren hentes ut til produktet brukes hos kunden. For hvert steg øker verdien. Som operatør eller laborant jobber du midt i kjeden. Her er seks eksempler fra norsk industri, og i prosessviseren under kan du se hovedprosessen i hver av dem og prøve å styre den selv.</p>
+  <div class="fag">
+    <div class="prose">
+      <h3>Verdikjeden</h3>
+      <p>En <strong>verdikjede</strong> består av leddene <strong>råvare → foredling → produkt → kunde</strong>. Foredlingen er det prosessanlegget gjør: blande, varme opp, reagere, skille, rense og tørke. Dette er <strong>enhetsoperasjonene</strong> du kjenner fra kjemisk teknologi. <strong>Verdiskaping</strong> betyr at produktet er verdt mer enn råvarene, energien og arbeidet det kostet å lage det.</p>
+      <p>Underveis oppstår <strong>biprodukter</strong>. Smarte bedrifter selger dem i stedet for å kaste dem. Spillvarme kan varme opp boliger, og CO₂ kan fanges og lagres.</p>
+
+      <h3>Eksempel 1: Aluminium</h3>
+      <div class="vk"><span>Bauksitt</span><i>→</i><span>Alumina (Al₂O₃)</span><i>→</i><span>Elektrolyse</span><i>→</i><span>Støping</span><i>→</i><span>Valsing og pressing</span><i>→</i><span>Bil, emballasje, vinduer</span></div>
+      <p>Alumina importeres og løses i smeltet kryolitt i elektrolyseovner på rundt 960 °C. Likestrøm spalter aluminaen, og flytende aluminium samles i bunnen av ovnen. Prosessen bruker enormt mye strøm, og karbonanodene som brukes opp gir CO₂-utslipp. Å smelte om skrapaluminium krever bare rundt 5 prosent av energien, derfor er <strong>resirkulering</strong> en viktig del av kjeden.</p>
+
+      <h3>Eksempel 2: Mineralgjødsel</h3>
+      <div class="vk"><span>Naturgass + luft</span><i>→</i><span>Hydrogen + nitrogen</span><i>→</i><span>Ammoniakk (NH₃)</span><i>→</i><span>Salpetersyre</span><i>→</i><span>NPK-gjødsel</span><i>→</i><span>Bonden</span></div>
+      <p>Hydrogen og nitrogen reagerer over en jernkatalysator ved høyt trykk og høy temperatur til ammoniakk (Haber–Bosch-prosessen): N₂ + 3H₂ → 2NH₃. Ammoniakken oksideres videre til salpetersyre og blandes med fosfat og kalium til gjødsel. Hydrogenet lages i dag mest av naturgass, som gir CO₂. Hydrogen fra elektrolyse med fornybar strøm kan fjerne det utslippet.</p>
+
+      <h3>Eksempel 3: Bioraffineri</h3>
+      <div class="vk"><span>Tømmer</span><i>→</i><span>Koking og separering</span><i>→</i><span>Cellulose · lignin · sukker</span><i>→</i><span>Spesialcellulose, bindemidler, vanillin, bioetanol</span></div>
+      <p>Et bioraffineri bruker hele treet. Cellulose blir til fortykningsmidler og fiber, ligninet blir til tilsetningsstoffer i betong og til vanillin, og sukkeret gjæres til etanol. Det er <strong>sirkulær tenkning</strong> i praksis: Det som før var avfall, blir nye produkter.</p>
+
+      <h3>Eksempel 4: Olje og gass</h3>
+      <div class="vk"><span>Brønnstrøm</span><i>→</i><span>Separator på plattformen</span><i>→</i><span>Rikgass i rør til land</span><i>→</i><span>Fraksjonering</span><i>→</i><span>Tørrgass til Europa · etan, propan, butan, nafta på skip</span></div>
+      <p>Det som kommer opp av brønnen, er en blanding av olje, gass og vann. På plattformen skilles den i separatorer. Rikgassen sendes i rør til gassanlegg på land, som Kårstø i Rogaland. Der skilles våtgassen (NGL) ut og deles i etan, propan, butan, nafta og kondensat. Det skjer ved destillasjon i kolonner, akkurat som på skolens anlegg, bare mye større. Tørrgassen, som stort sett er metan, går i rør til kundene i Europa.</p>
+      <p>Råoljen raffineres for eksempel på Mongstad. Der varmes den opp i en ovn og skilles i en destillasjonskolonne etter kokepunkt: gass øverst, så bensin og nafta, parafin, diesel og til slutt en tung rest i bunnen. Etan fra Kårstø blir råvare til plast i Bamble. Slik henger bransjene sammen i kjeder.</p>
+
+      <h3>Eksempel 5: Smelteverk</h3>
+      <div class="vk"><span>Kvarts + kull, koks og trekull</span><i>→</i><span>Elektrisk lysbueovn</span><i>→</i><span>Tapping</span><i>→</i><span>Raffinering</span><i>→</i><span>Støping og knusing</span><i>→</i><span>Silisium til aluminiumslegeringer, silikoner og solceller</span></div>
+      <p>I et smelteverk reduseres kvarts (SiO₂) med karbon i en elektrisk lysbueovn: SiO₂ + 2C → Si + 2CO. For å bryte bindingen mellom silisium og oksygen må temperaturen opp i over 1900 °C. Tre store elektroder fører strømmen ned i ovnen, og flytende silisium tappes i øser. Operatørene må hele tiden passe på <strong>karbonbalansen</strong>: For lite karbon gir driftsproblemer, og for mye får ovnen til å gro igjen.</p>
+      <p>Røykgassen inneholder fint silikastøv som fanges i filtre og selges som <strong>mikrosilika</strong>, et tilsetningsstoff i betong. Varmen i gassen kan gjenvinnes til damp og strøm. Elkem Thamshavn ved Orkanger lager for eksempel både silisium og mikrosilika.</p>
+
+      <h3>Eksempel 6: Bergverk</h3>
+      <div class="vk"><span>Malm i gruva</span><i>→</i><span>Knusing</span><i>→</i><span>Maling</span><i>→</i><span>Separasjon</span><i>→</i><span>Konsentrat</span><i>→</i><span>Stålverk</span></div>
+      <p>I bergverk og mineralindustri er råvaren stein. Rana Gruber i Mo i Rana bryter jernmalm, som stort sett er hematitt med litt magnetitt. Malmen knuses og males så fint at jernmineralene løsner fra gråberget. Så skilles de fra hverandre i en <strong>oppredning</strong>, med spiraler som sorterer etter tetthet og magneter som trekker ut magnetitten. Resultatet er et konsentrat med høyt jerninnhold, rundt 1,8 millioner tonn i året, som går til stålverk. Magnetitten selges blant annet til vannrensing.</p>
+      <p>Det som blir igjen, kalles <strong>avgang</strong>. Det er den største massestrømmen og må deponeres eller brukes, for eksempel som fyllmasse. Laboratoriet analyserer jerninnholdet i konsentratet hele tiden, fordi høyere jerninnhold gir bedre betalt.</p>
+
+      <div class="callout"><b>Kvalitet i hvert ledd</b>Kunden kjøper en spesifikasjon: renhet, kornstørrelse, fuktighet. Laboratoriet analyserer prøver fra råvare, mellomprodukt og ferdigvare. Er en analyse utenfor grensen, må operatøren justere prosessen før hele partiet blir vrakgods.</div>
+    </div>
+    <aside class="side">
+      <div class="fact"><div class="k">Resirkulert aluminium</div><div class="v">~5 %</div><p>av energien som trengs for å lage nytt aluminium, går med til å smelte om skrap.</p></div>
+      <div class="fact"><div class="k">Silisiumovn</div><div class="v">1900 °C+</div><p>trengs for å skille silisium fra oksygen i kvarts.</p><p class="src">Kilde: Teknisk Ukeblad</p></div>
+      <div class="fact"><div class="k">Rana Gruber</div><div class="v">1,8 mill. t</div><p>jernmalmkonsentrat i året, med rundt 370 ansatte.</p><p class="src">Kilde: Store norske leksikon</p></div>
+      <div class="gloss"><h4>Fagord norsk – engelsk</h4><dl>
+        <dt>verdikjede</dt><dd>value chain</dd>
+        <dt>foredling</dt><dd>refining, processing</dd>
+        <dt>biprodukt</dt><dd>by-product</dd>
+        <dt>mellomprodukt</dt><dd>intermediate</dd>
+        <dt>spesifikasjon</dt><dd>specification</dd>
+        <dt>vrakgods</dt><dd>off-spec product</dd>
+        <dt>lysbueovn</dt><dd>electric arc furnace</dd>
+        <dt>malm</dt><dd>ore</dd>
+        <dt>avgang</dt><dd>tailings</dd>
+        <dt>våtgass</dt><dd>natural gas liquids (NGL)</dd>
+      </dl></div>
+    </aside>
+  </div>
+
+  <div class="akts">
+    <article class="akt sim" id="d2/prosessviser">
+      <header><span class="ty">Simulering</span><h3>Prosessviseren: hovedprosessen i seks bransjer</h3></header>
+      <p class="intro">Velg en bransje. Følg stoffet gjennom anlegget med pilene, eller trykk på et utstyr for å lese om det. Endre driftsverdiene og se hva som skjer med produksjon, energi og kvalitet. Modellene er forenklet, men retningen på svarene stemmer med virkeligheten.</p>
+      <div class="tabs" id="pvTabs" role="group" aria-label="Velg bransje"></div>
+      <div class="pv">
+        <div class="pvfig">
+          <svg id="pvSvg" viewBox="0 0 760 330" role="img" aria-label="Animert flytskjema for valgt bransje"></svg>
+          <div class="pvstep"><button type="button" id="pvPrev" aria-label="Forrige steg">◀</button><p id="pvStep" aria-live="polite"></p><button type="button" id="pvNext" aria-label="Neste steg">▶</button></div>
+        </div>
+        <div class="pvside">
+          <div id="pvCtrls" class="pvside"></div>
+          <div class="kpis" id="pvKpis" aria-live="polite"></div>
+          <div class="pvnote" id="pvNote"></div>
+          <div class="pvinfo" id="pvInfo"></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="akt int" id="d2/verdikjede">
+      <header><span class="ty">Interaktiv øvelse</span><h3>Bygg verdikjeden</h3></header>
+      <p class="intro">Velg en kjede. Trykk på stegene i den rekkefølgen de kommer, fra råvare til kunde. Trykk × for å ta et steg ut igjen.</p>
+      <div class="tabs" id="vkTabs" role="group" aria-label="Velg verdikjede"></div>
+      <div class="ord">
+        <div><h4>Steg å velge mellom</h4><div class="pool" id="vkPool"></div></div>
+        <div><h4>Din verdikjede</h4><ol class="chainlist" id="vkList"></ol></div>
+      </div>
+      <div class="row"><button class="btn" id="vkCheck">Sjekk rekkefølgen</button><button class="btn ghost" id="vkReset">Start på nytt</button><span class="res" id="vkRes" aria-live="polite"></span></div>
+      <p class="fb" id="vkFb" hidden></p>
+    </article>
+
+    <article class="akt grp" id="d2/forklar">
+      <header><span class="ty">Gruppeoppgave · forklar for hverandre</span><h3>Forklar verdikjeden</h3></header>
+      <p class="intro">Jobb i par. Den ene velger et kort og forklarer begrepet med egne ord, gjerne med et eksempel fra skolens anlegg eller en bedrift dere kjenner. Den andre sjekker med fasiten ved å trykke på kortet. Bytt roller etter hvert kort.</p>
+      <div class="cards" data-cards="k2"></div>
+    </article>
+
+    <article class="akt test" id="d2/quiz">
+      <header><span class="ty">Egentest</span><h3>Sjekk deg selv: verdikjeder</h3></header>
+      <div class="quiz" data-quiz="q2"></div>
+    </article>
+  </div>
+</div></section>
+
+<!-- ======================= DEL 3 ======================= -->
+<section class="del" id="d3"><div class="wrap">
+  <div class="dhead"><span class="dno">3</span><span class="eyebrow">Del 3 · Produksjon og tjenester</span><h2>Yrker og veien videre</h2></div>
+  <p class="lede">Etter Vg2 venter to år som lærling i en bedrift. Så tar du fagprøven og blir fagarbeider. Derfra kan du gå mange veier, både i jobben og videre i utdanning.</p>
+  <div class="fag">
+    <div class="prose">
+      <h3>Veien til fagbrev</h3>
+      <div class="vk"><span>Vg1 teknologi- og industrifag</span><i>→</i><span>Vg2 kjemiprosess- og laboratoriefag</span><i>→</i><span>2 år læretid i bedrift</span><i>→</i><span>Fagprøve</span><i>→</i><span>Fagbrev</span></div>
+      <ul>
+        <li><strong>Kjemiprosessfaget</strong> gir yrkestittelen <strong>fagoperatør i kjemisk prosessindustri</strong>. Du styrer og overvåker produksjon i for eksempel metall-, kjemi-, petroleums-, papir- og farmasøytisk industri, eller i vannverk og renseanlegg.</li>
+        <li><strong>Laboratoriefaget</strong> gir yrkestittelen <strong>faglaborant</strong>. Du tar prøver og gjør analyser i industrilaboratorier, medisinske laboratorier og forskningslaboratorier.</li>
+      </ul>
+      <p>Som lærling skriver du en <strong>lærekontrakt</strong> med bedriften. Ofte er et <strong>opplæringskontor</strong> med og følger deg opp. Du får <strong>lærlingelønn</strong> som stiger gjennom læretiden og regnes i prosent av fagarbeiderlønnen. Læretiden avsluttes med en <strong>fagprøve</strong>, der du planlegger, gjennomfører og dokumenterer et reelt arbeidsoppdrag i bedriften.</p>
+
+      <h3>En vakt på verket</h3>
+      <p>En operatør i prosessindustrien møter ofte til <strong>skiftoverlevering</strong>: Skiftet som går av, forteller hva som har skjedd, hvilke alarmer som har gått, og hva som må følges opp. Deretter fordeles oppgavene:</p>
+      <ul>
+        <li><strong>Kontrollromsoperatør:</strong> følger prosessen på skjermene, endrer settpunkter, kvitterer alarmer og fører logg.</li>
+        <li><strong>Feltoperatør:</strong> går runder i anlegget, leser av lokale målere, tar prøver, kjører pumper og ventiler manuelt og klargjør utstyr for vedlikehold.</li>
+        <li><strong>Laborant:</strong> analyserer prøver og melder resultatene tilbake til kontrollrommet, slik at prosessen kan justeres.</li>
+        <li><strong>Skiftleder:</strong> har ansvaret for driften og sikkerheten på skiftet og koordinerer med vedlikehold og ledelse.</li>
+      </ul>
+      <p>Kontrollrom og felt må snakke godt sammen. Mange ulykker og driftsproblemer starter med en misforståelse over radio eller i en overlevering.</p>
+
+      <h3>Videre etter fagbrevet</h3>
+      <ul>
+        <li><strong>I bedriften:</strong> kontrollromsoperatør, skiftleder, prosesstekniker, HMS- eller kvalitetsrådgiver, opplæringsansvarlig for lærlinger.</li>
+        <li><strong>Fagskole:</strong> toårig teknisk fagskole, for eksempel innen kjemi og prosess, gir deg grad som fagskoletekniker. Mange tar den mens de jobber.</li>
+        <li><strong>Ingeniør:</strong> Med fagbrev kan du søke ingeniørutdanning via Y-veien eller med forkurs, avhengig av lærestedet.</li>
+        <li><strong>Flere fagbrev:</strong> Mange tar fagbrev i et beslektet fag, for eksempel automatisering eller industrimekanikk, som praksiskandidat.</li>
+      </ul>
+    </div>
+    <aside class="side">
+      <div class="fact"><div class="k">Læretid</div><div class="v">2 år</div><p>i bedrift etter Vg2, med lønn. Avsluttes med fagprøve.</p></div>
+      <div class="fact"><div class="k">Yrkestitler</div><div class="v" style="font-size:1.4rem;line-height:1.15">Fagoperatør · Faglaborant</div><p>Fagbrev i kjemiprosessfaget og i laboratoriefaget.</p><p class="src">Kilde: utdanning.no</p></div>
+      <div class="gloss"><h4>Fagord norsk – engelsk</h4><dl>
+        <dt>lærling</dt><dd>apprentice</dd>
+        <dt>fagbrev</dt><dd>trade certificate</dd>
+        <dt>skiftoverlevering</dt><dd>shift handover</dd>
+        <dt>feltoperatør</dt><dd>field operator</dd>
+        <dt>skiftleder</dt><dd>shift supervisor</dd>
+        <dt>settpunkt</dt><dd>setpoint</dd>
+      </dl></div>
+    </aside>
+  </div>
+
+  <div class="akts">
+    <article class="akt int" id="d3/hvem">
+      <header><span class="ty">Interaktiv øvelse</span><h3>Hvem tar jobben?</h3></header>
+      <p class="intro">Her er situasjoner fra et skift på et prosessanlegg. Velg hvem som naturlig gjør oppgaven, og les forklaringen.</p>
+      <div class="quiz" data-quiz="q3" data-fixed></div>
+    </article>
+
+    <article class="akt grp" id="d3/intervju">
+      <header><span class="ty">Gruppeoppgave</span><h3>Intervju en fagarbeider</h3></header>
+      <p class="intro">Jobb i grupper på 2–3. Finn en fagoperatør eller faglaborant: på bedriftsbesøk, i utplassering, i familien eller via et opplæringskontor. Intervjuet kan gjøres på telefon eller video.</p>
+      <ol class="steps">
+        <li><div><b>Forbered.</b> Velg 6–8 spørsmål fra listen under og legg til to egne. Avtal hvem som spør og hvem som noterer.</div></li>
+        <li><div><b>Spørsmål å velge fra:</b> Hvordan ser en vanlig vakt ut? Hvilken skiftordning har du, og hva synes du om den? Hva gjorde du som lærling? Hva er det viktigste du må passe på for sikkerheten? Hvordan samarbeider kontrollrom, felt og lab? Når brukte du sist engelsk på jobben? Hva har endret seg mest siden du begynte? Hva er du stolt av i jobben din? Hva ville du sagt til deg selv som Vg2-elev?</div></li>
+        <li><div><b>Gjennomfør.</b> Spør om lov til å notere. Still oppfølgingsspørsmål når svaret er kort.</div></li>
+        <li><div><b>Presenter.</b> Lag en kort presentasjon (3–5 minutter) for klassen: én ting som overrasket dere, og én ting som gjorde yrket mer eller mindre aktuelt for dere.</div></li>
+      </ol>
+    </article>
+
+    <article class="akt opp" id="d3/min-vei">
+      <header><span class="ty">Oppgave · refleksjon</span><h3>Min vei videre</h3></header>
+      <p class="intro">Skriv kort og ærlig. Ingen svar er feil. Svarene lagres bare i denne nettleseren.</p>
+      <div class="sheet" data-sheet="vei">
+        <label>Hva har du blitt flinkere til i Vg2 så langt?<span>Tenk på oppgaver på anlegget og i laboratoriet.</span><textarea data-k="flinkere"></textarea></label>
+        <label>Kjemiprosess eller laboratorium? Hvorfor?<textarea data-k="valg"></textarea></label>
+        <label>Hvilke tre bedrifter vil du søke læreplass hos?<textarea data-k="bedrifter"></textarea></label>
+        <label>Hva må du jobbe mer med før du søker?<textarea data-k="jobbe"></textarea></label>
+        <div class="row"><button class="btn" data-copy>Kopier svarene</button><span class="saved" aria-live="polite"></span></div>
+      </div>
+    </article>
+  </div>
+</div></section>
+
+<!-- ======================= DEL 4 ======================= -->
+<section class="del" id="d4"><div class="wrap">
+  <div class="dhead"><span class="dno">4</span><span class="eyebrow">Del 4 · Analyse, dokumentasjon og kvalitet</span><h2>Arbeidslivet: rettigheter og plikter</h2></div>
+  <p class="lede">I Norge bygger arbeidslivet på tillit, ansvar og medbestemmelse. Både arbeidsgiver og arbeidstaker har rettigheter og plikter. Det gjelder også deg som lærling.</p>
+  <div class="fag">
+    <div class="prose">
+      <h3>Den norske modellen</h3>
+      <p>I det <strong>trepartssamarbeidet</strong> samarbeider staten, arbeidsgiverne og arbeidstakerne om lønn, arbeidsmiljø og regler. Arbeidstakerne er organisert i <strong>fagforeninger</strong>, og de fleste i prosessindustrien er med i LO-forbundene Forbundet Styrke (tidligere Industri Energi) eller Fellesforbundet. Arbeidsgiverne er organisert i Norsk Industri, som er en del av NHO.</p>
+      <p>Partene forhandler fram <strong>tariffavtaler</strong> (overenskomster) med regler for lønn, skifttillegg, arbeidstid og overtid. Industrien forhandler som regel først i lønnsoppgjøret. Det kalles <strong>frontfagsmodellen</strong>: Det som den konkurranseutsatte industrien har råd til, setter rammen for resten av arbeidslivet.</p>
+      <p>På arbeidsplassen velger de ansatte <strong>tillitsvalgte</strong> som forhandler og snakker med ledelsen på vegne av de ansatte. Reglene for dette står i Hovedavtalen mellom LO og NHO.</p>
+
+      <h3>Arbeidsmiljøloven</h3>
+      <p><strong>Arbeidsgiveren har hovedansvaret</strong> for at arbeidsmiljøet er fullt forsvarlig. Det betyr blant annet å</p>
+      <ul>
+        <li>jobbe systematisk med helse, miljø og sikkerhet, kartlegge farer og sette inn tiltak</li>
+        <li>gi deg opplæring og verneutstyr</li>
+        <li>gi deg en skriftlig arbeidsavtale og betale lønn som avtalt</li>
+        <li>sørge for at ingen blir trakassert eller diskriminert</li>
+      </ul>
+      <p><strong>Arbeidstakeren har plikt til å medvirke</strong>. Det betyr blant annet å</p>
+      <ul>
+        <li>følge prosedyrer og instrukser og bruke verneutstyret</li>
+        <li>si fra om feil, mangler og farer du oppdager, og stanse arbeidet hvis det er fare for liv eller helse</li>
+        <li>melde fra om skader og ulykker</li>
+        <li>være lojal mot arbeidsgiveren og møte presis</li>
+      </ul>
+      <p><strong>Verneombudet</strong> er valgt av de ansatte og passer på arbeidsmiljøet. Verneombudet kan <strong>stanse farlig arbeid</strong> hvis det er umiddelbar fare for liv eller helse (arbeidsmiljøloven § 6-3). Bedrifter med minst 50 ansatte skal ha et <strong>arbeidsmiljøutvalg (AMU)</strong> der ledelse, ansatte og bedriftshelsetjenesten sitter sammen.</p>
+
+      <h3>Arbeidstid og skift</h3>
+      <p>Loven setter grenser for hvor mye du kan jobbe, og grensene er lavere for skiftarbeid. For helkontinuerlig skift (døgnet rundt, hele uka) er grensen 36 timer i uka (§ 10-4), og mange tariffavtaler gir enda kortere arbeidstid. Er du <strong>under 18 år</strong>, gjelder egne regler, blant annet at du som hovedregel ikke skal jobbe om natta. Skiftarbeid gir tillegg i lønn, men kan være krevende for søvn og helse. Gode skiftplaner og god søvnhygiene betyr mye.</p>
+
+      <h3>Et likeverdig og inkluderende fellesskap</h3>
+      <p>Likestillings- og diskrimineringsloven forbyr diskriminering på grunn av blant annet kjønn, etnisitet, religion, funksjonsnedsettelse og seksuell orientering. <strong>Trakassering</strong>, også «bare tull» i garderoben eller i en chat, er forbudt. Prosessindustrien har tradisjonelt hatt flest menn, og mange bedrifter jobber aktivt for å rekruttere flere kvinner og folk med ulik bakgrunn.</p>
+      <p>Ser du noe som er galt, kan du <strong>varsle</strong> om kritikkverdige forhold. Det er lovlig, og arbeidsgiveren har ikke lov til å straffe deg for det. Varsle først internt, til lederen din, verneombudet eller en tillitsvalgt.</p>
+      <div class="callout"><b>Du er en ressurs, ikke bare en lærling</b>Et godt skiftlag trenger at nye folk stiller spørsmål. «Hvorfor gjør vi det sånn?» har avslørt mange feil i prosedyrer. Det er en del av medvirkningsplikten din.</div>
+    </div>
+    <aside class="side">
+      <div class="fact"><div class="k">Verneombud</div><div class="v">§ 6-3</div><p>Verneombudet kan stanse farlig arbeid ved umiddelbar fare for liv eller helse.</p></div>
+      <div class="fact"><div class="k">AMU</div><div class="v">50+</div><p>ansatte betyr at bedriften skal ha arbeidsmiljøutvalg.</p></div>
+      <div class="gloss"><h4>Fagord norsk – engelsk</h4><dl>
+        <dt>arbeidsgiver</dt><dd>employer</dd>
+        <dt>arbeidstaker</dt><dd>employee</dd>
+        <dt>tariffavtale</dt><dd>collective agreement</dd>
+        <dt>tillitsvalgt</dt><dd>union representative</dd>
+        <dt>verneombud</dt><dd>safety representative</dd>
+        <dt>varsling</dt><dd>whistleblowing</dd>
+      </dl></div>
+    </aside>
+  </div>
+
+  <div class="akts">
+    <article class="akt int" id="d4/rett-plikt">
+      <header><span class="ty">Interaktiv øvelse</span><h3>Rett eller plikt, og hvem sin?</h3></header>
+      <p class="intro">Sorter hvert utsagn: Er det arbeidsgiverens plikt, arbeidstakerens plikt eller arbeidstakerens rett?</p>
+      <div class="sort" id="sort"></div>
+      <div class="row"><span class="res" id="sortRes" aria-live="polite"></span><button class="btn ghost" id="sortReset">Prøv igjen</button></div>
+    </article>
+
+    <article class="akt int" id="d4/scenario">
+      <header><span class="ty">Interaktiv øvelse</span><h3>Hva gjør du?</h3></header>
+      <p class="intro">Du er lærling på et prosessanlegg. Velg hva du gjør, og les hvorfor.</p>
+      <div class="quiz" data-quiz="q4"></div>
+    </article>
+
+    <article class="akt grp" id="d4/skiftlaget">
+      <header><span class="ty">Gruppeoppgave</span><h3>Spilleregler for et inkluderende skiftlag</h3></header>
+      <p class="intro">Grupper på 3–4. Et skiftlag på seks personer skal ta imot to nye lærlinger. Den ene er 17 år og har norsk som andrespråk. Den andre er den eneste jenta på skiftet.</p>
+      <ol class="steps">
+        <li><div><b>Kartlegg.</b> Hva kan gjøre det vanskelig å være ny på dette skiftet? Tenk på språk, fagord, humor i garderoben, nattskift, hvem som får de kjedelige oppgavene, og hvem som blir spurt om råd.</div></li>
+        <li><div><b>Lag 6–8 spilleregler</b> for skiftlaget. Skriv dem som konkrete handlinger, for eksempel «Vi gjentar viktige beskjeder over radio» eller «Alle går minst én runde sammen med en erfaren operatør den første uka».</div></li>
+        <li><div><b>Koble til loven.</b> Hvilke regler handler om arbeidsgiverens plikter, og hvilke handler om hva kollegene selv kan gjøre? Hva må lederen gjøre hvis en spilleregel brytes?</div></li>
+        <li><div><b>Del i klassen.</b> Hver gruppe presenterer sine tre viktigste regler. Lag en felles liste for klassen og heng den opp ved anlegget eller i laboratoriet.</div></li>
+      </ol>
+    </article>
+  </div>
+</div></section>
+
+<!-- ======================= DEL 5 ======================= -->
+<section class="del" id="d5"><div class="wrap">
+  <div class="dhead"><span class="dno">5</span><span class="eyebrow">Del 5 · Kjemisk teknologi</span><h2>Bransjen i omstilling</h2></div>
+  <p class="lede">Prosessindustrien slipper ut mye klimagasser, men lager også materialene det grønne skiftet trenger. Målet er å øke produksjonen og samtidig kutte utslippene. Det endrer også jobben til operatøren og laboranten.</p>
+  <div class="fag">
+    <div class="prose">
+      <h3>Hvor kommer utslippene fra?</h3>
+      <p>Norge slapp ut rundt 44 millioner tonn CO₂-ekvivalenter i 2025. <strong>Industri og bergverk</strong> sto for nesten 11 millioner tonn, omtrent en firedel. Utslippene fra industrien har gått ned med over 40 prosent siden 1990, men det er fortsatt den nest største kilden etter olje- og gassutvinning. En stor del kommer fra noen få store anlegg.</p>
+      <p>Mye av utslippet er <strong>prosessutslipp</strong>. Det betyr at CO₂ dannes i selve den kjemiske reaksjonen, ikke bare fra energien som brukes:</p>
+      <ul>
+        <li>Når kalkstein varmes opp til sementklinker: CaCO₃ → CaO + CO₂</li>
+        <li>Når kull og koks reduserer kvarts til silisium: SiO₂ + 2C → Si + 2CO</li>
+        <li>Når karbonanodene brukes opp i aluminiumselektrolysen</li>
+      </ul>
+      <p>Derfor holder det ikke bare å bytte til fornybar strøm. Bransjen trenger ny prosessteknologi.</p>
+
+      <h3>Verktøykassa</h3>
+      <ul>
+        <li><strong>Energieffektivisering:</strong> gjenvinne spillvarme, bedre isolasjon, mer nøyaktig prosessregulering.</li>
+        <li><strong>Biokarbon:</strong> trekull og flis i stedet for fossilt kull i smelteverk.</li>
+        <li><strong>Hydrogen:</strong> fornybar hydrogen som reduksjonsmiddel eller råvare i stedet for kull og naturgass.</li>
+        <li><strong>Karbonfangst og -lagring (CCS):</strong> CO₂ skilles ut fra røykgassen, gjøres flytende og lagres under havbunnen.</li>
+        <li><strong>Sirkulær økonomi:</strong> resirkulere metaller og bruke biprodukter og avfall som råvare.</li>
+      </ul>
+      <div class="callout"><b>Brevik CCS: verdens første i sementindustrien</b>I juni 2025 åpnet Heidelberg Materials karbonfangstanlegget ved sementfabrikken i Brevik. Det fanger rundt 400 000 tonn CO₂ i året, omtrent halvparten av fabrikkens utslipp. CO₂-en fraktes med skip og lagres under Nordsjøen som en del av Langskip-prosjektet. Bedriften rekrutterte 30 nye ansatte, som fikk grundig opplæring for å drive fangstanlegget.</div>
+
+      <h3>Hva betyr omstillingen for deg?</h3>
+      <p>Nye anlegg trenger nye operatører. Et karbonfangstanlegg er et prosessanlegg med absorpsjonskolonne, varmevekslere, kompressorer og tanker. Det er den samme kompetansen du lærer på Vg2. Samtidig blir anleggene mer <strong>digitale</strong>: flere sensorer, mer data, avansert regulering og roboter til farlige eller tunge oppgaver. Operatøren bruker mindre tid på manuelle avlesninger og mer på å forstå prosessen, oppdage avvik tidlig og samarbeide med andre fag.</p>
+      <p>Norsk Industri har laget et <strong>veikart for prosessindustrien</strong> med målet om økt verdiskaping og netto null utslipp i 2050. Staten, Norsk Industri og fagforbundene har også inngått et klimapartnerskap for prosessindustrien som gjelder fram til 2030.</p>
+    </div>
+    <aside class="side">
+      <div class="fact"><div class="k">Industri og bergverk 2025</div><div class="v">~¼</div><p>av Norges klimagassutslipp, nesten 11 av 44 millioner tonn CO₂-ekvivalenter.</p><p class="src">Kilde: SSB</p></div>
+      <div class="fact"><div class="k">Brevik CCS</div><div class="v">400 000 t</div><p>CO₂ fanget per år, om lag 50 % av sementfabrikkens utslipp.</p><p class="src">Kilde: Heidelberg Materials</p></div>
+      <div class="gloss"><h4>Fagord norsk – engelsk</h4><dl>
+        <dt>prosessutslipp</dt><dd>process emissions</dd>
+        <dt>karbonfangst</dt><dd>carbon capture</dd>
+        <dt>spillvarme</dt><dd>waste heat</dd>
+        <dt>reduksjonsmiddel</dt><dd>reducing agent</dd>
+        <dt>omstilling</dt><dd>transition</dd>
+      </dl></div>
+    </aside>
+  </div>
+
+  <div class="akts">
+    <article class="akt sim" id="d5/tiltak">
+      <header><span class="ty">Simulering</span><h3>Kutt utslippene på Fjordvik Smelteverk</h3></header>
+      <p class="intro">Fjordvik Smelteverk (et tenkt verk) lager silisium og slipper ut 400 000 tonn CO₂ i året. Styret krever at utslippene halveres innen 2035, og dere har 1 200 millioner kroner å investere. Velg tiltak. Følg med på utslipp, kostnad og hva tillitsvalgte og driften sier.</p>
+      <div class="simgrid">
+        <div class="meas" id="meas"></div>
+        <div class="panel" aria-live="polite">
+          <h4>FJORDVIK SMELTEVERK · STATUS 2035</h4>
+          <div class="gauge"><div class="lab"><span>Utslipp (kt CO₂/år)</span><b id="gE">400</b></div><div class="bar"><i id="bE" style="width:100%"></i><span class="goal" style="left:50%" title="Mål: 200 kt"></span></div></div>
+          <div class="gauge"><div class="lab"><span>Investering (mill. kr)</span><b id="gC">0 / 1200</b></div><div class="bar"><i id="bC" style="width:0%"></i></div></div>
+          <div class="gauge"><div class="lab"><span>Strømbehov (endring)</span><b id="gP">+0 %</b></div><div class="bar"><i id="bP" style="width:0%"></i></div></div>
+          <div class="log" id="slog"><span>Velg ett eller flere tiltak.</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="akt grp" id="d5/debatt">
+      <header><span class="ty">Gruppeoppgave · drøfting</span><h3>Rollespill: Hva skal verket gjøre?</h3></header>
+      <p class="intro">Bruk resultatet fra simuleringen. Klassen deles i fem roller. Hver rolle forbereder seg i 10 minutter og legger fram sitt syn på 2 minutter. Deretter drøfter dere sammen og prøver å bli enige om en plan.</p>
+      <div class="roles">
+        <div class="role"><b>Driftssjef</b>Produksjonen må gå jevnt, og leveransene til kundene må holdes. Hvilke tiltak er realistiske uten lange stopp?</div>
+        <div class="role"><b>Tillitsvalgt</b>Arbeidsplassene og arbeidsmiljøet. Hva betyr tiltakene for skiftordning, opplæring og bemanning?</div>
+        <div class="role"><b>Miljøorganisasjon</b>Raskere kutt. Er CCS en unnskyldning for å fortsette som før? Hva med naturinngrep for ny kraft?</div>
+        <div class="role"><b>Ordfører</b>Verket er kommunens største arbeidsplass. Hva skjer med lokalsamfunnet, og hvem betaler for ny kraftlinje?</div>
+        <div class="role"><b>Ung operatør</b>Du skal jobbe her i 40 år. Hvilken kompetanse trenger du, og hva gjør jobben attraktiv for nye lærlinger?</div>
+      </div>
+      <p style="margin-top:12px"><b>Skriv en felles konklusjon</b> på 5–8 setninger: Hvilke tiltak velger dere, i hvilken rekkefølge, og hva er den viktigste uenigheten dere ikke klarte å løse?</p>
+    </article>
+
+    <article class="akt test" id="d5/quiz">
+      <header><span class="ty">Egentest</span><h3>Sjekk deg selv: omstilling</h3></header>
+      <div class="quiz" data-quiz="q5"></div>
+    </article>
+  </div>
+</div></section>
+
+<!-- ======================= DEL 6 ======================= -->
+<section class="del" id="d6"><div class="wrap">
+  <div class="dhead"><span class="dno">6</span><span class="eyebrow">Del 6 · Produksjon og tjenester</span><h2>Kontinuerlig forbedring med lean</h2></div>
+  <p class="lede">De beste bedriftene blir litt bedre hver dag. Lean er en måte å jobbe på der alle, også operatører, laboranter og lærlinger, leter etter sløsing og forbedrer arbeidet sitt i små, trygge steg.</p>
+  <div class="fag">
+    <div class="prose">
+      <h3>Hva er lean?</h3>
+      <p>Lean kommer fra Toyota i Japan, som etter andre verdenskrig måtte lage biler med lite penger, lite plass og lite lager. I dag brukes lean i nesten all industri, også i prosessindustrien og i laboratorier. Tankegangen bygger på noen enkle ideer:</p>
+      <ul>
+        <li><strong>Kunden bestemmer hva som er verdi.</strong> Alt annet vi gjør, er sløsing som bør bort, eller nødvendig støttearbeid som bør bli enklere.</li>
+        <li><strong>Flyt.</strong> Produktet, prøven eller informasjonen skal gå jevnt gjennom prosessen uten å stå og vente.</li>
+        <li><strong>Kontinuerlig forbedring (kaizen).</strong> Mange små forbedringer hver dag, ikke én stor omveltning i blant.</li>
+        <li><strong>Respekt for folk.</strong> De som gjør jobben, vet mest om den. Derfor er det operatørene og laborantene som skal finne og teste forbedringene.</li>
+      </ul>
+
+      <h3>De sju sløsingene</h3>
+      <ul>
+        <li><strong>Transport:</strong> å flytte produkter og prøver lenger enn nødvendig.</li>
+        <li><strong>Lager:</strong> råvarer, mellomprodukter og prøver som står og venter.</li>
+        <li><strong>Bevegelse:</strong> unødvendige skritt, leting og strekk for de som jobber.</li>
+        <li><strong>Venting:</strong> folk eller utstyr som venter på svar, materialer eller beskjed.</li>
+        <li><strong>Overprosessering:</strong> å gjøre mer enn kunden trenger, for eksempel å rense mer enn spesifikasjonen krever.</li>
+        <li><strong>Overproduksjon:</strong> å lage mer eller tidligere enn noen trenger det.</li>
+        <li><strong>Feil og omarbeid:</strong> vrakgods, feilmerkede prøver og analyser som må gjøres om igjen.</li>
+      </ul>
+
+      <h3>Verktøykassa</h3>
+      <ul>
+        <li><strong>5S:</strong> Sortere, Systematisere, Skinne, Standardisere og Sikre. En ryddig arbeidsplass der alt har fast plass, gjør at feil og lekkasjer synes, og at ingen må lete.</li>
+        <li><strong>Standardisert arbeid:</strong> den beste kjente måten å gjøre en jobb på, skrevet ned i en prosedyre (SOP) som alle følger. Standarden er utgangspunktet for neste forbedring.</li>
+        <li><strong>PDCA:</strong> Plan, Do, Check, Act. Planlegg en endring og hva du tror den gir, prøv den, mål resultatet og bestem om den skal bli den nye standarden.</li>
+        <li><strong>5 hvorfor:</strong> Spør «hvorfor?» flere ganger til du finner rotårsaken, ikke bare symptomet.</li>
+        <li><strong>Hurtigomstilling (SMED):</strong> gjøre omstillinger og kalibreringer raskere, for eksempel ved å forberede mens maskinen fortsatt går. Det gjør det mulig å kjøre mindre batcher.</li>
+        <li><strong>Feilsikring (poka-yoke):</strong> løsninger som gjør det umulig eller vanskelig å gjøre feil, som strekkoder på prøveglass eller koblinger som bare passer én vei.</li>
+        <li><strong>Visuell styring og tavlemøter:</strong> korte møter ved en tavle i starten av skiftet, der laget ser på avvik, mål og forbedringsforslag.</li>
+      </ul>
+
+      <h3>OEE: hvor godt utnytter vi anlegget?</h3>
+      <p>Mange prosessbedrifter måler <strong>OEE</strong> (Overall Equipment Effectiveness). Den ganger sammen tre tap:</p>
+      <p style="font-family:var(--f-mono);font-size:.95rem;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px">OEE = tilgjengelighet × ytelse × kvalitet</p>
+      <ul>
+        <li><strong>Tilgjengelighet:</strong> hvor stor del av den planlagte tiden anlegget faktisk gikk (tap: stopp og omstillinger).</li>
+        <li><strong>Ytelse:</strong> hvor mye som ble produsert, sammenlignet med det anlegget kan klare når det går (tap: redusert fart).</li>
+        <li><strong>Kvalitet:</strong> hvor stor del av produksjonen som var godkjent (tap: vrakgods og omarbeid).</li>
+      </ul>
+      <p>Tre tall på 90 % høres bra ut, men gir en OEE på bare 73 %. Derfor lønner det seg å jobbe med alle tre.</p>
+      <div class="callout"><b>Lean i prosessindustrien</b>Et prosessanlegg går kontinuerlig, så forbedringene handler ofte om færre stopp, raskere oppstart, jevnere kvalitet, mindre energibruk og raskere analysesvar fra laboratoriet. Forslagene kommer ofte fra operatørene på tavlemøtet.</div>
+    </div>
+    <aside class="side">
+      <div class="fact"><div class="k">PDCA</div><div class="v">P→D→C→A</div><p>Planlegg, prøv, sjekk og standardiser. Så begynner du på nytt.</p></div>
+      <div class="fact"><div class="k">90 % × 90 % × 90 %</div><div class="v">73 %</div><p>OEE når tilgjengelighet, ytelse og kvalitet alle er 90 %.</p></div>
+      <div class="gloss"><h4>Fagord norsk – engelsk</h4><dl>
+        <dt>kontinuerlig forbedring</dt><dd>continuous improvement</dd>
+        <dt>sløsing</dt><dd>waste (muda)</dd>
+        <dt>ledetid</dt><dd>lead time</dd>
+        <dt>flaskehals</dt><dd>bottleneck</dd>
+        <dt>rotårsak</dt><dd>root cause</dd>
+        <dt>omstilling</dt><dd>changeover</dd>
+        <dt>varer i arbeid</dt><dd>work in progress (WIP)</dd>
+      </dl></div>
+    </aside>
+  </div>
+
+  <div class="akts">
+    <article class="akt sim" id="d6/spill">
+      <header><span class="ty">Simulering · spill</span><h3>Lean-spillet: prøveflyten i kvalitetslaben</h3></header>
+      <p class="intro">Det kommer en produktprøve fra anlegget hvert 6. minutt, 80 prøver i løpet av et skift på 8 timer. Kontrollrommet venter på svarene for å justere prosessen. I dag blir under halvparten ferdige, og svarene kommer flere timer for sent. <strong>Målet:</strong> minst 70 ferdige prøver og under 60 minutter gjennomsnittlig ledetid. Du har 8 runder. Hver runde er én PDCA-sirkel: Velg én endring, kjør skiftet, sammenlign og bestem om du beholder endringen.</p>
+      <div class="lg">
+        <div class="lgfloor">
+          <svg id="lgSvg" viewBox="0 0 640 230" role="img" aria-label="Animasjon av prøver som går gjennom fire stasjoner i laboratoriet"></svg>
+          <div class="lghud" aria-live="polite"><span>Klokka <b id="lgClock">07:00</b></span><span>Ferdige <b id="lgDone">0</b></span><span>I arbeid <b id="lgWip">0</b></span><span>Omarbeid <b id="lgRe">0</b></span></div>
+        </div>
+        <div class="lgplan" id="lgPlan"></div>
+      </div>
+      <div id="lgMsg"></div>
+      <div class="tblwrap"><table class="lgtable" id="lgTable"><thead><tr><th>Runde</th><th>Endring</th><th>Ferdige</th><th>Ledetid snitt</th><th>Ledetid maks</th><th>I arbeid snitt</th><th>Omarbeid</th><th>Beslutning</th></tr></thead><tbody></tbody></table></div>
+    </article>
+
+    <article class="akt int" id="d6/slosing">
+      <header><span class="ty">Interaktiv øvelse</span><h3>Finn sløsingen</h3></header>
+      <p class="intro">Hvilken av de sju sløsingene er dette? Velg for hvert eksempel fra anlegg og lab.</p>
+      <div class="sort" id="sort7"></div>
+      <div class="row"><span class="res" id="sort7Res" aria-live="polite"></span><button class="btn ghost" id="sort7Reset">Prøv igjen</button></div>
+    </article>
+
+    <article class="akt int" id="d6/hvorfor">
+      <header><span class="ty">Interaktiv øvelse</span><h3>5 hvorfor: pumpa som stoppet</h3></header>
+      <p class="intro"><b>Problem:</b> Pumpe P-201 stoppet midt på nattskiftet, og produksjonen sto i tre timer. Spør «hvorfor?» til dere finner rotårsaken. Velg det svaret som stemmer med det dere fant i undersøkelsen.</p>
+      <div class="why5" id="why5"></div>
+      <div class="row"><button class="btn ghost" id="why5Reset">Start på nytt</button></div>
+    </article>
+
+    <article class="akt opp" id="d6/oee">
+      <header><span class="ty">Oppgave</span><h3>Regn ut OEE for ovn 2</h3></header>
+      <div class="casebox"><b>Data fra ett døgn:</b><ul>
+        <li>Planlagt driftstid: 24 timer</li>
+        <li>Stopp (elektrodebrekk og omstilling): 2 timer</li>
+        <li>Kapasitet når ovnen går for fullt: 10 tonn per time</li>
+        <li>Produsert: 190 tonn, hvorav 9,5 tonn var utenfor spesifikasjon</li>
+      </ul></div>
+      <p class="intro">Regn ut og skriv svarene i prosent med én desimal. Trykk «Sjekk».</p>
+      <div class="oee">
+        <label>Tilgjengelighet (%)<input type="text" inputmode="decimal" data-oee="A"></label>
+        <label>Ytelse (%)<input type="text" inputmode="decimal" data-oee="P"></label>
+        <label>Kvalitet (%)<input type="text" inputmode="decimal" data-oee="Q"></label>
+        <label>OEE (%)<input type="text" inputmode="decimal" data-oee="O"></label>
+      </div>
+      <div class="row"><button class="btn" id="oeeCheck">Sjekk</button><button class="btn ghost" id="oeeShow">Vis løsning</button><span class="res" id="oeeRes" aria-live="polite"></span></div>
+      <p class="fb" id="oeeFb" hidden></p>
+    </article>
+
+    <article class="akt pra" id="d6/5s">
+      <header><span class="ty">Praksis på anlegg/lab</span><h3>5S-runde på laben eller anlegget</h3></header>
+      <p class="intro">Jobb i grupper på 3–4. Velg et avgrenset område: en arbeidsbenk på laben, et avtrekksskap, verktøytavla ved anlegget eller prøvetakingsstedet. Ta bilder før og etter. Avtal med læreren hva som kan kastes eller flyttes. Svarene lagres bare i denne nettleseren.</p>
+      <div class="sheet" data-sheet="5s">
+        <label>Område og gruppe<input type="text" data-k="omrade"></label>
+        <label>1 Sortere<span>Hva lå der som ikke trengs? Hva fjernet dere?</span><textarea data-k="s1"></textarea></label>
+        <label>2 Systematisere<span>Hva fikk fast plass? Hvordan merket dere det (skyggetavle, etiketter, farger)?</span><textarea data-k="s2"></textarea></label>
+        <label>3 Skinne<span>Hva rengjorde dere? Fant dere lekkasjer, skader eller annet som må meldes som avvik?</span><textarea data-k="s3"></textarea></label>
+        <label>4 Standardisere<span>Lag en kort sjekkliste eller et bilde som viser hvordan området skal se ut.</span><textarea data-k="s4"></textarea></label>
+        <label>5 Sikre<span>Hvem sjekker området, og hvor ofte? Hvordan merker vi at standarden ikke følges?</span><textarea data-k="s5"></textarea></label>
+        <label>Effekt<span>Ta tiden på en vanlig oppgave før og etter. Hva ble bedre for sikkerhet, tid og kvalitet?</span><textarea data-k="effekt"></textarea></label>
+        <div class="row"><button class="btn" data-copy>Kopier svarene</button><span class="saved" aria-live="polite"></span></div>
+      </div>
+    </article>
+
+    <article class="akt test" id="d6/quiz">
+      <header><span class="ty">Egentest</span><h3>Sjekk deg selv: lean</h3></header>
+      <div class="quiz" data-quiz="q6"></div>
+    </article>
+  </div>
+</div></section>
+
+<!-- ======================= PRØV DEG ======================= -->
+<section class="del" id="prove"><div class="wrap">
+  <div class="dhead"><span class="dno">✓</span><span class="eyebrow">Egentest · hele temaet</span><h2>Prøv deg i bransjelære</h2></div>
+  <p class="lede">Tolv blandede spørsmål fra alle delene. Svar på alle, så ser du hvor du står og hva du bør lese mer om.</p>
+  <article class="akt test">
+    <div class="quiz" data-quiz="qp" data-score></div>
+    <div class="row"><button class="btn ghost" id="proveReset">Ta testen på nytt</button></div>
+  </article>
+</div></section>
+
+<!-- ======================= LÆRER ======================= -->
+<section class="del" id="laerer" style="border-bottom:none"><div class="wrap">
+  <div class="dhead"><span class="dno">i</span><span class="eyebrow">For lærere</span><h2>Kobling til læreplanen</h2></div>
+  <div class="teacher">
+    <div class="box">
+      <h3>Læreplan KPL02-01</h3>
+      <p style="font-size:.94rem">Bransjelære er ikke et eget kompetansemål, men temaet samler flere mål og kjerneelementer:</p>
+      <ul>
+        <li><b>Analyse, dokumentasjon og kvalitet:</b> drøfte krav og forventninger til et likeverdig og inkluderende yrkesfellesskap og beskrive rettigheter og plikter for arbeidsgivere og arbeidstakere (del 4). Vurdere og beskrive egen utvikling (del 3, «Min vei videre»).</li>
+        <li><b>Kjemisk teknologi:</b> drøfte tiltak og metoder for miljøvennlig produksjon og bærekraftig utvikling (del 5). Forklare hvordan enhetsoperasjoner henger sammen i prosessanlegg (del 2).</li>
+        <li><b>Produksjon og tjenester:</b> beskrive prinsipper for å kontrollere og optimalisere produksjonsprosesser og utføre arbeidet i tråd med prinsippene (del 6 og prosessviseren i del 2). Bruke norsk og engelsk fagterminologi (ordlister i hver del).</li>
+        <li><b>Analyse, dokumentasjon og kvalitet:</b> arbeide etter standarder for internkontroll og kvalitet (del 6: standardisert arbeid, 5S, OEE).</li>
+        <li><b>Kjerneelementer:</b> produksjon fra råvare til ferdig produkt, samhandling, og HMS. Fagets relevans: den norske arbeidslivsmodellen bygd på tillit, ansvar og medbestemmelse.</li>
+      </ul>
+      <p class="src"><a href="https://www.udir.no/lk20/kpl02-01/kompetansemaal-og-vurdering/kv429">Kompetansemålene på udir.no</a></p>
+    </div>
+    <div class="box">
+      <h3>Tips til bruk</h3>
+      <ul>
+        <li>Delene kan brukes hver for seg og i hvilken som helst rekkefølge. Del 4 passer fint før utplassering eller søknad om læreplass.</li>
+        <li>«Bedriftsprofil» og «Intervju en fagarbeider» fungerer godt sammen med et bedriftsbesøk eller et opplæringskontor.</li>
+        <li>Simuleringen i del 5 har bevisst ingen fasit. Bruk den som utgangspunkt for rollespillet.</li>
+        <li>Lean-spillet tar 20–30 minutter. La elevene skrive hypotesen sin før hver runde, og ta en felles oppsummering etterpå: Hvorfor ble resultatet dårligere med batch på 1 før omstillingen var kortere? Hvor flyttet flaskehalsen seg?</li>
+        <li>Prosessviseren kan brukes som innledning til bedriftsbesøk: Hvilken av de seks prosessene ligner mest på bedriften dere skal besøke?</li>
+        <li>Tall og navn på organisasjoner er sjekket i november 2026. Utslippstall oppdateres av SSB hvert år.</li>
+        <li>Ingen innlogging. Tekst i arbeidsarkene lagres bare lokalt i nettleseren og sendes ikke noe sted.</li>
+      </ul>
+      <h3 style="margin-top:6px">Kilder</h3>
+      <ul class="src">
+        <li><a href="https://www.ssb.no/natur-og-miljo/forurensning-og-klima/statistikk/utslipp-til-luft">SSB: Utslipp til luft</a></li>
+        <li><a href="https://menon.no/wp-content/uploads/2023-125-Utslipp-og-produksjon-i-prosessindustrien.pdf">Menon: Utslipp og produksjon i prosessindustrien (2023)</a></li>
+        <li><a href="https://arbeidstilsynet.no/regelverk/lover/arbeidsmiljoloven/">Arbeidstilsynet: Arbeidsmiljøloven</a></li>
+        <li><a href="https://utdanning.no/utdanningsoversikt/kjemiprosessfaget">utdanning.no: Kjemiprosessfaget</a> og <a href="https://utdanning.no/utdanningsoversikt/laboratoriefaget">laboratoriefaget</a></li>
+        <li><a href="https://www.ccsassociation.org/case-studies/brevik-ccs">Brevik CCS</a></li>
+        <li><a href="https://www.norskindustri.no/siteassets/dokumenter/rapporter-og-brosjyrer/veikart-for-prosessindustrien-sammendrag.pdf">Norsk Industri: Veikart for prosessindustrien</a></li>
+        <li><a href="https://www.equinor.com/no/energi/karsto">Equinor: Kårstø</a></li>
+        <li><a href="https://snl.no/Rana_Gruber">Store norske leksikon: Rana Gruber</a></li>
+        <li><a href="https://www.tu.no/artikler/silisium-er-naturens-gave/321787">Teknisk Ukeblad: Silisium er naturens gave</a></li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">Bransjelære · Kjemiprosess læringslab · Vg2 kjemiprosess- og laboratoriefag · Ingen innlogging, ingen data sendes fra siden.</div></footer>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const store={get(k){try{return JSON.parse(localStorage.getItem(k)||"null")}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ---------- Quizdata ---------- */
+/* a = riktig indeks; f = felles forklaring, eller fo = forklaring per alternativ */
+const Q={
+q1:[
+ {q:"Hva kjennetegner prosessindustrien?",o:["Deler settes sammen til ferdige produkter på et samlebånd","Råvarer endres kjemisk eller fysisk i en kontinuerlig prosess","Produktene lages for hånd i små serier","Den lager bare produkter av olje og gass"],a:1,f:"I prosessindustrien strømmer stoffer gjennom anlegget og endres underveis. Å sette sammen deler er vareproduserende industri."},
+ {q:"Hvorfor jobber operatørene skift?",o:["Fordi det er billigere å betale nattillegg","Fordi det tar lang tid og koster mye å stoppe og starte anlegget","Fordi loven krever det","Fordi strømmen er billigst om natta"],a:1,f:"Ovner, reaktorer og kolonner skal helst gå jevnt. Hver stopp og start gir tap, slitasje og økt risiko."},
+ {q:"Hvorfor ble mange store verk bygd innerst i fjordene?",o:["Der var det nær til vannkraft og havn","Der var det flest folk","Der var det lettest å bygge veier","Der var det minst nedbør"],a:0,f:"Strøm fra fossene, havn for råvarer og produkter og råvarer i nærheten avgjorde hvor verkene ble lagt."},
+ {q:"Hva er laboratoriets viktigste oppgave i produksjonen?",o:["Å utvikle nye produkter","Å analysere prøver slik at prosessen kan styres og kvaliteten kontrolleres","Å skrive sikkerhetsdatablad","Å vedlikeholde pumper"],a:1,f:"Analyseresultatene sendes til kontrollrommet, som justerer prosessen. Ferdigvaren kontrolleres mot kundens spesifikasjon."}
+],
+q2:[
+ {q:"Hva betyr verdiskaping?",o:["At bedriften selger mye","At produktet er verdt mer enn råvarene, energien og arbeidet det kostet","At produktet er dyrt","At bedriften har mange ansatte"],a:1,f:"Verdiskaping er forskjellen mellom verdien av det som produseres og verdien av det som går med til å produsere det."},
+ {q:"Hvorfor er resirkulering så viktig for aluminium?",o:["Fordi resirkulert aluminium er sterkere","Fordi omsmelting bruker rundt 5 % av energien som trengs for nytt aluminium","Fordi det er forbudt å kaste aluminium","Fordi bauksitt er giftig"],a:1,f:"Elektrolysen krever svært mye strøm. Omsmelting av skrap trenger bare en liten del av den energien."},
+ {q:"Hvilken reaksjon er Haber–Bosch-prosessen?",o:["CaCO₃ → CaO + CO₂","N₂ + 3H₂ → 2NH₃","SiO₂ + 2C → Si + 2CO","2H₂O → 2H₂ + O₂"],a:1,f:"Nitrogen fra luft og hydrogen reagerer til ammoniakk over en jernkatalysator ved høyt trykk og høy temperatur."},
+ {q:"Et bioraffineri lager vanillin av …",o:["cellulose","lignin","sukker","bark"],a:1,f:"Ligninet, som binder fibrene i treet sammen, kan omdannes til vanillin og andre kjemikalier."}
+],
+q3:[
+ {q:"En alarm for høyt nivå i en tank går på skjermen klokka 03.10.",o:["Kontrollromsoperatør","Feltoperatør","Laborant","Skiftleder"],a:0,fo:["Riktig. Kontrollromsoperatøren kvitterer alarmen, sjekker trendene og vurderer tiltak, og sender ofte feltoperatøren ut for å sjekke lokalt.","Feltoperatøren blir ofte sendt ut for å sjekke tanken, men det er kontrollromsoperatøren som tar imot og håndterer alarmen først.","Laboranten har ikke ansvar for alarmer i prosessen.","Skiftlederen får beskjed hvis det blir alvorlig, men alarmen håndteres først i kontrollrommet."]},
+ {q:"En prøve av produktet skal analyseres for vanninnhold før partiet kan sendes til kunden.",o:["Kontrollromsoperatør","Feltoperatør","Laborant","Skiftleder"],a:2,fo:["Kontrollrommet får resultatet, men analyserer ikke selv.","Feltoperatøren kan ta ut prøven, men analysen gjøres i laboratoriet.","Riktig. Laboranten analyserer, sammenligner med spesifikasjonen og rapporterer resultatet.","Skiftlederen godkjenner kanskje utsendelsen, men gjør ikke analysen."]},
+ {q:"En pumpe skal klargjøres for vedlikehold: stenges av, tømmes og sikres med lås og merking.",o:["Kontrollromsoperatør","Feltoperatør","Laborant","Skiftleder"],a:1,fo:["Kontrollrommet må vite om det og stoppe pumpen fra skjermen, men selve klargjøringen skjer ute.","Riktig. Feltoperatøren isolerer, tømmer og låser utstyret etter prosedyre og arbeidstillatelse.","Laboranten har ikke denne oppgaven.","Skiftlederen godkjenner arbeidstillatelsen, men gjør ikke selve jobben."]},
+ {q:"To avdelinger trenger samme kran samtidig, og vedlikehold vil starte en jobb som kan påvirke produksjonen.",o:["Kontrollromsoperatør","Feltoperatør","Laborant","Skiftleder"],a:3,fo:["Kontrollromsoperatøren gir innspill om prosessen, men prioriteringen er ikke hans eller hennes.","Feltoperatøren må vite om planen, men bestemmer ikke prioriteringen.","Laboranten har ikke denne oppgaven.","Riktig. Skiftlederen koordinerer mellom produksjon og vedlikehold og prioriterer ut fra sikkerhet og drift."]},
+ {q:"Det nye skiftet møter kl. 06.00. Hvem forteller hva som har skjedd i natt?",o:["Lederen på dagtid","Skiftet som går av, i skiftoverleveringen","Ingen, alt står i loggen","Laboranten"],a:1,fo:["Lederen har ikke vært der i natt.","Riktig. Skiftoverleveringen skjer muntlig og skriftlig, og operatørene går gjennom avvik, alarmer og jobber som pågår.","Loggen er viktig, men muntlig overlevering fanger opp det som ikke står der.","Laboranten bidrar med analyseresultater, men har ikke ansvaret for overleveringen."]}
+],
+q4:[
+ {q:"Du ser at en kollega fyller på lut uten vernebriller. Han sier det «bare tar ett sekund».",o:["Du sier ingenting, han er mer erfaren enn deg","Du sier fra til ham på en vennlig måte, og tar det opp med verneombudet eller lederen hvis det fortsetter","Du tar et bilde og legger det ut i klassechatten","Du venter til neste HMS-møte"],a:1,fo:["Erfaring gjør ikke lut mindre etsende. Du har plikt til å si fra om farer du ser.","Riktig. Arbeidstakere skal medvirke til et trygt arbeidsmiljø. Si fra direkte, og bruk verneombudet hvis det ikke hjelper.","Det kan krenke kollegaen og bryte bedriftens regler. Si fra direkte i stedet.","Faren er her og nå. Det kan ikke vente."]},
+ {q:"Verneombudet stanser en jobb i en tank fordi gassmåleren viser for lite oksygen. Skiftlederen vil gjøre ferdig jobben.",o:["Skiftlederen bestemmer, jobben fortsetter","Arbeidet står stille til faren er borte eller Arbeidstilsynet har tatt stilling","Dere stemmer over det","Du går inn alene for å gjøre ferdig"],a:1,fo:["Nei. Verneombudet har lovfestet rett til å stanse farlig arbeid (aml § 6-3).","Riktig. Arbeidet kan ikke startes igjen før faren er borte, eller Arbeidstilsynet har bestemt noe annet.","Sikkerhet avgjøres ikke ved avstemning.","For lite oksygen i en tank kan drepe på sekunder. Aldri."]},
+ {q:"I garderoben blir det gjentatte ganger kommentert utseendet til den eneste jenta på skiftet. Hun ler med, men du ser at hun ikke liker det.",o:["Det er bare tull, ikke din sak","Si fra der og da at dere bør stoppe, og snakk med henne om hun vil ha hjelp til å si fra videre","Fortell det til hele klassen","Vent til hun klager selv"],a:1,fo:["Gjentatte kommentarer om utseende kan være seksuell trakassering, og det er forbudt.","Riktig. Å si fra viser at det ikke er greit. Hun bestemmer selv hvordan saken skal følges opp, men du kan hjelpe henne å kontakte leder, verneombud eller tillitsvalgt.","Det sprer saken uten å løse den, og kan gjøre det verre for henne.","Mange sier ikke fra selv. Kollegene har også et ansvar for miljøet."]},
+ {q:"Du er 17 år. Skiftlederen spør om du kan ta en ekstra nattevakt fordi noen er syke.",o:["Ja, det er bra for erfaringen","Nei, som hovedregel skal ikke arbeidstakere under 18 jobbe om natta, så du sier fra om alderen din","Ja, hvis du får dobbelt betalt","Ja, men bare hvis ingen får vite det"],a:1,fo:["Arbeidsmiljøloven har egne regler for unge arbeidstakere.","Riktig. Det er lederens ansvar å følge reglene, men det er lurt å minne om alderen din. Snakk med opplæringsansvarlig hvis du er usikker.","Lønn endrer ikke reglene.","Det er ikke lov, og det gjør situasjonen verre."]},
+ {q:"Du har vært lærling i to måneder og har fortsatt ikke fått en skriftlig arbeidsavtale.",o:["Det er normalt for lærlinger","Spør arbeidsgiveren eller opplæringskontoret. Du har krav på skriftlig avtale og lærekontrakt","Slutt i jobben","Vent til fagprøven"],a:1,fo:["Nei. Arbeidsgiveren skal gi deg en skriftlig arbeidsavtale, og som lærling skal du også ha en godkjent lærekontrakt.","Riktig. Spør først selv. Opplæringskontoret eller en tillitsvalgt kan hjelpe deg.","Det er ikke nødvendig. Saken løses som regel med en enkel henvendelse.","Avtalen sikrer lønn, arbeidstid og rettighetene dine nå, ikke bare ved fagprøven."]}
+],
+q5:[
+ {q:"Hva er et prosessutslipp?",o:["Utslipp fra lastebilene som henter produktene","CO₂ som dannes i selve den kjemiske reaksjonen","Utslipp fra kantina","Utslipp fra strømproduksjon"],a:1,f:"For eksempel CaCO₃ → CaO + CO₂ i sementproduksjon. Det forsvinner ikke selv om strømmen er fornybar."},
+ {q:"Hvor stor del av Norges klimagassutslipp kom fra industri og bergverk i 2025?",o:["Omtrent 5 %","Omtrent en firedel","Omtrent halvparten","Over 75 %"],a:1,f:"Nesten 11 av 44 millioner tonn CO₂-ekvivalenter, ifølge SSB."},
+ {q:"Hva skjer med CO₂-en som fanges i Brevik?",o:["Den slippes ut et annet sted","Den gjøres flytende, fraktes med skip og lagres under havbunnen i Nordsjøen","Den selges som kullsyre til brus","Den brennes"],a:1,f:"Brevik CCS er en del av Langskip-prosjektet. Northern Lights tar imot og lagrer CO₂-en under Nordsjøen."},
+ {q:"Hvordan påvirker digitalisering jobben til operatøren?",o:["Operatøren blir overflødig","Mindre manuell avlesning, mer arbeid med data, avvik og forståelse av prosessen","Ingen endring","Operatøren må lære å programmere roboter"],a:1,f:"Anleggene trenger fortsatt fagarbeidere, men oppgavene flytter seg mot overvåking, analyse og samarbeid."}
+],
+q6:[
+ {q:"Hva betyr kaizen?",o:["Store investeringer i ny teknologi","Kontinuerlig forbedring i små steg","Å kutte antall ansatte","En japansk kvalitetsstandard"],a:1,f:"Kaizen betyr forbedring. I lean handler det om mange små forbedringer hver dag, gjort av dem som kjenner arbeidet."},
+ {q:"Hva er riktig rekkefølge i PDCA?",o:["Planlegge, gjennomføre, sjekke, standardisere","Prøve, diskutere, sjekke, avslutte","Planlegge, dokumentere, kontrollere, analysere","Gjennomføre, planlegge, sjekke, angre"],a:0,f:"Plan, Do, Check, Act. I Act blir en vellykket endring den nye standarden."},
+ {q:"Hvorfor gjør hurtigomstilling (SMED) det mulig med mindre batcher?",o:["Fordi maskinen går fortere","Fordi hver omstilling koster mindre tid, så det lønner seg å stille om oftere","Fordi det trengs færre operatører","Fordi kvaliteten blir bedre"],a:1,f:"Når en omstilling tar lang tid, må batchene være store for at det skal lønne seg. Kortere omstilling gir mindre batcher og kortere ledetid."},
+ {q:"Et anlegg har 95 % tilgjengelighet, 90 % ytelse og 98 % kvalitet. Hva er OEE?",o:["Omtrent 84 %","Omtrent 90 %","Omtrent 94 %","Omtrent 98 %"],a:0,f:"0,95 × 0,90 × 0,98 = 0,838, altså omtrent 84 %."},
+ {q:"Hva er det første steget i 5S?",o:["Skinne","Standardisere","Sortere","Sikre"],a:2,f:"Først sorterer du ut det som ikke trengs. Så får resten fast plass, blir rengjort, standardisert og holdt ved like."}
+],
+qp:[
+ {q:"Hva er målet med 5 hvorfor?",o:["Å finne hvem som gjorde feilen","Å finne rotårsaken, ikke bare symptomet","Å stille fem spørsmål på tavlemøtet","Å fylle ut avviksskjemaet raskt"],a:1,f:"Tiltak mot rotårsaken hindrer at problemet kommer tilbake. Å finne en syndebukk løser ingenting."},
+ {q:"Hvilken sløsing er det når mellomprodukt står i tanker og venter på neste trinn?",o:["Transport","Lager","Overprosessering","Bevegelse"],a:1,f:"Lager binder penger og plass, og skjuler problemer i flyten."},
+ {q:"Hvilken yrkestittel gir fagbrev i kjemiprosessfaget?",o:["Prosessingeniør","Fagoperatør i kjemisk prosessindustri","Faglaborant","Industrimekaniker"],a:1,f:"Laboratoriefaget gir tittelen faglaborant."},
+ {q:"Hvor lang er læretiden etter Vg2?",o:["6 måneder","1 år","2 år","3 år"],a:2,f:"To år i bedrift, med lønn, og avsluttes med fagprøve."},
+ {q:"Hva kalles det når industrien forhandler først i lønnsoppgjøret og setter rammen for andre?",o:["Trepartssamarbeid","Frontfagsmodellen","Hovedavtalen","Allmenngjøring"],a:1,f:"Konkurranseutsatt industri går først, slik at lønnsveksten tilpasses det industrien tåler."},
+ {q:"Hvem har hovedansvaret for at arbeidsmiljøet er forsvarlig?",o:["Verneombudet","Arbeidstilsynet","Arbeidsgiveren","Hver enkelt ansatt"],a:2,f:"Arbeidsgiveren har hovedansvaret. Arbeidstakerne har plikt til å medvirke."},
+ {q:"Når kan verneombudet stanse arbeid?",o:["Når arbeidet tar for lang tid","Ved umiddelbar fare for liv eller helse","Når de ansatte er uenige med ledelsen om lønn","Aldri, bare lederen kan stanse arbeid"],a:1,f:"Arbeidsmiljøloven § 6-3."},
+ {q:"Hva er riktig rekkefølge i aluminiumskjeden?",o:["Alumina → bauksitt → elektrolyse → støping","Bauksitt → alumina → elektrolyse → støping","Bauksitt → elektrolyse → alumina → støping","Støping → alumina → elektrolyse → bauksitt"],a:1,f:"Bauksitt foredles til alumina (Al₂O₃), som spaltes ved elektrolyse. Det flytende metallet støpes."},
+ {q:"Hva er en skiftoverlevering?",o:["Når lønna betales ut","Når skiftet som går av, forteller det nye skiftet om status, avvik og pågående jobber","Når en lærling bytter avdeling","Når produktet leveres til kunden"],a:1,f:"God overlevering er en viktig barriere mot feil og ulykker."},
+ {q:"Hvilket tiltak gir mindre prosessutslipp i et silisiumverk?",o:["Fornybar strøm til kontorbygget","Biokarbon i stedet for fossilt kull","Flere skiftlag","Lengre ferie"],a:1,f:"Karbonet reagerer med kvarts og blir til CO₂. Med biokarbon kommer karbonet fra trær som har tatt opp CO₂."},
+ {q:"Hva gjelder hvis en kollega trakasserer noen på jobb?",o:["Det er bare forbudt hvis det skjer i arbeidstiden","Det er forbudt, og du kan si fra til leder, verneombud eller tillitsvalgt","Det er greit hvis det er ment som humor","Det er bare HR sitt ansvar"],a:1,f:"Trakassering er forbudt etter likestillings- og diskrimineringsloven. Arbeidsgiveren skal forebygge og stoppe det."},
+ {q:"Hvorfor regnes mye av prosessindustrien som kraftforedlende?",o:["Fordi den lager strøm","Fordi den gjør strøm om til produkter som metall og gjødsel","Fordi den eier kraftverk","Fordi den bruker lite strøm"],a:1,f:"Elektrolyse og smelteovner bruker store mengder strøm. Produktene «inneholder» mye energi."}
+]};
+
+/* ---------- Quiz-motor ---------- */
+function renderQuiz(el){
+  const key=el.dataset.quiz,data=Q[key],scored=el.hasAttribute("data-score");let answered=0,right=0;
+  el.innerHTML="";
+  data.forEach((it,qi)=>{
+    const d=document.createElement("div");d.className="q";
+    d.innerHTML=`<p class="qt"><small>${qi+1}/${data.length}</small>${esc(it.q)}</p><div class="opts" role="group"></div><div class="fb" hidden aria-live="polite"></div>`;
+    const opts=d.querySelector(".opts"),fb=d.querySelector(".fb");
+    const ord=el.hasAttribute("data-fixed")?it.o.map((o,i)=>i):shuffle(it.o.map((o,i)=>i));
+    ord.forEach(oi=>{const o=it.o[oi];const b=document.createElement("button");b.className="opt";b.type="button";b.textContent=o;
+      b.onclick=()=>{
+        opts.querySelectorAll("button").forEach((x,xi)=>{x.disabled=true;if(ord[xi]===it.a)x.classList.add("right");});
+        const ok=oi===it.a;if(!ok)b.classList.add("wrong");answered++;if(ok)right++;
+        fb.hidden=false;fb.innerHTML=`<b style="color:var(${ok?"--ok":"--bad"})">${ok?"Riktig.":"Ikke helt."}</b>${esc(it.fo?it.fo[oi]:it.f)}`;
+        if(ok||!it.fo){} else fb.innerHTML+=`<br><span style="color:var(--muted)">Riktig svar: ${esc(it.o[it.a])}. ${esc(it.fo[it.a].replace(/^Riktig\.\s*/,""))}</span>`;
+        if(scored&&answered===data.length) showScore();
+      };opts.append(b);});
+    el.append(d);
+  });
+  function showScore(){
+    const s=document.createElement("div");s.className="q";
+    const msg=right>=data.length*0.85?"Svært bra. Du har god oversikt over bransjen.":right>=data.length*0.6?"Godt jobbet. Les gjennom forklaringene på det du bommet på.":"Les delene på nytt, særlig der du svarte feil, og prøv igjen.";
+    s.innerHTML=`<p class="score">${right} av ${data.length} riktige</p><p>${msg}</p>`;el.append(s);s.scrollIntoView({behavior:"smooth",block:"nearest"});
+  }
+}
+$$(".quiz").forEach(renderQuiz);
+$("#proveReset").onclick=()=>renderQuiz($('[data-quiz="qp"]'));
+
+/* ---------- Del 1: Hvem lager hva ---------- */
+const M=[
+ ["Hydro Sunndalsøra","Møre og Romsdal","Aluminium","Et av Europas største aluminiumsverk. Alumina spaltes med strøm i elektrolyseovner."],
+ ["Yara Porsgrunn","Herøya, Telemark","Mineralgjødsel og ammoniakk","Ammoniakk, salpetersyre og NPK-gjødsel. Fabrikken er arvtakeren etter Hydros gjødselproduksjon."],
+ ["Borregaard","Sarpsborg","Cellulose, lignin og vanillin fra tre","Et bioraffineri som bruker hele tømmerstokken."],
+ ["Equinor Mongstad","Vestland","Bensin, diesel og andre oljeprodukter","Norges største oljeraffineri. Råolje skilles i fraksjoner ved destillasjon."],
+ ["Glencore Nikkelverk","Kristiansand","Nikkel","Nikkel, kobber og kobolt utvinnes ved utluting og elektrolyse."],
+ ["Heidelberg Materials Brevik","Telemark","Sement","Kalkstein brennes til klinker. Har verdens første fullskala karbonfangst i sementindustrien."],
+ ["INEOS Rafnes","Bamble, Telemark","Råstoff til plast","Etylen og vinylklorid (VCM), som brukes til å lage plast som PVC."],
+ ["GE HealthCare Lindesnes","Agder","Kontrastmidler til røntgen og CT","Farmasøytisk produksjon med strenge krav til renhet og dokumentasjon."]
+];
+let mOrder=[];
+function drawMatch(){
+  const box=$("#match");box.innerHTML="";mOrder=shuffle(M.map((m,i)=>i));
+  const prods=shuffle(M.map(m=>m[2]));
+  mOrder.forEach(i=>{const m=M[i];const r=document.createElement("div");r.className="mrow";r.dataset.i=i;
+    r.innerHTML=`<div><b>${esc(m[0])}</b><small>${esc(m[1])}</small></div><select aria-label="Produkt for ${esc(m[0])}"><option value="">Velg produkt …</option>${prods.map(p=>`<option>${esc(p)}</option>`).join("")}</select><span class="mark"></span><p class="why">${esc(m[3])}</p>`;
+    box.append(r);});
+  $("#matchRes").textContent="";
+}
+drawMatch();
+$("#matchCheck").onclick=()=>{let ok=0;$$("#match .mrow").forEach(r=>{const m=M[r.dataset.i],v=r.querySelector("select").value,mk=r.querySelector(".mark");
+  const good=v===m[2];if(good)ok++;mk.textContent=v?(good?"✓":"✗"):"–";mk.className="mark "+(good?"ok":"bad");r.classList.toggle("done",good);});
+  const res=$("#matchRes");res.textContent=`${ok} av ${M.length} riktige`+(ok===M.length?". Alle riktige!":"");res.className="res "+(ok===M.length?"ok":"");};
+$("#matchReset").onclick=drawMatch;
+
+/* ---------- Del 2: Verdikjede ---------- */
+const VK={
+ "Aluminium":{s:["Bauksitt utvinnes i gruve","Bauksitt foredles til alumina (Al₂O₃)","Elektrolyse i ovner ved ca. 960 °C","Flytende aluminium støpes til barrer og bolter","Valsing og pressing til plater og profiler","Brukes i bil, emballasje og vinduer","Skrap samles inn og smeltes om"],f:"Kjeden er nesten en sirkel: Når produktet er brukt opp, blir skrapet en ny råvare. Det sparer rundt 95 % av energien."},
+ "Mineralgjødsel":{s:["Naturgass og luft hentes inn","Hydrogen lages fra gassen, nitrogen tas fra lufta","Ammoniakk syntetiseres (N₂ + 3H₂ → 2NH₃)","Ammoniakk oksideres til salpetersyre","Blandes med fosfat og kalium til NPK-granulat","Analyse i laboratoriet før pakking","Bonden sprer gjødsla på jordet"],f:"Legg merke til laboratoriet: Kvalitetskontroll er et eget steg før produktet slippes til kunden."},
+ "Olje og gass":{s:["Olje, gass og vann strømmer opp fra brønnen","Separatorer på plattformen skiller olje, gass og vann","Rikgassen sendes i rør til gassanlegget på land","Våtgass (NGL) skilles fra tørrgassen","Våtgassen fraksjoneres til etan, propan, butan og nafta","Tørrgass går i rør til Europa, våtgassproduktene fraktes med skip"],f:"Etan fra Kårstø blir råvare til plast i Bamble og Sverige. Én bransjes produkt er en annen bransjes råvare."},
+ "Smelteverk":{s:["Kvarts, kull, koks og trekull veies opp","Råvarene chargeres i lysbueovnen","Kvarts reduseres til silisium ved over 1900 °C","Flytende silisium tappes i øser","Raffinering fjerner urenheter","Støping, knusing og sikting til kundens kornstørrelse"],f:"Avgassen fra ovnen gir to ekstra produkter: varme som blir strøm, og mikrosilika som selges til betong."},
+ "Bergverk":{s:["Malmen sprenges ut i gruva","Malmen knuses","Malmen males til fint pulver","Jernmineralene skilles fra gråberget med spiraler og magneter","Konsentratet avvannes og lagres","Konsentratet skipes til stålverk"],f:"Gråberget som blir igjen, kalles avgang. Det er den største massestrømmen i et bergverk og må deponeres eller brukes til noe nyttig."},
+ "Bioraffineri":{s:["Tømmer hogges og fraktes til fabrikken","Flis lages og kokes med kjemikalier","Cellulose, lignin og sukker skilles fra hverandre","Hver strøm renses og foredles videre","Produktene analyseres mot kundens spesifikasjon","Selges som spesialcellulose, bindemidler, vanillin og bioetanol"],f:"Et bioraffineri lager mange produkter av én råvare. Det gjør bedriften mindre sårbar og gir lite avfall."}
+};
+let vkCur="Aluminium",vkPicked=[],vkOrder=[];
+function newVK(k){if(k)vkCur=k;vkPicked=[];vkOrder=shuffle(VK[vkCur].s.map((s,i)=>i));drawVK();}
+const tabs=$("#vkTabs");Object.keys(VK).forEach(k=>{const b=document.createElement("button");b.type="button";b.textContent=k;b.onclick=()=>newVK(k);tabs.append(b);});
+function drawVK(){
+  tabs.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.textContent===vkCur));
+  const steps=VK[vkCur].s,pool=$("#vkPool"),list=$("#vkList");pool.innerHTML="";list.innerHTML="";
+  vkOrder.filter(i=>!vkPicked.includes(i)).forEach(i=>{const b=document.createElement("button");b.type="button";b.textContent=steps[i];b.onclick=()=>{vkPicked.push(i);drawVK();};pool.append(b);});
+  if(!pool.children.length)pool.innerHTML='<span class="empty-hint">Alle stegene er plassert. Sjekk rekkefølgen.</span>';
+  vkPicked.forEach((i,p)=>{const li=document.createElement("li");li.innerHTML=`<span>${esc(steps[i])}</span><button type="button" aria-label="Ta ut steget">×</button>`;li.querySelector("button").onclick=()=>{vkPicked.splice(p,1);drawVK();};list.append(li);});
+  if(!vkPicked.length)list.innerHTML='<li style="border-style:dashed;background:none" class="empty-hint">Trykk på det første steget.</li>';
+  $("#vkRes").textContent="";$("#vkFb").hidden=true;
+}
+newVK();
+$("#vkCheck").onclick=()=>{const steps=VK[vkCur].s;if(vkPicked.length<steps.length){$("#vkRes").textContent="Plasser alle stegene først.";$("#vkRes").className="res";return;}
+  let ok=0;$$("#vkList li").forEach((li,p)=>{const g=vkPicked[p]===p;if(g)ok++;li.classList.add(g?"ok":"bad");});
+  const r=$("#vkRes");r.textContent=`${ok} av ${steps.length} på riktig plass`;r.className="res "+(ok===steps.length?"ok":"bad");
+  if(ok===steps.length){const f=$("#vkFb");f.hidden=false;f.textContent=VK[vkCur].f;}};
+$("#vkReset").onclick=()=>newVK();
+
+/* ---------- Begrepskort ---------- */
+const K={k2:[["Verdikjede","Alle stegene fra råvaren hentes ut, gjennom foredling, til produktet brukes hos kunden."],["Foredling","Å bearbeide en råvare slik at den blir verdt mer, for eksempel ved reaksjon, separasjon eller rensing."],["Verdiskaping","Verdien av produktet minus verdien av råvarer, energi og innsatsvarer som gikk med."],["Biprodukt","Et stoff som dannes i tillegg til hovedproduktet. Kan selges eller brukes videre i stedet for å bli avfall."],["Spesifikasjon","Kravene kunden stiller til produktet, for eksempel renhet, fuktighet og kornstørrelse."],["Elektrolyse","Bruk av likestrøm til å spalte et stoff. Brukes til aluminium, nikkel og hydrogen."],["Bioraffineri","Et anlegg som lager mange produkter av biologisk råvare, som tre."],["Sirkulær økonomi","Produkter og avfall brukes om igjen som råvare, slik at lite går tapt."]]};
+$$("[data-cards]").forEach(c=>{K[c.dataset.cards].forEach(([w,d])=>{const b=document.createElement("button");b.type="button";b.className="flip";b.setAttribute("aria-expanded","false");
+  b.innerHTML=`<span class="w">${esc(w)}</span><span class="h">Trykk for fasit</span><span class="d">${esc(d)}</span>`;
+  b.onclick=()=>{const o=b.classList.toggle("open");b.setAttribute("aria-expanded",o);};c.append(b);});});
+
+/* ---------- Del 4: Rett eller plikt ---------- */
+const CAT=["Arbeidsgivers plikt","Arbeidstakers plikt","Arbeidstakers rett"];
+const SO=[
+ ["Gi opplæring i hvordan utstyret brukes trygt",0,"Arbeidsgiveren skal sørge for at alle får nødvendig opplæring."],
+ ["Bruke verneutstyret som er bestemt for jobben",1,"Arbeidstakeren skal følge sikkerhetsreglene og bruke verneutstyr."],
+ ["Melde fra om feil og farer du oppdager",1,"En del av medvirkningsplikten i arbeidsmiljøloven § 2-3."],
+ ["Få en skriftlig arbeidsavtale",2,"Alle arbeidstakere har krav på skriftlig arbeidsavtale."],
+ ["Kartlegge farer og lage risikovurderinger",0,"Systematisk HMS-arbeid er arbeidsgiverens ansvar."],
+ ["Melde seg inn i en fagforening",2,"Organisasjonsfrihet. Arbeidsgiveren kan ikke nekte deg eller straffe deg for det."],
+ ["Varsle om kritikkverdige forhold uten å bli straffet for det",2,"Varslingsreglene i arbeidsmiljøloven kapittel 2A beskytter deg."],
+ ["Følge prosedyrer og instrukser",1,"Arbeidstakeren skal følge instrukser og bidra til et trygt arbeidsmiljø."],
+ ["Forebygge og stoppe trakassering",0,"Arbeidsgiveren har plikt til å forebygge og hindre trakassering."],
+ ["Delta i valg av verneombud",2,"Det er arbeidstakerne som velger verneombudet."]
+];
+function drawSort(){const box=$("#sort");box.innerHTML="";let done=0,ok=0;
+  shuffle(SO).forEach(([t,c,why])=>{const r=document.createElement("div");r.className="srow";r.innerHTML=`<p>${esc(t)}</p><div class="sbtns"></div><p class="why" hidden></p>`;
+    const bs=r.querySelector(".sbtns");CAT.forEach((n,ci)=>{const b=document.createElement("button");b.type="button";b.textContent=n;b.onclick=()=>{
+      bs.querySelectorAll("button").forEach((x,xi)=>{x.disabled=true;if(xi===c)x.classList.add("right");});if(ci!==c)b.classList.add("wrong");
+      done++;if(ci===c)ok++;const w=r.querySelector(".why");w.hidden=false;w.textContent=why;
+      const res=$("#sortRes");res.textContent=`${ok} av ${done} riktige`+(done===SO.length?` · ferdig`:"");res.className="res "+(done===SO.length&&ok===done?"ok":"");};bs.append(b);});
+    box.append(r);});$("#sortRes").textContent="";}
+drawSort();$("#sortReset").onclick=drawSort;
+
+/* ---------- Del 5: Simulering ---------- */
+const BASE=400,BUDGET=1200;
+const T=[
+ {id:"varme",n:"Gjenvinn spillvarme til strøm",d:"Røykgassen er varm. En dampturbin lager strøm som verket ellers ville kjøpt.",cut:6,cost:250,pow:-8,t:["Moden teknologi","2 år"]},
+ {id:"reg",n:"Bedre prosessregulering og opplæring",d:"Nye sensorer, avansert regulering og kurs for operatørene. Jevnere drift gir mindre vrakgods og mindre karbon per tonn.",cut:5,cost:60,pow:-3,t:["Moden teknologi","Krever opplæring"]},
+ {id:"bio",n:"Bytt 40 % av kullet med biokarbon",d:"Trekull fra bærekraftig skog. Dyrere råvare, og det er konkurranse om biomassen.",cut:35,cost:150,pow:0,t:["Delvis moden","Høyere driftskostnad"]},
+ {id:"ccs",n:"Karbonfangst på røykgassen (CCS)",d:"Absorpsjonsanlegg som fanger 85 % av CO₂-en. Trenger skipstransport og lagerplass.",cut:85,cost:900,pow:15,t:["Nytt for silisium","4–5 år","Nye arbeidsplasser"]},
+ {id:"h2",n:"Hydrogen som reduksjonsmiddel",d:"Pilotanlegg for å bytte noe av karbonet med hydrogen fra elektrolyse. Teknologien er ennå umoden.",cut:20,cost:500,pow:30,t:["Umoden teknologi","Risiko for forsinkelse"]},
+ {id:"el",n:"Elektrifiser hjelpeprosesser",d:"Bytt oljefyring i tørker og oppvarming med el-kjeler.",cut:2,cost:40,pow:2,t:["Moden teknologi","1 år"]}
+];
+const box=$("#meas");T.forEach(m=>{const l=document.createElement("label");l.innerHTML=`<input type="checkbox" value="${m.id}"><span><b>${esc(m.n)}</b><small>${esc(m.d)}</small><span class="tags"><span>−${m.cut} % CO₂</span><span>${m.cost} mill. kr</span>${m.t.map(x=>`<span>${esc(x)}</span>`).join("")}</span></span>`;l.querySelector("input").onchange=sim;box.append(l);});
+function sim(){
+  const on=T.filter(m=>box.querySelector(`input[value=${m.id}]`).checked);
+  let e=BASE,cost=0,pow=0;
+  ["reg","varme","el","bio","h2","ccs"].forEach(id=>{const m=on.find(x=>x.id===id);if(!m)return;e=e*(1-m.cut/100);cost+=m.cost;pow+=m.pow;});
+  e=Math.round(e);
+  $("#gE").textContent=e;const bE=$("#bE");bE.style.width=(e/BASE*100)+"%";bE.className=e<=BASE/2?"good":"warn";
+  $("#gC").textContent=`${cost} / ${BUDGET}`;const bC=$("#bC");bC.style.width=Math.min(100,cost/BUDGET*100)+"%";bC.className=cost>BUDGET?"warn":"";
+  $("#gP").textContent=(pow>=0?"+":"")+pow+" %";$("#bP").style.width=Math.min(100,Math.abs(pow)*2)+"%";
+  const L=[];
+  if(!on.length)L.push("<span>Velg ett eller flere tiltak.</span>");
+  else{
+    L.push(e<=BASE/2?`<span class="hi">✓ Målet er nådd: ${Math.round((1-e/BASE)*100)} % kutt.</span>`:`<span class="lo">✗ ${Math.round((1-e/BASE)*100)} % kutt. Målet er 50 %.</span>`);
+    if(cost>BUDGET)L.push(`<span class="lo">✗ Over budsjett med ${cost-BUDGET} mill. kr. Styret må godkjenne mer, eller dere må søke støtte fra Enova.</span>`);
+    if(on.some(m=>m.id==="ccs"))L.push("<span>Tillitsvalgt: «Fangstanlegget gir nye skiftstillinger, men folk må læres opp før oppstart.»</span>");
+    if(on.some(m=>m.id==="h2"))L.push("<span>Driftssjef: «Hydrogenpiloten kan bli forsinket. Vi kan ikke regne med kuttet før teknologien er testet.»</span>");
+    if(on.some(m=>m.id==="bio"))L.push("<span>Innkjøp: «Biokarbon øker råvarekostnaden. Kundene må være villige til å betale for grønt silisium.»</span>");
+    if(pow>=20)L.push("<span class=\"lo\">Strømbehovet øker mye. Er det nok nettkapasitet og kraft i regionen?</span>");
+    if(on.some(m=>m.id==="reg"))L.push("<span>Operatør: «Bedre regulering merker vi med en gang: færre alarmer og jevnere ovner.»</span>");
+    if(e<=BASE/2&&cost<=BUDGET)L.push(`<span class="hi">Planen holder både mål og budsjett. Drøft risikoen i rollespillet.</span>`);
+  }
+  $("#slog").innerHTML=L.join("");
+}
+sim();
+
+/* ---------- Prosessviser ---------- */
+const PV=(function(){
+const svg=$("#pvSvg");
+/* Tegnefunksjoner. Alle tar en enhet u = {x,y,w,h} */
+const D={
+ silo:u=>`<path class="eq" d="M${u.x} ${u.y+4}q0-4 4-4h${u.w-8}q4 0 4 4v${u.h-26}l-${u.w/2-6} 22h-12l-${u.w/2-6}-22z"/><rect class="liq" x="${u.x+4}" y="${u.y+u.h*.35}" width="${u.w-8}" height="${u.h*.65-26}"/>`,
+ pile:u=>`<path class="eq" d="M${u.x} ${u.y+u.h}L${u.x+u.w*.35} ${u.y+8}L${u.x+u.w*.55} ${u.y+u.h*.4}L${u.x+u.w*.7} ${u.y+u.h*.25}L${u.x+u.w} ${u.y+u.h}z"/>`,
+ col:u=>{let t="";for(let i=1;i<7;i++){const yy=u.y+u.h*i/7;t+=`<line class="det" x1="${u.x+5}" y1="${yy}" x2="${u.x+u.w-5}" y2="${yy}"/>`;}return `<rect class="eq" x="${u.x}" y="${u.y}" width="${u.w}" height="${u.h}" rx="${u.w/2}"/>${t}`;},
+ tank:u=>`<rect class="eq" x="${u.x}" y="${u.y}" width="${u.w}" height="${u.h}" rx="8"/><rect class="liq" x="${u.x+3}" y="${u.y+u.h*.45}" width="${u.w-6}" height="${u.h*.55-3}" rx="5"/>`,
+ reactor:u=>`<rect class="eq" x="${u.x}" y="${u.y}" width="${u.w}" height="${u.h}" rx="${Math.min(18,u.w/2)}"/><rect class="glow" x="${u.x+6}" y="${u.y+u.h*.3}" width="${u.w-12}" height="${u.h*.4}" rx="3"/><path class="det" d="M${u.x+6} ${u.y+u.h*.3}l${u.w-12} ${u.h*.4}M${u.x+u.w-6} ${u.y+u.h*.3}l-${u.w-12} ${u.h*.4}"/>`,
+ furn:u=>{const e=[.28,.5,.72].map(f=>`<rect x="${u.x+u.w*f-5}" y="${u.y-14}" width="10" height="${u.h*.55+14}" fill="#5D7B8A"/>`).join("");return `<path class="eq" d="M${u.x} ${u.y}h${u.w}v${u.h-14}q0 14-14 14h-${u.w-28}q-14 0-14-14z"/><ellipse class="glow" cx="${u.x+u.w/2}" cy="${u.y+u.h*.72}" rx="${u.w*.4}" ry="${u.h*.18}"/>${u.el===false?"":e}`;},
+ cell:u=>{let a="";for(let i=0;i<5;i++)a+=`<rect x="${u.x+12+i*(u.w-24)/5}" y="${u.y+10}" width="${(u.w-24)/5-8}" height="${u.h*.35}" fill="#3a4a52" stroke="#5D7B8A"/>`;return `<rect class="eq" x="${u.x}" y="${u.y}" width="${u.w}" height="${u.h}" rx="6"/>${a}<rect class="glow" x="${u.x+6}" y="${u.y+u.h*.5}" width="${u.w-12}" height="${u.h*.22}"/><rect x="${u.x+6}" y="${u.y+u.h*.72}" width="${u.w-12}" height="${u.h*.2}" fill="#b9c4c9" opacity=".85"/>`;},
+ mill:u=>{const cx=u.x+u.w/2,cy=u.y+u.h/2,r=Math.min(u.w,u.h)/2;return `<circle class="eq" cx="${cx}" cy="${cy}" r="${r}"/><g class="spin"><path class="det" d="M${cx-r*.7} ${cy}h${r*1.4}M${cx} ${cy-r*.7}v${r*1.4}M${cx-r*.5} ${cy-r*.5}l${r} ${r}M${cx+r*.5} ${cy-r*.5}l-${r} ${r}"/></g>`;},
+ hx:u=>{const cx=u.x+u.w/2,cy=u.y+u.h/2,r=Math.min(u.w,u.h)/2;return `<circle class="eq" cx="${cx}" cy="${cy}" r="${r}"/><path d="M${cx-r*.8} ${cy+r*.25}l${r*.3}-${r*.5}l${r*.35} ${r*.5}l${r*.35}-${r*.5}l${r*.35} ${r*.5}" fill="none" stroke="#F08A4B" stroke-width="1.6"/>`;},
+ comp:u=>{const cx=u.x+u.w/2,cy=u.y+u.h/2,r=Math.min(u.w,u.h)/2;return `<circle class="eq" cx="${cx}" cy="${cy}" r="${r}"/><path class="det" d="M${cx-r*.6} ${cy-r*.75}L${cx+r*.7} ${cy-r*.35}V${cy+r*.35}L${cx-r*.6} ${cy+r*.75}"/>`;},
+ sep:u=>`<rect class="eq" x="${u.x}" y="${u.y}" width="${u.w}" height="${u.h}" rx="6"/><path class="det" d="M${u.x+8} ${u.y+u.h-8}q${u.w*.2}-${u.h*.7} ${u.w*.4} 0t${u.w*.4} 0M${u.x+8} ${u.y+u.h*.4}h${u.w-16}"/>`,
+ box:u=>`<rect class="eq" x="${u.x}" y="${u.y}" width="${u.w}" height="${u.h}" rx="6"/>`,
+ out:u=>""
+};
+const P={
+alu:{n:"Aluminium",
+ u:[{id:"silo",s:"silo",x:20,y:30,w:60,h:95,l:"ALUMINA-SILO",i:"Alumina (Al₂O₃) er et hvitt pulver som lages av bauksitt. Det kommer med skip til verket."},
+    {id:"rens",s:"box",x:330,y:30,w:110,h:50,l:"TØRRENSING",i:"Avgassen fra cellene ledes gjennom fersk alumina. Aluminaen fanger fluor fra gassen og sendes så videre til cellene. Slik blir avgassen renset, og fluoren gjenbrukes."},
+    {id:"anode",s:"box",x:20,y:205,w:90,h:50,l:"ANODEFABRIKK",i:"Anodene er store blokker av karbon. De brennes opp i elektrolysen og må byttes etter noen uker. Det er her CO₂-utslippet kommer fra."},
+    {id:"celle",s:"cell",x:160,y:150,w:270,h:110,l:"ELEKTROLYSECELLE",i:"Alumina løses i smeltet kryolitt ved ca. 960 °C. Likestrøm går fra karbonanodene (oppe) til katoden (nede) og spalter aluminaen: 2Al₂O₃ + 3C → 4Al + 3CO₂. Flytende aluminium samles i bunnen."},
+    {id:"stop",s:"box",x:500,y:180,w:95,h:60,l:"STØPERI",i:"Flytende aluminium hentes ut med vakuumøser, legeres og støpes til barrer, bolter og plater. Skrap kan smeltes om her."},
+    {id:"ut",s:"out",x:625,y:190,w:125,h:40,t:"Barrer og bolter"}],
+ f:[["M80 55 H330","main","Fersk alumina",160,48],["M385 80 V150","main","",0,0],["M250 150 V110 H360 V80","gas","Avgass",262,104],["M440 55 H520 V18","gas","Renset avgass (CO₂)",450,14],["M110 230 H160","main","Anoder",112,222],["M430 210 H500","main","Flytende Al",436,202],["M595 210 H625","main","",0,0],["M548 300 V240","by","Skrap inn",556,296]],
+ st:["silo","rens","celle","anode","stop","ut"],
+ c:[{id:"I",l:"Strømstyrke",u:"kA",min:150,max:500,step:10,v:350},{id:"U",l:"Cellespenning",u:"V",min:3.9,max:4.6,step:0.05,v:4.2}],
+ calc(v){const kg=v.I*1e3*86400*26.98/(3*96485)/1000*0.94,kwh=v.U*v.I*24/kg;const n=[];
+  if(v.U<4.05)n.push("Lav spenning gir lite varme. Badet kan fryse til langs kantene, og cellen blir ustabil.");
+  if(v.U>4.4)n.push("Høy spenning: Mer av energien blir til varme i stedet for metall. Hver kilo blir dyrere.");
+  if(v.I>450)n.push("Høy strøm gir mer metall per celle, men cellen må tåle mer varme og magnetiske krefter.");
+  if(!n.length)n.push("<good>Normal drift. Strømutbyttet er satt til 94 %. Resten av strømmen går tapt i sidereaksjoner.");
+  return{k:[["Aluminium per celle",Math.round(kg).toLocaleString("nb-NO"),"kg/døgn"],["Energibruk",kwh.toFixed(1),"kWh/kg",kwh<=13.5?"ok":kwh>14.5?"bad":""],["CO₂ fra anodene",(kg*1.5/1000).toFixed(1),"t/døgn"],["Effekt per celle",(v.U*v.I/1000).toFixed(2),"MW"]],n,spd:v.I/350,heat:(v.U*v.I-585)/1715,o:{ut:`Barrer ${(kg/1000).toFixed(1).replace(".",",")} t/døgn`}};}},
+
+nh3:{n:"Mineralgjødsel",
+ u:[{id:"gass",s:"pile",x:10,y:45,w:65,h:45,l:"NATURGASS",i:"Naturgass (metan) er kilden til hydrogenet."},
+    {id:"luft",s:"pile",x:10,y:160,w:65,h:45,l:"LUFT",i:"Lufta gir nitrogen (N₂), som utgjør 78 % av atmosfæren."},
+    {id:"ref",s:"furn",el:false,x:105,y:60,w:75,h:110,l:"REFORMER",i:"Metan og vanndamp reagerer over katalysator ved høy temperatur og gir hydrogen og CO₂: CH₄ + 2H₂O → CO₂ + 4H₂. Luft tilsettes for å få nitrogen i riktig forhold, 3 H₂ per N₂."},
+    {id:"co2",s:"col",x:210,y:50,w:34,h:125,l:"CO₂-FJERNING",i:"CO₂ vaskes ut av gassen i en absorpsjonskolonne. Ren CO₂ kan selges, for eksempel til matindustrien."},
+    {id:"komp",s:"comp",x:272,y:92,w:50,h:50,l:"KOMPRESSOR",i:"Syntesegassen komprimeres til høyt trykk. Kompressoren er en av de største energibrukerne i fabrikken."},
+    {id:"reak",s:"reactor",x:355,y:45,w:60,h:140,l:"REAKTOR",i:"Haber–Bosch: N₂ + 3H₂ ⇌ 2NH₃ over jernkatalysator. Reaksjonen er eksoterm og går mot likevekt. Bare en del av gassen reagerer per passering."},
+    {id:"sep",s:"tank",x:445,y:115,w:60,h:70,l:"KJØLING/SEPARATOR",i:"Gassen kjøles ned. Ammoniakken kondenserer til væske, mens nitrogen og hydrogen som ikke har reagert, sendes tilbake til reaktoren."},
+    {id:"nh3t",s:"tank",x:535,y:210,w:60,h:60,l:"AMMONIAKK",i:"Flytende ammoniakk lagres nedkjølt eller under trykk. Ammoniakk er giftig og krever streng sikkerhet."},
+    {id:"hno3",s:"box",x:535,y:35,w:95,h:50,l:"SALPETERSYRE",i:"Ammoniakk brennes med luft over platinanett og gir salpetersyre (HNO₃). Dette var opprinnelig Hydros produksjon på Herøya."},
+    {id:"npk",s:"box",x:650,y:110,w:95,h:60,l:"NPK-FABRIKK",i:"Salpetersyre, ammoniakk, fosfat og kalium blandes og granuleres til gjødselkorn. Laboratoriet kontrollerer næringsinnhold og kornstørrelse."},
+    {id:"ut",s:"out",x:640,y:245,w:115,h:36,t:"Gjødsel til bonden"}],
+ f:[["M75 70 H105","gas","",0,0],["M75 185 H142 V170","gas","",0,0],["M180 112 H210","gas","",0,0],["M227 50 V22 H300","gas","CO₂ ut",252,18],["M244 117 H272","gas","",0,0],["M322 117 H355","gas","",0,0],["M415 120 H430 V150 H445","main","",0,0],["M475 115 V28 H297 V92","by","Ureagert gass tilbake",320,24],["M475 185 V240 H535","main","Flytende NH₃",482,236],["M565 210 V85","main","",0,0],["M630 60 H697 V110","main","",0,0],["M595 228 H620 V150 H650","main","",0,0],["M735 28 V110","waste","Fosfat, kalium",640,22],["M697 170 V245","main","",0,0]],
+ st:["gass","ref","co2","komp","reak","sep","nh3t","hno3","npk","ut"],
+ c:[{id:"T",l:"Reaktortemperatur",u:"°C",min:350,max:550,step:5,v:450},{id:"P",l:"Trykk",u:"bar",min:100,max:300,step:10,v:200}],
+ calc(v){const Ts=[300,400,500,600],tab=[[52.0,25.1,10.6,4.5],[62.8,36.3,17.6,8.3],[71.0,47.0,23.5,13.8]];
+  const atT=row=>{let i=Math.min(2,Math.floor((v.T-300)/100));const f=(v.T-Ts[i])/100;return row[i]+(row[i+1]-row[i])*f;};
+  const r=tab.map(atT),pi=v.P<=200?0:1,pf=(v.P-(pi?200:100))/100,yeq=r[pi]+(r[pi+1]-r[pi])*pf;
+  const kt=0.9*Math.exp(-14433*(1/(v.T+273)-1/723)),conv=yeq*(1-Math.exp(-kt)),comp=Math.log(v.P)/Math.log(200)*100;const n=[];
+  n.push("Le Chateliers prinsipp: Høyt trykk flytter likevekten mot NH₃ (færre gassmolekyler). Høy temperatur flytter den bort fra NH₃ (reaksjonen er eksoterm), men gjør at reaksjonen går fortere.");
+  if(v.T<420)n.push("Lav temperatur: Høyt likevektsutbytte, men reaksjonen går så sakte at lite rekker å reagere i reaktoren.");
+  if(v.T>510)n.push("Høy temperatur: Reaksjonen går raskt, men likevekten gir lite ammoniakk.");
+  if(v.P>250)n.push("Høyt trykk gir mer ammoniakk, men kompressoren bruker mer energi og utstyret må tåle mer.");
+  if(conv>=15&&v.P<=250)n.push("<good>Godt kompromiss mellom fart, utbytte og energi. Ekte anlegg kjører ofte på 400–500 °C og 100–250 bar.");
+  return{k:[["Likevektsutbytte",yeq.toFixed(0),"% NH₃"],["Utbytte per passering",conv.toFixed(1),"% NH₃",conv>=15?"ok":conv<8?"bad":""],["Reaksjonsfart",kt<1?kt.toFixed(2):kt.toFixed(1),"relativ"],["Kompressorenergi",comp.toFixed(0),"% av 200 bar"]],n,spd:0.4+conv/15,heat:(v.T-350)/200};}},
+
+bio:{n:"Bioraffineri",
+ u:[{id:"tom",s:"pile",x:10,y:125,w:70,h:50,l:"TØMMER",i:"Gran fra norsk skog. Treet består av cellulose (fiber), hemicellulose (sukker) og lignin (limet som holder fibrene sammen)."},
+    {id:"flis",s:"mill",x:108,y:122,w:56,h:56,l:"BARKING OG FLIS",i:"Barken tas av, og stokkene hugges til flis."},
+    {id:"kjel",s:"furn",el:false,x:105,y:240,w:70,h:60,l:"BIOKJEL",i:"Bark og andre rester brennes og gir damp til fabrikken. Slik blir også restene brukt."},
+    {id:"koker",s:"reactor",x:205,y:70,w:60,h:140,l:"KOKER",i:"Flisa kokes med kjemikalier under trykk. Ligninet løses opp og frigjør cellulosefibrene. Jo lenger og hardere kok, jo renere cellulose, men noe cellulose brytes også ned."},
+    {id:"sep",s:"sep",x:295,y:105,w:80,h:70,l:"VASKING/SEPARASJON",i:"Fibrene vaskes og skilles fra kokevæska, som inneholder lignin og sukker."},
+    {id:"blek",s:"box",x:430,y:30,w:95,h:50,l:"BLEKING OG TØRKING",i:"Cellulosen blekes, renses og tørkes. Laboratoriet måler renhet og viskositet mot kundens spesifikasjon."},
+    {id:"lign",s:"box",x:430,y:125,w:95,h:50,l:"LIGNINFABRIKK",i:"Ligninet foredles til bindemidler for betong, fôr og batterier, og en liten del til vanillin."},
+    {id:"gjar",s:"tank",x:430,y:220,w:60,h:60,l:"GJÆRING",i:"Sukkeret gjæres til etanol med gjær, som i ølbrygging, bare i stor skala."},
+    {id:"dest",s:"col",x:515,y:200,w:30,h:95,l:"DESTILLASJON",i:"Etanol skilles fra vann ved destillasjon."},
+    {id:"u1",s:"out",x:585,y:35,w:165,h:40,t:"Spesialcellulose"},
+    {id:"u2",s:"out",x:585,y:130,w:165,h:40,t:"Bindemidler, vanillin"},
+    {id:"u3",s:"out",x:585,y:228,w:165,h:40,t:"Bioetanol"}],
+ f:[["M80 150 H108","main","",0,0],["M136 178 V240","waste","Bark",142,215],["M175 270 H235 V210","cw","Damp",188,264],["M164 150 H205","main","Flis",170,142],["M265 140 H295","main","",0,0],["M375 125 H405 V55 H430","main","Fiber",380,118],["M375 145 H430","by","Lignin",385,140],["M375 162 H400 V250 H430","by","Sukker",404,200],["M525 55 H585","main","",0,0],["M525 150 H585","by","",0,0],["M490 250 H515","by","",0,0],["M545 248 H585","by","",0,0]],
+ st:["tom","flis","koker","sep","blek","lign","gjar","dest","kjel"],
+ c:[{id:"M",l:"Tømmer inn",u:"t tørrstoff/døgn",min:500,max:3000,step:100,v:1500},{id:"K",l:"Kokegrad",u:"1–10",min:1,max:10,step:1,v:7}],
+ calc(v){const y=48-0.8*v.K,pur=Math.min(99.9,86+1.4*v.K),cel=v.M*y/100,lig=v.M*(22+0.8*v.K)/100,eth=v.M*0.24*0.45/0.789;const n=[];
+  if(pur<95)n.push("Cellulosen er ikke ren nok til spesialcellulose (krav: minst 95 % renhet). Kok hardere eller lenger.");
+  if(v.K>8)n.push("Hardt kok gir svært ren cellulose, men mer av cellulosen brytes ned og går tapt.");
+  if(pur>=95&&v.K<=8)n.push("<good>Cellulosen holder spesifikasjonen, og utbyttet er godt.");
+  n.push("Nesten hele treet blir til produkter eller energi. Det er sirkulær tenkning i praksis.");
+  return{k:[["Spesialcellulose",Math.round(cel),"t/døgn"],["Renhet",pur.toFixed(1),"%",pur>=95?"ok":"bad"],["Lignin",Math.round(lig),"t/døgn"],["Bioetanol",Math.round(eth),"m³/døgn"]],n,spd:v.M/1500,heat:0.3+v.K/15,o:{u1:`Spesialcellulose ${Math.round(cel)} t`,u2:`Lignin ${Math.round(lig)} t`,u3:`Bioetanol ${Math.round(eth)} m³`}};}},
+
+olje:{n:"Olje og gass",
+ u:[{id:"tank",s:"tank",x:15,y:190,w:70,h:85,l:"RÅOLJETANK",i:"Råolje fra Nordsjøen. Den er en blanding av tusenvis av hydrokarboner med ulike kokepunkt."},
+    {id:"vv",s:"hx",x:110,y:205,w:50,h:50,l:"VARMEVEKSLER",i:"Kald råolje forvarmes med varme produkter. Det sparer mye energi."},
+    {id:"ovn",s:"furn",el:false,x:190,y:175,w:75,h:105,l:"OVN",i:"Råoljen varmes opp til rundt 350–370 °C, slik at det meste av den fordamper. Varmer du mer, begynner de tunge molekylene å krakke og lage koks i ovnsrørene."},
+    {id:"kol",s:"col",x:310,y:30,w:60,h:285,l:"DESTILLASJONSKOLONNE",i:"Dampen stiger opp gjennom bunnene i kolonnen og kjøles gradvis. Hver fraksjon kondenserer på den høyden der temperaturen passer med kokepunktet, og tappes ut fra siden. Det tunge som ikke fordamper, går ut i bunnen."},
+    {id:"kond",s:"hx",x:420,y:12,w:40,h:40,l:"KONDENSATOR",i:"Toppen kjøles ned. Det som ikke kondenserer, er gass (metan, etan, propan og butan)."},
+    {id:"u1",s:"out",x:600,y:20,w:150,h:34,t:"Gass"},
+    {id:"u2",s:"out",x:600,y:85,w:150,h:34,t:"Nafta og bensin"},
+    {id:"u3",s:"out",x:600,y:145,w:150,h:34,t:"Parafin og jetdrivstoff"},
+    {id:"u4",s:"out",x:600,y:205,w:150,h:34,t:"Diesel og gassolje"},
+    {id:"u5",s:"out",x:600,y:270,w:150,h:34,t:"Tung rest"}],
+ f:[["M85 230 H110","main","",0,0],["M160 230 H190","main","",0,0],["M265 228 H310","main","Damp og væske",268,220],["M340 30 V14 H420","gas","",0,0],["M460 32 H600 V37","gas","",0,0],["M370 102 H600","main","",0,0],["M370 162 H600","main","",0,0],["M370 222 H600","main","",0,0],["M340 315 V322 H560 V287 H600","waste","",0,0]],
+ st:["tank","vv","ovn","kol","kond","u2","u4","u5"],
+ c:[{id:"T",l:"Ovnstemperatur",u:"°C",min:320,max:400,step:5,v:360},{id:"H",l:"Råoljetype",u:"lett → tung",min:0,max:100,step:10,v:50}],
+ calc(v){const h=v.H/100,pts=[[0,3,1.5],[180,32,16],[240,45,26],[350,65,45],[400,72,53]].map(p=>[p[0],p[1]+(p[2]-p[1])*h]);
+  const cum=T=>{for(let i=1;i<pts.length;i++)if(T<=pts[i][0]){const a=pts[i-1],b=pts[i];return a[1]+(b[1]-a[1])*(T-a[0])/(b[0]-a[0]);}return pts[4][1];};
+  const gas=pts[0][1],naf=cum(180)-gas,par=cum(240)-cum(180),die=cum(v.T)-cum(240),res=100-cum(v.T);const n=[];
+  if(v.T>370)n.push("Over ca. 370 °C begynner tunge molekyler å krakke. Det danner koks i ovnsrørene, som må stoppes og rengjøres.");
+  if(v.T<345)n.push("Lav temperatur: Mye diesel blir ikke fordampet og havner i den tunge resten, som er mindre verdt.");
+  if(h>0.6)n.push("Tung råolje gir mer tung rest. Den må videre til vakuumdestillasjon eller krakking for å gi lettere produkter.");
+  if(v.T>=345&&v.T<=370)n.push("<good>Normal drift. Resten går videre til andre anlegg i raffineriet.");
+  const p=x=>x.toFixed(0)+" %";
+  return{k:[["Gass",p(gas),""],["Nafta og bensin",p(naf),""],["Diesel og gassolje",p(die),"",die>=22?"ok":""],["Tung rest",p(res),"",res>50?"bad":""]],n,spd:1,heat:(v.T-320)/80,o:{u1:`Gass ${p(gas)}`,u2:`Nafta/bensin ${p(naf)}`,u3:`Parafin/jet ${p(par)}`,u4:`Diesel ${p(die)}`,u5:`Tung rest ${p(res)}`}};}},
+
+si:{n:"Smelteverk",
+ u:[{id:"kv",s:"pile",x:10,y:30,w:65,h:42,l:"KVARTS",i:"Kvarts (SiO₂) er råstoffet for silisium. Den må være ren, for urenheter havner i produktet."},
+    {id:"ku",s:"pile",x:10,y:110,w:65,h:42,l:"KULL OG KOKS",i:"Fossilt karbon som reduksjonsmiddel. Karbonet tar oksygenet fra kvartsen og blir til CO, som brenner til CO₂."},
+    {id:"bio",s:"pile",x:10,y:190,w:65,h:42,l:"TREKULL OG FLIS",i:"Biokarbon erstatter en del av det fossile karbonet og kutter fossilt CO₂-utslipp."},
+    {id:"silo",s:"silo",x:105,y:70,w:55,h:100,l:"SILO OG VEKT",i:"Råvarene veies opp i riktig forhold før de chargeres i ovnen. Karbonbalansen styres herfra."},
+    {id:"ovn",s:"furn",x:200,y:150,w:140,h:115,l:"LYSBUEOVN",i:"Tre elektroder fører strøm ned i chargen. I lysbuene blir det over 1900 °C, og kvarts reduseres: SiO₂ + 2C → Si + 2CO. Operatørene styrer elektrodene og passer på karbonbalansen."},
+    {id:"vg",s:"hx",x:380,y:30,w:50,h:50,l:"VARMEGJENVINNING",i:"Den varme avgassen lager damp som driver en turbin. En stor del av energien som ellers ville gått opp i pipa, blir strøm."},
+    {id:"fil",s:"box",x:470,y:28,w:75,h:55,l:"FILTER",i:"Posefilter fanger det fine silikastøvet fra avgassen."},
+    {id:"u1",s:"out",x:590,y:38,w:160,h:36,t:"Mikrosilika til betong"},
+    {id:"ose",s:"box",x:385,y:195,w:95,h:55,l:"ØSE OG RAFFINERING",i:"Flytende silisium tappes i øser. Oksygen og slaggdannere fjerner urenheter som kalsium og aluminium."},
+    {id:"knus",s:"mill",x:510,y:192,w:60,h:60,l:"STØPING OG KNUSING",i:"Silisium støpes, størkner, knuses og siktes til kornstørrelsen kunden vil ha."},
+    {id:"u2",s:"out",x:600,y:205,w:150,h:36,t:"Silisium"}],
+ f:[["M75 55 H90 V100 H105","main","",0,0],["M75 132 H105","main","",0,0],["M75 212 H90 V150 H105","by","",0,0],["M160 105 H270 V150","main","Charge",178,98],["M300 150 V55 H380","gas","Avgass",306,110],["M430 55 H470","gas","",0,0],["M545 55 H590","by","",0,0],["M507 28 V8","gas","Renset avgass",515,12],["M405 80 V112 H480","cw","Damp → strøm",412,106],["M340 222 H385","main","Tapping",343,214],["M480 222 H510","main","",0,0],["M570 222 H600","main","",0,0]],
+ st:["kv","ku","bio","silo","ovn","vg","fil","ose","knus","u2"],
+ c:[{id:"C",l:"Karbonbalanse",u:"% av riktig",min:85,max:115,step:1,v:100},{id:"B",l:"Andel biokarbon",u:"%",min:0,max:100,step:5,v:20}],
+ calc(v){const d=v.C-100,y=Math.max(40,86-0.06*d*d-(d<0?0.4*-d:0)),ms=280+(d<0?15*-d:0),co2=4.7*(1-v.B/100),e=11.5+0.08*Math.abs(d);const n=[];
+  if(d<-4)n.push("For lite karbon: Mer SiO-gass slipper ut av ovnen. Utbyttet faller, og mer silisium havner som mikrosilika i filteret.");
+  if(d>4)n.push("For mye karbon: Silisiumkarbid (SiC) bygger seg opp, og ovnen gror igjen. Det kan ta dager å rette opp.");
+  if(v.B>60)n.push("Mye biokarbon kutter fossilt CO₂, men trekull er dyrere og oppfører seg annerledes i ovnen. Den kan bli vanskeligere å styre.");
+  if(Math.abs(d)<=4)n.push("<good>God karbonbalanse. Ovnen går jevnt.");
+  return{k:[["Silisiumutbytte",y.toFixed(0),"%",y>=82?"ok":y<75?"bad":""],["Mikrosilika",Math.round(ms),"kg/t Si"],["Fossilt CO₂",co2.toFixed(1),"t/t Si",co2<2.5?"ok":""],["Energibruk",e.toFixed(1),"kWh/kg Si"]],n,spd:0.6+y/200,heat:Math.abs(d)>8?0.6:0.95,o:{u1:`Mikrosilika ${Math.round(ms)} kg/t`}};}},
+
+berg:{n:"Bergverk",
+ u:[{id:"gruve",s:"pile",x:10,y:125,w:70,h:55,l:"GRUVE",i:"Jernmalmen sprenges ut under jorda eller i dagbrudd. Rana Grubers malm er stort sett hematitt (Fe₂O₃) med litt magnetitt (Fe₃O₄)."},
+    {id:"knus",s:"mill",x:105,y:125,w:55,h:55,l:"KNUSER",i:"Store steiner knuses ned til noen centimeter."},
+    {id:"molle",s:"mill",x:190,y:120,w:66,h:66,l:"MØLLE",i:"Malmen males våt i roterende møller. Målet er at jernmineralene skal løsne fra gråberget (frigjøring). Maling bruker mye strøm."},
+    {id:"spir",s:"sep",x:300,y:60,w:85,h:60,l:"SPIRALER",i:"Tunge hematittkorn synker og følger innerkanten av spiralen, mens lett gråberg skylles utover. Dette kalles gravimetrisk separasjon."},
+    {id:"mag",s:"sep",x:300,y:200,w:85,h:60,l:"MAGNETSEPARATOR",i:"Magnetitt er magnetisk og trekkes ut med magnetiske tromler."},
+    {id:"fort",s:"tank",x:440,y:55,w:70,h:70,l:"FORTYKKER/FILTER",i:"Vannet tas ut av konsentratet før det lagres og skipes."},
+    {id:"u1",s:"out",x:560,y:70,w:190,h:36,t:"Hematittkonsentrat"},
+    {id:"u2",s:"out",x:560,y:212,w:190,h:36,t:"Magnetitt"},
+    {id:"u3",s:"out",x:430,y:285,w:200,h:34,t:"Avgang til deponi"}],
+ f:[["M80 152 H105","main","",0,0],["M160 152 H190","main","",0,0],["M256 145 H280 V90 H300","main","",0,0],["M256 162 H280 V230 H300","main","",0,0],["M385 90 H440","main","",0,0],["M510 90 H560","main","",0,0],["M385 230 H560","by","",0,0],["M385 110 H405 V302 H430","waste","Gråberg",410,170],["M385 250 H405","waste","",0,0]],
+ st:["gruve","knus","molle","spir","mag","fort","u1","u3"],
+ c:[{id:"G",l:"Malefinhet (P80)",u:"µm",min:40,max:300,step:5,v:150},{id:"F",l:"Jern i malmen",u:"%",min:25,max:40,step:1,v:33}],
+ calc(v){const lib=1-Math.exp(-150/v.G),se=v.G<75?0.95-(75-v.G)*0.012:0.95,rec=lib*se,gr=Math.min(67,52+15*lib),e=120*(1/Math.sqrt(v.G)-0.01);
+  const fe=1000*v.F/100,conc=fe*rec/(gr/100),tail=1000-conc;const n=[];
+  if(v.G>200)n.push("Grov maling: Mange korn er fortsatt sammenvokst med gråberg. Mye jern går tapt i avgangen, og konsentratet blir urent.");
+  if(v.G<70)n.push("Svært fin maling: De minste partiklene er vanskelige å fange i spiralene og går tapt. Møllene bruker også mye mer strøm.");
+  if(gr<64)n.push("Kunden krever minst 64 % jern i konsentratet.");
+  if(v.G>=70&&v.G<=110&&gr>=64)n.push("<good>God balanse mellom frigjøring, utbytte og energi.");
+  return{k:[["Konsentrat",Math.round(conc),"t per 1000 t malm"],["Jern i konsentrat",gr.toFixed(1),"%",gr>=64?"ok":"bad"],["Jernutbytte",(rec*100).toFixed(0),"%",rec>=0.75?"ok":rec<0.55?"bad":""],["Malingsenergi",e.toFixed(1),"kWh/t"]],n,spd:1,heat:0,o:{u1:`Konsentrat ${Math.round(conc)} t (${gr.toFixed(0)} % Fe)`,u3:`Avgang ${Math.round(tail)} t`}};}}
+};
+let cur="alu",step=-1,vals={};
+const tabs=$("#pvTabs");
+Object.entries(P).forEach(([k,p])=>{const b=document.createElement("button");b.type="button";b.textContent=p.n;b.onclick=()=>load(k);tabs.append(b);});
+function load(k){cur=k;step=-1;const p=P[k];vals={};p.c.forEach(c=>vals[c.id]=c.v);
+  tabs.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.textContent===p.n));
+  let h=`<defs><marker id="pvah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#5D7B8A"/></marker></defs>`;
+  p.f.forEach(f=>{h+=`<path class="pp" d="${f[0]}" marker-end="url(#pvah)"/><path class="pf ${f[1]}" d="${f[0]}"/>`;});
+  p.u.forEach(u=>{
+    if(u.s==="out"){h+=`<g class="po" data-id="${u.id}"><rect x="${u.x}" y="${u.y}" width="${u.w}" height="${u.h}" rx="6"/><text x="${u.x+u.w/2}" y="${u.y+u.h/2+4}">${esc(u.t)}</text></g>`;return;}
+    h+=`<g class="pu" data-id="${u.id}" tabindex="0" role="button" aria-label="${esc(u.l)}">${D[u.s](u)}<text class="plbl" x="${u.x+u.w/2}" y="${u.y+u.h+13}">${u.l}</text></g>`;});
+  p.f.forEach(f=>{if(f[2])h+=`<text class="slbl" x="${f[3]}" y="${f[4]}">${esc(f[2])}</text>`;});
+  svg.innerHTML=h;
+  svg.querySelectorAll(".pu").forEach(g=>{const go=()=>{const i=p.st.indexOf(g.dataset.id);step=i;show(g.dataset.id);};g.onclick=go;g.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go();}};});
+  $("#pvCtrls").innerHTML=p.c.map(c=>`<div class="ctrl"><label for="pv_${c.id}">${c.l}<output id="pvo_${c.id}">${c.v} ${c.u}</output></label><input type="range" id="pv_${c.id}" min="${c.min}" max="${c.max}" step="${c.step}" value="${c.v}"><small><span>${c.min}</span><span>${c.max}</span></small></div>`).join("");
+  p.c.forEach(c=>{const r=$("#pv_"+c.id);r.oninput=()=>{vals[c.id]=+r.value;$("#pvo_"+c.id).textContent=`${(+r.value).toLocaleString("nb-NO")} ${c.u}`;run();};});
+  $("#pvInfo").innerHTML="<b>Utstyr</b>Trykk på et utstyr i tegningen, eller bruk pilene for å følge stoffet gjennom anlegget.";
+  stepTxt();run();}
+function show(id){const p=P[cur],u=p.u.find(x=>x.id===id);svg.querySelectorAll(".pu").forEach(g=>g.classList.toggle("on",g.dataset.id===id));
+  if(u&&u.i)$("#pvInfo").innerHTML=`<b>${esc(u.l.charAt(0)+u.l.slice(1).toLowerCase())}</b>${esc(u.i)}`;stepTxt();}
+function stepTxt(){const p=P[cur];const el=$("#pvStep");
+  if(step<0){el.innerHTML=`<b>FØLG STOFFET</b>Trykk ▶ for å gå gjennom ${p.n.toLowerCase()}prosessen steg for steg.`;return;}
+  const u=p.u.find(x=>x.id===p.st[step]);el.innerHTML=`<b>STEG ${step+1} AV ${p.st.length}</b>${esc(u.l?u.l.charAt(0)+u.l.slice(1).toLowerCase():u.t)}${u.i?": "+esc(u.i.split(". ")[0].replace(/\.$/,""))+".":""}`;}
+$("#pvNext").onclick=()=>{const p=P[cur];step=(step+1)%p.st.length;show(p.st[step]);};
+$("#pvPrev").onclick=()=>{const p=P[cur];step=step<=0?p.st.length-1:step-1;show(p.st[step]);};
+function run(){const p=P[cur],r=p.calc(vals);
+  svg.style.setProperty("--spd",Math.max(0.25,Math.min(2.5,r.spd)).toFixed(2));
+  const h=Math.max(0,Math.min(1,r.heat)),col=`rgb(${Math.round(120+135*h)},${Math.round(50+105*h)},${Math.round(20+40*h)})`;
+  svg.querySelectorAll(".glow").forEach(g=>{g.style.fill=col;g.style.opacity=(0.35+0.6*h).toFixed(2);});
+  $("#pvKpis").innerHTML=r.k.map(k=>`<div class="kpi ${k[3]||""}"><span>${esc(k[0])}</span><b>${esc(k[1])}<small>${esc(k[2])}</small></b></div>`).join("");
+  $("#pvNote").innerHTML=r.n.map(t=>t.startsWith("<good>")?`<p class="good">${esc(t.slice(6))}</p>`:`<p>${esc(t)}</p>`).join("");
+  if(r.o)Object.entries(r.o).forEach(([id,t])=>{const g=svg.querySelector(`.po[data-id="${id}"] text`);if(g)g.textContent=t;});}
+load("alu");
+return{load};
+})();
+
+/* ---------- Del 6: Finn sløsingen ---------- */
+const W7=["Transport","Lager","Bevegelse","Venting","Overprosessering","Overproduksjon","Feil og omarbeid"];
+const SL=[
+ ["Operatøren venter 20 minutter på analysesvaret før hun kan justere ovnen.",3,"Folk og utstyr som står og venter, er venting. Raskere prøveflyt i laben gir kortere ventetid."],
+ ["Fatene kjøres med truck fra lageret til fylleplassen og tilbake, fordi fyllestasjonen står i en annen hall.",0,"Unødvendig flytting av produkter er transport. Løsningen er ofte en bedre plassering."],
+ ["Laboranten går tre ganger til skapet i nabolaben for å hente pipettespisser.",2,"Skritt og leting for den som jobber, er bevegelse. 5S med fast plass nær arbeidsstedet hjelper."],
+ ["Det står 40 tonn mellomprodukt i tanker fordi neste trinn ikke tar unna.",1,"Mellomprodukt som står og venter, er lager. Det binder penger og skjuler problemer i prosessen."],
+ ["Produktet renses til 99,9 % selv om kunden bare krever 99,5 %.",4,"Å gjøre mer enn kunden betaler for, er overprosessering. Det koster energi og kapasitet."],
+ ["Anlegget kjører for fullt selv om ferdigvarelageret er fullt og kundene ikke trenger mer denne måneden.",5,"Å lage mer enn noen trenger, er overproduksjon. Mange regner det som den verste sløsingen, fordi den skaper flere av de andre."],
+ ["En prøve var feilmerket, så analysen må gjøres på nytt.",6,"Feil som må rettes, er feil og omarbeid. Strekkoder (poka-yoke) kan hindre forveksling."],
+ ["Rapporten skrives ut, signeres og skannes inn igjen, selv om alt også ligger digitalt.",4,"Ekstra steg som ikke gir kunden noe, er overprosessering."],
+ ["Et parti må blandes om fordi pH-verdien var utenfor spesifikasjonen.",6,"Omblanding er omarbeid. Rotårsaken bør finnes, så det ikke skjer igjen."]
+];
+function drawSort7(){const box=$("#sort7");box.innerHTML="";let done=0,ok=0;
+  shuffle(SL).forEach(([t,c,why])=>{const r=document.createElement("div");r.className="srow";r.innerHTML=`<p>${esc(t)}</p><div class="sbtns"></div><p class="why" hidden></p>`;
+    const bs=r.querySelector(".sbtns");W7.forEach((n,ci)=>{const b=document.createElement("button");b.type="button";b.textContent=n;b.onclick=()=>{
+      bs.querySelectorAll("button").forEach((x,xi)=>{x.disabled=true;if(xi===c)x.classList.add("right");});if(ci!==c)b.classList.add("wrong");
+      done++;if(ci===c)ok++;const w=r.querySelector(".why");w.hidden=false;w.textContent=why;
+      const res=$("#sort7Res");res.textContent=`${ok} av ${done} riktige`+(done===SL.length?" · ferdig":"");res.className="res "+(done===SL.length&&ok===done?"ok":"");};bs.append(b);});
+    box.append(r);});$("#sort7Res").textContent="";}
+drawSort7();$("#sort7Reset").onclick=drawSort7;
+
+/* ---------- Del 6: 5 hvorfor ---------- */
+const WHY=[
+ {q:"Hvorfor stoppet pumpa?",o:["Motoren ble for varm, og motorvernet løste ut","Operatøren slo den av ved en feil","Det var strømbrudd i hele fabrikken"],f:"Funn: Alarmloggen viser at motorvernet løste ut på høy temperatur. Ingen andre utstyr stoppet."},
+ {q:"Hvorfor ble motoren for varm?",o:["Lageret i pumpa var slitt og gikk tungt","Det var varmt i pumpehuset","Pumpa var for stor for jobben"],f:"Funn: Vedlikehold fant et skadet kulelager med lite fett. Pumpa gikk tungt og trakk mer strøm."},
+ {q:"Hvorfor var lageret slitt?",o:["Det hadde ikke fått smøring på over et år","Det var av feil merke","Pumpa var helt ny"],f:"Funn: Smøreloggen viser ingen smøring siden pumpa ble byttet for 14 måneder siden."},
+ {q:"Hvorfor ble det ikke smurt?",o:["Den nye pumpa ble aldri lagt inn i vedlikeholdssystemet, så den kom ikke med på smørerunden","Smøreren var syk den uka","Ingen syntes det var viktig"],f:"Funn: Den gamle pumpa ble slettet fra systemet, men den nye ble aldri registrert."},
+ {q:"Hvorfor ble den nye pumpa ikke registrert?",o:["Det finnes ingen rutine som sier at utstyr skal registreres når det byttes","Datasystemet var nede","Det var lærlingens feil"],f:"Rotårsak: Det mangler en rutine for endringer. Tiltaket er en sjekkliste ved bytte av utstyr (standardisering), ikke bare å smøre pumpa eller finne en syndebukk."}
+];
+function drawWhy(){const box=$("#why5");box.innerHTML="";addWhy(0);}
+function addWhy(i){const w=WHY[i],box=$("#why5"),d=document.createElement("div");d.className="wlev";
+  d.innerHTML=`<p class="wq"><small>HVORFOR ${i+1}</small>${esc(w.q)}</p><div class="opts"></div><p class="fb" hidden></p>`;
+  const opts=d.querySelector(".opts"),fb=d.querySelector(".fb");
+  shuffle(w.o.map((o,j)=>j)).forEach(j=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=w.o[j];b.style.setProperty("--c","var(--t-int)");
+    b.onclick=()=>{if(j===0){opts.querySelectorAll("button").forEach(x=>x.disabled=true);b.classList.add("right");fb.hidden=false;fb.className="wfound";fb.textContent=w.f;if(i<WHY.length-1)addWhy(i+1);else{const e=document.createElement("p");e.className="fb";e.innerHTML="<b>Ferdig.</b>Legg merke til at det første svaret (motoren ble varm) bare var et symptom. Hadde dere stoppet der, ville dere byttet motor, og det samme ville skjedd igjen med neste pumpe som blir byttet.";box.append(e);}}
+    else{b.classList.add("wrong");b.disabled=true;fb.hidden=false;fb.className="fb";fb.textContent="Det stemmer ikke med det dere fant i undersøkelsen. Prøv et annet svar.";}};opts.append(b);});
+  box.append(d);}
+drawWhy();$("#why5Reset").onclick=drawWhy;
+
+/* ---------- Del 6: OEE ---------- */
+const OEEf={A:22/24*100,P:190/(22*10)*100,Q:180.5/190*100};OEEf.O=OEEf.A*OEEf.P*OEEf.Q/10000;
+$("#oeeCheck").onclick=()=>{let ok=0;$$("[data-oee]").forEach(i=>{const v=parseFloat(i.value.replace(",","."));const g=Math.abs(v-OEEf[i.dataset.oee])<=0.6;i.classList.toggle("ok",g);i.classList.toggle("bad",!g);if(g)ok++;});
+  const r=$("#oeeRes");r.textContent=`${ok} av 4 riktige`;r.className="res "+(ok===4?"ok":"bad");};
+$("#oeeShow").onclick=()=>{const f=$("#oeeFb");f.hidden=false;const p=x=>x.toFixed(1).replace(".",",");
+  f.innerHTML=`<b>Løsning</b>Tilgjengelighet = driftstid / planlagt tid = 22 / 24 = ${p(OEEf.A)} %<br>Ytelse = produsert / (driftstid × kapasitet) = 190 / (22 × 10) = ${p(OEEf.P)} %<br>Kvalitet = godkjent / produsert = 180,5 / 190 = ${p(OEEf.Q)} %<br>OEE = ${p(OEEf.A)} % × ${p(OEEf.P)} % × ${p(OEEf.Q)} % = <b style="display:inline">${p(OEEf.O)} %</b><br>Størst tap ligger i ytelsen. Det er lurt å finne ut hvorfor ovnen går under full kapasitet.`;};
+
+/* ---------- Del 6: Lean-spillet ---------- */
+const LG=(function(){
+const CH=[
+ {id:"s5",n:"5S på alle arbeidsstasjoner",d:"Rydd, merk og gi alt utstyr fast plass. Fjerner 3 minutter leting før hver batch.",t:"5S"},
+ {id:"smed",n:"Hurtigomstilling på instrumentet",d:"Forbered kalibrering og standarder mens forrige batch går. Omstillingen går fra 25 til 6 minutter.",t:"SMED"},
+ {id:"sop",n:"Standardisert arbeid i forbehandlingen",d:"Felles SOP med bilder og opplæring av alle. Færre feil ved veiing og fortynning.",t:"Standardisering"},
+ {id:"strek",n:"Strekkode på prøveglassene",d:"Prøvene skannes i stedet for å skrives inn for hånd. Raskere mottak og nesten ingen forvekslinger.",t:"Poka-yoke"},
+ {id:"layout",n:"Ny plassering av stasjonene",d:"Flytt stasjonene så prøvene går korteste vei. Transport mellom stasjoner går fra 5 til 1 minutt.",t:"Mindre transport"},
+ {id:"B",n:"Endre batchstørrelse",d:"Hvor mange prøver som samles før de flyttes og kjøres sammen. I dag: 10.",t:"Flyt"}];
+const NAMES=["Mottak og registrering","Forbehandling","Analyse (instrument)","Godkjenning og svar"];
+const ROUNDS=8,GOAL_DONE=70,GOAL_LT=60;
+let p={B:10},hist=[],round=0,pending=null,anim=null;
+function rng(seed){return()=>{seed=(seed*1664525+1013904223)%4294967296;return seed/4294967296;};}
+function makeSim(q){const R=rng(12345),ARR=6,SHIFT=480,TO=30;
+  const st=[{per:q.strek?1:2,setup:0},{per:4,setup:4},{per:3,setup:q.smed?6:25},{per:2,setup:0}];
+  const search=q.s5?0:3,tr=q.layout?1:5,eReg=q.strek?0.005:0.04,ePrep=q.sop?0.015:0.06;
+  st.forEach(s=>{s.q=[];s.busy=0;s.tot=0;s.batch=null;s.work=0;});
+  const S={t:0,st,moving:[],samples:[],done:[],wipSum:0,rework:0,next:0,end:SHIFT,tr};
+  S.tick=function(){const t=S.t;
+    if(t>=S.next&&t<SHIFT){const R1=R(),R2=R();const x={t0:t,err:R1<eReg||R2<ePrep,re:false,wait:t};S.samples.push(x);st[0].q.push(x);S.next+=ARR;}
+    for(let i=S.moving.length-1;i>=0;i--){const m=S.moving[i];if(m.at<=t){S.moving.splice(i,1);m.items.forEach(x=>x.wait=t);st[m.to].q.push(...m.items);}}
+    st.forEach((s,i)=>{
+      if(s.busy>0){s.busy--;s.work++;if(s.busy===0){const b=s.batch;s.batch=null;
+        if(i===3){b.forEach(x=>{if(x.err&&!x.re){x.re=true;x.err=false;S.rework++;S.moving.push({from:3,to:1,at:t+tr,dep:t,items:[x],back:true});}else{x.t1=t;S.done.push(x);}});}
+        else S.moving.push({from:i,to:i+1,at:t+tr,dep:t,items:b});}}
+      if(s.busy===0&&s.q.length){const old=t-Math.min(...s.q.map(x=>x.wait));
+        if(s.q.length>=q.B||old>=TO){const b=s.q.splice(0,q.B);s.batch=b;s.busy=s.tot=s.setup+search+b.length*s.per;}}});
+    S.wipSum+=S.samples.length-S.done.length;S.t++;};
+  S.result=function(){const lt=S.done.map(x=>x.t1-x.t0);return{done:S.done.length,lt:lt.length?Math.round(lt.reduce((a,b)=>a+b,0)/lt.length):0,max:lt.length?Math.max(...lt):0,wip:Math.round(S.wipSum/SHIFT),re:S.rework,util:st.map(s=>Math.round(s.work/SHIFT*100))};};
+  return S;}
+/* Tegning */
+const svg=$("#lgSvg"),X=[22,177,332,487],SW=130,SY=70,SH=80;
+function drawFloor(S,neck){let h=`<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#5D7B8A"/></marker></defs>`;
+  h+=`<text x="4" y="20">FRA ANLEGGET →</text><text x="636" y="20" text-anchor="end">→ SVAR TIL KONTROLLROMMET</text>`;
+  for(let i=0;i<3;i++)h+=`<path class="arr" d="M${X[i]+SW+2} ${SY+SH/2}H${X[i+1]-4}"/>`;
+  h+=`<path class="arr" d="M${X[3]+SW/2} ${SY+SH+2}V${SY+SH+40}H${X[1]+SW/2}V${SY+SH+6}" style="stroke-dasharray:4 4"/><text x="${(X[1]+X[3])/2+SW/2}" y="${SY+SH+54}" text-anchor="middle">OMARBEID: FEIL OPPDAGET VED GODKJENNING</text>`;
+  NAMES.forEach((n,i)=>{const s=S?S.st[i]:null;const x=X[i];
+    h+=`<rect class="stn${neck===i?" neck":""}" x="${x}" y="${SY}" width="${SW}" height="${SH}" rx="8"/><text class="sname" x="${x+8}" y="${SY+20}">${n.split(" (")[0]}</text>`;
+    const nq=s?s.q.length:0;h+=`<text x="${x}" y="${SY-30}">KØ: ${nq}</text>`;
+    for(let k=0;k<Math.min(nq,14);k++)h+=`<circle class="dot${s.q[k].err?" err":""}" cx="${x+6+(k%7)*10}" cy="${SY-18-Math.floor(k/7)*9}" r="3.6"/>`;
+    if(nq>14)h+=`<text x="${x+76}" y="${SY-14}">+${nq-14}</text>`;
+    const nb=s&&s.batch?s.batch.length:0;for(let k=0;k<Math.min(nb,10);k++)h+=`<circle class="dot" cx="${x+12+k*11}" cy="${SY+42}" r="4"/>`;
+    const fr=s&&s.batch?1-s.busy/s.tot:0;h+=`<rect class="pbar" x="${x+8}" y="${SY+SH-16}" width="${SW-16}" height="6" rx="3"/><rect class="pfill" x="${x+8}" y="${SY+SH-16}" width="${(SW-16)*fr}" height="6" rx="3"/>`;
+    if(s&&s.batch&&s.busy>s.tot-s.setup&&s.setup>0)h+=`<text x="${x+SW-8}" y="${SY+20}" text-anchor="end" style="fill:#F08A4B">OMSTILLING</text>`;});
+  if(S)S.moving.forEach(m=>{const f=Math.min(1,(S.t-m.dep)/Math.max(1,m.at-m.dep));
+    if(m.back){const pts=[[X[3]+SW/2,SY+SH+40],[X[1]+SW/2,SY+SH+40]];const xx=pts[0][0]+(pts[1][0]-pts[0][0])*f;h+=`<circle class="dot err" cx="${xx}" cy="${SY+SH+40}" r="4"/>`;}
+    else{const x0=X[m.from]+SW+4,x1=X[m.to]-6,xx=x0+(x1-x0)*f;m.items.slice(0,8).forEach((it,k)=>{h+=`<circle class="dot" cx="${xx}" cy="${SY+SH/2-14+k*4}" r="3"/>`;});}});
+  svg.innerHTML=h;
+  if(S){const t=Math.min(S.t,480),hh=7+Math.floor(t/60),mm=t%60;$("#lgClock").textContent=`${String(hh).padStart(2,"0")}:${String(mm).padStart(2,"0")}`;$("#lgDone").textContent=S.done.length;$("#lgWip").textContent=S.samples.length-S.done.length;$("#lgRe").textContent=S.rework;}}
+/* Planpanel */
+function desc(q){const a=[];if(q.s5)a.push("5S");if(q.smed)a.push("SMED");if(q.sop)a.push("SOP");if(q.strek)a.push("strekkode");if(q.layout)a.push("layout");a.push("batch "+q.B);return a.join(" · ");}
+function plan(){const pl=$("#lgPlan");
+  if(round===0){pl.innerHTML=`<h4>Start</h4><p style="font-size:.93rem">Kjør først et skift slik laben jobber i dag. Se hvor prøvene hoper seg opp. Hvor er flaskehalsen?</p><button class="btn" id="lgRun" style="--c:var(--t-sim)">Kjør dagens situasjon</button>`;$("#lgRun").onclick=()=>go(null);return;}
+  if(pending){const r=pending.res,prev=std(hist.length-1).res;const better=(r.done>prev.done)||(r.lt<prev.lt);
+    pl.innerHTML=`<h4>Act · runde ${round}</h4><p style="font-size:.93rem"><b>${esc(pending.label)}</b><br>Ferdige: ${prev.done} → ${r.done}. Ledetid: ${prev.lt} → ${r.lt} min. Du trodde ledetiden ville ${pending.hyp}.</p><p style="font-size:.93rem">${better?"Resultatet ble bedre. Vil du gjøre dette til ny standard?":"Resultatet ble ikke bedre. Vil du likevel beholde endringen?"}</p><div class="row"><button class="btn" id="lgKeep" style="--c:var(--t-sim)">Behold (ny standard)</button><button class="btn ghost" id="lgUndo" style="--c:var(--t-sim)">Angre</button></div>`;
+    $("#lgKeep").onclick=()=>act(true);$("#lgUndo").onclick=()=>act(false);return;}
+  if(round>ROUNDS){pl.innerHTML=`<h4>Spillet er over</h4><button class="btn" id="lgNew" style="--c:var(--t-sim)">Spill på nytt</button>`;$("#lgNew").onclick=reset;return;}
+  pl.innerHTML=`<h4>Plan · runde ${round} av ${ROUNDS}</h4><p style="font-size:.86rem;color:var(--muted)">Standard nå: ${desc(p)}</p>`+
+   CH.map(c=>{const used=c.id!=="B"&&p[c.id];return `<label class="chg${used?" used":""}" style="--c:var(--t-sim);--cs:var(--t-sims)"><input type="radio" name="lgc" value="${c.id}" ${used?"disabled":""}><span><b>${esc(c.n)}${used?" ✓":""}</b><small>${esc(c.id==="B"?c.d.replace("I dag: 10",`Nå: ${p.B}`):c.d)}</small><em>${esc(c.t)}</em>${c.id==="B"?` <select id="lgB" aria-label="Ny batchstørrelse" style="width:auto;margin-top:6px">${[1,2,3,4,5,6,8,10].map(n=>`<option ${n===p.B?"selected":""}>${n}</option>`).join("")}</select>`:""}</span></label>`;}).join("")+
+   `<label class="ctrl" style="font-weight:700;font-size:.9rem">Hypotese: Jeg tror ledetiden vil …<select id="lgHyp"><option>gå ned</option><option>gå opp</option><option>være omtrent lik</option></select></label><button class="btn" id="lgRun" style="--c:var(--t-sim)">Kjør skiftet (Do)</button>`;
+  $("#lgRun").onclick=()=>{const c=pl.querySelector("input[name=lgc]:checked");if(!c){c||alertMsg("Velg én endring først.");return;}
+    const q={...p};let label;if(c.value==="B"){const nb=+$("#lgB").value;if(nb===p.B){alertMsg("Velg en annen batchstørrelse enn den du har.");return;}q.B=nb;label=`Batch ${p.B} → ${nb}`;}else{q[c.value]=1;label=CH.find(x=>x.id===c.value).n;}
+    go({q,label,hyp:$("#lgHyp").value});};}
+function alertMsg(t){$("#lgMsg").innerHTML=`<div class="lgmsg">${esc(t)}</div>`;}
+function go(ch){$("#lgMsg").innerHTML="";const q=ch?ch.q:p;const S=makeSim(q);$("#lgPlan").querySelectorAll("button,input,select").forEach(e=>e.disabled=true);
+  const fin=()=>{const res=S.result();const neck=res.util.indexOf(Math.max(...res.util));drawFloor(S,neck);
+    hist.push({round,label:ch?ch.label:"Dagens situasjon",res,q,neck});if(ch)pending={...ch,res};round++;table();if(!ch){plan();msgAfter(res,neck);}else plan();};
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches){while(S.t<S.end)S.tick();fin();return;}
+  cancelAnimationFrame(anim);const loop=()=>{for(let k=0;k<3&&S.t<S.end;k++)S.tick();drawFloor(S);if(S.t<S.end)anim=requestAnimationFrame(loop);else fin();};loop();}
+function act(keep){const h=hist[hist.length-1];h.dec=keep?"Beholdt":"Angret";if(keep)p={...pending.q};pending=null;table();
+  const r=h.res;if(keep&&r.done>=GOAL_DONE&&r.lt<=GOAL_LT){win(r);return;}
+  if(round>ROUNDS){$("#lgMsg").innerHTML=`<div class="lgmsg"><b>Rundene er brukt opp.</b>${debrief()}</div>`;}
+  else msgAfter(r,h.neck);plan();}
+function msgAfter(r,neck){$("#lgMsg").innerHTML=`<div class="lgmsg"><span><b>Check:</b> ${r.done} av 80 prøver ferdige, snitt ledetid ${r.lt} min (mål: ${GOAL_DONE} og ${GOAL_LT} min). Flaskehalsen er <b>${NAMES[neck].toLowerCase()}</b> (${r.util[neck]} % opptatt).</span></div>`;}
+function win(r){round=ROUNDS+1;$("#lgMsg").innerHTML=`<div class="lgmsg win"><b>Målet er nådd på ${hist.length-1} runder!</b><span>${r.done} prøver ferdige og ${r.lt} minutter i snitt. Kontrollrommet får svar mens prosessen fortsatt kan justeres.</span>${debrief()}</div>`;plan();}
+function debrief(){return `<span><b>Det viktigste å ta med seg:</b></span><ul style="margin:0;padding-left:20px;display:grid;gap:4px"><li>Store batcher gir lang ventetid, selv om alle jobber hardt.</li><li>Hurtigomstilling (SMED) er nøkkelen som gjør små batcher mulig. Batch på 1 fungerer ikke før omstillingen er nesten null.</li><li>Når én flaskehals er løst, flytter den seg til neste stasjon.</li><li>Feil gir omarbeid som stjeler kapasitet fra flaskehalsen. Standardisering og feilsikring betaler seg.</li><li>Én endring om gangen, med hypotese og måling, er PDCA. Da vet du hva som virket.</li></ul>`;}
+function std(i){for(let j=i-1;j>=0;j--)if(hist[j].dec!=="Angret")return hist[j];return hist[0];}
+function table(){const tb=$("#lgTable tbody");tb.innerHTML=hist.map((h,i)=>{const pr=i?std(i).res:null;const cls=(a,b,low)=>!pr?"":(a===b?"":((low?a<b:a>b)?"up":"dn"));
+  return `<tr><td class="n">${h.round}</td><td>${esc(h.label)}</td><td class="n ${cls(h.res.done,pr&&pr.done)}">${h.res.done}</td><td class="n ${cls(h.res.lt,pr&&pr.lt,1)}">${h.res.lt} min</td><td class="n">${h.res.max} min</td><td class="n">${h.res.wip}</td><td class="n">${h.res.re}</td><td>${h.dec||(i===0?"Utgangspunkt":"–")}</td></tr>`;}).join("");}
+function reset(){p={B:10};hist=[];round=0;pending=null;$("#lgMsg").innerHTML="";table();drawFloor(null);$("#lgClock").textContent="07:00";["#lgDone","#lgWip","#lgRe"].forEach(s=>$(s).textContent="0");plan();}
+reset();
+})();
+
+/* ---------- Arbeidsark ---------- */
+$$("[data-sheet]").forEach(sh=>{const key="bransje-"+sh.dataset.sheet,data=store.get(key)||{},st=sh.querySelector(".saved");
+  sh.querySelectorAll("[data-k]").forEach(f=>{f.value=data[f.dataset.k]||"";f.addEventListener("input",()=>{data[f.dataset.k]=f.value;st.textContent=store.set(key,data)?"Lagret i nettleseren":"Kunne ikke lagre. Kopier svarene før du går.";});});
+  sh.querySelector("[data-copy]").onclick=()=>{
+    const txt=[...sh.querySelectorAll("label")].map(l=>{const f=l.querySelector("[data-k]");return l.firstChild.textContent.trim()+"\n"+(f.value||"–");}).join("\n\n");
+    const done=()=>{st.textContent="Kopiert. Lim inn i innleveringen.";};
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(done,()=>fallback(txt,done));else fallback(txt,done);};
+});
+function fallback(t,cb){const a=document.createElement("textarea");a.value=t;document.body.append(a);a.select();try{document.execCommand("copy");cb();}catch(e){}a.remove();}
+
+/* ---------- Aktiv del i navigasjonen ---------- */
+const links=$$("#dnav a"),secs=links.map(a=>document.getElementById(a.getAttribute("href").slice(1)));
+if("IntersectionObserver" in window){const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle("on",l.getAttribute("href")==="#"+e.target.id));const on=links.find(l=>l.classList.contains("on")),nav=$("#dnav");if(on)nav.scrollLeft=on.offsetLeft-nav.clientWidth/2+on.offsetWidth/2;}});},{rootMargin:"-40% 0px -55% 0px"});secs.forEach(s=>s&&io.observe(s));}
+})();
+</script>
+</body>
+</html>

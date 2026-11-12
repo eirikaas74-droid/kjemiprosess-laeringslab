@@ -284,6 +284,7 @@ const I=p=>`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-wi
 const TEMAER={
   ps:{n:"Prosessikkerhet",live:true,u:"prosessikkerhet/",c:"var(--a1)",cs:"var(--a1s)",i:I('<path d="M32 6 52 14v16c0 13-9 22-20 28C21 52 12 43 12 30V14z"/><path d="M32 22c4 5 7 8 7 13a7 7 0 0 1-14 0c0-3 2-5 3-7 1 3 2 4 4 4-1-4 0-7 0-10z"/>')},
   vaeske:{n:"Væske i prosessindustrien",live:true,u:"vaeske/",c:"var(--a2)",cs:"var(--a2s)",i:I('<path d="M32 6C24 18 14 28 14 40a18 18 0 0 0 36 0C50 28 40 18 32 6z"/><path d="M24 42a8 8 0 0 0 8 8"/>')},
+  bransje:{n:"Bransjelære",live:true,u:"bransjelaere/",c:"var(--a3)",cs:"var(--a3s)",i:I('<path d="M6 56V30l14 8V30l14 8V30l14 8V14h10v42z"/><path d="M14 48h6M28 48h6M42 48h6"/><path d="M50 14V8h6v6"/>')},
   utstyr:{n:"Prosessutstyr og enhetsoperasjoner",c:"var(--a2)",cs:"var(--a2s)",i:I('<circle cx="28" cy="34" r="16"/><path d="M28 18v-8h26M44 34h14"/><path d="M28 24l9 15H19z"/>')},
   reg:{n:"Måling og regulering",c:"var(--a2)",cs:"var(--a2s)",i:I('<path d="M10 44a22 22 0 1 1 44 0"/><path d="M32 44 44 26"/><circle cx="32" cy="44" r="4"/>')},
   pid:{n:"Flytskjema og P&ID",c:"var(--a2)",cs:"var(--a2s)",i:I('<rect x="6" y="20" width="14" height="28" rx="6"/><circle cx="34" cy="40" r="7"/><rect x="46" y="10" width="12" height="44" rx="6"/><path d="M20 40h7M41 40h5"/>')},
@@ -292,7 +293,7 @@ const TEMAER={
   miljo:{n:"Miljø og bærekraft",c:"var(--a1)",cs:"var(--a1s)",i:I('<path d="M12 52C12 26 28 10 54 10c0 26-16 42-42 42z"/><path d="M12 52 38 26"/>')}
 };
 /* Ressurser og aktiviteter. Nye legges til her. */
-const P="prosessikkerhet/#", V="vaeske/";
+const P="prosessikkerhet/#", V="vaeske/", B="bransjelaere/#";
 const RES=[
   {t:"Hva er prosessikkerhet?",ty:"fag",tema:"ps",ar:["prod"],u:P+"m1",d:"Forskjellen på personsikkerhet og prosessikkerhet, tap av inneslutning og hvem som passer på.",x:["Med quiz"]},
   {t:"Farlige stoffer og CLP-merking",ty:"fag",tema:"ps",ar:["prod","ana"],u:P+"m2",d:"Farepiktogrammer, sikkerhetsdatablad (SDS) og tiltakshierarkiet.",x:["Med quiz"]},
@@ -362,7 +363,41 @@ const RES=[
   {t:"Oppgaver: strømning i rør",ty:"test",tema:"vaeske",ar:["tek"],u:V+"uke3.html#oppgaver",d:"Flervalg og regneoppgaver om volumstrøm, kontinuitet og Reynolds tall, med fasit.",x:["Med regneoppgaver"]},
   {t:"Oppgaver: trykktap og energi",ty:"test",tema:"vaeske",ar:["tek"],u:V+"uke4.html#oppgaver",d:"Flervalg og regneoppgaver om Bernoulli og trykktap, med fasit.",x:["Med regneoppgaver"]},
   {t:"Oppgaver: pumper",ty:"test",tema:"vaeske",ar:["tek"],u:V+"uke5.html#oppgaver",d:"Flervalg og regneoppgaver om pumpekurver, arbeidspunkt og NPSH, med fasit.",x:["Med regneoppgaver"]},
-  {t:"Oppgaver: måling og styring",ty:"test",tema:"vaeske",ar:["tek"],u:V+"uke6.html#oppgaver",d:"Flervalg og regneoppgaver om målere og regulering, med fasit.",x:["Med regneoppgaver"]}
+  {t:"Oppgaver: måling og styring",ty:"test",tema:"vaeske",ar:["tek"],u:V+"uke6.html#oppgaver",d:"Flervalg og regneoppgaver om målere og regulering, med fasit.",x:["Med regneoppgaver"]},
+
+  /* ---- Bransjelære ---- */
+  {t:"Prosessindustrien i Norge",ty:"fag",tema:"bransje",ar:["prod"],u:B+"d1",d:"Hva prosessindustri er, bransjene, hvorfor verkene ligger der de ligger, og hvor mange som jobber der.",x:["Del 1","Med quiz"]},
+  {t:"Fra råvare til produkt",ty:"fag",tema:"bransje",ar:["tek","prod"],u:B+"d2",d:"Verdikjeder og verdiskaping med aluminium, mineralgjødsel, bioraffineri, olje og gass, smelteverk og bergverk som eksempler.",x:["Del 2","Med quiz"]},
+  {t:"Yrker og veien videre",ty:"fag",tema:"bransje",ar:["prod","ana"],u:B+"d3",d:"Fra lærling til fagoperatør eller faglaborant, en vakt på verket, og fagskole eller ingeniør etterpå.",x:["Del 3"]},
+  {t:"Arbeidslivet: rettigheter og plikter",ty:"fag",tema:"bransje",ar:["ana","prod"],u:B+"d4",d:"Den norske modellen, tariffavtaler, arbeidsmiljøloven, verneombud, skiftarbeid og et inkluderende yrkesfellesskap.",x:["Del 4"]},
+  {t:"Kontinuerlig forbedring med lean",ty:"fag",tema:"bransje",ar:["prod","ana"],u:B+"d6",d:"De sju sløsingene, 5S, standardisert arbeid, PDCA, 5 hvorfor, hurtigomstilling og OEE.",x:["Del 6","Med quiz"]},
+  {t:"Bransjen i omstilling",ty:"fag",tema:"bransje",ar:["tek"],u:B+"d5",d:"Prosessutslipp, karbonfangst i Brevik, biokarbon, hydrogen og hva digitalisering betyr for operatøren.",x:["Del 5","Med quiz"]},
+
+  {t:"Prosessviseren",ty:"sim",tema:"bransje",ar:["tek","prod"],u:B+"d2/prosessviser",d:"Animerte flytskjemaer for aluminium, gjødsel, bioraffineri, olje og gass, smelteverk og bergverk. Endre driftsverdier og se hva som skjer."},
+  {t:"Lean-spillet: prøveflyten i kvalitetslaben",ty:"sim",tema:"bransje",ar:["prod","ana"],u:B+"d6/spill",d:"Åtte PDCA-runder: Velg forbedringer, kjør skiftet og få flere prøver ferdig på kortere tid."},
+  {t:"Kutt utslippene på Fjordvik Smelteverk",ty:"sim",tema:"bransje",ar:["tek"],u:B+"d5/tiltak",d:"Velg klimatiltak for et smelteverk. Nå målet om halverte utslipp innenfor budsjettet, og hør hva driften og tillitsvalgte sier."},
+
+  {t:"Hvem lager hva?",ty:"int",tema:"bransje",ar:["prod"],u:B+"d1/bedrifter",d:"Koble åtte norske prosessbedrifter til produktene de lager."},
+  {t:"Bygg verdikjeden",ty:"int",tema:"bransje",ar:["tek","prod"],u:B+"d2/verdikjede",d:"Sett stegene i riktig rekkefølge fra råvare til kunde for aluminium, gjødsel og bioraffineri."},
+  {t:"Hvem tar jobben?",ty:"int",tema:"bransje",ar:["prod"],u:B+"d3/hvem",d:"Situasjoner fra et skift: Er det kontrollromsoperatøren, feltoperatøren, laboranten eller skiftlederen som tar oppgaven?"},
+  {t:"Rett eller plikt, og hvem sin?",ty:"int",tema:"bransje",ar:["ana"],u:B+"d4/rett-plikt",d:"Sorter utsagn om arbeidslivet: arbeidsgiverens plikt, arbeidstakerens plikt eller arbeidstakerens rett."},
+  {t:"Hva gjør du som lærling?",ty:"int",tema:"bransje",ar:["ana","prod"],u:B+"d4/scenario",d:"Verneombud som stanser arbeid, trakassering i garderoben, nattevakt som 17-åring. Velg, og få vite hvorfor."},
+
+  {t:"Finn sløsingen",ty:"int",tema:"bransje",ar:["prod","ana"],u:B+"d6/slosing",d:"Sorter eksempler fra anlegg og lab i de sju sløsingene."},
+  {t:"5 hvorfor: pumpa som stoppet",ty:"int",tema:"bransje",ar:["prod","ana"],u:B+"d6/hvorfor",d:"Spør hvorfor til du finner rotårsaken bak et produksjonsstopp."},
+
+  {t:"Regn ut OEE for ovn 2",ty:"opp",tema:"bransje",ar:["prod"],u:B+"d6/oee",d:"Regn ut tilgjengelighet, ytelse, kvalitet og OEE fra et døgn på et smelteverk.",x:["Med løsning"]},
+  {t:"Bedriftsprofil",ty:"opp",tema:"bransje",ar:["prod"],u:B+"d1/bedriftsprofil",d:"Arbeidsark: undersøk en prosessbedrift eller et laboratorium nær deg, fra råvarer til lærlinger og miljø.",x:["Arbeidsark"]},
+  {t:"Min vei videre",ty:"opp",tema:"bransje",ar:["ana"],u:B+"d3/min-vei",d:"Vurder egen utvikling og legg en plan for læreplass.",x:["Refleksjon"]},
+
+  {t:"Forklar for hverandre: verdikjeden",ty:"grp",tema:"bransje",ar:["tek"],u:B+"d2/forklar",d:"Begrepskort om verdikjede, foredling, verdiskaping og sirkulær økonomi.",x:["Par"]},
+  {t:"Intervju en fagarbeider",ty:"grp",tema:"bransje",ar:["prod","ana"],u:B+"d3/intervju",d:"Intervjuguide og presentasjon: Hvordan er hverdagen til en fagoperatør eller faglaborant?",x:["2–3 elever"]},
+  {t:"Spilleregler for et inkluderende skiftlag",ty:"grp",tema:"bransje",ar:["ana"],u:B+"d4/skiftlaget",d:"Lag konkrete regler for å ta imot nye lærlinger, og koble dem til arbeidsgiverens plikter.",x:["3–4 elever"]},
+  {t:"Rollespill: Hva skal verket gjøre?",ty:"grp",tema:"bransje",ar:["tek","prod"],u:B+"d5/debatt",d:"Driftssjef, tillitsvalgt, miljøorganisasjon, ordfører og ung operatør drøfter klimatiltak.",x:["Hele klassen"]},
+
+  {t:"5S-runde på laben eller anlegget",ty:"pra",tema:"bransje",ar:["prod","ana"],u:B+"d6/5s",d:"Arbeidsark: sorter, systematiser, skinn, standardiser og sikre et område på skolen, og mål effekten.",x:["Skolens lab"]},
+
+  {t:"Prøv deg i bransjelære",ty:"test",tema:"bransje",ar:["prod","ana","tek"],u:B+"prove",d:"Tolv blandede spørsmål fra hele temaet, med forklaring og poengsum."}
 ];
 
 const state={ty:null,ar:null,tema:null,q:""};

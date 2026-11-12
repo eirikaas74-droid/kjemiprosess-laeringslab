@@ -10,6 +10,7 @@ Nettstedet er statiske HTML-sider og publiseres med GitHub Pages.
 index.html              Forside med temaoversikt
 prosessikkerhet/        Tema: prosessikkerhet
 vaeske/                 Tema: væske i prosessindustrien (6 deler)
+bransjelaere/           Tema: bransjelære (5 deler, dyplenker #d1/bedrifter osv.)
 ```
 
 ## Legge til et nytt tema
