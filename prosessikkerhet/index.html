@@ -79,6 +79,8 @@ p{margin:0 0 14px}
 ul.b,ol.b{padding-left:22px;margin:0 0 14px}
 ul.b li,ol.b li{margin-bottom:6px}
 strong{font-weight:700}
+.act{scroll-margin-top:calc(var(--top-h) + 20px)}
+.act.flash{box-shadow:0 0 0 3px var(--accent);transition:box-shadow .3s}
 .goals{background:var(--steel-soft);border-radius:8px;padding:16px 20px;margin:20px 0}
 .goals h3{margin:0 0 6px;font-size:1.05rem;font-family:var(--f-mono);font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--steel)}
 .goals ul{margin:0;padding-left:20px}
@@ -290,8 +292,8 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 
 <header class="top">
   <div class="top-in">
-    <a class="home-link" href="../" title="Til forsiden av Kjemiprosess læringslab">← Læringslab</a><div class="brand">Prosess<span>sikkerhet</span></div>
-    <div class="prog" aria-label="Fremdrift">
+    <a class="home-link" href="../" title="Til forsiden av Kjemiprosess læringslab">← Alle ressurser</a><div class="brand">Prosess<span>sikkerhet</span></div>
+    <div class="prog" aria-label="Fremdrift" hidden>
       <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
       <div class="prog-txt" id="progTxt">0 av 7 moduler</div>
     </div>
@@ -300,7 +302,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 
 <div class="wrap">
   <nav class="side" aria-label="Moduler">
-    <h2>Kursinnhold</h2>
+    <h2>Innhold</h2>
     <ol id="navList"></ol>
   </nav>
 
@@ -309,12 +311,12 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 
 <!-- ============ START ============ -->
 <section class="mod" data-id="start">
-  <div class="eyebrow"><span>Vg2 kjemiprosess- og laboratoriefag</span><span class="t">Ca. 7 timer</span></div>
+  <div class="eyebrow"><span>Vg2 kjemiprosess- og laboratoriefag</span><span class="t">Tema</span></div>
   <h1>Prosessikkerhet: Hvordan vi hindrer at det smeller</h1>
-  <p class="lead">Et nettkurs om farlige stoffer, prosessfarer, barrierer og hva vi kan lære av storulykker. Kurset er laget for deg som skal jobbe som operatør i et prosessanlegg eller som laborant.</p>
+  <p class="lead">Fagstoff og læringsaktiviteter om farlige stoffer, prosessfarer, barrierer og hva vi kan lære av storulykker. For deg som skal jobbe som operatør i et prosessanlegg eller som laborant.</p>
 
   <div class="callout steel">
-    <p style="margin:0"><strong>Slik bruker du kurset:</strong> Ta modulene i rekkefølge. Hver modul har fagtekst, en eller flere aktiviteter og en kort quiz. Når du har bestått quizen (minst 3 av 4 riktige), blir modulen markert som fullført. Til slutt tar du en avsluttende prøve. Fremdriften lagres i nettleseren din.</p>
+    <p style="margin:0"><strong>Slik bruker du siden:</strong> Velg en del i menyen, i den rekkefølgen som passer deg eller læreren din. Hver del har fagtekst, aktiviteter og en kort quiz du kan sjekke deg selv med. Alle aktivitetene finner du også samlet på forsiden.</p>
   </div>
 
   <div class="home-grid" id="homeGrid"></div>
@@ -335,7 +337,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
       <tr><td class="num">M-05</td><td>Barrierer og risikoanalyse</td><td class="num">90 min</td><td>HAZOP- og SJA-oppgaven egner seg godt i grupper på 3–4. SJA-en har én jobb for kjemiprosess og én for laboratorium</td></tr>
       <tr><td class="num">M-06</td><td>Storulykker: Hva kan vi lære?</td><td class="num">60 min</td><td>Del klassen i ekspertgrupper per case</td></tr>
       <tr><td class="num">M-07</td><td>Din rolle: Avvik, endringer og varsling</td><td class="num">40 min</td><td>Scenarioene kan brukes som klassediskusjon</td></tr>
-      <tr><td class="num">Prøve</td><td>Avsluttende prøve, 12 spørsmål</td><td class="num">20 min</td><td>Individuelt</td></tr>
+      <tr><td class="num">Prøve</td><td>Prøv deg, 12 spørsmål</td><td class="num">20 min</td><td>Individuelt</td></tr>
     </tbody>
   </table></div>
   <p>Svarene elevene skriver i tekstfeltene blir ikke sendt noe sted. Be elevene kopiere refleksjonssvarene inn i sin egen logg eller innlevering hvis du vil vurdere dem.</p>
@@ -391,7 +393,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     <div>Havindustri­tilsynet</div><div>Fører tilsyn med petroleumsvirksomheten og landanlegg som Kårstø og Mongstad. Het tidligere Petroleumstilsynet.</div>
   </div>
 
-  <div class="act">
+  <div class="act" id="se-deg-rundt">
     <div class="act-h"><span class="lbl">Refleksjon</span><h3>Se deg rundt</h3></div>
     <p>Tenk på skolens prosessanlegg eller laboratorium. Nevn ett eksempel på en personsikkerhetsfare og ett eksempel på en prosessikkerhetsfare.</p>
     <label for="r1" class="eyebrow t" style="margin-bottom:4px">Ditt svar</label>
@@ -402,7 +404,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     </details>
   </div>
 
-  <div class="act"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m1"></div></div>
+  <div class="act" id="quiz-m1"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m1"></div></div>
   <div class="pager"></div>
 </section>
 
@@ -430,7 +432,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
   </ul>
   <p>H-setningene er gruppert: <span class="num">H2xx</span> er fysiske farer (brann, eksplosjon), <span class="num">H3xx</span> er helsefarer og <span class="num">H4xx</span> er miljøfarer.</p>
 
-  <div class="act">
+  <div class="act" id="piktogrammer">
     <div class="act-h"><span class="lbl">Aktivitet</span><h3>Hva betyr piktogrammet?</h3></div>
     <p>Velg riktig betydning for hvert av de ni piktogrammene, og trykk «Sjekk svar». Tegningene er forenklet, men har de samme symbolene som du finner på ekte etiketter.</p>
     <div class="ghs-grid" id="ghsGrid"></div>
@@ -465,7 +467,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     <li><strong>Personlig verneutstyr</strong>: hansker, briller, visir, åndedrettsvern. Siste forsvarslinje.</li>
   </ol>
 
-  <div class="act">
+  <div class="act" id="datablad">
     <div class="act-h"><span class="lbl">Oppgave</span><h3>Les et ekte datablad</h3></div>
     <p>Finn sikkerhetsdatabladet for <strong>aceton</strong> i skolens stoffkartotek (eller spør læreren). Svar på spørsmålene:</p>
     <ol class="b">
@@ -484,7 +486,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     </details>
   </div>
 
-  <div class="act"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m2"></div></div>
+  <div class="act" id="quiz-m2"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m2"></div></div>
   <div class="pager"></div>
 </section>
 
@@ -519,7 +521,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
   </div>
   <p>Gassdetektorer i anlegg viser ofte <strong>% LEL</strong>. Hvis en detektor viser 20 % LEL, betyr det at konsentrasjonen er en femtedel av nedre eksplosjonsgrense. Vanlige alarmgrenser er 20 % LEL (varsel) og 40–60 % LEL (nedstengning), men dette varierer mellom anlegg.</p>
 
-  <div class="act">
+  <div class="act" id="propan">
     <div class="act-h"><span class="lbl">Aktivitet</span><h3>Propan i luft</h3></div>
     <p>Propan har nedre eksplosjonsgrense på ca. <span class="num">2,1 %</span> og øvre på ca. <span class="num">9,5 %</span> (volumprosent i luft). Flytt glideren og se hva som skjer.</p>
     <div class="range-wrap">
@@ -552,7 +554,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
   </table></div>
   <div class="callout steel"><p style="margin:0"><strong>Støv kan også eksplodere.</strong> Mel, sukker, trestøv, metallpulver og mange organiske pulvere kan danne eksplosive støvskyer. Et tynt lag støv på bjelker og hyller kan virvles opp av en liten første eksplosjon og gi en mye større andre eksplosjon. Godt renhold er et sikkerhetstiltak.</p></div>
 
-  <div class="act"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m3"></div></div>
+  <div class="act" id="quiz-m3"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m3"></div></div>
   <div class="pager"></div>
 </section>
 
@@ -599,7 +601,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     <li><strong>Mekanisk sikring (PSV-101):</strong> Sikkerhetsventilen åpner av fjærkraft alene. Den trenger verken strøm, instrumentluft eller signal, og er derfor siste tekniske barriere.</li>
   </ol>
 
-  <div class="act">
+  <div class="act" id="trykktank">
     <div class="act-h"><span class="lbl">Aktivitet</span><h3>Øk trykket i tanken</h3></div>
     <p>Flytt glideren og se hvilke lag som slår inn. Prøv deretter å krysse av for at PT-101 svikter, og øk trykket igjen.</p>
     <div class="pid-wrap">
@@ -732,7 +734,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
   </table></div>
   <p>Aktiviteten har to deler. Del A er en simulering du gjør i klassen. Del B er et arbeidsark du fyller ut ute på anlegget, med en funksjonstest dere gjør selv.</p>
 
-  <div class="act">
+  <div class="act" id="overfylling">
     <div class="act-h"><span class="lbl">Del A</span><h3>Simulering: Hold tanken unna overfylling</h3></div>
     <p>Taggene i skissen er de samme som på tank 1 på skolens anlegg. Settpunktene er eksempler, og i del B finner du de ekte settpunktene. Gjør oppgavene i rekkefølge, og les hendelsesloggen underveis.</p>
     <ol class="b">
@@ -881,7 +883,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     <p style="margin:0"><strong>Fra virkeligheten: Buncefield, England, 11. desember 2005.</strong> En stor lagertank med bensin ble fylt i flere timer uten at noen merket det. Nivåmåleren hadde hengt seg opp og viste et fast nivå, og den uavhengige høynivåbryteren som skulle stoppe fyllingen, virket ikke. Bensin rant ut over toppen, fordampet og dannet en stor gassky som eksploderte. Over 40 personer ble skadet, og bygninger i området ble ødelagt. Det er nesten det samme som oppgave 5 i simuleringen.</p>
   </div>
 
-  <div class="act ws">
+  <div class="act ws" id="nivasikring">
     <div class="act-h"><span class="lbl">Del B</span><h3>Arbeidsark: Kartlegg nivåsikringen på skolens anlegg</h3></div>
     <div class="callout" style="margin-top:4px"><p style="margin:0"><strong>Sikkerhet:</strong> Følg skolens prosedyre for anlegget. Du skal ikke endre settpunkter, koble ut sikringer eller overstyre noe.</p></div>
 
@@ -934,7 +936,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
   <p>Mange reaksjoner i prosessindustrien er <strong>eksoterme</strong>: de avgir varme. Reaktoren har kjøling som fjerner varmen. Så lenge kjølingen fjerner like mye varme som reaksjonen lager, er temperaturen stabil.</p>
   <p>Problemet er at reaksjonsfarten øker veldig raskt med temperaturen. En vanlig tommelfingerregel er at <strong>reaksjonsfarten omtrent dobles for hver 10 °C</strong> temperaturen stiger. Kjølingen øker derimot bare litt når temperaturen øker. Hvis temperaturen først har passert et visst punkt, lager reaksjonen mer varme enn kjølingen klarer å fjerne. Da stiger temperaturen enda mer, reaksjonen går enda fortere, og så videre. Dette kalles en <strong>løpsk reaksjon</strong> (på engelsk <em>runaway reaction</em>).</p>
 
-  <div class="act">
+  <div class="act" id="reaktor">
     <div class="act-h"><span class="lbl">Aktivitet</span><h3>Hold reaktoren under kontroll</h3></div>
     <p>En forenklet modell: Varmen fra reaksjonen dobles for hver 10 °C. Kjølesystemet kan fjerne opptil 10 varmeenheter. Flytt glideren og finn temperaturen der reaktoren går over i løpsk tilstand.</p>
     <label for="temp" class="eyebrow t">Reaktortemperatur</label>
@@ -950,7 +952,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     </details>
   </div>
 
-  <div class="act"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m4"></div></div>
+  <div class="act" id="quiz-m4"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m4"></div></div>
   <div class="pager"></div>
 </section>
 
@@ -971,7 +973,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
   <h2>Hva er risiko?</h2>
   <p>Risiko består av to deler: <strong>hvor sannsynlig</strong> det er at noe skjer, og <strong>hvor alvorlig konsekvensen</strong> blir hvis det skjer. En hendelse som skjer ofte men gir små skader, og en hendelse som skjer svært sjelden men kan drepe mange, kan begge ha høy risiko.</p>
 
-  <div class="act">
+  <div class="act" id="risikomatrise">
     <div class="act-h"><span class="lbl">Aktivitet</span><h3>Plasser hendelsen i risikomatrisen</h3></div>
     <p>Velg en hendelse, og klikk på ruten der du mener den hører hjemme. Det finnes ikke ett fasitsvar, men sammenlign med forslaget.</p>
     <label for="riskEv" class="eyebrow t">Hendelse</label>
@@ -1000,7 +1002,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 
   <h3>Sløyfediagram (bowtie)</h3>
   <p>Et sløyfediagram viser en hendelse i midten (topphendelsen). Til venstre er årsakene og de <strong>forebyggende barrierene</strong> som skal hindre at hendelsen skjer. Til høyre er konsekvensene og de <strong>konsekvensreduserende barrierene</strong> som skal begrense skaden.</p>
-  <div class="act" style="overflow-x:auto">
+  <div class="act" id="bowtie" style="overflow-x:auto">
     <div class="act-h"><span class="lbl">Eksempel</span><h3>Overfylling av lagertank med bensin</h3></div>
     <div class="bowtie">
       <div class="bt-col">
@@ -1037,7 +1039,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
   </ol>
   <div class="callout"><p style="margin:0">En SJA gjelder bare for jobben slik den ble planlagt. Hvis noe endrer seg underveis, for eksempel nytt utstyr, andre folk eller en uventet lekkasje, skal dere stoppe og vurdere på nytt.</p></div>
 
-  <div class="act sja">
+  <div class="act sja" id="sja">
     <div class="act-h"><span class="lbl">Gruppeoppgave</span><h3>Lag en SJA</h3></div>
     <p>Jobb i grupper på 3–4. Velg en av jobbene, og fyll ut SJA-skjemaet. Den første raden er et eksempel som dere kan endre eller slette.</p>
     <div class="seg" id="sjaSeg">
@@ -1099,7 +1101,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
   </table></div>
   <p>For hvert avvik spør teamet: Hva kan være <strong>årsaken</strong>? Hva blir <strong>konsekvensen</strong>? Hvilke <strong>barrierer</strong> finnes allerede? Trengs det nye <strong>tiltak</strong>?</p>
 
-  <div class="act">
+  <div class="act" id="hazop">
     <div class="act-h"><span class="lbl">Gruppeoppgave</span><h3>Mini-HAZOP på en varmeveksler</h3></div>
     <p>En pumpe sender etanol (flammepunkt ca. 13 °C) gjennom en varmeveksler der den varmes med damp til 70 °C, før den går videre til en destillasjonskolonne. Det er en temperaturmåler (TT) på utløpet og en reguleringsventil på dampen.</p>
     <p>Bruk guideordene <strong>Ingen strømning</strong>, <strong>Mer temperatur</strong> og <strong>Omvendt strømning</strong>. Finn mulig årsak, konsekvens og tiltak for hvert avvik.</p>
@@ -1117,7 +1119,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     </details>
   </div>
 
-  <div class="act"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m5"></div></div>
+  <div class="act" id="quiz-m5"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m5"></div></div>
   <div class="pager"></div>
 </section>
 
@@ -1209,7 +1211,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     </div>
   </article>
 
-  <div class="act">
+  <div class="act" id="fellesnevnere">
     <div class="act-h"><span class="lbl">Refleksjon</span><h3>Fellesnevnere</h3></div>
     <p>Hva har disse ulykkene til felles? Skriv minst tre punkter, og ta med ett du kan bruke på skolens anlegg eller laboratorium.</p>
     <label for="r6" class="eyebrow t" style="margin-bottom:4px">Ditt svar</label>
@@ -1225,7 +1227,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     </details>
   </div>
 
-  <div class="act"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m6"></div></div>
+  <div class="act" id="quiz-m6"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m6"></div></div>
   <div class="pager"></div>
 </section>
 
@@ -1254,19 +1256,19 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 
   <div class="callout"><p style="margin:0"><strong>Du har rett og plikt til å stoppe arbeidet</strong> hvis du mener det er fare for liv eller helse. Ingen jobb er så viktig at den ikke kan gjøres trygt.</p></div>
 
-  <div class="act">
+  <div class="act" id="scenario">
     <div class="act-h"><span class="lbl">Scenario</span><h3>Hva gjør du?</h3></div>
     <div id="scenarios"></div>
   </div>
 
-  <div class="act"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m7"></div></div>
+  <div class="act" id="quiz-m7"><div class="act-h"><span class="lbl">Quiz</span><h3>Sjekk deg selv</h3></div><div class="quiz" data-quiz="m7"></div></div>
   <div class="pager"></div>
 </section>
 
 <!-- ============ PRØVE ============ -->
 <section class="mod" data-id="prove" hidden>
-  <div class="eyebrow"><span>Avsluttende prøve</span><span class="t">12 spørsmål · ca. 20 min</span></div>
-  <h1>Avsluttende prøve</h1>
+  <div class="eyebrow"><span>Prøv deg</span><span class="t">12 spørsmål · ca. 20 min</span></div>
+  <h1>Prøv deg</h1>
   <p class="lead">Spørsmålene dekker alle modulene. Du må ha minst 9 av 12 riktige for å bestå. Svar på alle spørsmålene før du leverer.</p>
   <div class="act"><div class="quiz" data-quiz="prove"></div></div>
   <div id="certBox"></div>
@@ -1279,7 +1281,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 <script>
 (function(){
 const MODS=[
-  {id:"start",tag:"START",t:"Om kurset"},
+  {id:"start",tag:"START",t:"Om temaet"},
   {id:"m1",tag:"M-01",t:"Hva er prosessikkerhet?",min:35},
   {id:"m2",tag:"M-02",t:"Farlige stoffer og merking",min:50},
   {id:"m3",tag:"M-03",t:"Brann og eksplosjon",min:50},
@@ -1287,7 +1289,7 @@ const MODS=[
   {id:"m5",tag:"M-05",t:"Barrierer og risikoanalyse",min:90},
   {id:"m6",tag:"M-06",t:"Storulykker: Hva kan vi lære?",min:60},
   {id:"m7",tag:"M-07",t:"Din rolle: Avvik, endringer og varsling",min:40},
-  {id:"prove",tag:"PRØVE",t:"Avsluttende prøve",min:20}
+  {id:"prove",tag:"PRØVE",t:"Prøv deg",min:20}
 ];
 
 /* ---------- Lagring ---------- */
@@ -1318,7 +1320,8 @@ function buildNav(){
   document.getElementById("progTxt").textContent=n+" av 7 moduler"+(state.done.prove?" · prøve bestått":"");
   markCurrent();
 }
-function current(){const h=location.hash.replace("#","");return MODS.some(m=>m.id===h)?h:"start";}
+function current(){const h=location.hash.replace("#","").split("/")[0];return MODS.some(m=>m.id===h)?h:"start";}
+function subTarget(){const p=location.hash.replace("#","").split("/");return p[1]?document.getElementById(p[1]):null;}
 function markCurrent(){
   const c=current();
   navList.querySelectorAll("a").forEach(a=>{if(a.dataset.nav===c)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");});
@@ -1330,7 +1333,9 @@ function show(){
   markCurrent();
 }
 mobSel.addEventListener("change",()=>{location.hash=mobSel.value;});
-window.addEventListener("hashchange",()=>{show();window.scrollTo(0,0);});
+function jump(){const t=subTarget();if(t){t.scrollIntoView({block:"start"});t.classList.add("flash");setTimeout(()=>t.classList.remove("flash"),1800);}else window.scrollTo(0,0);}
+window.addEventListener("hashchange",()=>{show();jump();});
+window.addEventListener("load",()=>{if(subTarget())setTimeout(jump,50);});
 
 /* Pager */
 document.querySelectorAll("section.mod").forEach(sec=>{
@@ -1340,7 +1345,7 @@ document.querySelectorAll("section.mod").forEach(sec=>{
   pg.innerHTML=(prev?'<a class="btn alt" href="#'+prev.id+'" style="text-decoration:none">← '+prev.tag+'</a>':'<span></span>')+(next?'<a class="btn" href="#'+next.id+'" style="text-decoration:none">'+next.tag+' →</a>':'');
 });
 const startSec=document.querySelector('section[data-id="start"]');
-const sb=document.createElement("div");sb.className="row";sb.style.marginTop="24px";sb.innerHTML='<a class="btn acc" href="#m1" style="text-decoration:none">Start kurset →</a>';
+const sb=document.createElement("div");sb.className="row";sb.style.marginTop="24px";sb.innerHTML='<a class="btn acc" href="../" style="text-decoration:none">← Se alle ressurser og aktiviteter</a>';
 startSec.insertBefore(sb,startSec.querySelector(".home-grid"));
 
 /* ---------- Quiz ---------- */
@@ -1424,7 +1429,7 @@ function renderQuiz(box){
     });
     const need=id==="prove"?9:3, pass=score>=need;
     fb.className="fb "+(pass?"ok":"bad");
-    fb.innerHTML='<span class="score">'+score+' / '+qs.length+'</span><br>'+(pass?(id==="prove"?"Gratulerer, du har bestått prøven!":"Bestått. Modulen er markert som fullført."):"Ikke bestått ennå. Les forklaringene, gå tilbake til fagteksten og prøv på nytt.");
+    fb.innerHTML='<span class="score">'+score+' / '+qs.length+'</span><br>'+(pass?(id==="prove"?"Godt jobbet!":"Bra! Delen er markert med en hake i menyen."):"Ikke bestått ennå. Les forklaringene, gå tilbake til fagteksten og prøv på nytt.");
     if(pass){state.done[id]=true;save();buildNav();if(id==="prove")showCert(score);}
   });
   rst.addEventListener("click",()=>renderQuiz(box));
@@ -1433,9 +1438,9 @@ document.querySelectorAll(".quiz").forEach(renderQuiz);
 
 function showCert(score){
   const n=["m1","m2","m3","m4","m5","m6","m7"].filter(k=>state.done[k]).length;
-  document.getElementById("certBox").innerHTML='<div class="callout steel"><p style="margin:0"><strong>Kursbevis:</strong> Du har bestått den avsluttende prøven med '+score+' av 12 riktige og fullført '+n+' av 7 moduler. Ta et skjermbilde av denne siden og lever til læreren din.</p></div>';
+  document.getElementById("certBox").innerHTML='<div class="callout steel"><p style="margin:0"><strong>Resultat:</strong> Du fikk '+score+' av 12 riktige. Vil du vise læreren din, kan du ta et skjermbilde.</p></div>';
 }
-if(state.done.prove) document.getElementById("certBox").innerHTML='<div class="callout steel"><p style="margin:0"><strong>Du har allerede bestått prøven.</strong> Du kan ta den på nytt hvis du vil øve.</p></div>';
+if(state.done.prove) document.getElementById("certBox").innerHTML='<div class="callout steel"><p style="margin:0"><strong>Du har tatt denne før.</strong> Ta den gjerne på nytt for å øve.</p></div>';
 
 /* ---------- GHS ---------- */
 const GHS=[

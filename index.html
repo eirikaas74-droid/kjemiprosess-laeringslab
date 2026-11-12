@@ -3,17 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kjemiprosess læringslab – Vg2 kjemiprosess- og laboratoriefag</title>
-<meta name="description" content="Ressurser og læringsaktiviteter for Vg2 kjemiprosess- og laboratoriefag.">
+<title>Kjemiprosess læringslab – ressurser og læringsaktiviteter</title>
+<meta name="description" content="Fagstoff, simuleringer, oppgaver og egentester for Vg2 kjemiprosess- og laboratoriefag.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root{
   --bg:#F2F4F3; --panel:#FFFFFF; --ink:#18232B; --muted:#55636B; --line:#D3DADB;
-  --accent:#C2410C; --accent-soft:#FBE7DC; --steel:#2F5D73; --steel-soft:#E1ECF0;
-  --ok:#2E7D4F; --ok-soft:#DFF1E6;
+  --accent:#C2410C; --steel:#2F5D73; --steel-soft:#E1ECF0; --ok:#2E7D4F; --ok-soft:#DFF1E6;
   --a1:#2F5D73; --a1s:#E1ECF0; --a2:#7A4E9C; --a2s:#EFE6F5; --a3:#2E7D4F; --a3s:#DFF1E6;
-  /* kontrollrom (alltid mørk) */
+  /* typefarger */
+  --t-fag:#2F5D73; --t-fags:#E1ECF0;
+  --t-sim:#C2410C; --t-sims:#FBE7DC;
+  --t-int:#7A4E9C; --t-ints:#EFE6F5;
+  --t-opp:#0F766E; --t-opps:#D7F0EC;
+  --t-grp:#A16207; --t-grps:#FBF0D9;
+  --t-pra:#2E7D4F; --t-pras:#DFF1E6;
+  --t-test:#B42318; --t-tests:#FBE3E1;
   --cr-bg:#111A20; --cr-grid:#1E2A32; --cr-ink:#E6ECEE; --cr-muted:#8FA0A8; --cr-pipe:#5D7B8A; --cr-flow:#F08A4B; --cr-ok:#6CCB93; --cr-liq:#3E7F9E;
   --f-display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
   --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -21,45 +27,47 @@
 }
 @media (prefers-color-scheme: dark){:root{
   --bg:#12181C; --panel:#1A2228; --ink:#E6ECEE; --muted:#9AA8AF; --line:#2C3840;
-  --accent:#F08A4B; --accent-soft:#3A2418; --steel:#7FB3CB; --steel-soft:#1C2F38;
-  --ok:#6CCB93; --ok-soft:#173326;
+  --accent:#F08A4B; --steel:#7FB3CB; --steel-soft:#1C2F38; --ok:#6CCB93; --ok-soft:#173326;
   --a1:#7FB3CB; --a1s:#1C2F38; --a2:#C4A0E0; --a2s:#2B2236; --a3:#6CCB93; --a3s:#173326;
+  --t-fag:#7FB3CB; --t-fags:#1C2F38; --t-sim:#F08A4B; --t-sims:#3A2418; --t-int:#C4A0E0; --t-ints:#2B2236;
+  --t-opp:#5EC8BA; --t-opps:#123330; --t-grp:#E8B860; --t-grps:#3A2E15; --t-pra:#6CCB93; --t-pras:#173326;
+  --t-test:#F2857B; --t-tests:#3D1E1B;
   --cr-bg:#0B1115; --cr-grid:#18232A; color-scheme:dark}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6}
 a{color:var(--steel)}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 h1,h2,h3{font-family:var(--f-display);line-height:1.05;margin:0;text-wrap:balance}
-.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
 
 /* ---------- Kontrollrom-hero ---------- */
 .hero{background:var(--cr-bg);color:var(--cr-ink);position:relative;overflow:hidden;
   background-image:linear-gradient(var(--cr-grid) 1px,transparent 1px),linear-gradient(90deg,var(--cr-grid) 1px,transparent 1px);
   background-size:28px 28px;background-position:-1px -1px}
-.hero::after{content:"";position:absolute;inset:auto 0 0;height:120px;background:linear-gradient(transparent,var(--cr-bg));pointer-events:none}
-.topbar{display:flex;align-items:center;justify-content:space-between;height:60px;border-bottom:1px solid var(--cr-grid);position:relative;z-index:2}
+.topbar{display:flex;align-items:center;justify-content:space-between;height:60px;border-bottom:1px solid var(--cr-grid)}
 .brand{font-family:var(--f-display);font-weight:700;font-size:1.4rem;letter-spacing:.03em;text-transform:uppercase}
 .brand span{color:var(--cr-flow)}
-.status-led{font-family:var(--f-mono);font-size:.75rem;color:var(--cr-muted);display:flex;align-items:center;gap:8px}
-.status-led i{width:8px;height:8px;border-radius:50%;background:var(--cr-ok);box-shadow:0 0 8px var(--cr-ok);animation:blink 2.4s infinite}
-.hero-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:32px;align-items:center;padding:48px 0 72px;position:relative;z-index:2}
+.topnav{display:flex;gap:18px;font-family:var(--f-mono);font-size:.78rem}
+.topnav a{color:var(--cr-muted);text-decoration:none}
+.topnav a:hover{color:var(--cr-ink)}
+.hero-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:36px;align-items:center;padding:44px 0 56px}
 .eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cr-flow)}
-.hero h1{font-size:clamp(2.6rem,6vw,4.4rem);font-weight:700;margin:12px 0 16px;text-transform:uppercase;letter-spacing:.01em}
+.hero h1{font-size:clamp(2.5rem,5.6vw,4.1rem);font-weight:700;margin:12px 0 14px;text-transform:uppercase;letter-spacing:.01em}
 .hero h1 em{font-style:normal;color:var(--cr-flow)}
-.hero p{color:var(--cr-muted);font-size:1.12rem;max-width:46ch;margin:0 0 26px}
-.cta{display:flex;gap:12px;flex-wrap:wrap}
-.btn{font-family:var(--f-display);font-weight:600;font-size:1.15rem;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;
-  padding:11px 20px;border-radius:6px;display:inline-flex;align-items:center;gap:8px;transition:transform .15s,background .15s}
-.btn.pri{background:var(--cr-flow);color:#1A0E06}
-.btn.pri:hover{transform:translateY(-2px)}
-.btn.sec{border:1.5px solid var(--cr-pipe);color:var(--cr-ink)}
-.btn.sec:hover{border-color:var(--cr-ink)}
-.readouts{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap}
-.ro{border:1px solid var(--cr-grid);background:rgba(255,255,255,.02);border-radius:6px;padding:8px 14px;min-width:96px}
-.ro b{display:block;font-family:var(--f-mono);font-size:1.5rem;font-weight:500;color:var(--cr-ink);line-height:1.2}
-.ro span{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cr-muted)}
+.hero p{color:var(--cr-muted);font-size:1.1rem;max-width:46ch;margin:0 0 22px}
+.search{position:relative;display:block;max-width:480px}
+.search input{width:100%;font:inherit;font-size:1.05rem;padding:13px 16px 13px 46px;border-radius:8px;border:1.5px solid var(--cr-pipe);background:rgba(255,255,255,.05);color:var(--cr-ink)}
+.search input::placeholder{color:var(--cr-muted)}
+.search input:focus{outline:none;border-color:var(--cr-flow);background:rgba(255,255,255,.08)}
+.search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:20px;height:20px;color:var(--cr-muted)}
+.quick{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.quick button{font:inherit;font-size:.88rem;display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 8px;border-radius:999px;cursor:pointer;
+  background:rgba(255,255,255,.04);border:1px solid var(--cr-grid);color:var(--cr-ink);transition:border-color .15s,background .15s}
+.quick button:hover{border-color:var(--qc);background:rgba(255,255,255,.08)}
+.quick .qi{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--qc);color:#111}
+.quick .qi svg{width:14px;height:14px}
+.quick b{font-family:var(--f-mono);font-weight:500;color:var(--cr-muted);font-size:.78rem}
 
-/* Prosessanlegg-SVG */
 .plant{width:100%;height:auto;display:block}
 .plant .pipe{fill:none;stroke:var(--cr-pipe);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
 .plant .flow{fill:none;stroke:var(--cr-flow);stroke-width:2.2;stroke-dasharray:6 12;stroke-linecap:round;animation:flow 1.1s linear infinite}
@@ -83,57 +91,60 @@ h1,h2,h3{font-family:var(--f-display);line-height:1.05;margin:0;text-wrap:balanc
 @keyframes lvl{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.72)}}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 
-/* ---------- Områder ---------- */
-.areas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:-40px;position:relative;z-index:3}
-.area{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;display:grid;grid-template-columns:52px 1fr;gap:4px 14px;align-items:start;
-  box-shadow:0 10px 30px -18px rgba(0,0,0,.45);cursor:pointer;text-align:left;font:inherit;color:inherit;transition:transform .15s,border-color .15s}
-.area:hover{transform:translateY(-3px);border-color:var(--c)}
-.area[aria-pressed="true"]{border-color:var(--c);box-shadow:0 0 0 2px var(--c),0 10px 30px -18px rgba(0,0,0,.45)}
-.area .ic{grid-row:span 2;width:52px;height:52px;border-radius:10px;background:var(--cs);color:var(--c);display:grid;place-items:center}
-.area .ic svg{width:30px;height:30px}
-.area b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;line-height:1.15}
-.area span{font-size:.9rem;color:var(--muted);line-height:1.4}
+/* ---------- Filterlinje ---------- */
+.filters{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.filters .wrap{display:flex;flex-direction:column;gap:8px;padding-top:12px;padding-bottom:12px}
+.frow{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.frow .fl{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);width:64px;flex:none}
+.fchip{font:inherit;font-size:.85rem;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:3px 12px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.fchip i{width:9px;height:9px;border-radius:50%;background:var(--c,var(--muted))}
+.fchip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.fchip[aria-pressed="true"] i{box-shadow:0 0 0 2px var(--bg)}
+select.fsel{font:inherit;font-size:.85rem;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:3px 10px}
+
+/* ---------- Ressurser ---------- */
+section.res{padding:28px 0 56px}
+.res-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.res-head h2{font-size:2.2rem;font-weight:700;text-transform:uppercase}
+.count{font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
+.reset{font:inherit;font-family:var(--f-mono);font-size:.78rem;background:none;border:none;color:var(--accent);cursor:pointer;text-decoration:underline}
+.reset[hidden]{display:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
+.card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px 16px;display:flex;flex-direction:column;gap:8px;
+  border-top:4px solid var(--c);transition:transform .16s,box-shadow .16s}
+.card:hover{transform:translateY(-3px);box-shadow:0 16px 30px -20px rgba(0,0,0,.5)}
+.ctop{display:flex;align-items:center;gap:10px}
+.cic{width:38px;height:38px;border-radius:9px;background:var(--cs);color:var(--c);display:grid;place-items:center;flex:none}
+.cic svg{width:22px;height:22px}
+.ctype{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--c);font-weight:500}
+.card h3{font-size:1.4rem;font-weight:600;line-height:1.1}
+.card h3 a{color:inherit;text-decoration:none}
+.card h3 a::after{content:"";position:absolute;inset:0;border-radius:12px}
+.card p{margin:0;color:var(--muted);font-size:.93rem;line-height:1.5}
+.meta{margin-top:auto;padding-top:6px;display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-family:var(--f-mono);font-size:.68rem;border-radius:3px;padding:1px 7px;background:var(--bg);color:var(--muted);border:1px solid var(--line)}
+.tag.hl{border-color:var(--t-pra);color:var(--t-pra)}
+.empty{grid-column:1/-1;padding:40px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
 
 /* ---------- Temaer ---------- */
-section.topics{padding:56px 0 72px}
-.sec-head{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
-.sec-head h2{font-size:2.3rem;font-weight:700;text-transform:uppercase;letter-spacing:.01em}
-.sec-head .sub{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
-.showall{font:inherit;font-family:var(--f-mono);font-size:.8rem;background:none;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:4px 12px;cursor:pointer}
-.showall[hidden]{display:none}
-
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
-.card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
-.card .art{height:118px;position:relative;display:grid;place-items:center;background:var(--cs);color:var(--c);overflow:hidden}
-.card .art::before{content:"";position:absolute;inset:0;background-image:radial-gradient(currentColor 1px,transparent 1.2px);background-size:14px 14px;opacity:.18}
-.card .art svg{width:64px;height:64px;position:relative}
-.card .tagno{position:absolute;top:10px;left:12px;font-family:var(--f-mono);font-size:.7rem;font-weight:500;border:1.5px solid currentColor;border-radius:3px;padding:0 5px;background:var(--panel)}
-.card .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
-.card h3{font-size:1.55rem;font-weight:600}
-.card h3 a{color:inherit;text-decoration:none}
-.card h3 a::after{content:"";position:absolute;inset:0}
-.card p{margin:0;color:var(--muted);font-size:.96rem}
-.chips{display:flex;gap:6px;flex-wrap:wrap}
-.chip{font-family:var(--f-mono);font-size:.68rem;color:var(--c);background:var(--cs);border-radius:3px;padding:1px 7px}
-.status{margin-top:auto;padding-top:6px;font-family:var(--f-mono);font-size:.78rem;display:flex;align-items:center;gap:10px;color:var(--muted)}
-.pill{border-radius:999px;padding:2px 10px;font-weight:500}
-.pill.open{background:var(--ok-soft);color:var(--ok)}
-.pill.soon{background:var(--steel-soft);color:var(--muted)}
-.bar{flex:1;height:6px;background:var(--line);border-radius:3px;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--accent)}
-.card.live{border-color:color-mix(in srgb,var(--c) 55%,var(--line));transition:transform .18s,box-shadow .18s}
-.card.live:hover{transform:translateY(-4px);box-shadow:0 18px 34px -20px rgba(0,0,0,.5)}
-.card.live .art svg{transition:transform .3s}
-.card.live:hover .art svg{transform:scale(1.1) rotate(-4deg)}
-.card.live .go{position:absolute;right:14px;top:98px;width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:1.2rem;box-shadow:0 4px 12px -4px rgba(0,0,0,.4)}
-.card.soon .art{filter:grayscale(.6);opacity:.75}
-.card.soon h3{color:var(--muted)}
+section.temaer{padding:8px 0 64px}
+section.temaer h2{font-size:2.2rem;font-weight:700;text-transform:uppercase;margin-bottom:6px}
+section.temaer .sub{color:var(--muted);margin:0 0 18px}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.tcard{font:inherit;text-align:left;color:inherit;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;grid-template-columns:52px 1fr;gap:4px 14px;align-items:start}
+button.tcard{cursor:pointer;transition:border-color .15s,transform .15s}
+button.tcard:hover{border-color:var(--c);transform:translateY(-2px)}
+.tcard .ti{grid-row:span 2;width:52px;height:52px;border-radius:10px;background:var(--cs);color:var(--c);display:grid;place-items:center}
+.tcard .ti svg{width:32px;height:32px}
+.tcard b{font-family:var(--f-display);font-size:1.25rem;font-weight:600;line-height:1.15}
+.tcard span{font-family:var(--f-mono);font-size:.74rem;color:var(--muted)}
+.tcard.soon{opacity:.6;border-style:dashed}
 
 footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);font-size:.88rem}
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
-@media (max-width:900px){.hero-in{grid-template-columns:1fr;padding-top:32px}.plant{max-width:560px;margin:0 auto}.areas{grid-template-columns:1fr;margin-top:-24px}}
-@media (max-width:520px){.status-led{display:none}.brand{font-size:1.15rem}}
+@media (max-width:900px){.hero-in{grid-template-columns:1fr;padding-top:28px}.plant{max-width:540px;margin:0 auto}}
+@media (max-width:600px){.topnav{display:none}.brand{font-size:1.15rem}.frow .fl{width:100%}.filters{position:static}}
 </style>
 </head>
 <body>
@@ -142,24 +153,19 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="wrap">
     <div class="topbar">
       <div class="brand">Kjemiprosess <span>læringslab</span></div>
-      <div class="status-led"><i></i>ANLEGG I DRIFT · VG2 KPL</div>
+      <nav class="topnav"><a href="#ressurser">Ressurser</a><a href="#temaer">Temaer</a><a href="prosessikkerhet/#start">For lærere</a></nav>
     </div>
     <div class="hero-in">
       <div>
         <div class="eyebrow">Vg2 kjemiprosess- og laboratoriefag</div>
-        <h1>Fra råstoff til <em>ferdig produkt</em></h1>
-        <p>Nettkurs, oppgaver og egentester som tar deg gjennom prosessanlegget og laboratoriet. Jobb i ditt eget tempo. Fremdriften lagres i nettleseren din.</p>
-        <div class="cta">
-          <a class="btn pri" href="prosessikkerhet/">Start med prosessikkerhet →</a>
-          <a class="btn sec" href="#temaer">Se alle temaer</a>
-        </div>
-        <div class="readouts">
-          <div class="ro"><b id="roTopics">1</b><span>Kurs åpne</span></div>
-          <div class="ro"><b id="roMods">7</b><span>Moduler</span></div>
-          <div class="ro"><b id="roDone">0</b><span>Fullført av deg</span></div>
-        </div>
+        <h1>Ressurser og <em>læringsaktiviteter</em></h1>
+        <p>Fagstoff, simuleringer, oppgaver og egentester for prosessanlegget og laboratoriet. Finn det du trenger, når du trenger det.</p>
+        <label class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+          <input id="q" type="search" placeholder="Søk, for eksempel «HAZOP» eller «datablad»" aria-label="Søk i ressurser og aktiviteter">
+        </label>
+        <div class="quick" id="quick" aria-label="Hurtigvalg etter type"></div>
       </div>
-
       <!-- Animert, forenklet destillasjonsanlegg (P&ID-stil) -->
       <svg class="plant" viewBox="0 0 560 380" role="img" aria-label="Animert tegning av et prosessanlegg: tank, pumpe, varmeveksler og destillasjonskolonne med instrumenter">
         <path class="pipe" d="M88 300 H130 M162 300 H205 V250 H232 M268 250 H330"/>
@@ -232,102 +238,142 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 </header>
 
 <main>
-  <div class="wrap">
-    <div class="areas" role="group" aria-label="Filtrer temaer på hovedområde i læreplanen">
-      <button class="area" data-f="prod" aria-pressed="false" style="--c:var(--a1);--cs:var(--a1s)">
-        <span class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 28V14l7 5v-5l7 5v-5l7 5V6h5v22z"/><path d="M8 24h3M15 24h3M22 24h3"/></svg></span>
-        <b>Produksjon og tjenester</b><span>Drift, HMS, sikkerhet og miljø</span>
-      </button>
-      <button class="area" data-f="tek" aria-pressed="false" style="--c:var(--a2);--cs:var(--a2s)">
-        <span class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><rect x="11" y="3" width="10" height="26" rx="5"/><path d="M12 10h8M12 16h8M12 22h8M3 16h8M21 8h8"/></svg></span>
-        <b>Kjemisk teknologi</b><span>Enhetsoperasjoner, prosessutstyr og regulering</span>
-      </button>
-      <button class="area" data-f="ana" aria-pressed="false" style="--c:var(--a3);--cs:var(--a3s)">
-        <span class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3h8M13 3v9L5 26a2 2 0 0 0 2 3h18a2 2 0 0 0 2-3l-8-14V3"/><path d="M9 20h14"/></svg></span>
-        <b>Analyse, dokumentasjon og kvalitet</b><span>Laboratoriearbeid, analyser og kvalitetssikring</span>
-      </button>
+  <div class="filters" id="ressurser">
+    <div class="wrap">
+      <div class="frow" id="fType"><span class="fl">Type</span></div>
+      <div class="frow" id="fArea"><span class="fl">Område</span></div>
     </div>
   </div>
 
-  <section class="topics" id="temaer"><div class="wrap">
-    <div class="sec-head">
-      <div><h2>Temaer</h2><div class="sub" id="filterInfo">Trykk på et område over for å filtrere</div></div>
-      <button class="showall" id="showAll" hidden>Vis alle temaer ✕</button>
+  <section class="res"><div class="wrap">
+    <div class="res-head">
+      <h2 id="resTitle">Alle ressurser</h2>
+      <div><span class="count" id="count"></span> <button class="reset" id="reset" hidden>Nullstill filter</button></div>
     </div>
     <div class="grid" id="grid"></div>
+  </div></section>
+
+  <section class="temaer" id="temaer"><div class="wrap">
+    <h2>Temaer</h2>
+    <p class="sub">Velg et tema for å se alt innhold innenfor det. Flere temaer kommer.</p>
+    <div class="tgrid" id="tgrid"></div>
   </div></section>
 </main>
 
 <footer><div class="wrap"><span>Kjemiprosess læringslab</span><span>Vg2 kjemiprosess- og laboratoriefag · KPL02-01</span></div></footer>
 
 <script>
-const AREAS={
-  prod:{n:"Produksjon og tjenester",c:"var(--a1)",s:"var(--a1s)"},
-  tek:{n:"Kjemisk teknologi",c:"var(--a2)",s:"var(--a2s)"},
-  ana:{n:"Analyse og kvalitet",c:"var(--a3)",s:"var(--a3s)"}
+const S=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+const TYPES={
+  fag:{n:"Fagstoff",pl:"Fagstoff",i:S('<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M8 7h7M8 11h7"/>')},
+  sim:{n:"Simulering",pl:"Simuleringer",i:S('<path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>')},
+  int:{n:"Interaktiv øvelse",pl:"Interaktive øvelser",i:S('<path d="M9 11V5a2 2 0 0 1 4 0v5l4.5 1a2 2 0 0 1 1.5 2.3L18 19a3 3 0 0 1-3 2h-3a4 4 0 0 1-3.2-1.6L6 16a1.6 1.6 0 0 1 2.4-2.1L9 14.5"/>')},
+  opp:{n:"Oppgave",pl:"Oppgaver",i:S('<path d="M15 4l5 5L9 20H4v-5z"/><path d="M13 6l5 5"/>')},
+  grp:{n:"Gruppeoppgave",pl:"Gruppeoppgaver",i:S('<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20a6 6 0 0 1 12 0M15 20a5 5 0 0 1 6-4.8"/>')},
+  pra:{n:"Praksis på anlegg/lab",pl:"Praksis",i:S('<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/>')},
+  test:{n:"Egentest",pl:"Egentester",i:S('<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>')}
 };
+for(const k in TYPES){TYPES[k].c=`var(--t-${k})`;TYPES[k].s=`var(--t-${k}s)`;}
+const AREAS={prod:{n:"Produksjon og tjenester",c:"var(--a1)"},tek:{n:"Kjemisk teknologi",c:"var(--a2)"},ana:{n:"Analyse, dokumentasjon og kvalitet",c:"var(--a3)"}};
 const I=p=>`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
-const ICONS={
-  safety:I('<path d="M32 6 52 14v16c0 13-9 22-20 28C21 52 12 43 12 30V14z"/><path d="M32 22c4 5 7 8 7 13a7 7 0 0 1-14 0c0-3 2-5 3-7 1 3 2 4 4 4-1-4 0-7 0-10z"/>'),
-  pump:I('<circle cx="28" cy="34" r="16"/><path d="M28 18v-8h26M44 34h14"/><path d="M28 24l9 15H19z"/><path d="M14 56h28"/>'),
-  gauge:I('<path d="M10 44a22 22 0 1 1 44 0"/><path d="M32 44 44 26"/><circle cx="32" cy="44" r="4"/><path d="M16 44h4M44 44h4M32 22v4M20 30l3 3M44 30l-3 3"/>'),
-  pid:I('<rect x="6" y="20" width="14" height="28" rx="6"/><circle cx="34" cy="40" r="7"/><rect x="46" y="10" width="12" height="44" rx="6"/><path d="M20 40h7M41 40h5M13 20v-8h20"/><circle cx="33" cy="12" r="5"/>'),
-  flask:I('<path d="M24 6h16M26 6v18L12 50a4 4 0 0 0 4 6h32a4 4 0 0 0 4-6L38 24V6"/><path d="M18 40h28"/><circle cx="28" cy="47" r="2"/><circle cx="37" cy="44" r="1.5"/>'),
-  check:I('<rect x="12" y="8" width="40" height="50" rx="4"/><path d="M24 8V4h16v4"/><path d="M20 24l4 4 7-8M20 38l4 4 7-8M36 26h10M36 40h10"/>'),
-  leaf:I('<path d="M12 52C12 26 28 10 54 10c0 26-16 42-42 42z"/><path d="M12 52 38 26"/>')
+/* Temaer. live:true = har innhold. */
+const TEMAER={
+  ps:{n:"Prosessikkerhet",live:true,c:"var(--a1)",cs:"var(--a1s)",i:I('<path d="M32 6 52 14v16c0 13-9 22-20 28C21 52 12 43 12 30V14z"/><path d="M32 22c4 5 7 8 7 13a7 7 0 0 1-14 0c0-3 2-5 3-7 1 3 2 4 4 4-1-4 0-7 0-10z"/>')},
+  utstyr:{n:"Prosessutstyr og enhetsoperasjoner",c:"var(--a2)",cs:"var(--a2s)",i:I('<circle cx="28" cy="34" r="16"/><path d="M28 18v-8h26M44 34h14"/><path d="M28 24l9 15H19z"/>')},
+  reg:{n:"Måling og regulering",c:"var(--a2)",cs:"var(--a2s)",i:I('<path d="M10 44a22 22 0 1 1 44 0"/><path d="M32 44 44 26"/><circle cx="32" cy="44" r="4"/>')},
+  pid:{n:"Flytskjema og P&ID",c:"var(--a2)",cs:"var(--a2s)",i:I('<rect x="6" y="20" width="14" height="28" rx="6"/><circle cx="34" cy="40" r="7"/><rect x="46" y="10" width="12" height="44" rx="6"/><path d="M20 40h7M41 40h5"/>')},
+  lab:{n:"Laboratorieteknikk og analyse",c:"var(--a3)",cs:"var(--a3s)",i:I('<path d="M24 6h16M26 6v18L12 50a4 4 0 0 0 4 6h32a4 4 0 0 0 4-6L38 24V6"/><path d="M18 40h28"/>')},
+  kval:{n:"Kvalitet og dokumentasjon",c:"var(--a3)",cs:"var(--a3s)",i:I('<rect x="12" y="8" width="40" height="50" rx="4"/><path d="M20 24l4 4 7-8M20 38l4 4 7-8M36 26h10M36 40h10"/>')},
+  miljo:{n:"Miljø og bærekraft",c:"var(--a1)",cs:"var(--a1s)",i:I('<path d="M12 52C12 26 28 10 54 10c0 26-16 42-42 42z"/><path d="M12 52 38 26"/>')}
 };
-/* Nye temaer legges til her. live:true = publisert. storeKey/modules gir fremdriftsvisning. */
-const TOPICS=[
-  {t:"Prosessikkerhet",tag:"PS-01",icon:"safety",href:"prosessikkerhet/",live:true,areas:["prod","tek"],
-   d:"Farlige stoffer, brann og eksplosjon, løpske reaksjoner, barrierer og læring fra storulykker.",
-   storeKey:"prosessikkerhet-vg2-v1",modules:7},
-  {t:"Prosessutstyr og enhetsoperasjoner",tag:"KT-01",icon:"pump",areas:["tek"],d:"Pumper, ventiler, varmevekslere, reaktorer og separasjon som destillasjon, filtrering og ekstraksjon."},
-  {t:"Måling og regulering",tag:"KT-02",icon:"gauge",areas:["tek"],d:"Givere, reguleringssløyfer og hvordan prosessen holdes stabil."},
-  {t:"Flytskjema og P&ID",tag:"KT-03",icon:"pid",areas:["prod","tek"],d:"Lese og tegne flytskjema, kjenne igjen symboler og følge en prosess på tegning."},
-  {t:"Laboratorieteknikk og analyse",tag:"AK-01",icon:"flask",areas:["ana"],d:"Prøvetaking, titrering, fotometri og trygt arbeid på laboratoriet."},
-  {t:"Kvalitet og dokumentasjon",tag:"AK-02",icon:"check",areas:["ana","prod"],d:"Prosedyrer, avvik, sporbarhet og rapportskriving."},
-  {t:"Miljø og bærekraft",tag:"PT-01",icon:"leaf",areas:["prod"],d:"Utslipp, avfall, energibruk og miljøbevisste valg i industrien."}
+/* Ressurser og aktiviteter. Nye legges til her. */
+const P="prosessikkerhet/#";
+const RES=[
+  {t:"Hva er prosessikkerhet?",ty:"fag",tema:"ps",ar:["prod"],u:P+"m1",d:"Forskjellen på personsikkerhet og prosessikkerhet, tap av inneslutning og hvem som passer på.",x:["Med quiz"]},
+  {t:"Farlige stoffer og CLP-merking",ty:"fag",tema:"ps",ar:["prod","ana"],u:P+"m2",d:"Farepiktogrammer, sikkerhetsdatablad (SDS) og tiltakshierarkiet.",x:["Med quiz"]},
+  {t:"Brann og eksplosjon",ty:"fag",tema:"ps",ar:["prod","tek"],u:P+"m3",d:"Branntrekanten, flammepunkt, eksplosjonsgrenser, tennkilder og ATEX-soner.",x:["Med quiz"]},
+  {t:"Trykk, temperatur og løpske reaksjoner",ty:"fag",tema:"ps",ar:["tek"],u:P+"m4",d:"Hvordan overtrykk oppstår, trykkavlastning, lag på lag-sikring og nivåsikring av tank.",x:["Med quiz"]},
+  {t:"Risiko og barrierer",ty:"fag",tema:"ps",ar:["prod","tek"],u:P+"m5",d:"Risikomatrise, sveitserostmodellen, sløyfediagram (bowtie), SJA og HAZOP.",x:["Med quiz"]},
+  {t:"Storulykker: Hva kan vi lære?",ty:"fag",tema:"ps",ar:["prod"],u:P+"m6",d:"Piper Alpha, Bhopal, Texas City og Vest Tank i Sløvåg. Hvilke barrierer sviktet?",x:["Med quiz"]},
+  {t:"Avvik, endringer og varsling",ty:"fag",tema:"ps",ar:["prod","ana"],u:P+"m7",d:"Din rolle som operatør eller laborant: melde avvik, håndtere endringer og si fra.",x:["Med quiz"]},
+
+  {t:"Hold tanken unna overfylling",ty:"sim",tema:"ps",ar:["tek"],u:P+"m4/overfylling",d:"Nivåregulering og nivåsikring med taggene fra tank 1 på skolens anlegg. Les hendelsesloggen underveis.",x:["Skolens anlegg"]},
+  {t:"Øk trykket i tanken",ty:"sim",tema:"ps",ar:["tek"],u:P+"m4/trykktank",d:"Se hvilke sikkerhetslag som slår inn når trykket stiger, og hva som skjer når en trykkgiver svikter."},
+  {t:"Hold reaktoren under kontroll",ty:"sim",tema:"ps",ar:["tek"],u:P+"m4/reaktor",d:"Finn temperaturen der en eksoterm reaksjon løper løpsk fordi kjølingen ikke henger med."},
+  {t:"Propan i luft",ty:"sim",tema:"ps",ar:["prod","tek"],u:P+"m3/propan",d:"Endre konsentrasjonen og se når blandingen er for mager, brennbar eller for fet."},
+
+  {t:"Hva betyr piktogrammet?",ty:"int",tema:"ps",ar:["prod","ana"],u:P+"m2/piktogrammer",d:"Koble de ni farepiktogrammene til riktig betydning og sjekk svarene."},
+  {t:"Plasser hendelsen i risikomatrisen",ty:"int",tema:"ps",ar:["prod"],u:P+"m5/risikomatrise",d:"Vurder sannsynlighet og konsekvens for hendelser fra lab og anlegg, og sammenlign med et forslag."},
+  {t:"Hva gjør du?",ty:"int",tema:"ps",ar:["prod"],u:P+"m7/scenario",d:"Situasjoner fra arbeidshverdagen der du velger hva du gjør, og får vite hvorfor."},
+
+  {t:"Les et ekte datablad",ty:"opp",tema:"ps",ar:["ana","prod"],u:P+"m2/datablad",d:"Finn sikkerhetsdatabladet for aceton og svar på spørsmål om farer, flammepunkt, verneutstyr og førstehjelp."},
+  {t:"Se deg rundt",ty:"opp",tema:"ps",ar:["prod"],u:P+"m1/se-deg-rundt",d:"Finn eksempler på personsikkerhetsfarer og prosessikkerhetsfarer på skolen.",x:["Refleksjon"]},
+  {t:"Fellesnevnere i storulykker",ty:"opp",tema:"ps",ar:["prod"],u:P+"m6/fellesnevnere",d:"Hva har ulykkene til felles, og hva kan du bruke på skolens anlegg eller lab?",x:["Refleksjon"]},
+
+  {t:"Lag en SJA",ty:"grp",tema:"ps",ar:["prod","ana"],u:P+"m5/sja",d:"Velg en jobb, bytte pakning eller fortynne svovelsyre, og fyll ut et SJA-skjema sammen.",x:["3–4 elever"]},
+  {t:"Mini-HAZOP på en varmeveksler",ty:"grp",tema:"ps",ar:["tek"],u:P+"m5/hazop",d:"Bruk guideord som «ingen strømning» og «mer temperatur» for å finne årsak, konsekvens og tiltak.",x:["Med løsningsforslag"]},
+
+  {t:"Kartlegg nivåsikringen på skolens anlegg",ty:"pra",tema:"ps",ar:["tek","ana"],u:P+"m4/nivasikring",d:"Arbeidsark: finn instrumentene, tegn flytskjema, lag forriglingsmatrise og gjennomfør funksjonstest.",x:["Skolens anlegg"]},
+
+  {t:"Prøv deg i prosessikkerhet",ty:"test",tema:"ps",ar:["prod","tek"],u:P+"prove",d:"Blandede spørsmål fra hele temaet. Se hva du kan, og hva du bør lese mer om."}
 ];
-function progress(tp){
-  if(!tp.storeKey) return 0;
-  try{const s=JSON.parse(localStorage.getItem(tp.storeKey)||"{}");return Object.entries(s.done||{}).filter(([k,v])=>v&&/^m\d/.test(k)).length;}catch(e){return 0}
+
+const state={ty:null,ar:null,tema:null,q:""};
+const $=id=>document.getElementById(id);
+function chip(label,c,on,click){const b=document.createElement("button");b.className="fchip";b.setAttribute("aria-pressed",on);if(c)b.style.setProperty("--c",c);b.innerHTML=(c?"<i></i>":"")+label;b.onclick=click;return b;}
+function buildFilters(){
+  const ft=$("fType"),fa=$("fArea");ft.querySelectorAll("button").forEach(b=>b.remove());fa.querySelectorAll("button,select").forEach(b=>b.remove());
+  ft.append(chip("Alle",null,!state.ty,()=>set({ty:null})));
+  for(const k in TYPES) if(RES.some(r=>r.ty===k)) ft.append(chip(TYPES[k].pl,TYPES[k].c,state.ty===k,()=>set({ty:state.ty===k?null:k})));
+  fa.append(chip("Alle",null,!state.ar,()=>set({ar:null})));
+  for(const k in AREAS) fa.append(chip(AREAS[k].n,AREAS[k].c,state.ar===k,()=>set({ar:state.ar===k?null:k})));
+  const sel=document.createElement("select");sel.className="fsel";sel.setAttribute("aria-label","Tema");
+  sel.innerHTML=`<option value="">Alle temaer</option>`+Object.entries(TEMAER).filter(([k,t])=>t.live).map(([k,t])=>`<option value="${k}" ${state.tema===k?"selected":""}>${t.n}</option>`).join("");
+  sel.onchange=()=>set({tema:sel.value||null});fa.append(sel);
 }
-function render(f){
-  const g=document.getElementById("grid");g.innerHTML="";
-  TOPICS.filter(tp=>!f||tp.areas.includes(f)).forEach(tp=>{
-    const a=AREAS[tp.areas[0]];
-    const el=document.createElement("article");el.className="card "+(tp.live?"live":"soon");
-    el.style.setProperty("--c",a.c);el.style.setProperty("--cs",a.s);
-    const chips=tp.areas.map(k=>`<span class="chip" style="--c:${AREAS[k].c};--cs:${AREAS[k].s}">${AREAS[k].n}</span>`).join("");
-    let status;
-    if(tp.live){const n=progress(tp),pct=Math.round(100*n/tp.modules);
-      status=`<span class="pill open">Åpent</span>`+(n?`<span class="bar" aria-hidden="true"><i style="width:${pct}%"></i></span><span>${n}/${tp.modules}</span>`:`<span>${tp.modules} moduler</span>`);}
-    else status=`<span class="pill soon">Kommer</span>`;
-    el.innerHTML=`<div class="art"><span class="tagno">${tp.tag}</span>${ICONS[tp.icon]}</div>`+
-      (tp.live?`<span class="go" aria-hidden="true">→</span>`:"")+
-      `<div class="body"><div class="chips">${chips}</div><h3>${tp.live?`<a href="${tp.href}">${tp.t}</a>`:tp.t}</h3><p>${tp.d}</p><div class="status">${status}</div></div>`;
-    g.appendChild(el);
+const norm=s=>s.toLowerCase();
+function render(){
+  const q=norm(state.q.trim());
+  const list=RES.filter(r=>(!state.ty||r.ty===state.ty)&&(!state.ar||r.ar.includes(state.ar))&&(!state.tema||r.tema===state.tema)&&
+    (!q||norm(r.t+" "+r.d+" "+TYPES[r.ty].n+" "+TEMAER[r.tema].n+" "+(r.x||[]).join(" ")).includes(q)));
+  const g=$("grid");g.innerHTML="";
+  if(!list.length) g.innerHTML=`<div class="empty">Ingen treff. Prøv et annet søkeord eller nullstill filteret.</div>`;
+  list.forEach(r=>{
+    const T=TYPES[r.ty];const el=document.createElement("article");el.className="card";
+    el.style.setProperty("--c",T.c);el.style.setProperty("--cs",T.s);
+    const tags=[`<span class="tag">${TEMAER[r.tema].n}</span>`].concat((r.x||[]).map(x=>`<span class="tag${x==="Skolens anlegg"?" hl":""}">${x}</span>`)).join("");
+    el.innerHTML=`<div class="ctop"><span class="cic">${T.i}</span><span class="ctype">${T.n}</span></div><h3><a href="${r.u}">${r.t}</a></h3><p>${r.d}</p><div class="meta">${tags}</div>`;
+    g.append(el);
   });
+  $("count").textContent=`${list.length} av ${RES.length}`;
+  $("reset").hidden=!(state.ty||state.ar||state.tema||state.q);
+  $("resTitle").textContent=state.ty?TYPES[state.ty].pl:(state.tema?TEMAER[state.tema].n:"Alle ressurser");
 }
-let cur=null;
-const areaBtns=document.querySelectorAll(".area"),info=document.getElementById("filterInfo"),showAll=document.getElementById("showAll");
-function setFilter(f){
-  cur=f;areaBtns.forEach(b=>b.setAttribute("aria-pressed",b.dataset.f===f));
-  info.textContent=f?`Viser: ${AREAS[f].n}`:"Trykk på et område over for å filtrere";
-  showAll.hidden=!f;render(f);
-}
-areaBtns.forEach(b=>b.addEventListener("click",()=>{setFilter(cur===b.dataset.f?null:b.dataset.f);document.getElementById("temaer").scrollIntoView({behavior:"smooth"});}));
-showAll.addEventListener("click",()=>setFilter(null));
-setFilter(null);
+function set(p,scroll){Object.assign(state,p);buildFilters();render();if(scroll)$("ressurser").scrollIntoView({behavior:"smooth"});}
+$("reset").onclick=()=>{$("q").value="";set({ty:null,ar:null,tema:null,q:""});};
+$("q").addEventListener("input",e=>set({q:e.target.value}));
+$("q").addEventListener("keydown",e=>{if(e.key==="Enter")$("ressurser").scrollIntoView({behavior:"smooth"});});
 
-const live=TOPICS.filter(t=>t.live);
-document.getElementById("roTopics").textContent=live.length;
-document.getElementById("roMods").textContent=live.reduce((s,t)=>s+(t.modules||0),0);
-document.getElementById("roDone").textContent=live.reduce((s,t)=>s+progress(t),0);
+/* Hurtigvalg i toppen */
+const qk=$("quick");
+for(const k in TYPES){const n=RES.filter(r=>r.ty===k).length;if(!n)continue;
+  const b=document.createElement("button");b.style.setProperty("--qc",TYPES[k].c);
+  b.innerHTML=`<span class="qi">${TYPES[k].i}</span>${TYPES[k].pl} <b>${n}</b>`;b.onclick=()=>set({ty:k},true);qk.append(b);}
 
+/* Temakort */
+const tg=$("tgrid");
+for(const k in TEMAER){const t=TEMAER[k];const n=RES.filter(r=>r.tema===k);
+  const el=document.createElement(t.live?"button":"div");el.className="tcard"+(t.live?"":" soon");
+  el.style.setProperty("--c",t.c);el.style.setProperty("--cs",t.cs);
+  const akt=n.filter(r=>r.ty!=="fag").length,fag=n.length-akt;
+  el.innerHTML=`<span class="ti">${t.i}</span><b>${t.n}</b><span>${t.live?`${fag} fagtekster · ${akt} aktiviteter`:"Kommer"}</span>`;
+  if(t.live) el.onclick=()=>{$("q").value="";set({tema:k,ty:null,ar:null,q:""},true);};
+  tg.append(el);}
+
+set({});
 if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
-  const tt=document.getElementById("tTop"),tb=document.getElementById("tBot");
-  setInterval(()=>{tt.textContent=(78.4+(Math.random()-.5)*0.6).toFixed(1);tb.textContent=(98.1+(Math.random()-.5)*0.8).toFixed(1);},1500);
+  const tt=$("tTop"),tb=$("tBot");
+  if(tt) setInterval(()=>{tt.textContent=(78.4+(Math.random()-.5)*0.6).toFixed(1);tb.textContent=(98.1+(Math.random()-.5)*0.8).toFixed(1);},1500);
 }
 </script>
 </body>
