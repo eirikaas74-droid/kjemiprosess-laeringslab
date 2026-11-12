@@ -127,7 +127,7 @@ section.res{padding:28px 0 56px}
 .empty{grid-column:1/-1;padding:40px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
 
 /* ---------- Temaer ---------- */
-section.temaer{padding:8px 0 64px}
+section.temaer{padding:44px 0 40px}
 section.temaer h2{font-size:2.2rem;font-weight:700;text-transform:uppercase;margin-bottom:6px}
 section.temaer .sub{color:var(--muted);margin:0 0 18px}
 .tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
@@ -156,7 +156,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="wrap">
     <div class="topbar">
       <div class="brand">Kjemiprosess <span>læringslab</span></div>
-      <nav class="topnav"><a href="#ressurser">Ressurser</a><a href="#temaer">Temaer</a><a href="prosessikkerhet/#start">For lærere</a></nav>
+      <nav class="topnav"><a href="#temaer">Temaer</a><a href="#ressurser">Ressurser</a><a href="prosessikkerhet/#start">For lærere</a></nav>
     </div>
     <div class="hero-in">
       <div>
@@ -241,6 +241,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 </header>
 
 <main>
+  <section class="temaer" id="temaer"><div class="wrap">
+    <h2>Temaer</h2>
+    <p class="sub">Velg et tema for å se alt innholdet, eller åpne temasiden. Flere temaer kommer.</p>
+    <div class="tgrid" id="tgrid"></div>
+  </div></section>
+
   <div class="filters" id="ressurser">
     <div class="wrap">
       <div class="frow" id="fType"><span class="fl">Type</span></div>
@@ -256,11 +262,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     <div class="grid" id="grid"></div>
   </div></section>
 
-  <section class="temaer" id="temaer"><div class="wrap">
-    <h2>Temaer</h2>
-    <p class="sub">Velg et tema for å se alt innhold innenfor det. Flere temaer kommer.</p>
-    <div class="tgrid" id="tgrid"></div>
-  </div></section>
 </main>
 
 <footer><div class="wrap"><span>Kjemiprosess læringslab</span><span>Vg2 kjemiprosess- og laboratoriefag · KPL02-01</span></div></footer>
