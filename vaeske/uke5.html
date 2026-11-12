@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Del 5: Pumper</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="kurs.css">
+
+</head>
+<body>
+<div class="coursebar"><div class="wrap"><a href="index.html">← Væske i prosessindustrien</a><nav class="weeks" aria-label="Deler"><a href="uke1.html" title="Del 1: Væskers egenskaper">1</a><a href="uke2.html" title="Del 2: Trykk i væsker">2</a><a href="uke3.html" title="Del 3: Strømning i rør">3</a><a href="uke4.html" title="Del 4: Trykktap og energi i rørsystemer">4</a><a href="uke5.html" title="Del 5: Pumper" aria-current="page">5</a><a href="uke6.html" title="Del 6: Måling, styring og helhet">6</a></nav></div></div>
+<div class="sitebar"><div class="wrap"><a href="../">← Alle ressurser</a><span>Kjemiprosess <b>læringslab</b></span></div></div>
+<header class="top">
+  <div class="wrap">
+    <div>
+      <div class="tag">Væske i prosessindustrien · Vg2 kjemiprosess · Del 5 av 6</div>
+      <h1 style="margin-top:10px">Pumper</h1>
+      <p class="lede">Pumpen er hjertet i et prosessanlegg. Den gir væsken energien som trengs for å løfte den og overvinne trykktapet. Men hvor mye pumper den egentlig, og hva skjer når vi struper en ventil?</p>
+      <div class="meta"><span>Tidsbruk <b>ca. 4 økter</b></span><span>Forkunnskaper <b>trykktap og systemkurve (del 4)</b></span></div>
+    </div>
+    <div class="goals">
+      <div class="tag">Etter denne uken skal du kunne</div>
+      <ul>
+        <li>beskrive sentrifugalpumper og fortrengningspumper og forklare virkemåten</li>
+        <li>lese en pumpekurve og finne arbeidspunktet mot systemkurven</li>
+        <li>sammenligne regulering med struping og med turtall, og beregne effekt og energibruk</li>
+        <li>forklare kavitasjon og bruke NPSH til å vurdere risikoen</li>
+        <li>måle pumpekurven til pumpen på riggen</li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Innhold"><div class="wrap"><ol id="toc">
+  <li><a href="#typer"><span>1</span>Pumpetyper</a></li>
+  <li><a href="#kurver"><span>2</span>Pumpekurve</a></li>
+  <li><a href="#regulering"><span>3</span>Regulering og energi</a></li>
+  <li><a href="#kavitasjon"><span>4</span>Kavitasjon</a></li>
+  <li><a href="#simulering"><span>5</span>Simulering</a></li>
+  <li><a href="#labark"><span>6</span>Labark</a></li>
+  <li><a href="#oppgaver"><span>7</span>Oppgaver</a></li>
+  <li><a href="#forklar"><span>8</span>Forklar for hverandre</a></li>
+  <li><a href="#oppsummering"><span>9</span>Oppsummering</a></li>
+</ol></div></nav>
+
+<main>
+<section id="typer">
+  <div class="wrap">
+    <div class="sechead"><span class="step">01</span><h2>To hovedtyper pumper</h2></div>
+    <div class="two" style="margin-bottom:22px">
+      <div class="prose stack">
+        <p><b>Sentrifugalpumpen</b> er den vanligste pumpen i prosessindustrien. Et løpehjul med skovler roterer raskt. Væsken kommer inn i midten (sugeøyet), blir slynget utover av skovlene og får høy hastighet. I pumpehuset, som er formet som et snegleskall, bremses væsken ned, og hastigheten blir omgjort til trykk.</p>
+        <p>En sentrifugalpumpe leverer mindre væske jo høyere trykk den må pumpe mot. Den tåler å gå en kort stund mot stengt ventil, men da blir all energien til varme.</p>
+        <p><b>Fortrengningspumper</b> (stempel-, membran-, tannhjuls- og skruepumper) flytter en fast mengde væske for hver omdreining eller hvert slag. Volumstrømmen er nesten uavhengig av trykket. De passer for viskøse væsker, høye trykk og nøyaktig dosering. Men de må <b>aldri</b> gå mot stengt ventil: Trykket stiger til noe ryker. Derfor skal de alltid ha en sikkerhetsventil.</p>
+      </div>
+      <div class="tablebox" style="align-self:start"><table>
+        <thead><tr><th></th><th>Sentrifugalpumpe</th><th>Fortrengningspumpe</th></tr></thead>
+        <tbody>
+          <tr><td>Prinsipp</td><td>Gir væsken fart, som blir til trykk</td><td>Flytter fast volum per slag</td></tr>
+          <tr><td>Volumstrøm</td><td>Avhenger av mottrykket</td><td>Nesten konstant</td></tr>
+          <tr><td>Stengt ventil</td><td>Tåles kort tid</td><td>Farlig, krever sikkerhetsventil</td></tr>
+          <tr><td>Passer for</td><td>Store mengder, tynne væsker</td><td>Viskøse væsker, dosering, høyt trykk</td></tr>
+          <tr><td>Regulering</td><td>Ventil eller turtall</td><td>Turtall eller slaglengde, aldri struping</td></tr>
+        </tbody></table></div>
+    </div>
+    <div class="animbox">
+      <canvas class="anim" id="imp" data-h="340" role="img" aria-label="Animasjon av løpehjul i en sentrifugalpumpe med væske som slynges utover"></canvas>
+      <aside>
+        <div class="ctrl"><label for="imN">Turtall <output id="imNo"></output></label><input type="range" id="imN" min="0" max="3000" step="50" value="1450"></div>
+        <div class="ctrl"><label for="imS">Trykk på sugesiden <output id="imSo"></output></label><input type="range" id="imS" min="0" max="100" step="1" value="80"></div>
+        <div class="kv" id="imRead"></div>
+        <div class="warn" id="imWarn" hidden>Kavitasjon: Trykket i sugeøyet er så lavt at væsken koker. Dampboblene klapper sammen med smell når trykket øker ut mot skovlene, og river løs metall.</div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="kurver">
+  <div class="wrap">
+    <div class="sechead"><span class="step">02</span><h2>Pumpekurve, systemkurve og arbeidspunkt</h2></div>
+    <div class="two">
+      <div class="prose stack">
+        <p>Hvor mye energi pumpen gir væsken, oppgis som <b>løftehøyde</b> <var>H</var> i meter. Det er så høyt pumpen kunne løftet væsken hvis det ikke fantes noe trykktap. Fordelen med meter er at det gjelder uansett væske. Trykket pumpen gir, avhenger av tettheten.</p>
+        <p>Produsenten oppgir en <b>pumpekurve</b> som viser løftehøyden ved ulike volumstrømmer. For en sentrifugalpumpe faller kurven: Mer væske gir lavere løftehøyde.</p>
+        <p>Anlegget har sin egen kurve, <b>systemkurven</b>, som du lagde i del 4. Den består av en statisk del (høydeforskjellen som alltid må overvinnes) og en dynamisk del (trykktapet, som øker med volumstrømmen i andre).</p>
+        <p>Pumpen og anlegget må bli «enige». Det skjer i <b>arbeidspunktet</b>, der kurvene krysser hverandre. Der leverer pumpen akkurat den løftehøyden anlegget krever ved den volumstrømmen.</p>
+      </div>
+      <div class="stack">
+        <div class="formula" role="img" aria-label="Løftehøyde H er lik delta p delt på rho g">
+          <div class="tag" style="margin-bottom:8px">Løftehøyde</div>
+          <div class="eq"><var>H</var><span>=</span><span class="frac"><span><var>p</var><sub>ut</sub> − <var>p</var><sub>inn</sub></span><span><var>ρ</var>·<var>g</var></span></span></div>
+        </div>
+        <div class="formula" role="img" aria-label="Systemkurve H system er lik H statisk pluss k ganger Q i andre">
+          <div class="tag" style="margin-bottom:8px">Systemkurve</div>
+          <div class="eq"><var>H</var><sub>system</sub><span>=</span><span class="underbrace"><span><var>H</var><sub>stat</sub></span><small>høyde</small></span><span>+</span><span class="underbrace"><span><var>k</var>·<var>Q</var>²</span><small>trykktap</small></span></div>
+        </div>
+        <div class="chart"><h4>Arbeidspunktet</h4><div class="cap">Blå: pumpekurve. Oransje: systemkurve.</div><svg id="apSvg" viewBox="0 0 420 240" role="img" aria-label="Pumpekurve og systemkurve som krysser i arbeidspunktet"></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="regulering">
+  <div class="wrap">
+    <div class="sechead"><span class="step">03</span><h2>Regulering og energi</h2></div>
+    <div class="two">
+      <div class="prose stack">
+        <p>Ofte trenger prosessen mindre væske enn pumpen gir med helt åpen ventil. Det er to vanlige måter å regulere på.</p>
+        <p><b>Struping med ventil</b> gjør systemkurven brattere, slik du så i del 4. Arbeidspunktet flytter seg mot venstre. Det er enkelt og billig, men pumpen jobber fortsatt mot et høyt trykk, og energien blir til varme i ventilen.</p>
+        <p><b>Turtallsregulering</b> med frekvensomformer senker hele pumpekurven. Pumpen gir akkurat den løftehøyden som trengs. Fordi effekten går med turtallet i tredje, sparer det mye energi. 20 % lavere turtall gir omtrent halvparten av effekten.</p>
+        <p>To pumper i <b>serie</b> gir dobbel løftehøyde. To pumper i <b>parallell</b> gir dobbel volumstrøm ved samme løftehøyde. I praksis blir økningen mindre, fordi systemkurven også stiger.</p>
+      </div>
+      <div class="stack">
+        <div class="formula" role="img" aria-label="Hydraulisk effekt P er lik rho g Q H, akseleffekt er P hydraulisk delt på eta">
+          <div class="tag" style="margin-bottom:8px">Effekt</div>
+          <div class="eq"><var>P</var><sub>hyd</sub><span>=</span><var>ρ</var><span>·</span><var>g</var><span>·</span><var>Q</var><span>·</span><var>H</var><span style="margin-left:14px"><var>P</var><sub>aksel</sub></span><span>=</span><span class="frac"><span><var>P</var><sub>hyd</sub></span><span><var>η</var></span></span></div>
+          <p class="note"><var>η</var> er pumpens virkningsgrad, typisk 0,5–0,85 for sentrifugalpumper.</p>
+        </div>
+        <div class="formula" role="img" aria-label="Affinitetslovene">
+          <div class="tag" style="margin-bottom:8px">Affinitetslovene (når turtallet n endres)</div>
+          <div class="eq"><span class="frac"><span><var>Q</var><sub>2</sub></span><span><var>Q</var><sub>1</sub></span></span><span>=</span><span class="frac"><span><var>n</var><sub>2</sub></span><span><var>n</var><sub>1</sub></span></span>
+            <span class="frac" style="margin-left:14px"><span><var>H</var><sub>2</sub></span><span><var>H</var><sub>1</sub></span></span><span>=</span><span>(<span class="frac"><span><var>n</var><sub>2</sub></span><span><var>n</var><sub>1</sub></span></span>)²</span>
+            <span class="frac" style="margin-left:14px"><span><var>P</var><sub>2</sub></span><span><var>P</var><sub>1</sub></span></span><span>=</span><span>(<span class="frac"><span><var>n</var><sub>2</sub></span><span><var>n</var><sub>1</sub></span></span>)³</span></div>
+        </div>
+        <div class="callout"><b>Miljø og bærekraft</b>Pumper står for en stor del av strømforbruket i industrien. Riktig dimensjonert pumpe, turtallsregulering og lavt trykktap i rørene er noen av de enkleste tiltakene for å spare energi.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kavitasjon">
+  <div class="wrap">
+    <div class="sechead"><span class="step">04</span><h2>Kavitasjon og NPSH</h2></div>
+    <div class="two">
+      <div class="prose stack">
+        <p>I sugeøyet på en sentrifugalpumpe er trykket lavere enn i sugeledningen. Faller trykket under væskens <b>damptrykk</b>, begynner væsken å koke, selv om den er kald. Det dannes dampbobler.</p>
+        <p>Når boblene kommer ut mot skovlene der trykket er høyere, klapper de sammen. Det skjer så voldsomt at det river løs små biter av metallet. Dette kalles <b>kavitasjon</b>. Det høres som grus eller knitring i pumpen, gir vibrasjoner, lavere løftehøyde og ødelegger løpehjulet over tid.</p>
+        <p>For å unngå kavitasjon må anlegget gi et visst trykk inn til pumpen. Dette kalles <b>NPSH</b> (Net Positive Suction Head). Anlegget har en tilgjengelig NPSH (NPSH<sub>a</sub>), og pumpen krever en NPSH (NPSH<sub>r</sub>) som står i databladet. NPSH<sub>a</sub> må være større enn NPSH<sub>r</sub>, gjerne med minst 0,5 m margin.</p>
+        <p><b>Dette øker risikoen for kavitasjon:</b> varm væske (høyere damptrykk), pumpen står høyere enn væskeflaten (sugeløft), lang eller smal sugeledning, tett sil, og stor volumstrøm.</p>
+      </div>
+      <div class="stack">
+        <div class="formula" role="img" aria-label="NPSH tilgjengelig er p atm minus p damp delt på rho g pluss h s minus h f">
+          <div class="tag" style="margin-bottom:8px">Tilgjengelig NPSH, åpen sugetank</div>
+          <div class="eq"><span>NPSH<sub>a</sub></span><span>=</span><span class="frac"><span><var>p</var><sub>atm</sub> − <var>p</var><sub>damp</sub></span><span><var>ρ</var>·<var>g</var></span></span><span>+</span><var>h</var><sub>s</sub><span>−</span><var>h</var><sub>f</sub></div>
+          <p class="note"><var>h</var><sub>s</sub> væskeflaten over pumpens innløp (negativ hvis pumpen står høyere), <var>h</var><sub>f</sub> trykktap i sugeledningen (m).</p>
+        </div>
+        <div class="tablebox"><table>
+          <thead><tr><th>Vann, temperatur</th><th class="r">Damptrykk (kPa)</th></tr></thead>
+          <tbody><tr><td>20 °C</td><td class="r num">2,3</td></tr><tr><td>40 °C</td><td class="r num">7,4</td></tr><tr><td>60 °C</td><td class="r num">19,9</td></tr><tr><td>80 °C</td><td class="r num">47,3</td></tr><tr><td>100 °C</td><td class="r num">101,3</td></tr></tbody></table></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="simulering">
+  <div class="wrap">
+    <div class="sechead"><span class="step">05</span><h2>Simulering: pumpen i anlegget</h2></div>
+    <p class="prose" style="margin-bottom:18px">Pumpen henter væske fra en åpen tank og pumper den gjennom 40 m DN40-rør med 6 bend og en reguleringsventil opp til en høyere tank. Finn arbeidspunktet, prøv ulike måter å regulere på, og se hva som skjer med energibruken og risikoen for kavitasjon.</p>
+    <div class="sim">
+      <div class="panel controls">
+        <div class="ctrl"><label for="pType">Pumpetype</label><select id="pType"><option value="sentri">Sentrifugalpumpe</option><option value="fortr">Fortrengningspumpe</option></select></div>
+        <div class="ctrl"><label for="pAnt">Antall pumper</label><select id="pAnt"><option value="1">Én pumpe</option><option value="serie">To i serie</option><option value="par">To i parallell</option></select></div>
+        <div class="ctrl"><label for="pN">Turtall <output id="pNo"></output></label><input type="range" id="pN" min="40" max="110" step="1" value="100"></div>
+        <div class="ctrl"><label for="pV">Ventilåpning <output id="pVo"></output></label><input type="range" id="pV" min="0" max="100" step="1" value="100"></div>
+        <div class="ctrl"><label for="pH">Statisk høyde <output id="pHo"></output></label><input type="range" id="pH" min="0" max="25" step="0.5" value="8"></div>
+        <div class="ctrl"><label for="pF">Væske</label><select id="pF"><option value="vann">Vann</option><option value="glykol">Glykol/vann 50 %</option><option value="olje">Hydraulikkolje VG 46</option></select></div>
+        <div class="ctrl"><label for="pT">Temperatur <output id="pTo"></output></label><input type="range" id="pT" min="10" max="90" step="1" value="20"></div>
+        <div class="ctrl"><label for="pS">Væskeflaten i sugetanken over pumpen <output id="pSo"></output></label><input type="range" id="pS" min="-6" max="4" step="0.25" value="1"></div>
+        <button type="button" class="ghost" id="pReset">Tilbakestill</button>
+      </div>
+      <div class="stack" style="min-width:0">
+        <div class="gauges">
+          <div class="gauge"><div class="k">Volumstrøm</div><div class="val" id="gQ"></div><div class="sub">L/min</div></div>
+          <div class="gauge"><div class="k">Løftehøyde</div><div class="val" id="gH"></div><div class="sub" id="gHs"></div></div>
+          <div class="gauge"><div class="k">Virkningsgrad</div><div class="val" id="gE"></div><div class="sub">%</div></div>
+          <div class="gauge total"><div class="k">Akseleffekt</div><div class="val" id="gP"></div><div class="sub" id="gPs"></div></div>
+        </div>
+        <div class="chart"><h4>Pumpekurve og systemkurve</h4><div class="cap" id="chCap"></div><svg id="chHQ" viewBox="0 0 640 300"></svg></div>
+        <div class="two" style="gap:16px">
+          <div class="panel"><h3 style="font-size:1.15rem;margin-bottom:8px">Kavitasjon?</h3><div id="npsh" class="stack" style="gap:8px"></div></div>
+          <div class="panel"><h3 style="font-size:1.15rem;margin-bottom:8px">Energi</h3><div id="energy" class="stack" style="gap:8px"></div></div>
+        </div>
+      </div>
+    </div>
+    <h3 style="margin:30px 0 12px">Utforsk: spå først, test etterpå</h3>
+    <div class="explore">
+      <div class="task"><p><b>A.</b> Strup ventilen til 30 %. Hva skjer med volumstrømmen, løftehøyden og effekten?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Systemkurven blir brattere, og arbeidspunktet flytter seg mot venstre: lavere volumstrøm og høyere løftehøyde. Effekten går litt ned, men mye av den går nå tapt som varme i ventilen.</div></details></div>
+      <div class="task"><p><b>B.</b> Åpne ventilen helt igjen, og senk turtallet til du får samme volumstrøm som i A. Sammenlign effekten.</p>
+        <details><summary>Se forklaring</summary><div class="ans">Effekten blir betydelig lavere enn ved struping, fordi pumpen bare lager den løftehøyden anlegget trenger. Det er derfor frekvensomformere er så vanlige på store pumper.</div></details></div>
+      <div class="task"><p><b>C.</b> Velg fortrengningspumpe og strup ventilen sakte. Hva skjer?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Volumstrømmen holder seg nesten lik, mens trykket stiger kraftig. Til slutt åpner sikkerhetsventilen. Uten den ville noe gått i stykker. En fortrengningspumpe skal reguleres med turtall, aldri med ventil.</div></details></div>
+      <div class="task"><p><b>D.</b> Sett statisk høyde til 20 m. Prøv én pumpe, to i serie og to i parallell. Hva fungerer best?</p>
+        <details><summary>Se forklaring</summary><div class="ans">To i serie gir mest, fordi de dobler løftehøyden, og det er høyde dette anlegget trenger. To i parallell gir mindre økning, fordi hver pumpe fortsatt må klare hele høyden alene. Legg også merke til effekten: Ekstra volumstrøm koster mye ekstra energi.</div></details></div>
+      <div class="task"><p><b>E.</b> Sett væskeflaten 4 m under pumpen og øk temperaturen. Ved hvilken temperatur begynner pumpen å kavitere?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Allerede rundt 45–50 °C med vann ved full volumstrøm. Damptrykket stiger raskt med temperaturen og spiser opp NPSH-marginen. Løsningen er å plassere pumpen lavere enn tanken, eller å kjøle væsken.</div></details></div>
+    </div>
+  </div>
+</section>
+
+<section id="labark">
+  <div class="wrap">
+    <div class="sechead"><span class="step">06</span><h2>Labark: mål pumpekurven</h2></div>
+    <div class="two" style="margin-bottom:22px">
+      <div class="prose stack">
+        <p>Start med ventilen stengt og åpne den i trinn. For hvert trinn leser du av trykket etter pumpen og måler volumstrømmen med nivåøkning i tanken. Siden regner ut løftehøyden og tegner pumpekurven.</p>
+        <p>Riggen har bare trykkmåler etter pumpen. Trykket inn til pumpen kommer fra væskesøylen i sugetanken. Løftehøyden blir derfor omtrent:</p>
+        <div class="formula" role="img" aria-label="H er lik p målt delt på rho g minus h s">
+          <div class="eq"><var>H</var><span>≈</span><span class="frac"><span><var>p</var><sub>målt</sub></span><span><var>ρ</var>·<var>g</var></span></span><span>−</span><var>h</var><sub>s</sub></div>
+          <p class="note"><var>h</var><sub>s</sub> er høyden fra trykkmåleren opp til væskeflaten i sugetanken (negativ hvis væskeflaten er lavere enn måleren). Trykktap i sugeledningen og forskjeller i hastighet er ikke med.</p>
+        </div>
+        <p class="status">Det du skriver lagres bare i denne nettleseren på denne enheten. Ingenting sendes noe sted.</p>
+      </div>
+      <div class="stack">
+        <div class="callout"><b>Sikkerhet</b>Dette gjelder bare sentrifugalpumper. Ikke kjør pumpen mot stengt ventil lenger enn det tar å lese av måleren, fordi væsken i pumpen varmes opp.</div>
+        <div class="callout"><b>Ved stengt ventil</b>Skriv samme nivå i start og slutt. Da blir volumstrømmen 0, og du får løftehøyden ved null volumstrøm.</div>
+      </div>
+    </div>
+    <div class="panel lab stack">
+      <div class="btnrow"><span class="example" id="lEx">Eksempeldata – bytt ut med egne målinger</span></div>
+      <div class="labgrid">
+        <div class="ctrl"><label for="lF">Væske</label><select id="lF"><option value="vann">Vann</option><option value="glykol">Glykol/vann 50 %</option><option value="olje">Hydraulikkolje VG 46</option></select></div>
+        <div class="ctrl"><label for="lT">Væsketemperatur (°C)</label><input type="number" id="lT" step="1"></div>
+        <div class="ctrl"><label for="lHs">Væskeflaten i sugetanken over måleren (m)</label><input type="number" id="lHs" step="0.01"></div>
+        <div class="ctrl"><label for="lS">Tankform (der nivået måles)</label><select id="lS"><option value="rekt">Rektangulær</option><option value="syl">Sylindrisk</option></select></div>
+        <div class="ctrl"><label for="lA" id="lAlab">Indre lengde (cm)</label><input type="number" id="lA" step="0.1"></div>
+        <div class="ctrl" id="lBW"><label for="lB">Indre bredde (cm)</label><input type="number" id="lB" step="0.1"></div>
+      </div>
+      <div class="tablebox"><table>
+        <thead><tr><th>Ventil</th><th>Nivå start (cm)</th><th>Nivå slutt (cm)</th><th>Tid (s)</th><th>p målt (kPa)</th><th class="r">Q (L/min)</th><th class="r">H (m)</th><th class="r">P<sub>hyd</sub> (W)</th><th></th></tr></thead>
+        <tbody id="lRows"></tbody></table></div>
+      <div class="btnrow">
+        <button type="button" id="lAdd">Legg til måling</button>
+        <button type="button" class="ghost" id="lClear">Tøm og start med egne målinger</button>
+        <span class="status" id="lClearC" hidden>Sikker? <button type="button" class="small" id="lClearY">Ja, tøm</button> <button type="button" class="small ghost" id="lClearN">Avbryt</button></span>
+      </div>
+      <div class="two">
+        <div class="chart"><h4>Målt pumpekurve</h4><div class="cap">Prikkene er målingene. Den stiplede kurven er tilpasset formen H = H₀ − b·Q².</div><svg id="lChart" viewBox="0 0 420 260"></svg></div>
+        <div class="panel stack"><h3 style="font-size:1.15rem">Pumpens kurve</h3><div id="lFit"></div></div>
+      </div>
+      <div class="two">
+        <div class="ctrl"><label for="lR1">Beskriv pumpekurven du målte. Hva er løftehøyden ved stengt ventil, og hvor stor er volumstrømmen med helt åpen ventil?</label><textarea id="lR1"></textarea></div>
+        <div class="ctrl"><label for="lR2">Hvorfor kunne vi strupe denne pumpen helt? Hva ville skjedd med en fortrengningspumpe? Nevn også feilkilder i målingen.</label><textarea id="lR2"></textarea></div>
+      </div>
+      <div class="btnrow"><button type="button" id="lCopy">Kopier resultater</button><span class="status" id="lCopied" role="status"></span></div>
+      <textarea id="lFb" hidden readonly style="min-height:160px;font-family:var(--f-mono);font-size:.8rem"></textarea>
+    </div>
+  </div>
+</section>
+
+<section id="oppgaver">
+  <div class="wrap">
+    <div class="sechead"><span class="step">07</span><h2>Oppgaver</h2></div>
+    <h3 style="margin-bottom:12px">Sjekk forståelsen</h3>
+    <div class="stack" id="quiz" style="max-width:780px"></div>
+    <div class="btnrow" style="margin-top:12px"><span class="score" id="qScore"></span></div>
+    <h3 style="margin:36px 0 6px">Regneoppgaver</h3>
+    <p class="prose" style="margin-bottom:14px">En sentrifugalpumpe pumper 30 m³/h vann (ρ = 998 kg/m³) med løftehøyde 25 m ved 2900 o/min. Virkningsgraden er 68 %. Bruk <var>g</var> = 9,81 m/s².</p>
+    <div class="stack" id="calcs" style="max-width:780px"></div>
+  </div>
+</section>
+
+<section id="forklar">
+  <div class="wrap">
+    <div class="sechead"><span class="step">08</span><h2>Forklar for hverandre</h2></div>
+    <div id="peer"></div>
+  </div>
+</section>
+
+<section id="oppsummering">
+  <div class="wrap">
+    <div class="sechead"><span class="step">09</span><h2>Oppsummering</h2></div>
+    <div class="two">
+      <div class="summary prose">
+        <ul>
+          <li>Sentrifugalpumper gir væsken fart som blir til trykk. Volumstrømmen faller når mottrykket øker.</li>
+          <li>Fortrengningspumper flytter et fast volum og må alltid ha sikkerhetsventil. De skal aldri strupes.</li>
+          <li>Arbeidspunktet er der pumpekurven krysser systemkurven.</li>
+          <li>Turtallsregulering sparer energi fordi effekten går med turtallet i tredje. Struping brenner energi i ventilen.</li>
+          <li>Kavitasjon skjer når trykket i sugeøyet faller under damptrykket. NPSH<sub>a</sub> må være større enn NPSH<sub>r</sub>.</li>
+        </ul>
+        <p style="margin-top:18px"><b>Neste del:</b> Måling, styring og helhet. Vi setter sammen alt du har lært til en prosesslinje med instrumenter og regulering.</p>
+      </div>
+      <div class="teacher">
+        <div class="tag">Til læreren</div>
+        <h3 style="margin:6px 0 10px">Kobling og forslag til gjennomføring</h3>
+        <p style="font-size:.95rem">Uken støtter kompetansemålene i kjemisk teknologi (KPL02-01) om å beskrive enhetsoperasjoner med prosessutstyr og forklare virkemåten, om energiomsetning, og om tiltak for miljøvennlig produksjon (energibruk ved regulering).</p>
+        <ol style="font-size:.95rem;padding-left:20px;margin:12px 0 0;display:grid;gap:4px">
+          <li>Pumpetyper og animasjonen, pumpekurve og arbeidspunkt</li>
+          <li>Regulering, energi og kavitasjon med simuleringen i par</li>
+          <li>Måling av pumpekurve på riggen og labark</li>
+          <li>Oppgaver, «Forklar for hverandre» (15–20 min) og innlevering</li>
+        </ol>
+        <p class="status" style="margin-top:12px">Pumpekurvene i simuleringen er modellkurver, ikke data for en bestemt pumpe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<footer><div class="wrap">Væske i prosessindustrien · Del 5 · Pumpekurvene er forenklede modeller.</div></footer>
+
+<script src="kurs.js"></script>
+<script>
+(function(){
+"use strict";
+const {$,nf,num,el,chart,fluid,FLUIDS,g}=K;
+
+/* ---- Løpehjul-animasjon ---- */
+const imN=$('#imN'),imS=$('#imS');let rot=0,drops=[],bub=[];
+function imState(){const n=+imN.value,s=+imS.value,H=12*Math.pow(n/1450,2),cav=n>300&&s<30+20*(n/3000);return {n,s,H,cav};}
+function imRead(){const st=imState();$('#imNo').textContent=st.n+' o/min';$('#imSo').textContent=st.s+' %';
+  $('#imRead').innerHTML=`<span>Løftehøyde ved null strøm</span><span>${nf(st.H,1)} m</span><span>Dobbelt turtall gir</span><span>4 × løftehøyde</span>`;$('#imWarn').hidden=!st.cav;}
+const imA=K.animate($('#imp'),(c,{W,H},dt)=>{
+  const st=imState(),pipe=K.css('--pipe'),soft=K.css('--pipe-soft'),ink=K.css('--ink'),muted=K.css('--muted'),sig=K.css('--signal'),bad=K.css('--bad'),surf=K.css('--surface'),mono=K.css('--f-mono');
+  c.fillStyle=surf;c.fillRect(0,0,W,H);
+  const cx=Math.min(W*0.42,W/2),cy=H/2+10,R=Math.min(110,H*0.32),Rv=R*1.35;
+  rot+=dt*st.n/60*2*Math.PI*0.15;
+  // spiralhus
+  c.fillStyle=soft;c.beginPath();for(let a=0;a<=Math.PI*2;a+=0.05){const r=R*1.08+(Rv-R*1.08)*a/(Math.PI*2);c.lineTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r);}
+  c.lineTo(cx+Rv+60,cy-Rv*0.15);c.lineTo(cx+Rv+60,cy+Rv*0.05);c.closePath();
+  c.fill();c.strokeStyle=ink;c.lineWidth=2.5;c.stroke();
+  // utløp
+  c.fillStyle=muted;c.font='11px '+mono;c.textAlign='left';c.fillText('trykkside →',cx+Rv+66,cy-Rv*0.05);
+  c.fillText('sugeøye',cx-20,cy+R*0.38+16);
+  // løpehjul
+  c.fillStyle=surf;c.beginPath();c.arc(cx,cy,R,0,7);c.fill();c.strokeStyle=muted;c.lineWidth=1;c.stroke();
+  c.strokeStyle=ink;c.lineWidth=3;
+  for(let i=0;i<6;i++){const a0=rot+i*Math.PI/3;c.beginPath();for(let t=0;t<=1;t+=0.1){const r=R*0.3+R*0.68*t,a=a0-t*0.9;c.lineTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r);}c.stroke();}
+  c.fillStyle=ink;c.beginPath();c.arc(cx,cy,R*0.12,0,7);c.fill();
+  // væskedråper
+  if(dt&&!K.reduce&&st.n>0){for(let k=0;k<3;k++)if(Math.random()<st.n/1500)drops.push({r:R*0.3,a:Math.random()*6.28,ph:0});
+    drops.forEach(d=>{const sp=st.n/1450;if(d.r<R){d.r+=dt*R*0.9*sp;d.a+=dt*st.n/60*2*Math.PI*0.15*0.8;}else{d.ph+=dt*sp;d.a+=dt*0.9*sp;d.r=R*1.08+(Rv-R*1.08)*((d.a%(2*Math.PI))+2*Math.PI)%(2*Math.PI)/(2*Math.PI)*0.9;}});
+    drops=drops.filter(d=>d.ph<2.5);if(drops.length>220)drops.splice(0,drops.length-220);}
+  c.fillStyle=pipe;drops.forEach(d=>{c.beginPath();c.arc(cx+Math.cos(d.a)*d.r,cy+Math.sin(d.a)*d.r,2.6,0,7);c.fill();});
+  // kavitasjon
+  if(st.cav&&dt&&!K.reduce){if(Math.random()<0.7)bub.push({r:R*0.32,a:Math.random()*6.28,s:2+Math.random()*3,life:0});
+    bub.forEach(b=>{b.life+=dt;b.r+=dt*R*0.8;b.a+=dt*2;});bub=bub.filter(b=>b.r<R*0.85);}else if(!st.cav)bub=[];
+  bub.forEach(b=>{const k=b.r/(R*0.85),rad=b.s*(k<0.75?1:Math.max(0.2,(1-k)*4));c.strokeStyle=bad;c.lineWidth=1.5;c.beginPath();c.arc(cx+Math.cos(b.a)*b.r,cy+Math.sin(b.a)*b.r,rad,0,7);c.stroke();});
+  if(K.reduce&&st.cav){c.strokeStyle=bad;for(let i=0;i<12;i++){const a=i*0.52,r=R*(0.35+0.04*i);c.beginPath();c.arc(cx+Math.cos(a)*r,cy+Math.sin(a)*r,3,0,7);c.stroke();}}
+  c.lineWidth=1;
+});
+[imN,imS].forEach(e=>e.addEventListener('input',()=>{imRead();imA.redraw();}));imRead();
+
+/* ---- Liten figur: arbeidspunkt ---- */
+(function(){const pts=[],sys=[];for(let q=0;q<=100;q+=2){pts.push([q,30-0.0018*q*q]);sys.push([q,8+0.0016*q*q]);}
+  let qx=Math.sqrt(22/0.0034);const r=chart($('#apSvg'),{xMax:100,yMax:32,xLabel:'volumstrøm Q',yLabel:'løftehøyde H (m)',lines:[{pts,color:'var(--pipe)'},{pts:sys,color:'var(--signal)'}],
+    dots:[{x:qx,y:8+0.0016*qx*qx,fill:'var(--ink)',label:'arbeidspunkt'}],hlines:[{y:8,label:'statisk høyde',color:'var(--muted)',below:true}]});})();
+
+/* ---- Simulering ---- */
+const P={Type:$('#pType'),Ant:$('#pAnt'),N:$('#pN'),V:$('#pV'),H:$('#pH'),F:$('#pF'),T:$('#pT'),S:$('#pS')};
+const PDEF={Type:'sentri',Ant:'1',N:100,V:100,H:8,F:'vann',T:20,S:1};
+const H0=30,Qn=250,QBEP=180,EMAX=0.72,QD=160,SLIP=0.35,RELIEF=60;
+function single(Q,s,type){ // returnerer H for én pumpe ved Q (L/min)
+  if(type==='sentri')return H0*s*s-0.4*H0*Math.pow(Q/Qn,2);
+  // fortrengning: Q = s*QD - SLIP*H  =>  H = (s*QD - Q)/SLIP, begrenset av sikkerhetsventil
+  return Math.min(RELIEF,(s*QD-Q)/SLIP);}
+function pumpH(Q,s,type,ant){if(ant==='serie')return 2*single(Q,s,type);if(ant==='par')return single(Q/2,s,type);return single(Q,s,type);}
+function eff(Q,s,type,ant){const q=ant==='par'?Q/2:Q;if(type==='fortr')return 0.8;const x=(q/s-QBEP)/QBEP;return Math.max(0.05,EMAX*(1-x*x));}
+function sysH(Q,st){if(Q<=0)return st.Hs;const r=K.pipe({Q,D:41.9,L:40,sumK:6*K.KB+K.valveK(st.V)+0.5+1.0,rho:st.F.rho,mu:st.F.mu,eps:0.045e-3});return st.Hs+r.dp/(st.F.rho*g);}
+function solve(st){const f=Q=>pumpH(Q,st.s,st.type,st.ant)-sysH(Q,st);let lo=0,hi=st.type==='sentri'?(st.ant==='par'?2:1)*Qn*st.s/Math.sqrt(0.4)*0.999:(st.ant==='par'?2:1)*st.s*QD;
+  if(f(0)<0)return {Q:0,H:pumpH(0,st.s,st.type,st.ant),none:true};
+  for(let i=0;i<60;i++){const m=(lo+hi)/2;f(m)>0?lo=m:hi=m;}const Q=(lo+hi)/2;return {Q,H:sysH(Q,st)};}
+function pv(F,t,key){return key==='vann'?K.pvWater(t):key==='glykol'?0.6*K.pvWater(t):5;}
+function pState(){const F=fluid(P.F.value,+P.T.value);return {F,type:P.Type.value,ant:P.Ant.value,s:+P.N.value/100,V:+P.V.value,Hs:+P.H.value,T:+P.T.value,hs:+P.S.value,key:P.F.value};}
+function pUpdate(){const st=pState();
+  $('#pNo').textContent=P.N.value+' %';$('#pVo').textContent=P.V.value+' %';$('#pHo').textContent=nf(st.Hs,1)+' m';$('#pTo').textContent=P.T.value+' °C';$('#pSo').textContent=(st.hs>0?'+':'')+nf(st.hs,2)+' m';
+  const op=solve(st),Q=op.Q,Hp=op.H,q=Q/60000;
+  const relief=st.type==='fortr'&&pumpH(Q,st.s,st.type,st.ant)>=RELIEF*(st.ant==='serie'?2:1)-0.01&&st.V<100;
+  // ved fortrengning og struping: sikkerhetsventil leder overskudd tilbake
+  const eta=eff(Q,st.s,st.type,st.ant),Phyd=st.F.rho*g*q*Hp,Pak=Q>0?Phyd/eta:(st.type==='sentri'?0.25*st.F.rho*g*(QBEP/60000)*H0*st.s*st.s*st.s/EMAX*(st.ant==='1'?1:2):0);
+  $('#gQ').textContent=nf(Q,0);$('#gH').textContent=nf(Hp,1);$('#gHs').textContent='m · '+nf(st.F.rho*g*Hp/1e5,2)+' bar';$('#gE').textContent=nf(eta*100,0);
+  $('#gP').textContent=Pak<1000?nf(Pak,0):nf(Pak/1000,2);$('#gPs').textContent=Pak<1000?'W':'kW';
+  // diagram
+  const Qmax=Math.max(st.type==='sentri'?(st.ant==='par'?2:1)*Qn*1.1/Math.sqrt(0.4)*0.75:(st.ant==='par'?2:1)*QD*1.15,Q*1.2,100);
+  const pc=[],sc=[],ref=[];for(let i=0;i<=80;i++){const x=Qmax*i/80;const h=pumpH(x,st.s,st.type,st.ant);if(h>=0)pc.push([x,h]);sc.push([x,sysH(x,st)]);if(st.s!==1){const h1=pumpH(x,1,st.type,st.ant);if(h1>=0)ref.push([x,h1]);}}
+  const yMax=Math.max(10,...pc.map(p=>p[1]),Hp)*1.1;
+  const lines=[];if(ref.length)lines.push({pts:ref,color:'var(--muted)',dash:'4 4',w:1.4,label:'100 % turtall'});lines.push({pts:pc,color:'var(--pipe)',label:'pumpe'},{pts:sc.filter(p=>p[1]<=yMax*1.2),color:'var(--signal)',label:'system'});
+  chart($('#chHQ'),{xMax:Qmax,yMax,xLabel:'volumstrøm (L/min)',yLabel:'løftehøyde (m)',lines,dots:[{x:Q,y:Hp,fill:'var(--ink)',r:6,label:nf(Q,0)+' L/min, '+nf(Hp,1)+' m'}],hlines:[{y:st.Hs,label:'statisk høyde '+nf(st.Hs,1)+' m',color:'var(--muted)',right:true,below:true}]});
+  $('#chCap').textContent=op.none?'Pumpen klarer ikke den statiske høyden. Den går mot stengt, og ingen væske kommer fram.':relief?'Sikkerhetsventilen er åpen. Trykket har nådd innstillingen, og overskuddet går i retur.':'Arbeidspunktet er der pumpekurven krysser systemkurven.';
+  // NPSH
+  const suc=K.pipe({Q:st.ant==='par'?Q/2:Q,D:53.1,L:5,sumK:3.25,rho:st.F.rho,mu:st.F.mu}),hf=suc.dp/(st.F.rho*g);
+  const npa=(101325-pv(st.F,st.T,st.key))/(st.F.rho*g)+st.hs-hf,qq=(st.ant==='par'?Q/2:Q),npr=st.type==='sentri'?1+4*Math.pow(qq/(Qn*st.s||1),2)*st.s*st.s:1.5;const marg=npa-npr;
+  $('#npsh').innerHTML=`<div class="kv"><span>Damptrykk</span><span>${nf(pv(st.F,st.T,st.key)/1000,1)} kPa</span><span>Trykktap i sugeledningen</span><span>${nf(hf,2)} m</span><span>NPSH tilgjengelig</span><span>${nf(npa,2)} m</span><span>NPSH påkrevd</span><span>${nf(npr,2)} m</span></div>`+
+    (marg<0?'<div class="warn">Pumpen kaviterer. NPSH tilgjengelig er lavere enn påkrevd. Senk pumpen, kjøl væsken eller reduser volumstrømmen.</div>':marg<0.5?'<div class="warn">For liten margin (under 0,5 m). Fare for kavitasjon.</div>':`<div class="okbox">Ingen kavitasjon. Margin ${nf(marg,1)} m.</div>`);
+  const valveLoss=Q>0?K.pipe({Q,D:41.9,L:0,sumK:K.valveK(st.V),rho:st.F.rho,mu:st.F.mu}).dp*q:0;
+  $('#energy').innerHTML=`<div class="kv"><span>Hydraulisk effekt</span><span>${nf(Phyd/1000,2)} kW</span><span>Akseleffekt</span><span>${nf(Pak/1000,2)} kW</span><span>Tapt i ventilen</span><span>${nf(valveLoss/1000,2)} kW</span><span>Energi per år (døgndrift)</span><span>${nf(Pak/1000*8760,0)} kWh</span></div>`;}
+Object.values(P).forEach(e=>e.addEventListener('input',pUpdate));$('#pReset').addEventListener('click',()=>{for(const k in PDEF)P[k].value=PDEF[k];pUpdate();});pUpdate();
+
+/* ---- Labark pumpekurve ---- */
+const LKEY='uke5-pumpekurve-v1';
+const LEX={F:'vann',T:20,Hs:0.3,S:'rekt',A:40,B:30,ex:true,rows:[['Stengt',20,20,30,120.5],['1/8 åpen',20,23.3,30,117.6],['1/4 åpen',23.3,30,30,109.1],['1/2 åpen',30,40,30,95.0],['3/4 åpen',40,52.5,30,80.9],['Helt åpen',52.5,66.7,30,69.2]],r1:'',r2:''};
+let L=K.load(LKEY,LEX);const ls=()=>K.save(LKEY,L);
+const LF={F:$('#lF'),T:$('#lT'),Hs:$('#lHs'),S:$('#lS'),A:$('#lA'),B:$('#lB')};
+const lF=()=>fluid(L.F,Number.isFinite(num(L.T))?num(L.T):20);
+function lRow(r){const A=K.tankArea(L.S,L.A,L.B),h0=num(r[1]),h1=num(r[2]),t=num(r[3]),p=num(r[4]);const Q=(A>0&&t>0&&h1>=h0)?A*(h1-h0)/100/t*60000:NaN;
+  const F=lF(),H=p*1000/(F.rho*g)-(num(L.Hs)||0);return {Q,H,P:F.rho*g*Q/60000*H,ok:Number.isFinite(Q)&&Number.isFinite(H)};}
+function lShape(){const syl=L.S==='syl';$('#lAlab').textContent=syl?'Indre diameter (cm)':'Indre lengde (cm)';$('#lBW').hidden=syl;}
+function lRender(){for(const k in LF)LF[k].value=L[k]??'';$('#lR1').value=L.r1||'';$('#lR2').value=L.r2||'';$('#lEx').hidden=!L.ex;lShape();
+  const tb=$('#lRows');tb.innerHTML='';const names=['Ventil','Nivå start','Nivå slutt','Tid','Målt trykk'];
+  L.rows.forEach((row,i)=>{const tr=document.createElement('tr');
+    tr.innerHTML=names.map((n,j)=>`<td><input type="text" ${j?'inputmode="decimal"':''} id="lr${i}_${j}" value="${K.esc(row[j]??'')}" aria-label="${n}, måling ${i+1}"></td>`).join('')+
+      `<td class="r num" data-c="q"></td><td class="r num" data-c="h"></td><td class="r num" data-c="p"></td><td><button type="button" class="small ghost" aria-label="Fjern måling ${i+1}">Fjern</button></td>`;
+    tr.querySelectorAll('input').forEach((inp,j)=>inp.addEventListener('input',()=>{L.rows[i][j]=inp.value;L.ex=false;$('#lEx').hidden=true;lCalc();ls();}));
+    tr.querySelector('button').addEventListener('click',()=>{L.rows.splice(i,1);lRender();ls();});tb.appendChild(tr);});
+  lCalc();}
+function lCalc(){const pts=[];[...$('#lRows').children].forEach((tr,i)=>{const r=lRow(L.rows[i]);const c=k=>tr.querySelector(`[data-c="${k}"]`);
+    if(r.ok){pts.push([r.Q,r.H,r.P]);c('q').textContent=nf(r.Q,1);c('h').textContent=nf(r.H,2);c('p').textContent=nf(r.P,0);}else['q','h','p'].forEach(k=>c(k).textContent='–');});
+  let fit=null;if(pts.length>=2){const xs=pts.map(p=>p[0]*p[0]),ys=pts.map(p=>p[1]),n=xs.length,sx=xs.reduce((a,b)=>a+b,0),sy=ys.reduce((a,b)=>a+b,0),sxx=xs.reduce((a,b)=>a+b*b,0),sxy=xs.reduce((a,b,i)=>a+b*ys[i],0);
+    const den=n*sxx-sx*sx;if(den!==0){const b=(n*sxy-sx*sy)/den,a=(sy-b*sx)/n;fit={H0:a,b:-b};}}
+  const qMax=Math.max(10,...pts.map(p=>p[0]))*1.2,curve=[];if(fit)for(let i=0;i<=40;i++){const q=qMax*i/40,h=fit.H0-fit.b*q*q;if(h>=0)curve.push([q,h]);}
+  chart($('#lChart'),{xMax:qMax,yMax:Math.max(1,...pts.map(p=>p[1]),fit?fit.H0:0)*1.12,xLabel:'volumstrøm (L/min)',yLabel:'løftehøyde (m)',lines:curve.length?[{pts:curve,color:'var(--signal)',dash:'6 4',w:1.8}]:[],dots:pts.map(p=>({x:p[0],y:p[1],fill:'var(--pipe)'}))});
+  const best=pts.length?pts.reduce((a,b)=>b[2]>a[2]?b:a):null;
+  $('#lFit').innerHTML=fit?`<div class="kv"><span>Løftehøyde ved Q = 0 (H₀)</span><span>${nf(fit.H0,2)} m</span><span>Trykk etter pumpen ved Q = 0</span><span>${nf((fit.H0+(num(L.Hs)||0))*lF().rho*g/1000,1)} kPa</span><span>Kurven når H = 0 ved</span><span>${fit.b>0?nf(Math.sqrt(fit.H0/fit.b),0)+' L/min':'–'}</span><span>Størst hydraulisk effekt</span><span>${best?nf(best[2],0)+' W ved '+nf(best[0],1)+' L/min':'–'}</span></div><p class="status" style="margin-top:8px">Sammenlign gjerne med pumpekurven i produsentens datablad.</p>`:'<p class="status">Legg inn minst to målinger for å tilpasse en kurve.</p>';L._fit=fit;}
+Object.entries(LF).forEach(([k,e])=>e.addEventListener('input',()=>{L[k]=e.value;L.ex=false;$('#lEx').hidden=true;lShape();lCalc();ls();}));
+$('#lR1').addEventListener('input',e=>{L.r1=e.target.value;ls();});$('#lR2').addEventListener('input',e=>{L.r2=e.target.value;ls();});
+$('#lAdd').addEventListener('click',()=>{L.rows.push(['','','','','']);lRender();ls();const f=$('#lr'+(L.rows.length-1)+'_0');if(f)f.focus();});
+K.confirm($('#lClear'),$('#lClearC'),$('#lClearY'),$('#lClearN'),()=>{L={F:L.F,T:'',Hs:'',S:L.S,A:'',B:'',ex:false,rows:[['Stengt','','','',''],['','','','',''],['','','','',''],['','','','','']],r1:'',r2:''};lRender();ls();});
+$('#lCopy').addEventListener('click',()=>{const f=L._fit;let t=`Labark del 5 – pumpekurve\nVæske: ${FLUIDS[L.F].navn}, ${L.T} °C. hs = ${L.Hs} m\nTank: ${L.S==='syl'?'sylindrisk, diameter '+L.A+' cm':'rektangulær, '+L.A+' × '+L.B+' cm'}\n\nVentil\tQ (L/min)\tp målt (kPa)\tH (m)\tP hyd (W)\n`;
+  L.rows.forEach(row=>{const r=lRow(row);if(r.ok)t+=`${row[0]}\t${nf(r.Q,1)}\t${row[4]}\t${nf(r.H,2)}\t${nf(r.P,0)}\n`;});
+  if(f)t+=`\nTilpasset kurve: H = ${nf(f.H0,2)} − ${nf(f.b,5)} · Q²  (Q i L/min)\n`;t+=`\nPumpekurven: ${L.r1||''}\n\nStruping og feilkilder: ${L.r2||''}\n`;K.copy(t,$('#lCopied'),$('#lFb'));});
+lRender();
+
+/* ---- Quiz ---- */
+K.quiz($('#quiz'),$('#qScore'),[
+ {q:'Hva skjer med volumstrømmen fra en sentrifugalpumpe når du struper ventilen på trykksiden?',o:['Den øker','Den synker, og løftehøyden øker','Den er uendret, men trykket øker til sikkerhetsventilen åpner','Pumpen stopper'],a:1,e:'Struping gjør systemkurven brattere. Arbeidspunktet flytter seg mot lavere volumstrøm og høyere løftehøyde langs pumpekurven.'},
+ {q:'Hvorfor må en fortrengningspumpe ha sikkerhetsventil?',o:['For å hindre kavitasjon','Fordi den flytter et fast volum, og trykket stiger ukontrollert hvis utløpet stenges','For å spare energi','Fordi den ikke tåler vann'],a:1,e:'En fortrengningspumpe presser ut samme volum per slag uansett mottrykk. Stenges utløpet, stiger trykket til noe ryker, med mindre en sikkerhetsventil åpner.'},
+ {q:'Hvor finner du arbeidspunktet til en pumpe i et anlegg?',o:['Der pumpekurven krysser systemkurven','På toppen av pumpekurven','Der virkningsgraden er 100 %','Ved den statiske høyden'],a:0,e:'I arbeidspunktet gir pumpen akkurat den løftehøyden anlegget krever ved den volumstrømmen.'},
+ {q:'Turtallet på en pumpe senkes med 20 %. Omtrent hvor mye endres effekten?',o:['Den synker med 20 %','Den synker til ca. 64 %','Den synker til ca. 51 %','Den øker'],a:2,e:'Effekten går med turtallet i tredje: 0,8³ ≈ 0,51. Det er derfor turtallsregulering sparer mye energi.'},
+ {q:'Hvilken endring øker risikoen for kavitasjon?',o:['Lavere væsketemperatur','Pumpen flyttes lavere enn tanken','Høyere væsketemperatur','Større sugeledning'],a:2,e:'Høyere temperatur gir høyere damptrykk, og da skal det mindre trykkfall til før væsken koker i sugeøyet.'},
+ {q:'En pumpe knitrer og høres ut som den pumper grus. Hva er den mest sannsynlige årsaken?',o:['For lav volumstrøm','Kavitasjon','Feil rotasjonsretning er umulig','For høy viskositet'],a:1,e:'Lyden kommer fra dampbobler som klapper sammen. Sjekk sil, sugeledning, væsketemperatur og nivå i sugetanken.'}
+]);
+
+/* ---- Regneoppgaver ---- */
+const Ph=998*g*(30/3600)*25;
+K.calcs($('#calcs'),[
+ {t:'a) Beregn den hydrauliske effekten i kW.',u:'kW',a:Ph/1000,hint:'Q = 30 / 3600 m³/s.',s:`P<sub>hyd</sub> = ρ·g·Q·H = 998 · 9,81 · (30/3600) · 25 = ${nf(Ph,0)} W ≈ <b>${nf(Ph/1000,2)} kW</b>.`},
+ {t:'b) Hvor stor akseleffekt trenger pumpen?',u:'kW',a:Ph/1000/0.68,s:`P<sub>aksel</sub> = ${nf(Ph/1000,2)} / 0,68 ≈ <b>${nf(Ph/1000/0.68,2)} kW</b>.`},
+ {t:'c) Turtallet senkes til 2400 o/min. Hva blir den nye volumstrømmen?',u:'m³/h',a:30*2400/2900,s:`Q₂ = 30 · 2400/2900 = <b>${nf(30*2400/2900,1)} m³/h</b>.`},
+ {t:'d) Hva blir løftehøyden ved 2400 o/min?',u:'m',a:25*Math.pow(2400/2900,2),s:`H₂ = 25 · (2400/2900)² = <b>${nf(25*Math.pow(2400/2900,2),1)} m</b>.`},
+ {t:'e) Hva blir akseleffekten ved 2400 o/min (samme virkningsgrad)?',u:'kW',a:Ph/1000/0.68*Math.pow(2400/2900,3),s:`P₂ = ${nf(Ph/1000/0.68,2)} · (2400/2900)³ ≈ <b>${nf(Ph/1000/0.68*Math.pow(2400/2900,3),2)} kW</b>. Det er en besparelse på over 40 %.`},
+ {t:'f) Pumpen henter vann ved 20 °C (damptrykk 2,34 kPa) fra en åpen tank. Væskeflaten står 1,5 m over pumpens innløp, og trykktapet i sugeledningen er 0,4 m. Beregn NPSH tilgjengelig. Bruk p<sub>atm</sub> = 101,3 kPa.',u:'m',a:(101300-2340)/(998*g)+1.1,s:`NPSH<sub>a</sub> = (101 300 − 2 340) / (998 · 9,81) + 1,5 − 0,4 = ${nf((101300-2340)/(998*g),2)} + 1,1 ≈ <b>${nf((101300-2340)/(998*g)+1.1,1)} m</b>.`}
+]);
+
+/* ---- Forklar for hverandre ---- */
+K.peer($('#peer'),{key:'uke5-medelev-v1',title:'del 5, pumper',min:'15–20',cards:[
+ {t:'Sentrifugal eller fortrengning',p:'Hvordan virker en sentrifugalpumpe, og hva er den viktigste forskjellen fra en fortrengningspumpe?',h:'Tenk på animasjonen og tabellen.',link:'#typer',ln:'Pumpetyper',
+  c:['Løpehjulet slynger væsken utover og gir den fart, som blir til trykk i pumpehuset','Volumstrømmen fra en sentrifugalpumpe avhenger av mottrykket','En fortrengningspumpe flytter et fast volum per slag','En fortrengningspumpe må ha sikkerhetsventil og skal aldri strupes']},
+ {t:'Arbeidspunktet',p:'Hva er pumpekurven, hva er systemkurven, og hvordan finner du arbeidspunktet?',h:'Tenk på figuren i del 2 og systemkurven fra del 4.',link:'#kurver',ln:'Pumpekurve',
+  c:['Pumpekurven viser løftehøyden pumpen gir ved ulike volumstrømmer','Systemkurven er statisk høyde pluss trykktap','Arbeidspunktet er der kurvene krysser','Struping gjør systemkurven brattere og flytter arbeidspunktet']},
+ {t:'Regulering og energi',p:'Hvorfor sparer turtallsregulering mer energi enn struping med ventil?',h:'Tenk på affinitetslovene og utforskoppgave A og B.',link:'#regulering',ln:'Regulering og energi',
+  c:['Ved struping går energi tapt som varme i ventilen','Lavere turtall senker hele pumpekurven','Effekten går med turtallet i tredje','Kobler til miljø, strømforbruk eller kostnader']},
+ {t:'Kavitasjon',p:'Hva er kavitasjon, hvordan merker du det, og hva kan du gjøre for å unngå det?',h:'Tenk på damptrykk og NPSH.',link:'#kavitasjon',ln:'Kavitasjon',
+  c:['Trykket i sugeøyet faller under damptrykket, og væsken koker','Boblene klapper sammen og skader løpehjulet','Merkes som knitring eller grus, vibrasjoner og lavere løftehøyde','Nevner minst ett tiltak: senke pumpen, kjøle væsken, rense silen, redusere strømmen']}
+]});
+K.toc();
+})();
+</script>
+
+<div class="wrap"><div class="weeknav"><a href="uke4.html"><span>Forrige del</span><b>Del 4: Trykktap og energi i rørsystemer</b></a><a class="next" href="uke6.html"><span>Neste del</span><b>Del 6: Måling, styring og helhet</b></a></div></div>
+</body>
+</html>

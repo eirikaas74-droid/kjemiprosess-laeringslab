@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Del 2: Trykk i væsker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="kurs.css">
+
+</head>
+<body>
+<div class="coursebar"><div class="wrap"><a href="index.html">← Væske i prosessindustrien</a><nav class="weeks" aria-label="Deler"><a href="uke1.html" title="Del 1: Væskers egenskaper">1</a><a href="uke2.html" title="Del 2: Trykk i væsker" aria-current="page">2</a><a href="uke3.html" title="Del 3: Strømning i rør">3</a><a href="uke4.html" title="Del 4: Trykktap og energi i rørsystemer">4</a><a href="uke5.html" title="Del 5: Pumper">5</a><a href="uke6.html" title="Del 6: Måling, styring og helhet">6</a></nav></div></div>
+<div class="sitebar"><div class="wrap"><a href="../">← Alle ressurser</a><span>Kjemiprosess <b>læringslab</b></span></div></div>
+<header class="top">
+  <div class="wrap">
+    <div>
+      <div class="tag">Væske i prosessindustrien · Vg2 kjemiprosess · Del 2 av 6</div>
+      <h1 style="margin-top:10px">Trykk i væsker</h1>
+      <p class="lede">Hvorfor er trykket i bunnen av en tank det samme uansett hvor bred tanken er? Og hvordan kan en trykkmåler fortelle hvor mye væske det er i tanken?</p>
+      <div class="meta"><span>Tidsbruk <b>ca. 4 økter</b></span><span>Forkunnskaper <b>tetthet (del 1)</b></span></div>
+    </div>
+    <div class="goals">
+      <div class="tag">Etter denne uken skal du kunne</div>
+      <ul>
+        <li>forklare hva trykk er og regne om mellom Pa, kPa, bar og meter vannsøyle</li>
+        <li>skille mellom absolutt trykk, manometertrykk og atmosfæretrykk</li>
+        <li>beregne hydrostatisk trykk med <var>p</var> = <var>ρ</var>·<var>g</var>·<var>h</var></li>
+        <li>forklare hvordan nivå måles med trykk, og hvilke feil som kan oppstå</li>
+        <li>kontrollere en nivå- eller trykktransmitter mot målt nivå</li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Innhold"><div class="wrap"><ol id="toc">
+  <li><a href="#trykk"><span>1</span>Trykk og enheter</a></li>
+  <li><a href="#hydrostatisk"><span>2</span>Hydrostatisk trykk</a></li>
+  <li><a href="#niva"><span>3</span>Nivåmåling</a></li>
+  <li><a href="#simulering"><span>4</span>Simulering</a></li>
+  <li><a href="#labark"><span>5</span>Labark</a></li>
+  <li><a href="#oppgaver"><span>6</span>Oppgaver</a></li>
+  <li><a href="#forklar"><span>7</span>Forklar for hverandre</a></li>
+  <li><a href="#oppsummering"><span>8</span>Oppsummering</a></li>
+</ol></div></nav>
+
+<main>
+<section id="trykk">
+  <div class="wrap">
+    <div class="sechead"><span class="step">01</span><h2>Hva er trykk?</h2></div>
+    <div class="two">
+      <div class="prose stack">
+        <p>Trykk er kraft fordelt på et areal. Står du på ski, synker du mindre ned i snøen enn med vanlige sko, fordi vekten din fordeles på et større areal. I en væske virker trykket i alle retninger, mot alle flater væsken berører.</p>
+        <p>SI-enheten for trykk er pascal (Pa), som er 1 newton per kvadratmeter. Det er en liten enhet, så i industrien brukes ofte kPa eller bar. Mange anlegg oppgir også trykk som <b>meter vannsøyle</b> (mVs), altså hvor høy en vannsøyle må være for å gi det samme trykket.</p>
+        <p><b>Atmosfæretrykket</b> er trykket fra luften rundt oss, omtrent 101,3 kPa ved havnivå. De fleste manometre i et anlegg viser trykket <b>over</b> atmosfæretrykket. Det kalles <b>manometertrykk</b> (eller overtrykk). <b>Absolutt trykk</b> regnes fra fullstendig vakuum. Er manometertrykket negativt, har vi undertrykk eller vakuum.</p>
+      </div>
+      <div class="stack">
+        <div class="formula" role="img" aria-label="Trykk p er lik kraft F delt på areal A">
+          <div class="eq"><var>p</var><span>=</span><span class="frac"><span><var>F</var></span><span><var>A</var></span></span><span class="lbl" style="margin-left:12px">Pa = N/m²</span></div>
+        </div>
+        <div class="formula" role="img" aria-label="Absolutt trykk er atmosfæretrykk pluss manometertrykk">
+          <div class="eq"><var>p</var><sub>abs</sub><span>=</span><var>p</var><sub>atm</sub><span>+</span><var>p</var><sub>man</sub></div>
+          <p class="note">Skriv gjerne «bar a» eller «kPa abs» for absolutt trykk, og «bar g» (gauge) for manometertrykk.</p>
+        </div>
+        <div class="tablebox"><table>
+          <thead><tr><th>Enhet</th><th class="r">I pascal</th><th>Brukes til</th></tr></thead>
+          <tbody>
+            <tr><td>1 kPa</td><td class="r num">1 000 Pa</td><td>Lave trykk, nivå</td></tr>
+            <tr><td>1 bar</td><td class="r num">100 000 Pa</td><td>Prosesstrykk</td></tr>
+            <tr><td>1 mVs</td><td class="r num">≈ 9 810 Pa</td><td>Pumper, nivå</td></tr>
+            <tr><td>1 atm</td><td class="r num">101 325 Pa</td><td>Standard lufttrykk</td></tr>
+            <tr><td>1 psi</td><td class="r num">≈ 6 895 Pa</td><td>Amerikansk utstyr</td></tr>
+          </tbody></table></div>
+        <div class="chart"><h4>Tre måter å oppgi trykk på</h4><svg id="absSvg" viewBox="0 0 420 210" role="img" aria-label="Søyle som viser vakuum, atmosfæretrykk, manometertrykk og absolutt trykk"></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="hydrostatisk">
+  <div class="wrap">
+    <div class="sechead"><span class="step">02</span><h2>Hydrostatisk trykk</h2></div>
+    <div class="two" style="margin-bottom:22px">
+      <div class="prose stack">
+        <p>Væsken over et punkt har en vekt, og den vekten gir trykk. Jo dypere du kommer, jo mer væske ligger over, og jo høyere blir trykket. Dette kalles hydrostatisk trykk.</p>
+        <p>Trykket avhenger bare av <b>dybden</b> og <b>tettheten</b>, ikke av formen eller bredden på beholderen. En smal rørsøyle og en stor tank med samme væskehøyde har samme trykk i bunnen. Det virker rart, men det er fordi trykket er kraft <i>per areal</i>: Den store tanken har mer vekt, men den fordeles også på et større areal.</p>
+        <p>I vann øker trykket med omtrent 9,8 kPa, eller 0,1 bar, for hver meter. Det er derfor meter vannsøyle er en så praktisk enhet.</p>
+      </div>
+      <div class="stack">
+        <div class="formula" role="img" aria-label="Hydrostatisk trykk p er lik rho g h">
+          <div class="tag" style="margin-bottom:8px">Hydrostatisk trykk</div>
+          <div class="eq"><var>p</var><span>=</span><var>ρ</var><span>·</span><var>g</var><span>·</span><var>h</var></div>
+          <p class="note"><var>ρ</var> tetthet (kg/m³), <var>g</var> = 9,81 m/s², <var>h</var> dybde under væskeflaten (m). Svaret er manometertrykk i Pa. Er tanken lukket med gass over væsken, legges gasstrykket til.</p>
+        </div>
+        <div class="callout"><b>Husk sammenhengen fra del 4</b>Leddet <var>p</var>/(<var>ρ</var>·<var>g</var>) i Bernoullis ligning er nettopp trykket gjort om til meter væskesøyle.</div>
+      </div>
+    </div>
+    <div class="animbox">
+      <canvas class="anim" id="hydro" data-h="330" role="img" aria-label="Tre beholdere med ulik form og samme væskehøyde, med trykkmålere i bunnen"></canvas>
+      <aside>
+        <div class="ctrl"><label for="hyH">Væskehøyde <output id="hyHo"></output></label><input type="range" id="hyH" min="0" max="3" step="0.05" value="2"></div>
+        <div class="ctrl"><label for="hyD">Dybde for målepunktet <output id="hyDo"></output></label><input type="range" id="hyD" min="0" max="100" step="1" value="60"></div>
+        <div class="ctrl"><label for="hyF">Væske</label><select id="hyF"><option value="vann">Vann</option><option value="olje">Hydraulikkolje</option><option value="glyserol">Glyserol</option><option value="kvikksolv">Kvikksølv (13 546 kg/m³)</option></select></div>
+        <div class="kv" id="hyRead"></div>
+      </aside>
+    </div>
+    <div class="explore" style="margin-top:16px">
+      <div class="task"><p><b>Prøv:</b> Se på de tre målerne i bunnen. Hvorfor viser de det samme?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Trykket avhenger bare av dybden og tettheten. Alle beholderne har samme væskehøyde, så trykket i bunnen blir likt, selv om mengden væske er svært forskjellig.</div></details></div>
+      <div class="task"><p><b>Prøv:</b> Bytt til kvikksølv. Hvor høy søyle trengs for å få samme trykk som 1 m vann?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Bare ca. 7,4 cm, fordi kvikksølv er 13,6 ganger tyngre enn vann. Derfor ble kvikksølv brukt i gamle manometre og barometre: søylene ble korte.</div></details></div>
+    </div>
+  </div>
+</section>
+
+<section id="niva">
+  <div class="wrap">
+    <div class="sechead"><span class="step">03</span><h2>Nivåmåling med trykk</h2></div>
+    <div class="two">
+      <div class="prose stack">
+        <p>Siden trykket i bunnen bare avhenger av væskehøyden og tettheten, kan vi snu formelen og regne ut nivået fra trykket. Dette er en av de vanligste måtene å måle nivå på i prosessindustrien. En trykktransmitter monteres i bunnen av tanken og sender et signal til kontrollrommet.</p>
+        <p>Signalet er ofte en strøm på <b>4–20 mA</b>. 4 mA betyr nedre grense for måleområdet, og 20 mA betyr øvre grense. At signalet starter på 4 og ikke 0, gjør at en brutt ledning (0 mA) kan skilles fra et tomt måleområde.</p>
+        <p><b>Tre vanlige feilkilder:</b></p>
+        <p>1. <b>Feil tetthet.</b> Transmitteren er stilt inn for én tetthet. Endres væsken eller temperaturen, viser den feil nivå.</p>
+        <p>2. <b>Lukket tank.</b> Er det gasstrykk over væsken, måler transmitteren også gasstrykket og viser for høyt nivå. Da brukes en <b>differansetrykkcelle</b> (DP-celle) som måler forskjellen mellom bunnen og gassen over væsken.</p>
+        <p>3. <b>Monteringshøyde.</b> Sitter transmitteren over bunnen, måler den bare væsken over seg selv. Det må korrigeres med et nullpunktsavvik.</p>
+      </div>
+      <div class="stack">
+        <div class="formula" role="img" aria-label="Nivå h er lik p delt på rho g">
+          <div class="tag" style="margin-bottom:8px">Nivå fra trykk</div>
+          <div class="eq"><var>h</var><span>=</span><span class="frac"><span><var>p</var></span><span><var>ρ</var>·<var>g</var></span></span><span>+</span><var>h</var><sub>0</sub></div>
+          <p class="note"><var>h</var><sub>0</sub> er høyden transmitteren sitter over tankbunnen.</p>
+        </div>
+        <div class="formula" role="img" aria-label="Signal i milliampere er 4 pluss 16 ganger p minus p min delt på p maks minus p min">
+          <div class="tag" style="margin-bottom:8px">Fra trykk til 4–20 mA</div>
+          <div class="eq"><var>I</var><span>=</span><span>4 + 16 ·</span><span class="frac"><span><var>p</var> − <var>p</var><sub>min</sub></span><span><var>p</var><sub>maks</sub> − <var>p</var><sub>min</sub></span></span><span class="lbl">mA</span></div>
+          <p class="note">Midt i måleområdet er signalet 12 mA.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="simulering">
+  <div class="wrap">
+    <div class="sechead"><span class="step">04</span><h2>Simulering: nivåmåling i en tank</h2></div>
+    <p class="prose" style="margin-bottom:18px">Tanken er 4 m høy. Transmitteren er stilt inn for måleområdet 0–50 kPa (4–20 mA), og kontrollsystemet regner om fra trykk til nivå med tettheten transmitteren er stilt inn for. Prøv å lage feil, og se hvordan de viser seg.</p>
+    <div class="sim">
+      <div class="panel controls">
+        <div class="ctrl"><label for="tH">Virkelig nivå <output id="tHo"></output></label><input type="range" id="tH" min="0" max="4" step="0.05" value="2.5"></div>
+        <div class="ctrl"><label for="tF">Væske i tanken</label><select id="tF"><option value="vann">Vann</option><option value="glykol">Glykol/vann 50 %</option><option value="olje">Hydraulikkolje</option></select></div>
+        <div class="ctrl"><label for="tCal">Transmitter stilt inn for</label><select id="tCal"><option value="998">Vann (998 kg/m³)</option><option value="riktig">Riktig væske</option></select></div>
+        <div class="ctrl"><label for="tType">Tank og måling</label><select id="tType"><option value="aapen">Åpen tank, trykktransmitter</option><option value="lukketPT">Lukket tank, trykktransmitter</option><option value="lukketDP">Lukket tank, DP-celle</option></select></div>
+        <div class="ctrl" id="tGasW"><label for="tGas">Gasstrykk over væsken <output id="tGaso"></output></label><input type="range" id="tGas" min="0" max="40" step="1" value="10"></div>
+        <div class="ctrl"><label for="tZ">Transmitteren sitter over bunnen <output id="tZo"></output></label><input type="range" id="tZ" min="0" max="0.5" step="0.05" value="0"></div>
+        <button type="button" class="ghost" id="tReset">Tilbakestill</button>
+      </div>
+      <div class="stack" style="min-width:0">
+        <div class="gauges">
+          <div class="gauge"><div class="k">Trykk i bunnen</div><div class="val" id="tgP"></div><div class="sub" id="tgPs">kPa (manometer)</div></div>
+          <div class="gauge"><div class="k">Transmitteren måler</div><div class="val" id="tgM"></div><div class="sub">kPa</div></div>
+          <div class="gauge"><div class="k">Signal</div><div class="val" id="tgI"></div><div class="sub">mA</div></div>
+          <div class="gauge total"><div class="k">Nivå i kontrollrommet</div><div class="val" id="tgL"></div><div class="sub" id="tgLs"></div></div>
+        </div>
+        <div class="schem"><svg id="tSvg" viewBox="0 0 620 300" role="img" aria-label="Tank med væske, transmitter og signal til kontrollrommet"></svg></div>
+        <div id="tMsg"></div>
+      </div>
+    </div>
+    <h3 style="margin:30px 0 12px">Utforsk: spå først, test etterpå</h3>
+    <div class="explore">
+      <div class="task"><p><b>A.</b> Bytt fra vann til hydraulikkolje uten å endre innstillingen på transmitteren. Viser kontrollrommet for høyt eller for lavt nivå?</p>
+        <details><summary>Se forklaring</summary><div class="ans">For lavt. Oljen er lettere enn vann og gir mindre trykk for samme høyde. Transmitteren tror det er vann og regner ut et for lavt nivå, ca. 13 % for lavt.</div></details></div>
+      <div class="task"><p><b>B.</b> Velg lukket tank med trykktransmitter og 10 kPa gasstrykk. Hvor stor blir feilen i nivå?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Rundt 1 m for høyt med vann. Gasstrykket blir lagt til væsketrykket, og 10 kPa tilsvarer ca. 1 m vannsøyle. Tanken kan se full ut selv om den ikke er det.</div></details></div>
+      <div class="task"><p><b>C.</b> Bytt til DP-celle i den lukkede tanken. Hva skjer med feilen?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Den forsvinner. DP-cellen måler forskjellen mellom trykket i bunnen og gasstrykket over væsken, så gasstrykket trekkes fra.</div></details></div>
+      <div class="task"><p><b>D.</b> Flytt transmitteren 0,3 m opp fra bunnen. Hva skjer ved lave nivåer?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Transmitteren viser 0,3 m for lite hele veien, og den viser tom tank når det fortsatt står 0,3 m væske igjen. Feilen rettes ved å legge inn monteringshøyden som nullpunktsavvik.</div></details></div>
+      <div class="task"><p><b>E.</b> Hvilket nivå med vann gir et signal på 12 mA?</p>
+        <details><summary>Se forklaring</summary><div class="ans">12 mA er midt i måleområdet, altså 25 kPa. Med vann er det 25 000 / (998 · 9,81) ≈ 2,55 m.</div></details></div>
+    </div>
+  </div>
+</section>
+
+<section id="labark">
+  <div class="wrap">
+    <div class="sechead"><span class="step">05</span><h2>Labark: kontroller transmitteren</h2></div>
+    <div class="two" style="margin-bottom:22px">
+      <div class="prose stack">
+        <p>Fyll tanken i trinn. For hvert trinn leser du av nivået med målestav eller seglass, og noterer hva transmitteren viser. Siden beregner det teoretiske trykket og viser avviket.</p>
+        <p>Når du har flere målinger, legger siden en rett linje gjennom punktene. <b>Stigningstallet</b> til linjen er <var>ρ</var>·<var>g</var>, og det betyr at du kan regne ut tettheten til væsken fra målingene dine. <b>Skjæringspunktet</b> med nivåaksen viser hvor høyt transmitteren sitter.</p>
+        <p class="status">Det du skriver lagres bare i denne nettleseren på denne enheten. Ingenting sendes noe sted.</p>
+      </div>
+      <div class="stack">
+        <div class="callout"><b>Tips til målingen</b>Vent til væskeflaten er rolig før du leser av. Mål nivået fra tankbunnen, og mål også hvor høyt transmitterens tilkobling sitter over bunnen.</div>
+        <div class="callout"><b>Signal i mA?</b>Velg «mA» og skriv inn måleområdet til transmitteren (står på typeskiltet eller i konfigurasjonen). Da regner siden om til kPa.</div>
+      </div>
+    </div>
+    <div class="panel lab stack">
+      <div class="btnrow"><span class="example" id="pEx">Eksempeldata – bytt ut med egne målinger</span></div>
+      <div class="labgrid">
+        <div class="ctrl"><label for="pF">Væske</label><select id="pF"><option value="vann">Vann</option><option value="glykol">Glykol/vann 50 %</option><option value="olje">Hydraulikkolje</option></select></div>
+        <div class="ctrl"><label for="pT">Væsketemperatur (°C)</label><input type="number" id="pT" step="1"></div>
+        <div class="ctrl"><label for="pZ">Transmitteren over bunnen (m)</label><input type="number" id="pZ" step="0.01"></div>
+        <div class="ctrl"><label for="pU">Transmitteren viser</label><select id="pU"><option value="kPa">Trykk i kPa</option><option value="mA">Signal i mA</option></select></div>
+        <div class="ctrl" id="pMinW"><label for="pMin">Måleområde fra (kPa)</label><input type="number" id="pMin" step="0.1"></div>
+        <div class="ctrl" id="pMaxW"><label for="pMax">Måleområde til (kPa)</label><input type="number" id="pMax" step="0.1"></div>
+      </div>
+      <div class="tablebox"><table>
+        <thead><tr><th>Nivå (cm)</th><th id="pValH">Transmitter</th><th class="r">Målt trykk (kPa)</th><th class="r">Teori (kPa)</th><th class="r">Avvik (kPa)</th><th class="r">Nivå fra trykk (cm)</th><th></th></tr></thead>
+        <tbody id="pRows"></tbody></table></div>
+      <div class="btnrow">
+        <button type="button" id="pAdd">Legg til måling</button>
+        <button type="button" class="ghost" id="pClear">Tøm og start med egne målinger</button>
+        <span class="status" id="pClearC" hidden>Sikker? <button type="button" class="small" id="pClearY">Ja, tøm</button> <button type="button" class="small ghost" id="pClearN">Avbryt</button></span>
+      </div>
+      <div class="two">
+        <div class="chart"><h4>Trykk mot nivå</h4><div class="cap">Blå linje: teori. Stiplet linje: beste rette linje gjennom målingene.</div><svg id="pChart" viewBox="0 0 420 260"></svg></div>
+        <div class="panel stack"><h3 style="font-size:1.15rem">Hva sier linjen?</h3><div id="pFit"></div></div>
+      </div>
+      <div class="two">
+        <div class="ctrl"><label for="pR1">Hvor godt stemmer transmitteren med det målte nivået? Er avviket størst ved lave eller høye nivåer?</label><textarea id="pR1"></textarea></div>
+        <div class="ctrl"><label for="pR2">Sammenlign tettheten du fant fra linjen med tabellverdien. Hva kan forklare forskjellen?</label><textarea id="pR2"></textarea></div>
+      </div>
+      <div class="btnrow"><button type="button" id="pCopy">Kopier resultater</button><span class="status" id="pCopied" role="status"></span></div>
+      <textarea id="pFb" hidden readonly style="min-height:160px;font-family:var(--f-mono);font-size:.8rem"></textarea>
+    </div>
+  </div>
+</section>
+
+<section id="oppgaver">
+  <div class="wrap">
+    <div class="sechead"><span class="step">06</span><h2>Oppgaver</h2></div>
+    <h3 style="margin-bottom:12px">Sjekk forståelsen</h3>
+    <div class="stack" id="quiz" style="max-width:780px"></div>
+    <div class="btnrow" style="margin-top:12px"><span class="score" id="qScore"></span></div>
+    <h3 style="margin:36px 0 6px">Regneoppgaver</h3>
+    <p class="prose" style="margin-bottom:14px">Bruk <var>g</var> = 9,81 m/s² og atmosfæretrykk 101,3 kPa. Komma eller punktum som desimaltegn.</p>
+    <div class="stack" id="calcs" style="max-width:780px"></div>
+  </div>
+</section>
+
+<section id="forklar">
+  <div class="wrap">
+    <div class="sechead"><span class="step">07</span><h2>Forklar for hverandre</h2></div>
+    <div id="peer"></div>
+  </div>
+</section>
+
+<section id="oppsummering">
+  <div class="wrap">
+    <div class="sechead"><span class="step">08</span><h2>Oppsummering</h2></div>
+    <div class="two">
+      <div class="summary prose">
+        <ul>
+          <li>Trykk er kraft per areal, <var>p</var> = <var>F</var>/<var>A</var>. 1 bar = 100 kPa, og 1 m vannsøyle ≈ 9,8 kPa.</li>
+          <li>Absolutt trykk = atmosfæretrykk + manometertrykk. De fleste målere i anlegget viser manometertrykk.</li>
+          <li>Hydrostatisk trykk er <var>p</var> = <var>ρ</var>·<var>g</var>·<var>h</var>, og avhenger bare av dybde og tetthet, ikke av formen på tanken.</li>
+          <li>Nivå kan måles med trykk. Feil tetthet, gasstrykk i lukket tank og monteringshøyde gir feil nivå hvis de ikke korrigeres.</li>
+          <li>Transmittere sender ofte 4–20 mA, der 4 mA er bunnen og 20 mA toppen av måleområdet.</li>
+        </ul>
+        <p style="margin-top:18px"><b>Neste del:</b> Nå skal væsken begynne å strømme. Vi ser på volumstrøm, hastighet og hvordan strømningen oppfører seg i et rør.</p>
+      </div>
+      <div class="teacher">
+        <div class="tag">Til læreren</div>
+        <h3 style="margin:6px 0 10px">Kobling og forslag til gjennomføring</h3>
+        <p style="font-size:.95rem">Uken støtter kompetansemålene i kjemisk teknologi (KPL02-01) om å anvende grunnleggende fysikk til å forklare prosesser, utstyr og målemetoder, og om å beskrive prosessutstyr og forklare virkemåten.</p>
+        <ol style="font-size:.95rem;padding-left:20px;margin:12px 0 0;display:grid;gap:4px">
+          <li>Trykk, enheter og hydrostatisk trykk med animasjonen</li>
+          <li>Nivåmåling og simulering med utforskoppgaver i par</li>
+          <li>Kontroll av nivå- eller trykktransmitter på riggen og labark</li>
+          <li>Oppgaver, «Forklar for hverandre» (15–20 min) og innlevering</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<footer><div class="wrap">Væske i prosessindustrien · Del 2 · Stoffdata er tilnærmede lærebokverdier.</div></footer>
+
+<script src="kurs.js"></script>
+<script>
+(function(){
+"use strict";
+const {$,nf,num,el,chart,fluid,FLUIDS,g}=K;
+const PATM=101.3;
+const RHO=k=>k==='kvikksolv'?13546:fluid(k,20).rho;
+
+/* ---- Absolutt/manometer-figur ---- */
+(function(){const s=$('#absSvg');const X0=150,W=70,Y=p=>190-p/250*170;
+  el('rect',{x:X0,y:Y(250),width:W,height:Y(0)-Y(250),fill:'var(--grid)'},s);
+  el('rect',{x:X0,y:Y(101.3),width:W,height:Y(0)-Y(101.3),fill:'var(--pipe-soft)'},s);
+  el('rect',{x:X0,y:Y(201.3),width:W,height:Y(101.3)-Y(201.3),fill:'var(--signal-soft)'},s);
+  [[0,'0 kPa abs (vakuum)'],[101.3,'101,3 kPa abs = 0 kPa man'],[201.3,'201,3 kPa abs = 100 kPa man']].forEach(([p,t])=>{el('line',{x1:X0-6,x2:X0+W+6,y1:Y(p),y2:Y(p),stroke:'var(--ink)','stroke-width':1.5},s);el('text',{x:X0+W+12,y:Y(p)+4,style:'fill:var(--ink)'},s,t);});
+  el('text',{x:X0+W/2,y:(Y(0)+Y(101.3))/2+4,'text-anchor':'middle',style:'fill:var(--pipe)'},s,'atmosfære');
+  el('text',{x:X0+W/2,y:(Y(101.3)+Y(201.3))/2+4,'text-anchor':'middle',style:'fill:var(--signal)'},s,'overtrykk');
+  const ar=(x,p0,p1,t,c)=>{el('line',{x1:x,x2:x,y1:Y(p0),y2:Y(p1),stroke:c,'stroke-width':2},s);el('path',{d:`M${x-5} ${Y(p1)+8} L${x} ${Y(p1)} L${x+5} ${Y(p1)+8}`,fill:'none',stroke:c,'stroke-width':2},s);el('text',{x:x-8,y:(Y(p0)+Y(p1))/2+4,'text-anchor':'end',style:'fill:'+c},s,t);};
+  ar(130,0,201.3,'absolutt','var(--ink)');ar(X0+W/2+18,101.3,201.3,'','var(--signal)');
+  el('text',{x:20,y:Y(140)+4,style:'fill:var(--signal)'},s,'manometer');})();
+
+/* ---- Hydrostatisk animasjon ---- */
+const hyH=$('#hyH'),hyD=$('#hyD'),hyF=$('#hyF');let wob=0;
+function hyRead(){const h=+hyH.value,d=h*hyD.value/100,rho=RHO(hyF.value);$('#hyHo').textContent=nf(h,2)+' m';$('#hyDo').textContent=nf(d,2)+' m';
+  $('#hyRead').innerHTML=`<span>Tetthet</span><span>${nf(rho,0)} kg/m³</span><span>Trykk i målepunktet</span><span>${nf(rho*g*d/1000,1)} kPa</span><span>Trykk i bunnen</span><span>${nf(rho*g*h/1000,1)} kPa</span><span>Bunntrykk i bar</span><span>${nf(rho*g*h/1e5,3)} bar</span>`;}
+const hyA=K.animate($('#hydro'),(c,{W,H},dt)=>{
+  const h=+hyH.value,rho=RHO(hyF.value),pipe=K.css('--pipe'),soft=K.css('--pipe-soft'),ink=K.css('--ink'),muted=K.css('--muted'),sig=K.css('--signal'),surf=K.css('--surface');
+  wob+=dt;c.fillStyle=surf;c.fillRect(0,0,W,H);
+  const base=H-80,top=30,sc=(base-top)/3.2,ly=base-h*sc,mono=K.css('--f-mono');
+  const cw=W/3;
+  const shapes=[ // [venstre bunn, høyre bunn, venstre topp, høyre topp] i andeler av kolonne
+    [0.15,0.85,0.15,0.85],[0.4,0.6,0.4,0.6],[0.38,0.62,0.08,0.92]];
+  shapes.forEach((sh,i)=>{const x0=i*cw,X=f=>x0+f*cw;const yt=top;
+    const xl=y=>X(sh[0]+(sh[2]-sh[0])*(base-y)/(base-yt)),xr=y=>X(sh[1]+(sh[3]-sh[1])*(base-y)/(base-yt));
+    // væske
+    c.fillStyle=soft;c.beginPath();c.moveTo(xl(base),base);c.lineTo(xr(base),base);c.lineTo(xr(ly),ly);c.lineTo(xl(ly),ly);c.closePath();c.fill();
+    c.strokeStyle=pipe;c.lineWidth=1.5;c.beginPath();c.moveTo(xl(ly),ly);c.lineTo(xr(ly),ly);c.stroke();
+    // vegger
+    c.strokeStyle=ink;c.lineWidth=2;c.beginPath();c.moveTo(xl(yt),yt);c.lineTo(xl(base),base);c.lineTo(xr(base),base);c.lineTo(xr(yt),yt);c.stroke();
+    // måleur
+    const gx=X(0.5),gy=base+38,r=22,p=rho*g*h/1000,pmax=40,ang=Math.PI*0.75+Math.min(1,p/pmax)*Math.PI*1.5;
+    c.strokeStyle=ink;c.lineWidth=1.5;c.beginPath();c.moveTo(gx,base);c.lineTo(gx,gy-r);c.stroke();
+    c.fillStyle=surf;c.beginPath();c.arc(gx,gy,r,0,7);c.fill();c.stroke();
+    c.strokeStyle=muted;for(let k=0;k<=4;k++){const a=Math.PI*0.75+k/4*Math.PI*1.5;c.beginPath();c.moveTo(gx+Math.cos(a)*(r-6),gy+Math.sin(a)*(r-6));c.lineTo(gx+Math.cos(a)*(r-2),gy+Math.sin(a)*(r-2));c.stroke();}
+    c.strokeStyle=sig;c.lineWidth=2.5;c.beginPath();c.moveTo(gx,gy);c.lineTo(gx+Math.cos(ang)*(r-5),gy+Math.sin(ang)*(r-5));c.stroke();
+    c.fillStyle=ink;c.font='600 12px '+mono;c.textAlign='left';c.fillText(nf(p,1)+' kPa',gx+r+6,gy+4);
+  });
+  // målepunkt i første beholder
+  const d=h*hyD.value/100,py=ly+d*sc,px=cw*0.5;
+  if(h>0){const pr=rho*g*d/1000,len=4+Math.min(30,pr*1.2);
+    c.strokeStyle=sig;c.lineWidth=2;[[1,0],[-1,0],[0,1],[0,-1]].forEach(([dx,dy])=>{c.beginPath();c.moveTo(px+dx*(len+6),py+dy*(len+6));c.lineTo(px+dx*6,py+dy*6);c.stroke();
+      c.beginPath();c.moveTo(px+dx*6+dy*4+dx*6,py+dy*6+dx*4+dy*6);c.lineTo(px+dx*6,py+dy*6);c.lineTo(px+dx*6-dy*4+dx*6,py+dy*6-dx*4+dy*6);c.stroke();});
+    c.fillStyle=sig;c.beginPath();c.arc(px,py,4,0,7);c.fill();
+    c.font='11px '+mono;c.textAlign='left';c.fillText(nf(pr,1)+' kPa',px+len+10,py-6);
+    // dybdemål
+    c.strokeStyle=muted;c.lineWidth=1;c.setLineDash([3,3]);c.beginPath();c.moveTo(cw*0.1,ly);c.lineTo(cw*0.1,py);c.stroke();c.setLineDash([]);
+    c.fillStyle=muted;c.textAlign='right';c.fillText('h = '+nf(d,2)+' m',cw*0.1+46, (ly+py)/2+4);}
+  c.lineWidth=1;
+});
+[hyH,hyD,hyF].forEach(e=>e.addEventListener('input',()=>{hyRead();hyA.redraw();}));hyRead();
+
+/* ---- Tanksimulering ---- */
+const T={H:$('#tH'),F:$('#tF'),Cal:$('#tCal'),Type:$('#tType'),Gas:$('#tGas'),Z:$('#tZ')};
+const TDEF={H:2.5,F:'vann',Cal:'998',Type:'aapen',Gas:10,Z:0};
+function tCalc(){const h=+T.H.value,rho=fluid(T.F.value,20).rho,type=T.Type.value,gas=type==='aapen'?0:+T.Gas.value,z=+T.Z.value;
+  const pBottom=rho*g*h/1000+gas,pTx=rho*g*Math.max(0,h-z)/1000+gas,meas=type==='lukketDP'?pTx-gas:pTx;
+  const rcal=T.Cal.value==='riktig'?rho:998,lvl=meas*1000/(rcal*g);const mA=4+16*Math.max(0,Math.min(1,meas/50));
+  return {h,rho,gas,z,pBottom,meas,lvl,mA,sat:meas>50,err:lvl-h,type};}
+function tUpdate(){const s=tCalc();$('#tHo').textContent=nf(s.h,2)+' m';$('#tGaso').textContent=T.Gas.value+' kPa';$('#tZo').textContent=nf(s.z,2)+' m';$('#tGasW').hidden=s.type==='aapen';
+  $('#tgP').textContent=nf(s.pBottom,1);$('#tgPs').textContent='kPa · '+nf(s.pBottom+PATM,1)+' kPa abs';$('#tgM').textContent=nf(s.meas,1);$('#tgI').textContent=nf(s.mA,2);
+  $('#tgL').textContent=nf(Math.min(s.lvl,50*1000/((T.Cal.value==='riktig'?s.rho:998)*g)),2)+' m';$('#tgLs').textContent=Math.abs(s.err)<0.01?'stemmer':(s.err>0?'+':'')+nf(s.err,2)+' m feil';
+  let msg='';if(s.sat)msg='<div class="warn">Trykket er over måleområdet (50 kPa). Signalet står fast på 20 mA, og kontrollrommet ser ikke at nivået stiger mer.</div>';
+  else if(Math.abs(s.err)<0.01)msg='<div class="okbox">Målingen stemmer med det virkelige nivået.</div>';
+  else{const why=[];if(s.type==='lukketPT'&&s.gas>0)why.push('gasstrykket over væsken blir målt som om det var væske');if(T.Cal.value!=='riktig'&&Math.abs(s.rho-998)>1)why.push('transmitteren regner med feil tetthet');if(s.z>0&&s.h>0)why.push('transmitteren sitter over bunnen og ser ikke væsken under seg');
+    msg=`<div class="warn">Kontrollrommet viser ${s.err>0?'for høyt':'for lavt'} nivå fordi ${why.join(', og ')}.</div>`;}
+  $('#tMsg').innerHTML=msg;tDraw(s);}
+function tDraw(s){const svg=$('#tSvg');svg.innerHTML='';const x0=80,x1=300,yt=30,yb=260,sc=(yb-yt)/4,ly=yb-s.h*sc;
+  if(s.type!=='aapen')el('rect',{x:x0,y:yt,width:x1-x0,height:ly-yt,fill:'var(--signal-soft)'},svg);
+  el('rect',{x:x0,y:ly,width:x1-x0,height:yb-ly,fill:'var(--pipe-soft)'},svg);el('line',{x1:x0,x2:x1,y1:ly,y2:ly,stroke:'var(--pipe)','stroke-width':2},svg);
+  el('path',{d:s.type==='aapen'?`M${x0} ${yt} V${yb} H${x1} V${yt}`:`M${x0} ${yt} V${yb} H${x1} V${yt} Z`,fill:'none',stroke:'var(--ink)','stroke-width':2.5},svg);
+  if(s.type!=='aapen')el('text',{x:(x0+x1)/2,y:yt+18,'text-anchor':'middle',style:'fill:var(--signal)'},svg,'gass '+nf(s.gas,0)+' kPa');
+  for(let m=0;m<=4;m++){el('line',{x1:x0-8,x2:x0,y1:yb-m*sc,y2:yb-m*sc,stroke:'var(--muted)'},svg);el('text',{x:x0-12,y:yb-m*sc+4,'text-anchor':'end'},svg,m+' m');}
+  // transmitter
+  const ty=yb-s.z*sc;el('line',{x1:x1,x2:x1+40,y1:ty,y2:ty,stroke:'var(--ink)','stroke-width':2},svg);
+  el('circle',{cx:x1+60,cy:ty,r:20,fill:'var(--surface)',stroke:'var(--ink)','stroke-width':2},svg);el('text',{x:x1+60,y:ty+4,'text-anchor':'middle',style:'fill:var(--ink);font-size:12px'},svg,s.type==='lukketDP'?'LT':'PT');
+  if(s.type==='lukketDP'){el('path',{d:`M${x1} ${yt+10} H${x1+60} V${ty-20}`,fill:'none',stroke:'var(--signal)','stroke-width':1.5,'stroke-dasharray':'5 4'},svg);el('text',{x:x1+66,y:yt+28,style:'fill:var(--signal)'},svg,'lavtrykkside');}
+  // signal
+  el('path',{d:`M${x1+80} ${ty} H${x1+120}`,stroke:'var(--muted)','stroke-width':1.5,'stroke-dasharray':'2 3'},svg);
+  el('rect',{x:x1+120,y:ty-34,width:180,height:68,rx:4,fill:'var(--surface)',stroke:'var(--line)'},svg);
+  el('text',{x:x1+130,y:ty-14},svg,'Kontrollrom');el('text',{x:x1+130,y:ty+8,style:'fill:var(--ink);font-size:15px'},svg,'Nivå '+nf(s.lvl,2)+' m');el('text',{x:x1+130,y:ty+26},svg,nf(s.mA,2)+' mA');
+  // virkelig nivå
+  el('text',{x:(x0+x1)/2,y:Math.min(yb-8,ly+20),'text-anchor':'middle',style:'fill:var(--pipe)'},svg,'virkelig '+nf(s.h,2)+' m');}
+Object.values(T).forEach(e=>e.addEventListener('input',tUpdate));$('#tReset').addEventListener('click',()=>{for(const k in TDEF)T[k].value=TDEF[k];tUpdate();});tUpdate();
+
+/* ---- Labark transmitter ---- */
+const PKEY='uke2-transmitter-v1';
+const PEX={F:'vann',T:20,Z:0.05,U:'mA',Min:0,Max:10,ex:true,rows:[[10,4.81],[25,7.12],[40,9.52],[55,11.84],[70,14.16],[85,16.55]],r1:'',r2:''};
+let P=K.load(PKEY,PEX);const ps=()=>K.save(PKEY,P);
+const PF={F:$('#pF'),T:$('#pT'),Z:$('#pZ'),U:$('#pU'),Min:$('#pMin'),Max:$('#pMax')};
+const pRho=()=>fluid(P.F,Number.isFinite(num(P.T))?num(P.T):20).rho;
+function pRow(r){const h=num(r[0])/100,v=num(r[1]),z=num(P.Z)||0,rho=pRho();
+  const pm=P.U==='mA'?num(P.Min)+(v-4)/16*(num(P.Max)-num(P.Min)):v;const pt=rho*g*Math.max(0,h-z)/1000;
+  return {h,pm,pt,dev:pm-pt,hl:(pm*1000/(rho*g)+z)*100,ok:Number.isFinite(h)&&Number.isFinite(pm)};}
+function pShape(){const ma=P.U==='mA';$('#pMinW').hidden=!ma;$('#pMaxW').hidden=!ma;$('#pValH').textContent=ma?'Signal (mA)':'Trykk (kPa)';}
+function pRender(){for(const k in PF)PF[k].value=P[k]??'';$('#pR1').value=P.r1||'';$('#pR2').value=P.r2||'';$('#pEx').hidden=!P.ex;pShape();
+  const tb=$('#pRows');tb.innerHTML='';
+  P.rows.forEach((row,i)=>{const tr=document.createElement('tr');
+    tr.innerHTML=`<td><input type="text" inputmode="decimal" id="pr${i}_0" value="${row[0]??''}" aria-label="Nivå, måling ${i+1}"></td><td><input type="text" inputmode="decimal" id="pr${i}_1" value="${row[1]??''}" aria-label="Transmitterverdi, måling ${i+1}"></td>
+      <td class="r num" data-c="m"></td><td class="r num" data-c="t"></td><td class="r num" data-c="d"></td><td class="r num" data-c="h"></td><td><button type="button" class="small ghost" aria-label="Fjern måling ${i+1}">Fjern</button></td>`;
+    tr.querySelectorAll('input').forEach((inp,j)=>inp.addEventListener('input',()=>{P.rows[i][j]=inp.value;P.ex=false;$('#pEx').hidden=true;pCalc();ps();}));
+    tr.querySelector('button').addEventListener('click',()=>{P.rows.splice(i,1);pRender();ps();});tb.appendChild(tr);});
+  pCalc();}
+function pCalc(){const pts=[];[...$('#pRows').children].forEach((tr,i)=>{const r=pRow(P.rows[i]);const c=k=>tr.querySelector(`[data-c="${k}"]`);
+    if(r.ok){pts.push([r.h,r.pm]);c('m').textContent=nf(r.pm,2);c('t').textContent=nf(r.pt,2);
+      c('d').innerHTML=`<span class="${Math.abs(r.dev)<0.2?'dev-ok':Math.abs(r.dev)<0.5?'dev-mid':'dev-hi'}">${r.dev>0?'+':''}${nf(r.dev,2)}</span>`;c('h').textContent=nf(r.hl,1);}
+    else['m','t','d','h'].forEach(k=>c(k).textContent='–');});
+  const rho=pRho(),z=num(P.Z)||0,hMax=Math.max(1,...pts.map(p=>p[0]))*1.1;
+  const th=[[0,0],[z,0],[hMax,rho*g*(hMax-z)/1000]];let fit=null;
+  if(pts.length>=2){const n=pts.length,sx=pts.reduce((a,p)=>a+p[0],0),sy=pts.reduce((a,p)=>a+p[1],0),sxx=pts.reduce((a,p)=>a+p[0]*p[0],0),sxy=pts.reduce((a,p)=>a+p[0]*p[1],0);
+    const b=(n*sxy-sx*sy)/(n*sxx-sx*sx),a=(sy-b*sx)/n;if(Number.isFinite(b)&&b>0)fit={b,a,rho:b*1000/g,z0:-a/b};}
+  const lines=[{pts:th,color:'var(--pipe)'}];if(fit)lines.push({pts:[[Math.max(0,fit.z0),Math.max(0,fit.a+fit.b*Math.max(0,fit.z0))],[hMax,fit.a+fit.b*hMax]],color:'var(--signal)',dash:'6 4',w:1.8});
+  chart($('#pChart'),{xMax:hMax,yMax:Math.max(1,...pts.map(p=>p[1]),th[2][1])*1.08,xLabel:'nivå (m)',yLabel:'trykk (kPa)',lines,dots:pts.map(p=>({x:p[0],y:p[1],fill:'var(--signal)'}))});
+  $('#pFit').innerHTML=fit?`<div class="kv"><span>Stigningstall (ρ·g)</span><span>${nf(fit.b,2)} kPa/m</span><span>Tetthet fra målingene</span><span>${nf(fit.rho,0)} kg/m³</span><span>Tetthet fra tabell</span><span>${nf(rho,0)} kg/m³</span><span>Avvik i tetthet</span><span>${nf((fit.rho-rho)/rho*100,1)} %</span><span>Linjen krysser trykk = 0 ved</span><span>${nf(fit.z0*100,1)} cm</span><span>Oppgitt monteringshøyde</span><span>${nf(z*100,1)} cm</span></div>`:'<p class="status">Legg inn minst to målinger for å få en linje.</p>';
+  P._fit=fit;}
+Object.entries(PF).forEach(([k,e])=>e.addEventListener('input',()=>{P[k]=e.value;P.ex=false;$('#pEx').hidden=true;pShape();pCalc();ps();}));
+$('#pR1').addEventListener('input',e=>{P.r1=e.target.value;ps();});$('#pR2').addEventListener('input',e=>{P.r2=e.target.value;ps();});
+$('#pAdd').addEventListener('click',()=>{P.rows.push(['','']);pRender();ps();const f=$('#pr'+(P.rows.length-1)+'_0');if(f)f.focus();});
+K.confirm($('#pClear'),$('#pClearC'),$('#pClearY'),$('#pClearN'),()=>{P={F:P.F,T:'',Z:'',U:P.U,Min:P.Min,Max:P.Max,ex:false,rows:[['',''],['',''],['',''],['','']],r1:'',r2:''};pRender();ps();});
+$('#pCopy').addEventListener('click',()=>{const f=P._fit;let t=`Labark del 2 – kontroll av nivå-/trykktransmitter\nVæske: ${FLUIDS[P.F].navn}, ${P.T} °C (ρ = ${nf(pRho(),0)} kg/m³). Transmitter ${P.Z} m over bunnen.${P.U==='mA'?` Måleområde ${P.Min}–${P.Max} kPa = 4–20 mA.`:''}\n\nNivå (cm)\tMålt (kPa)\tTeori (kPa)\tAvvik (kPa)\tNivå fra trykk (cm)\n`;
+  P.rows.forEach(row=>{const r=pRow(row);if(r.ok)t+=`${row[0]}\t${nf(r.pm,2)}\t${nf(r.pt,2)}\t${nf(r.dev,2)}\t${nf(r.hl,1)}\n`;});
+  if(f)t+=`\nBeste rette linje: stigning ${nf(f.b,2)} kPa/m, tetthet ${nf(f.rho,0)} kg/m³, krysser null ved ${nf(f.z0*100,1)} cm\n`;
+  t+=`\nSamsvar: ${P.r1||''}\n\nTetthet: ${P.r2||''}\n`;K.copy(t,$('#pCopied'),$('#pFb'));});
+pRender();
+
+/* ---- Quiz ---- */
+K.quiz($('#quiz'),$('#qScore'),[
+ {q:'Tre tanker har samme væskehøyde, men ulik bredde. Hvor er trykket i bunnen størst?',o:['I den bredeste tanken','I den smaleste tanken','Det er likt i alle','Det avhenger av hvor mye væske det er'],a:2,e:'Hydrostatisk trykk avhenger bare av dybde og tetthet, p = ρ·g·h. Bredden spiller ingen rolle.'},
+ {q:'Et manometer viser 3,0 bar. Hva er det absolutte trykket omtrent?',o:['3,0 bar','2,0 bar','4,0 bar','3,0 kPa'],a:2,e:'Absolutt trykk = manometertrykk + atmosfæretrykk ≈ 3,0 + 1,0 = 4,0 bar a.'},
+ {q:'Omtrent hvor mye øker trykket for hver meter du går ned i vann?',o:['1 kPa','10 kPa (0,1 bar)','100 kPa (1 bar)','1 bar per 100 m'],a:1,e:'ρ·g·h = 998 · 9,81 · 1 ≈ 9 800 Pa ≈ 10 kPa = 0,1 bar.'},
+ {q:'En trykktransmitter i bunnen av en lukket tank viser for høyt nivå. Hva er den mest sannsynlige årsaken?',o:['Væsken er kaldere enn vanlig','Det er gasstrykk over væsken som også blir målt','Tanken er for bred','Signalet er 4–20 mA'],a:1,e:'I en lukket tank måler en vanlig trykktransmitter både væsketrykket og gasstrykket. Løsningen er en DP-celle som trekker fra gasstrykket.'},
+ {q:'En transmitter med måleområde 0–40 kPa sender 4–20 mA. Hva er signalet ved 20 kPa?',o:['10 mA','12 mA','16 mA','20 mA'],a:1,e:'20 kPa er midt i måleområdet. Midt mellom 4 og 20 mA er 12 mA.'},
+ {q:'Transmitteren er stilt inn for vann, men tanken fylles med en væske med tetthet 1200 kg/m³. Hva viser kontrollrommet?',o:['Riktig nivå','For lavt nivå','For høyt nivå','0 m'],a:2,e:'Den tyngre væsken gir høyere trykk for samme høyde. Transmitteren tror det er vann og regner ut et for høyt nivå, ca. 20 % for høyt.'}
+]);
+
+/* ---- Regneoppgaver ---- */
+K.calcs($('#calcs'),[
+ {t:'a) Beregn manometertrykket i bunnen av en tank med 3,5 m vann (ρ = 998 kg/m³). Svar i kPa.',u:'kPa',a:998*9.81*3.5/1000,s:`p = ρ·g·h = 998 · 9,81 · 3,5 = ${nf(998*9.81*3.5,0)} Pa ≈ <b>${nf(998*9.81*3.5/1000,1)} kPa</b>.`},
+ {t:'b) Hva er det absolutte trykket i bunnen av tanken i a)?',u:'kPa',a:998*9.81*3.5/1000+101.3,s:`p<sub>abs</sub> = ${nf(998*9.81*3.5/1000,1)} + 101,3 = <b>${nf(998*9.81*3.5/1000+101.3,1)} kPa</b>.`},
+ {t:'c) Et manometer på pumpen viser 2,4 bar. Hva er det absolutte trykket i kPa?',u:'kPa',a:341.3,s:'2,4 bar = 240 kPa. p<sub>abs</sub> = 240 + 101,3 = <b>341,3 kPa</b>.'},
+ {t:'d) En trykktransmitter i bunnen av en åpen tank med hydraulikkolje (ρ = 867 kg/m³) viser 26,5 kPa. Hvor høyt er nivået?',u:'m',a:26500/(867*9.81),hint:'Snu formelen: h = p / (ρ·g). Husk å gjøre om til Pa.',s:`h = 26 500 / (867 · 9,81) ≈ <b>${nf(26500/(867*9.81),2)} m</b>.`},
+ {t:'e) En transmitter har måleområde 0–50 kPa og sender 4–20 mA. Signalet er 12,8 mA. Hvilket trykk tilsvarer det?',u:'kPa',a:27.5,s:'p = (12,8 − 4) / 16 · 50 = 0,55 · 50 = <b>27,5 kPa</b>.'}
+]);
+
+/* ---- Forklar for hverandre ---- */
+K.peer($('#peer'),{key:'uke2-medelev-v1',title:'del 2, trykk i væsker',min:'15–20',cards:[
+ {t:'Absolutt og manometertrykk',p:'Hva er forskjellen på absolutt trykk og manometertrykk? Hva viser et vanlig manometer i anlegget?',h:'Tenk på figuren med de tre måtene å oppgi trykk på.',link:'#trykk',ln:'Trykk og enheter',
+  c:['Manometertrykk regnes fra atmosfæretrykket','Absolutt trykk regnes fra vakuum','p_abs = p_atm + p_man, med atmosfæretrykk ca. 101,3 kPa','Vanlige manometre viser manometertrykk (overtrykk)']},
+ {t:'Hydrostatisk trykk',p:'Hvorfor er trykket i bunnen likt i en smal og en bred tank med samme væskehøyde?',h:'Tenk på animasjonen med de tre beholderne.',link:'#hydrostatisk',ln:'Hydrostatisk trykk',
+  c:['Trykket er p = ρ·g·h','Trykket avhenger bare av dybde og tetthet','Mer vekt i den brede tanken fordeles på et større areal','Vet at vann gir ca. 10 kPa (0,1 bar) per meter']},
+ {t:'Nivåmåling',p:'Hvordan kan en trykktransmitter måle nivå? Hva betyr 4 mA og 20 mA?',h:'Tenk på formelen h = p / (ρ·g) og måleområdet.',link:'#niva',ln:'Nivåmåling',
+  c:['Nivået regnes ut fra trykket: h = p / (ρ·g)','Transmitteren må vite tettheten til væsken','4 mA er bunnen og 20 mA toppen av måleområdet','Forklarer hvorfor signalet starter på 4 mA']},
+ {t:'Feil i nivåmålingen',p:'Nevn to ting som kan gi feil nivå fra en trykktransmitter, og hvordan de kan rettes.',h:'Tenk på utforskoppgavene A–D i simuleringen.',link:'#simulering',ln:'Simulering',
+  c:['Feil tetthet gir feil nivå (lettere væske viser for lavt)','Gasstrykk i lukket tank gir for høyt nivå','DP-celle trekker fra gasstrykket','Monteringshøyde over bunnen må legges inn som nullpunkt']}
+]});
+K.toc();
+})();
+</script>
+
+<div class="wrap"><div class="weeknav"><a href="uke1.html"><span>Forrige del</span><b>Del 1: Væskers egenskaper</b></a><a class="next" href="uke3.html"><span>Neste del</span><b>Del 3: Strømning i rør</b></a></div></div>
+</body>
+</html>

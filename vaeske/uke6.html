@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Del 6: Måling, styring og helhet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="kurs.css">
+
+</head>
+<body>
+<div class="coursebar"><div class="wrap"><a href="index.html">← Væske i prosessindustrien</a><nav class="weeks" aria-label="Deler"><a href="uke1.html" title="Del 1: Væskers egenskaper">1</a><a href="uke2.html" title="Del 2: Trykk i væsker">2</a><a href="uke3.html" title="Del 3: Strømning i rør">3</a><a href="uke4.html" title="Del 4: Trykktap og energi i rørsystemer">4</a><a href="uke5.html" title="Del 5: Pumper">5</a><a href="uke6.html" title="Del 6: Måling, styring og helhet" aria-current="page">6</a></nav></div></div>
+<div class="sitebar"><div class="wrap"><a href="../">← Alle ressurser</a><span>Kjemiprosess <b>læringslab</b></span></div></div>
+<header class="top">
+  <div class="wrap">
+    <div>
+      <div class="tag">Væske i prosessindustrien · Vg2 kjemiprosess · Del 6 av 6</div>
+      <h1 style="margin-top:10px">Måling, styring og helhet</h1>
+      <p class="lede">I et ekte anlegg står ingen ved tanken og ser på nivået. Instrumenter måler, regulatorer justerer ventiler, og operatøren følger med fra kontrollrommet. Denne uken setter vi sammen alt du har lært.</p>
+      <div class="meta"><span>Tidsbruk <b>ca. 4 økter</b></span><span>Forkunnskaper <b>del 1–5</b></span></div>
+    </div>
+    <div class="goals">
+      <div class="tag">Etter denne uken skal du kunne</div>
+      <ul>
+        <li>beskrive vanlige instrumenter for strømning og nivå og velge riktig instrument</li>
+        <li>lese instrumentskjema og tolke instrumenttagger som LIC-101</li>
+        <li>forklare en reguleringssløyfe og virkningen av P- og I-ledd</li>
+        <li>gjøre rede for HMS og miljø ved arbeid med væsker i prosessanlegg</li>
+        <li>gjennomføre en sløyfesjekk av en transmitter og vurdere om den er innenfor toleransen</li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Innhold"><div class="wrap"><ol id="toc">
+  <li><a href="#maling"><span>1</span>Måling</a></li>
+  <li><a href="#skjema"><span>2</span>Instrumentskjema</a></li>
+  <li><a href="#regulering"><span>3</span>Regulering</a></li>
+  <li><a href="#hms"><span>4</span>HMS og miljø</a></li>
+  <li><a href="#simulering"><span>5</span>Simulering</a></li>
+  <li><a href="#labark"><span>6</span>Labark</a></li>
+  <li><a href="#oppgaver"><span>7</span>Oppgaver og case</a></li>
+  <li><a href="#forklar"><span>8</span>Forklar for hverandre</a></li>
+  <li><a href="#oppsummering"><span>9</span>Oppsummering</a></li>
+</ol></div></nav>
+
+<main>
+<section id="maling">
+  <div class="wrap">
+    <div class="sechead"><span class="step">01</span><h2>Måling av strømning og nivå</h2></div>
+    <div class="prose stack" style="margin-bottom:18px">
+      <p>På riggen målte du volumstrømmen med nivåøkning og stoppeklokke. I et anlegg må målingen skje kontinuerlig og automatisk. Det finnes mange typer instrumenter, og valget avhenger av væsken, nøyaktigheten som trengs, og prisen.</p>
+    </div>
+    <div class="two">
+      <div>
+        <h3 style="margin-bottom:10px">Strømningsmålere</h3>
+        <div class="tablebox"><table>
+          <thead><tr><th>Type</th><th>Prinsipp</th><th>Passer for</th></tr></thead>
+          <tbody>
+            <tr><td><b>Måleblende</b></td><td>En plate med hull gir trykkfall. Δp øker med <var>Q</var>².</td><td>Rene væsker, enkel og billig. Gir permanent trykktap.</td></tr>
+            <tr><td><b>Magnetisk</b></td><td>Væsken som strømmer gjennom et magnetfelt, lager en spenning.</td><td>Ledende væsker som vann, syrer og slam. Ikke olje.</td></tr>
+            <tr><td><b>Coriolis</b></td><td>Vibrerende rør vris av væsken. Måler massestrøm direkte.</td><td>Nøyaktig massestrøm og tetthet. Dyr.</td></tr>
+            <tr><td><b>Ultralyd</b></td><td>Lydbølger går fortere med strømmen enn mot den.</td><td>Store rør, kan monteres utenpå røret.</td></tr>
+            <tr><td><b>Rotameter</b></td><td>En flottør løftes i et konisk glassrør.</td><td>Lokal avlesning, små mengder.</td></tr>
+          </tbody></table></div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:10px">Nivåmålere</h3>
+        <div class="tablebox"><table>
+          <thead><tr><th>Type</th><th>Prinsipp</th><th>Passer for</th></tr></thead>
+          <tbody>
+            <tr><td><b>Trykk / DP</b></td><td>Hydrostatisk trykk, <var>h</var> = <var>p</var>/(<var>ρ</var>·<var>g</var>). Du kjenner den fra del 2.</td><td>Mange væsker. Avhenger av tettheten.</td></tr>
+            <tr><td><b>Radar</b></td><td>Mikrobølger reflekteres fra væskeflaten.</td><td>Nøyaktig, uavhengig av tetthet. Tåler damp og trykk.</td></tr>
+            <tr><td><b>Ultralyd</b></td><td>Lydpuls reflekteres fra væskeflaten.</td><td>Åpne tanker. Forstyrres av skum og damp.</td></tr>
+            <tr><td><b>Nivåbryter</b></td><td>Flottør, vibrasjonsgaffel eller elektrode gir signal ved et bestemt nivå.</td><td>Alarm for høyt og lavt nivå, tørrkjøringsvern for pumper.</td></tr>
+            <tr><td><b>Seglass</b></td><td>Et glassrør i kontakt med tanken viser nivået direkte.</td><td>Lokal kontroll og kalibrering.</td></tr>
+          </tbody></table></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skjema">
+  <div class="wrap">
+    <div class="sechead"><span class="step">02</span><h2>Instrumentskjema og tagger</h2></div>
+    <div class="two">
+      <div class="prose stack">
+        <p>Et <b>instrumentskjema</b> (P&amp;ID, Piping and Instrumentation Diagram) viser rør, utstyr og instrumenter i anlegget med standardiserte symboler. Hvert instrument har en <b>tagg</b>, for eksempel LIC-101.</p>
+        <p><b>Første bokstav</b> forteller hva som måles: F for strømning (flow), L for nivå (level), P for trykk, T for temperatur.</p>
+        <p><b>Bokstavene etter</b> forteller hva instrumentet gjør: I viser verdien, T sender et signal (transmitter), C regulerer, V er en ventil, A gir alarm og S er en bryter. H og L etter A betyr høy og lav.</p>
+        <p><b>Tallet</b> er sløyfenummeret. Alle instrumenter som hører til samme reguleringssløyfe, har samme nummer: LT-101 måler, LIC-101 regulerer og LV-101 er ventilen.</p>
+        <p>En sirkel betyr et instrument ute i anlegget. En sirkel med en vannrett strek betyr et instrument eller en funksjon i kontrollrommet.</p>
+      </div>
+      <div class="stack">
+        <div class="panel stack">
+          <h3 style="font-size:1.2rem">Tagg-leseren</h3>
+          <div class="ctrl"><label for="tagIn">Skriv en tagg</label><input type="text" id="tagIn" value="LIC-101" autocomplete="off" spellcheck="false"></div>
+          <div class="btnrow" id="tagEx"></div>
+          <div id="tagOut" class="stack" style="gap:6px"></div>
+        </div>
+        <div class="schem"><svg viewBox="0 0 420 120" role="img" aria-label="Symbol for feltinstrument og instrument i kontrollrommet" style="min-width:0">
+          <circle cx="70" cy="50" r="28" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/><text x="70" y="47" text-anchor="middle" style="fill:var(--ink);font-size:12px">LT</text><text x="70" y="62" text-anchor="middle" style="fill:var(--ink);font-size:11px">101</text>
+          <text x="70" y="102" text-anchor="middle">i anlegget</text>
+          <circle cx="210" cy="50" r="28" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/><line x1="182" y1="50" x2="238" y2="50" stroke="var(--ink)" stroke-width="2"/><text x="210" y="44" text-anchor="middle" style="fill:var(--ink);font-size:12px">LIC</text><text x="210" y="68" text-anchor="middle" style="fill:var(--ink);font-size:11px">101</text>
+          <text x="210" y="102" text-anchor="middle">i kontrollrommet</text>
+          <path d="M320 36 L350 64 L350 36 L320 64 Z" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/><path d="M335 50 V22 M322 22 Q335 6 348 22 Z" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="335" y="102" text-anchor="middle">reguleringsventil</text>
+        </svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="regulering">
+  <div class="wrap">
+    <div class="sechead"><span class="step">03</span><h2>Reguleringssløyfen</h2></div>
+    <div class="two">
+      <div class="prose stack">
+        <p>En reguleringssløyfe holder en prosessverdi, for eksempel nivået i en tank, på et ønsket nivå. Sløyfen har fire deler:</p>
+        <p>1. <b>Måling.</b> Transmitteren (LT) måler nivået og sender 4–20 mA.<br>2. <b>Regulator.</b> Regulatoren (LIC) sammenligner målingen med <b>settpunktet</b>, altså det ønskede nivået. Forskjellen kalles <b>avviket</b>.<br>3. <b>Pådrag.</b> Regulatoren regner ut hvor mye ventilen skal åpne, og sender et signal.<br>4. <b>Pådragsorgan.</b> Reguleringsventilen (LV) åpner eller lukker, og nivået endrer seg.</p>
+        <p>De fleste regulatorer er <b>PI-regulatorer</b>. <b>P-leddet</b> (proporsjonal) reagerer på hvor stort avviket er akkurat nå. Høy forsterkning <var>K</var><sub>p</sub> gir rask reaksjon, men for høy forsterkning gir svingninger. P-leddet alene klarer ikke å fjerne avviket helt. Det blir et <b>stasjonært avvik</b>.</p>
+        <p><b>I-leddet</b> (integral) summerer avviket over tid og fortsetter å justere til avviket er borte. Integraltiden <var>T</var><sub>i</sub> bestemmer hvor raskt det skjer. Kort <var>T</var><sub>i</sub> gir rask korrigering, men øker faren for svingninger.</p>
+        <p>I <b>manuell</b> styring setter operatøren ventilåpningen selv. I <b>automatisk</b> styrer regulatoren.</p>
+      </div>
+      <div class="stack">
+        <div class="formula" role="img" aria-label="Pådrag u er lik K p ganger avvik e pluss K p delt på T i ganger integralet av e">
+          <div class="tag" style="margin-bottom:8px">PI-regulator</div>
+          <div class="eq"><var>u</var><span>=</span><var>u</var><sub>0</sub><span>+</span><var>K</var><sub>p</sub><span>·</span><var>e</var><span>+</span><span class="frac"><span><var>K</var><sub>p</sub></span><span><var>T</var><sub>i</sub></span></span><span>·∫</span><var>e</var><span>d</span><var>t</var></div>
+          <p class="note"><var>u</var> pådrag (%), <var>e</var> avvik mellom måling og settpunkt (%), <var>u</var><sub>0</sub> pådrag når avviket er null.</p>
+        </div>
+        <div class="schem"><svg id="loopSvg" viewBox="0 0 420 200" role="img" aria-label="Blokkskjema for en reguleringssløyfe" style="min-width:0"></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="hms">
+  <div class="wrap">
+    <div class="sechead"><span class="step">04</span><h2>HMS og miljø</h2></div>
+    <div class="explore">
+      <div class="task"><h3 style="font-size:1.25rem">Kjenn væsken</h3><p>Les sikkerhetsdatabladet før du arbeider med en kjemikalie. Det forteller om helsefare, brannfare, verneutstyr, førstehjelp og hva du gjør ved søl. Varme væsker gir fare for brannskader, og noen væsker avgir farlig damp.</p></div>
+      <div class="task"><h3 style="font-size:1.25rem">Trykk er lagret energi</h3><p>Et rør eller en tank under trykk kan sprute væske langt hvis noe åpnes. Før vedlikehold skal utstyret være trykkavlastet, tømt og sikret mot oppstart med låsing og merking av pumper og ventiler.</p></div>
+      <div class="task"><h3 style="font-size:1.25rem">Sikkerhetsventiler</h3><p>Sikkerhetsventiler hindrer at trykket blir høyere enn utstyret tåler, for eksempel etter en fortrengningspumpe eller på en tank som varmes opp. De skal aldri blokkeres eller justeres uten tillatelse.</p></div>
+      <div class="task"><h3 style="font-size:1.25rem">Trykkstøt</h3><p>Stenges en ventil for raskt, stopper væsken brått. Det gir et trykkstøt (væskeslag) som kan smelle i rørene og skade utstyr. Ventiler i væskeledninger skal åpnes og stenges rolig.</p></div>
+      <div class="task"><h3 style="font-size:1.25rem">Lekkasjer og søl</h3><p>Flenser, pakninger, pumpetetninger og prøvetakingspunkter er vanlige lekkasjesteder. Tanker med farlige væsker står i oppsamlingskar som kan holde mer enn innholdet i tanken. Nivåalarmer (LAH) hindrer overfylling.</p></div>
+      <div class="task"><h3 style="font-size:1.25rem">Miljø og energi</h3><p>Pumper, trykktap og struping bruker mye energi. Godt vedlikehold, riktige rørdimensjoner og turtallsregulering gir lavere strømforbruk. Søl og lekkasjer skal samles opp og leveres som farlig avfall der det er påkrevd.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="simulering">
+  <div class="wrap">
+    <div class="sechead"><span class="step">05</span><h2>Simulering: nivåregulering</h2></div>
+    <p class="prose" style="margin-bottom:18px">Tanken får væske inn på toppen. LIC-101 skal holde nivået på settpunktet ved å styre utløpsventilen LV-101. Simuleringen går 20 ganger raskere enn virkeligheten. Prøv å forstyrre prosessen, og se hvordan regulatoren svarer.</p>
+    <div class="sim">
+      <div class="panel controls">
+        <div class="ctrl"><label for="rMode">Modus</label><select id="rMode"><option value="auto">Automatisk (regulator styrer)</option><option value="man">Manuell (du styrer ventilen)</option></select></div>
+        <div class="ctrl"><label for="rSP">Settpunkt <output id="rSPo"></output></label><input type="range" id="rSP" min="0.5" max="2.6" step="0.05" value="1.5"></div>
+        <div class="ctrl" id="rManW"><label for="rMan">Ventilåpning (manuell) <output id="rMano"></output></label><input type="range" id="rMan" min="0" max="100" step="1" value="50"></div>
+        <div class="ctrl"><label for="rKp"><span>Forsterkning K<sub>p</sub></span> <output id="rKpo"></output></label><input type="range" id="rKp" min="0.2" max="12" step="0.1" value="2"></div>
+        <div class="ctrl"><label for="rTi"><span>Integraltid T<sub>i</sub></span> <output id="rTio"></output></label><input type="range" id="rTi" min="0" max="600" step="10" value="120"></div>
+        <div class="ctrl"><label for="rQ">Innløp <output id="rQo"></output></label><input type="range" id="rQ" min="0" max="24" step="0.5" value="12"></div>
+        <div class="btnrow">
+          <button type="button" class="small" id="rStep">Øk innløpet med 5 m³/h</button>
+          <button type="button" class="small ghost" id="rPause">Pause</button>
+          <button type="button" class="small ghost" id="rReset">Start på nytt</button>
+        </div>
+        <p class="status">Sett integraltiden til 0 for å slå av I-leddet (bare P-regulering).</p>
+      </div>
+      <div class="stack" style="min-width:0">
+        <div class="gauges">
+          <div class="gauge"><div class="k">Nivå (LT-101)</div><div class="val" id="rgL"></div><div class="sub">m</div></div>
+          <div class="gauge"><div class="k">Avvik</div><div class="val" id="rgE"></div><div class="sub">m</div></div>
+          <div class="gauge"><div class="k">Pådrag (LV-101)</div><div class="val" id="rgU"></div><div class="sub">% åpen</div></div>
+          <div class="gauge total"><div class="k">Utløp</div><div class="val" id="rgQ"></div><div class="sub">m³/h</div></div>
+        </div>
+        <div class="two" style="gap:16px">
+          <div class="schem"><svg id="rSvg" viewBox="0 0 380 300" role="img" aria-label="Tank med nivåregulering" style="min-width:0"></svg></div>
+          <div class="stack">
+            <div class="chart"><h4>Trend: nivå og settpunkt</h4><div class="cap">Siste 10 minutter prosesstid.</div><svg id="rTrL" viewBox="0 0 420 200"></svg></div>
+            <div class="chart"><h4>Trend: ventilåpning</h4><svg id="rTrU" viewBox="0 0 420 150"></svg></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3 style="margin:30px 0 12px">Utforsk: spå først, test etterpå</h3>
+    <div class="explore">
+      <div class="task"><p><b>A.</b> Sett <var>T</var><sub>i</sub> til 0 (bare P). Øk innløpet med 5 m³/h. Kommer nivået tilbake til settpunktet?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Nei. Nivået legger seg litt over settpunktet. Det er det stasjonære avviket: Regulatoren trenger et avvik for å holde ventilen mer åpen. Høyere <var>K</var><sub>p</sub> gir mindre avvik, men fjerner det ikke.</div></details></div>
+      <div class="task"><p><b>B.</b> Sett <var>T</var><sub>i</sub> til 120 s og gjenta. Hva er forskjellen?</p>
+        <details><summary>Se forklaring</summary><div class="ans">I-leddet fortsetter å åpne ventilen så lenge det er et avvik, og nivået går tilbake til settpunktet.</div></details></div>
+      <div class="task"><p><b>C.</b> Sett <var>K</var><sub>p</sub> til 10 og <var>T</var><sub>i</sub> til 20 s. Endre settpunktet. Hva skjer?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Nivået svinger fordi regulatoren reagerer for kraftig og for raskt. Ventilen slår fra side til side. Det sliter på utstyret og forstyrrer prosessen videre. Å stille inn regulatoren riktig kalles tuning.</div></details></div>
+      <div class="task"><p><b>D.</b> Bytt til manuell og la ventilen stå på 50 %. Øk innløpet. Hva må operatøren gjøre?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Nivået stiger til utløpet blir like stort som innløpet, eller til tanken går full og høynivåalarmen (LAH) går. Operatøren må selv åpne ventilen og følge med hele tiden. Det er derfor vi har automatisk regulering.</div></details></div>
+    </div>
+  </div>
+</section>
+
+<section id="labark">
+  <div class="wrap">
+    <div class="sechead"><span class="step">06</span><h2>Labark: sløyfesjekk av transmitteren</h2></div>
+    <div class="two" style="margin-bottom:22px">
+      <div class="prose stack">
+        <p>En sløyfesjekk kontrollerer at signalet fra transmitteren stemmer med det den måler, hele veien til kontrollrommet. Det gjøres ved oppstart, etter vedlikehold og med faste mellomrom.</p>
+        <p>Påtrykk kjente verdier ved 0, 25, 50, 75 og 100 % av måleområdet. For en nivåtransmitter kan det gjøres ved å fylle tanken til kjente nivåer målt med målestav eller seglass. Da er påtrykt verdi nivået, for eksempel i cm. Bruker dere en trykkalibrator, er påtrykt verdi trykket, for eksempel i bar. Les av signalet i mA med et multimeter eller i kontrollsystemet.</p>
+        <p>Siden regner ut forventet signal og feilen i prosent av måleområdet (spennet), og sier om transmitteren er innenfor toleransen.</p>
+        <p class="status">Det du skriver lagres bare i denne nettleseren på denne enheten. Ingenting sendes noe sted.</p>
+      </div>
+      <div class="stack">
+        <div class="formula" role="img" aria-label="Feil i prosent av spennet">
+          <div class="tag" style="margin-bottom:8px">Feil i prosent av spennet</div>
+          <div class="eq"><span>feil</span><span>=</span><span class="frac"><span><var>I</var><sub>målt</sub> − <var>I</var><sub>forventet</sub></span><span>16 mA</span></span><span>· 100 %</span></div>
+        </div>
+        <div class="callout"><b>Nullpunkt eller spenn?</b>Er feilen like stor over hele området, er det en <strong>nullpunktsfeil</strong>. Øker feilen jevnt mot toppen, er det en <strong>spennfeil</strong>. Begge kan justeres i transmitteren.</div>
+      </div>
+    </div>
+    <div class="panel lab stack">
+      <div class="btnrow"><span class="example" id="cEx">Eksempeldata – bytt ut med egne målinger</span></div>
+      <div class="labgrid">
+        <div class="ctrl"><label for="cTag">Tagg</label><input type="text" id="cTag"></div>
+        <div class="ctrl"><label for="cUnit">Enhet (for eksempel cm eller bar)</label><input type="text" id="cUnit"></div>
+        <div class="ctrl"><label for="cMin">Måleområde fra (4 mA)</label><input type="number" id="cMin" step="any"></div>
+        <div class="ctrl"><label for="cMax">Måleområde til (20 mA)</label><input type="number" id="cMax" step="any"></div>
+        <div class="ctrl"><label for="cTol">Toleranse (± % av spenn)</label><input type="number" id="cTol" step="0.05"></div>
+      </div>
+      <div class="tablebox"><table>
+        <thead><tr><th id="cValH">Påtrykt verdi</th><th>Målt signal (mA)</th><th class="r">% av område</th><th class="r">Forventet (mA)</th><th class="r">Feil (mA)</th><th class="r">Feil (% av spenn)</th><th>Status</th><th></th></tr></thead>
+        <tbody id="cRows"></tbody></table></div>
+      <div class="btnrow">
+        <button type="button" id="cAdd">Legg til punkt</button>
+        <button type="button" class="ghost" id="cClear">Tøm og start med egne målinger</button>
+        <span class="status" id="cClearC" hidden>Sikker? <button type="button" class="small" id="cClearY">Ja, tøm</button> <button type="button" class="small ghost" id="cClearN">Avbryt</button></span>
+      </div>
+      <div class="two">
+        <div class="chart"><h4>Feil gjennom måleområdet</h4><div class="cap">De stiplede linjene er toleransegrensene.</div><svg id="cChart" viewBox="0 0 420 260"></svg></div>
+        <div class="panel stack"><h3 style="font-size:1.15rem">Vurdering</h3><div id="cVerdict"></div></div>
+      </div>
+      <div class="two">
+        <div class="ctrl"><label for="cR1">Er transmitteren innenfor toleransen? Er feilen en nullpunktsfeil, en spennfeil eller begge deler?</label><textarea id="cR1"></textarea></div>
+        <div class="ctrl"><label for="cR2">Hvilke konsekvenser kan en feil på denne størrelsen få i et anlegg? Hva bør gjøres?</label><textarea id="cR2"></textarea></div>
+      </div>
+      <div class="btnrow"><button type="button" id="cCopy">Kopier resultater</button><span class="status" id="cCopied" role="status"></span></div>
+      <textarea id="cFb" hidden readonly style="min-height:160px;font-family:var(--f-mono);font-size:.8rem"></textarea>
+    </div>
+  </div>
+</section>
+
+<section id="oppgaver">
+  <div class="wrap">
+    <div class="sechead"><span class="step">07</span><h2>Oppgaver og avsluttende case</h2></div>
+    <h3 style="margin-bottom:12px">Sjekk forståelsen</h3>
+    <div class="stack" id="quiz" style="max-width:780px"></div>
+    <div class="btnrow" style="margin-top:12px"><span class="score" id="qScore"></span></div>
+    <h3 style="margin:36px 0 6px">Regneoppgaver</h3>
+    <p class="prose" style="margin-bottom:14px">Komma eller punktum som desimaltegn.</p>
+    <div class="stack" id="calcs" style="max-width:780px"></div>
+    <h3 style="margin:36px 0 6px">Case: en vakt i kontrollrommet</h3>
+    <p class="prose" style="margin-bottom:14px">Du er operatør på et anlegg der en sentrifugalpumpe henter væske fra tank T-1 og pumper den gjennom et rørsystem til tank T-2. Løs situasjonene som dukker opp i løpet av vakten. Alle situasjonene bygger på noe du har lært i kurset.</p>
+    <div class="stack" id="case" style="max-width:780px"></div>
+    <div class="btnrow" style="margin-top:12px"><span class="score" id="caseScore"></span></div>
+  </div>
+</section>
+
+<section id="forklar">
+  <div class="wrap">
+    <div class="sechead"><span class="step">08</span><h2>Forklar for hverandre</h2></div>
+    <div id="peer"></div>
+  </div>
+</section>
+
+<section id="oppsummering">
+  <div class="wrap">
+    <div class="sechead"><span class="step">09</span><h2>Oppsummering av kurset</h2></div>
+    <div class="two">
+      <div class="summary prose">
+        <ul>
+          <li><b>Del 1:</b> Tetthet og viskositet bestemmer hvordan væsken oppfører seg, og temperaturen endrer begge.</li>
+          <li><b>Del 2:</b> Trykket i en væske øker med dybden, <var>p</var> = <var>ρ</var>·<var>g</var>·<var>h</var>, og kan brukes til å måle nivå.</li>
+          <li><b>Del 3:</b> Volumstrømmen er lik gjennom hele røret, og Reynolds tall avgjør om strømningen er laminær eller turbulent.</li>
+          <li><b>Del 4:</b> Friksjon og komponenter gir trykktap, og trykktap koster energi.</li>
+          <li><b>Del 5:</b> Pumpen gir energien. Arbeidspunktet ligger der pumpekurven møter systemkurven.</li>
+          <li><b>Del 6:</b> Instrumenter måler, regulatorer styrer, og operatøren har ansvar for sikker og miljøvennlig drift.</li>
+        </ul>
+      </div>
+      <div class="teacher">
+        <div class="tag">Til læreren</div>
+        <h3 style="margin:6px 0 10px">Kobling og forslag til gjennomføring</h3>
+        <p style="font-size:.95rem">Uken støtter kompetansemålene i kjemisk teknologi (KPL02-01) om å beskrive prosessutstyr og forklare virkemåten, å forklare den logiske sammenhengen mellom enhetsoperasjonene i prosessanlegg, og å drøfte tiltak for miljøvennlig produksjon. Casen kan brukes som repetisjon eller vurdering for hele kurset.</p>
+        <ol style="font-size:.95rem;padding-left:20px;margin:12px 0 0;display:grid;gap:4px">
+          <li>Måling, instrumentskjema og tagg-leseren</li>
+          <li>Regulering med simuleringen, HMS og miljø</li>
+          <li>Sløyfesjekk av transmitteren på riggen og labark</li>
+          <li>Case, «Forklar for hverandre» (20–25 min) og avslutning</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<footer><div class="wrap">Væske i prosessindustrien · Del 6 · Taggbokstavene følger vanlig praksis etter ISA 5.1. Bedriftens egne standarder kan avvike.</div></footer>
+
+<script src="kurs.js"></script>
+<script>
+(function(){
+"use strict";
+const {$,nf,num,el,chart}=K;
+
+/* ---- Tagg-leser ---- */
+const FIRST={F:'strømning',L:'nivå',P:'trykk',T:'temperatur',A:'analyse (f.eks. pH eller ledningsevne)',D:'tetthet',S:'hastighet eller turtall',W:'vekt',E:'spenning',H:'håndbetjening',Z:'posisjon'};
+const FUNC={I:'viser verdien (indikator)',T:'sender signal (transmitter)',C:'regulerer (regulator)',V:'ventil',A:'alarm',S:'bryter',E:'føler (måleelement)',R:'registrerer (skriver eller logger)',Y:'omformer signalet',G:'seglass (lokal visning)',K:'kontrollstasjon'};
+function readTag(raw){const m=String(raw).toUpperCase().replace(/\s/g,'').match(/^([A-Z]+)-?(\d*)/);if(!m||!m[1])return null;
+  const L=m[1].split(''),nr=m[2];const out={first:L[0],var:FIRST[L[0]],mods:[],funcs:[],nr};if(!out.var)return {err:`Ukjent første bokstav «${L[0]}».`};
+  let i=1;if(L[1]==='D'&&(L[0]==='P'||L[0]==='T')){out.mods.push('differanse');i=2;}else if(L[1]==='Q'&&L[0]==='F'){out.mods.push('totalisert mengde');i=2;}
+  for(;i<L.length;i++){const ch=L[i];if((ch==='H'||ch==='L')&&i>1&&(L[i-1]==='A'||L[i-1]==='S'||L[i-1]==='H'||L[i-1]==='L')){const last=out.funcs[out.funcs.length-1];if(last)last.mod=(last.mod||'')+(ch==='H'?' høy':' lav');continue;}
+    if(FUNC[ch])out.funcs.push({ch,t:FUNC[ch]});else return {err:`Ukjent bokstav «${ch}».`};}
+  return out;}
+function showTag(){const r=readTag($('#tagIn').value),o=$('#tagOut');if(!r){o.innerHTML='<p class="status">Skriv en tagg, for eksempel FT-201.</p>';return;}if(r.err){o.innerHTML=`<div class="warn">${r.err}</div>`;return;}
+  const v=(r.mods.length?r.mods[0]+' i ':'')+r.var;const lvl=m=>({' høy':'høyt',' lav':'lavt',' høy høy':'svært høyt',' lav lav':'svært lavt'})[m]||'';
+  const row=(k,t)=>`<span><b>${k}</b></span><span style="text-align:left;font-family:var(--f-body)">${t}</span>`;
+  let h=row(r.first+(r.mods.length?(r.mods[0]==='differanse'?'D':'Q'):''),'måler '+v);
+  r.funcs.forEach(f=>{const mk=f.mod?f.mod.trim().split(' ').map(x=>x==='høy'?'H':'L').join(''):'';let t=f.t;
+    if(f.mod&&f.ch==='A')t=`alarm ved ${lvl(f.mod)} nivå`.replace('nivå',r.var);else if(f.mod&&f.ch==='S')t=`bryter ved ${lvl(f.mod)} ${r.var}`;h+=row(f.ch+mk,t);});
+  if(r.nr)h+=row(r.nr,'sløyfenummer');o.innerHTML=`<div class="kv">${h}</div>`;}
+$('#tagEx').innerHTML=['LIC-101','FT-201','PI-305','LAH-101','PDT-410','TIC-150','LSLL-102','FQI-220'].map(t=>`<button type="button" class="small ghost" data-t="${t}">${t}</button>`).join('');
+$('#tagEx').addEventListener('click',e=>{const b=e.target.closest('button');if(b){$('#tagIn').value=b.dataset.t;showTag();}});$('#tagIn').addEventListener('input',showTag);showTag();
+
+/* ---- Blokkskjema ---- */
+(function(){const s=$('#loopSvg');const box=(x,y,w,t,sub,c)=>{el('rect',{x,y,width:w,height:46,rx:4,fill:'var(--surface)',stroke:c||'var(--ink)','stroke-width':1.8},s);el('text',{x:x+w/2,y:y+20,'text-anchor':'middle',style:'fill:var(--ink);font-size:12px'},s,t);el('text',{x:x+w/2,y:y+36,'text-anchor':'middle'},s,sub);};
+  const ar=(d)=>{el('path',{d,fill:'none',stroke:'var(--muted)','stroke-width':1.6},s);};
+  box(20,20,110,'Regulator','LIC-101','var(--pipe)');box(270,20,130,'Ventil','LV-101');box(270,130,130,'Tank','prosessen');box(20,130,110,'Transmitter','LT-101');
+  ar('M130 43 H262');el('path',{d:'M262 38 L270 43 L262 48',fill:'var(--muted)'},s);el('text',{x:200,y:36,'text-anchor':'middle'},s,'pådrag');
+  ar('M335 66 V122');el('path',{d:'M330 122 L335 130 L340 122',fill:'var(--muted)'},s);el('text',{x:342,y:100},s,'utløp');
+  ar('M270 153 H138');el('path',{d:'M138 148 L130 153 L138 158',fill:'var(--muted)'},s);el('text',{x:200,y:146,'text-anchor':'middle'},s,'nivå');
+  ar('M75 130 V74');el('path',{d:'M70 74 L75 66 L80 74',fill:'var(--muted)'},s);el('text',{x:82,y:104},s,'4–20 mA');
+  el('text',{x:75,y:12,'text-anchor':'middle',style:'fill:var(--signal)'},s,'settpunkt ↓');})();
+
+/* ---- Nivåregulering ---- */
+const R={Mode:$('#rMode'),SP:$('#rSP'),Man:$('#rMan'),Kp:$('#rKp'),Ti:$('#rTi'),Q:$('#rQ')};
+const A=1.0,HT=3.0,CV=25/Math.sqrt(1.5),TAUM=8,TAUV=15,SPEED=20;
+let st,hist,paused=false;
+function reset(){st={t:0,h:1.5,hm:1.5,u:50,uv:50,I:0};hist=[];R.SP.value=1.5;R.Q.value=12;R.Man.value=50;}
+reset();
+function step(dt){const Qin=+R.Q.value,sp=+R.SP.value,Kp=+R.Kp.value,Ti=+R.Ti.value;
+  st.hm+=(st.h-st.hm)*dt/TAUM;const e=(st.hm-sp)/HT*100;
+  if(R.Mode.value==='auto'){let u=50+Kp*e+(Ti>0?st.I:0);const sat=u>100||u<0;u=Math.max(0,Math.min(100,u));if(Ti>0&&!(sat&&Math.sign(e)===Math.sign(u-50)))st.I+=Kp/Ti*e*dt;st.u=u;}
+  else{st.u=+R.Man.value;st.I=st.u-50-Kp*e;}
+  st.uv+=(st.u-st.uv)*dt/TAUV;const Qout=CV*st.uv/100*Math.sqrt(Math.max(0,st.h));
+  st.h=Math.max(0,Math.min(HT,st.h+(Qin-Qout)/3600/A*dt));st.Qout=Qout;st.t+=dt;}
+function rDraw(){const sp=+R.SP.value;$('#rSPo').textContent=nf(sp,2)+' m';$('#rMano').textContent=R.Man.value+' %';$('#rKpo').textContent=nf(+R.Kp.value,1);$('#rTio').textContent=+R.Ti.value?R.Ti.value+' s':'av';$('#rQo').textContent=nf(+R.Q.value,1)+' m³/h';
+  $('#rManW').hidden=R.Mode.value!=='man';
+  $('#rgL').textContent=nf(st.hm,2);$('#rgE').textContent=(st.hm-sp>0?'+':'')+nf(st.hm-sp,2);$('#rgU').textContent=nf(st.uv,0);$('#rgQ').textContent=nf(st.Qout||0,1);
+  const s=$('#rSvg');s.innerHTML='';const x0=90,x1=250,yt=50,yb=250,sc=(yb-yt)/HT,ly=yb-st.h*sc;
+  el('rect',{x:x0,y:ly,width:x1-x0,height:yb-ly,fill:'var(--pipe-soft)'},s);el('line',{x1:x0,x2:x1,y1:ly,y2:ly,stroke:'var(--pipe)','stroke-width':2},s);
+  el('line',{x1:x0,x2:x1,y1:yb-sp*sc,y2:yb-sp*sc,stroke:'var(--signal)','stroke-width':1.5,'stroke-dasharray':'6 4'},s);el('text',{x:x1-4,y:yb-sp*sc-5,'text-anchor':'end',style:'fill:var(--signal)'},s,'SP');
+  el('path',{d:`M${x0} ${yt} V${yb} H${x1} V${yt}`,fill:'none',stroke:'var(--ink)','stroke-width':2.5},s);
+  // innløp
+  el('path',{d:`M20 30 H${x0+30} V${yt+10}`,fill:'none',stroke:'var(--pipe)','stroke-width':6},s);el('text',{x:20,y:22},s,'innløp '+nf(+R.Q.value,1)+' m³/h');
+  // utløp + ventil
+  el('path',{d:`M${x1} ${yb-10} H370`,fill:'none',stroke:'var(--pipe)','stroke-width':6},s);
+  const vx=310,vy=yb-10;el('path',{d:`M${vx-14} ${vy-11} L${vx+14} ${vy+11} L${vx+14} ${vy-11} L${vx-14} ${vy+11} Z`,fill:'var(--surface)',stroke:'var(--ink)','stroke-width':2},s);
+  el('path',{d:`M${vx} ${vy} V${vy-26} M${vx-12} ${vy-26} Q${vx} ${vy-40} ${vx+12} ${vy-26} Z`,fill:'var(--surface)',stroke:'var(--ink)','stroke-width':2},s);
+  el('text',{x:vx,y:vy+28,'text-anchor':'middle'},s,'LV-101 '+nf(st.uv,0)+' %');
+  // LT og LIC
+  el('line',{x1:x1,x2:x1+24,y1:yb-30,y2:yb-30,stroke:'var(--ink)','stroke-width':1.5},s);el('circle',{cx:x1+40,cy:yb-30,r:16,fill:'var(--surface)',stroke:'var(--ink)','stroke-width':1.5},s);el('text',{x:x1+40,y:yb-26,'text-anchor':'middle',style:'fill:var(--ink);font-size:10px'},s,'LT');
+  el('circle',{cx:x1+40,cy:yt+20,r:18,fill:'var(--surface)',stroke:'var(--pipe)','stroke-width':1.8},s);el('line',{x1:x1+22,x2:x1+58,y1:yt+20,y2:yt+20,stroke:'var(--pipe)','stroke-width':1.5},s);el('text',{x:x1+40,y:yt+16,'text-anchor':'middle',style:'fill:var(--ink);font-size:10px'},s,'LIC');el('text',{x:x1+40,y:yt+33,'text-anchor':'middle',style:'font-size:9px'},s,'101');
+  el('path',{d:`M${x1+40} ${yb-46} V${yt+38}`,stroke:'var(--muted)','stroke-width':1.2,'stroke-dasharray':'4 3',fill:'none'},s);
+  el('path',{d:`M${x1+58} ${yt+20} H${vx} V${vy-40}`,stroke:'var(--muted)','stroke-width':1.2,'stroke-dasharray':'4 3',fill:'none'},s);
+  for(let m=0;m<=3;m++){el('text',{x:x0-8,y:yb-m*sc+4,'text-anchor':'end'},s,m+' m');}
+  // alarmer
+  const lah=st.h>2.8,lal=st.h<0.3;if(lah||lal)el('text',{x:(x0+x1)/2,y:yt-14,'text-anchor':'middle',style:'fill:var(--bad);font-size:13px;font-weight:700'},s,lah?'LAH-101: HØYT NIVÅ':'LAL-101: LAVT NIVÅ');
+  el('text',{x:(x0+x1)/2,y:yb+22,'text-anchor':'middle'},s,R.Mode.value==='auto'?'Automatisk':'Manuell');
+  // trend
+  const t1=st.t,t0=Math.max(0,t1-600),H=hist.filter(p=>p[0]>=t0);
+  chart($('#rTrL'),{xMin:0,xMax:10,yMax:3,xLabel:'minutter',yLabel:'nivå (m)',lines:[{pts:H.map(p=>[(p[0]-t0)/60,p[3]]),color:'var(--signal)',dash:'6 4',w:1.6},{pts:H.map(p=>[(p[0]-t0)/60,p[1]]),color:'var(--pipe)'}]});
+  chart($('#rTrU'),{xMin:0,xMax:10,yMax:100,xLabel:'minutter',yLabel:'%',lines:[{pts:H.map(p=>[(p[0]-t0)/60,p[2]]),color:'var(--signal)'}]});}
+let last=0,acc=0;
+function loop(ts){const dt=Math.min(0.1,(ts-last)/1000||0);last=ts;if(!paused){let sim=dt*SPEED;while(sim>0){const h=Math.min(0.5,sim);step(h);sim-=h;}
+    if(!hist.length||st.t-hist[hist.length-1][0]>=2)hist.push([st.t,st.hm,st.uv,+R.SP.value]);if(hist.length>400)hist.shift();}
+  acc+=dt;if(acc>0.2){acc=0;rDraw();}requestAnimationFrame(loop);}
+if(K.reduce){for(let i=0;i<600;i++){step(1);if(i%2===0)hist.push([st.t,st.hm,st.uv,+R.SP.value]);}rDraw();setInterval(()=>{if(!paused){for(let i=0;i<20;i++)step(1);hist.push([st.t,st.hm,st.uv,+R.SP.value]);if(hist.length>400)hist.shift();rDraw();}},1000);}
+else requestAnimationFrame(loop);
+Object.values(R).forEach(e=>e.addEventListener('input',rDraw));
+$('#rStep').addEventListener('click',()=>{R.Q.value=Math.min(24,+R.Q.value+5);rDraw();});
+$('#rPause').addEventListener('click',e=>{paused=!paused;e.target.textContent=paused?'Fortsett':'Pause';});
+$('#rReset').addEventListener('click',()=>{reset();rDraw();});
+rDraw();
+
+/* ---- Labark sløyfesjekk ---- */
+const CKEY='uke6-sloyfesjekk-v1';
+const CEX={Tag:'LT-101',Unit:'cm',Min:0,Max:80,Tol:0.5,ex:true,rows:[[0,4.03],[20,8.05],[40,12.08],[60,16.10],[80,20.13]],r1:'',r2:''};
+let C=K.load(CKEY,CEX);const cs=()=>K.save(CKEY,C);
+const CF={Tag:$('#cTag'),Unit:$('#cUnit'),Min:$('#cMin'),Max:$('#cMax'),Tol:$('#cTol')};
+function cRow(r){const v=num(r[0]),m=num(r[1]),lo=num(C.Min),hi=num(C.Max);const pct=(v-lo)/(hi-lo)*100,exp=4+16*pct/100,err=m-exp,errP=err/16*100;return {v,m,pct,exp,err,errP,ok:Number.isFinite(pct)&&Number.isFinite(m)&&hi!==lo};}
+function cRender(){for(const k in CF)CF[k].value=C[k]??'';$('#cR1').value=C.r1||'';$('#cR2').value=C.r2||'';$('#cEx').hidden=!C.ex;
+  const tb=$('#cRows');tb.innerHTML='';
+  C.rows.forEach((row,i)=>{const tr=document.createElement('tr');
+    tr.innerHTML=`<td><input type="text" inputmode="decimal" id="cr${i}_0" value="${row[0]??''}" aria-label="Påtrykt verdi, punkt ${i+1}"></td><td><input type="text" inputmode="decimal" id="cr${i}_1" value="${row[1]??''}" aria-label="Målt signal, punkt ${i+1}"></td>
+      <td class="r num" data-c="p"></td><td class="r num" data-c="e"></td><td class="r num" data-c="d"></td><td class="r num" data-c="dp"></td><td data-c="s"></td><td><button type="button" class="small ghost" aria-label="Fjern punkt ${i+1}">Fjern</button></td>`;
+    tr.querySelectorAll('input').forEach((inp,j)=>inp.addEventListener('input',()=>{C.rows[i][j]=inp.value;C.ex=false;$('#cEx').hidden=true;cCalc();cs();}));
+    tr.querySelector('button').addEventListener('click',()=>{C.rows.splice(i,1);cRender();cs();});tb.appendChild(tr);});
+  cCalc();}
+function cCalc(){$('#cValH').textContent='Påtrykt verdi'+(String(C.Unit||'').trim()?' ('+String(C.Unit).trim()+')':'');const tol=num(C.Tol)||0.5,pts=[];[...$('#cRows').children].forEach((tr,i)=>{const r=cRow(C.rows[i]);const c=k=>tr.querySelector(`[data-c="${k}"]`);
+    if(r.ok){pts.push(r);c('p').textContent=nf(r.pct,0)+' %';c('e').textContent=nf(r.exp,2);c('d').textContent=(r.err>0?'+':'')+nf(r.err,2);c('dp').textContent=(r.errP>0?'+':'')+nf(r.errP,2)+' %';
+      c('s').innerHTML=Math.abs(r.errP)<=tol?'<span class="pill lam">OK</span>':'<span class="pill" style="background:var(--bad-soft);color:var(--bad)">Utenfor</span>';}
+    else['p','e','d','dp','s'].forEach(k=>c(k).textContent='–');});
+  const maxE=Math.max(tol*1.6,...pts.map(p=>Math.abs(p.errP)))*1.15;
+  chart($('#cChart'),{xMin:0,xMax:100,yMin:-maxE,yMax:maxE,xLabel:'% av måleområdet',yLabel:'feil (% av spenn)',hlines:[{y:tol,label:'+'+nf(tol,2)+' %',color:'var(--bad)',right:true},{y:-tol,label:'−'+nf(tol,2)+' %',color:'var(--bad)',right:true,below:true}],
+    lines:[{pts:pts.slice().sort((a,b)=>a.pct-b.pct).map(p=>[p.pct,p.errP]),color:'var(--pipe)',w:1.6}],dots:pts.map(p=>({x:p.pct,y:p.errP,fill:Math.abs(p.errP)<=tol?'var(--good)':'var(--bad)'}))});
+  let v='<p class="status">Legg inn minst to punkter.</p>';
+  if(pts.length>=2){const s=pts.slice().sort((a,b)=>a.pct-b.pct),lo=s[0],hi=s[s.length-1],zero=lo.errP-(hi.errP-lo.errP)/(hi.pct-lo.pct)*lo.pct,span=(hi.errP-lo.errP)/(hi.pct-lo.pct)*100,worst=Math.max(...pts.map(p=>Math.abs(p.errP))),okAll=worst<=tol;
+    const kind=Math.abs(zero)>tol/2&&Math.abs(span)>tol/2?'både nullpunktsfeil og spennfeil':Math.abs(span)>Math.abs(zero)?'mest spennfeil (feilen øker mot toppen)':'mest nullpunktsfeil (lik feil over hele området)';
+    v=`<div class="kv"><span>Største feil</span><span>${nf(worst,2)} % av spenn</span><span>Nullpunktsfeil (ved 0 %)</span><span>${nf(zero,2)} %</span><span>Spennfeil (økning 0–100 %)</span><span>${nf(span,2)} %</span></div>`+
+      (okAll?`<div class="okbox">Alle punkter er innenfor ±${nf(tol,2)} %. Transmitteren er godkjent.</div>`:`<div class="warn">Transmitteren er utenfor toleransen. Feilen ser ut som ${kind}. Den bør justeres og sjekkes på nytt.</div>`);}
+  $('#cVerdict').innerHTML=v;}
+Object.entries(CF).forEach(([k,e])=>e.addEventListener('input',()=>{C[k]=e.value;C.ex=false;$('#cEx').hidden=true;cCalc();cs();}));
+$('#cR1').addEventListener('input',e=>{C.r1=e.target.value;cs();});$('#cR2').addEventListener('input',e=>{C.r2=e.target.value;cs();});
+$('#cAdd').addEventListener('click',()=>{C.rows.push(['','']);cRender();cs();const f=$('#cr'+(C.rows.length-1)+'_0');if(f)f.focus();});
+K.confirm($('#cClear'),$('#cClearC'),$('#cClearY'),$('#cClearN'),()=>{C={Tag:C.Tag,Unit:C.Unit,Min:C.Min,Max:C.Max,Tol:C.Tol,ex:false,rows:[['',''],['',''],['',''],['',''],['','']],r1:'',r2:''};cRender();cs();});
+$('#cCopy').addEventListener('click',()=>{let t=`Labark del 6 – sløyfesjekk ${C.Tag}\nMåleområde ${C.Min}–${C.Max} ${C.Unit} = 4–20 mA. Toleranse ±${C.Tol} % av spenn\n\nPåtrykt (${C.Unit})\t% av område\tForventet (mA)\tMålt (mA)\tFeil (% av spenn)\n`;
+  C.rows.forEach(row=>{const r=cRow(row);if(r.ok)t+=`${row[0]}\t${nf(r.pct,0)}\t${nf(r.exp,2)}\t${nf(r.m,2)}\t${nf(r.errP,2)}\n`;});
+  t+=`\nVurdering: ${C.r1||''}\n\nKonsekvenser og tiltak: ${C.r2||''}\n`;K.copy(t,$('#cCopied'),$('#cFb'));});
+cRender();
+
+/* ---- Quiz ---- */
+K.quiz($('#quiz'),$('#qScore'),[
+ {q:'Hva betyr taggen FIC-201?',o:['Strømningsindikator og regulator i sløyfe 201','Trykkbryter i sløyfe 201','Nivåtransmitter i sløyfe 201','Flottør i tank 201'],a:0,e:'F = strømning, I = indikator, C = regulator. 201 er sløyfenummeret.'},
+ {q:'Du skal måle volumstrømmen av hydraulikkolje. Hvilken måler passer dårlig?',o:['Coriolis','Magnetisk strømningsmåler','Måleblende','Ultralyd'],a:1,e:'En magnetisk strømningsmåler krever at væsken leder strøm. Olje gjør ikke det.'},
+ {q:'Hva gjør I-leddet i en PI-regulator?',o:['Reagerer bare på hvor stort avviket er nå','Fjerner stasjonært avvik ved å summere avviket over tid','Stopper pumpen ved høyt nivå','Måler nivået'],a:1,e:'I-leddet fortsetter å endre pådraget så lenge det finnes et avvik, til avviket er borte.'},
+ {q:'Nivået i en regulert tank svinger opp og ned rundt settpunktet. Hva er en sannsynlig årsak?',o:['For lav forsterkning','For høy forsterkning eller for kort integraltid','Transmitteren er av','Regulatoren står i manuell'],a:1,e:'En regulator som reagerer for kraftig eller for raskt, overkorrigerer, og prosessen begynner å svinge.'},
+ {q:'Hva må gjøres før du åpner en flens på et rør med væske?',o:['Ingenting, bare bruk hansker','Rør og utstyr må være trykkavlastet og tømt, og pumpe og ventiler sikret mot oppstart','Pumpen må gå for å holde trykket','Sikkerhetsventilen må blokkeres'],a:1,e:'Trykk er lagret energi. Utstyret skal være trykkløst, tømt og sikret med låsing og merking før det åpnes.'},
+ {q:'Hvorfor skal ventiler i væskeledninger stenges rolig?',o:['For å spare energi','For å unngå trykkstøt (væskeslag) som kan skade rør og utstyr','For at pumpen skal kavitere','Fordi ventilen ellers lekker'],a:1,e:'Når væsken stoppes brått, omdannes bevegelsesenergien til en trykkbølge. Det kan gi kraftige smell og skade rør, ventiler og målere.'}
+]);
+
+/* ---- Regneoppgaver ---- */
+K.calcs($('#calcs'),[
+ {t:'a) En nivåtransmitter har måleområde 0–4,0 m, som gir 4–20 mA. Signalet er 9,6 mA. Hva er nivået?',u:'m',a:1.4,s:'Nivå = (9,6 − 4) / 16 · 4,0 = 0,35 · 4,0 = <b>1,4 m</b>.'},
+ {t:'b) En måleblende gir 25 kPa trykkfall ved 20 m³/h. Trykkfallet er nå 16 kPa. Hva er volumstrømmen? (Δp er proporsjonalt med Q².)',u:'m³/h',a:16,s:'Q = 20 · √(16/25) = 20 · 0,8 = <b>16 m³/h</b>.'},
+ {t:'c) Ved 100 % av måleområdet forventes 20,00 mA, men du måler 20,12 mA. Hva er feilen i prosent av spennet?',u:'%',a:0.75,s:'Feil = 0,12 / 16 · 100 % = <b>0,75 %</b>.'},
+ {t:'d) En P-regulator har forsterkning K<sub>p</sub> = 2,0. Avviket øker med 5 %. Hvor mye endres pådraget?',u:'%',a:10,s:'Endring = K<sub>p</sub> · avvik = 2,0 · 5 % = <b>10 %</b>.'},
+ {t:'e) Et oppsamlingskar skal kunne romme 110 % av innholdet i den største tanken. Største tank er 30 m³. Hvor stort må karet være?',u:'m³',a:33,s:'1,10 · 30 m³ = <b>33 m³</b>.'}
+]);
+
+/* ---- Case ---- */
+K.quiz($('#case'),$('#caseScore'),[
+ {q:'<b>06:10</b> Det er kaldt ute. Trykket etter pumpen er høyere enn vanlig, og volumstrømmen er lavere. Væsken er en olje. Hva er den mest sannsynlige forklaringen?',o:['Oljen er kald og har høyere viskositet, som gir større trykktap','Pumpen kaviterer','Nivåtransmitteren er feil','Oljen har lavere tetthet'],a:0,e:'Del 1 og 4: Kald olje har mye høyere viskositet. Det gir større friksjonstap, systemkurven blir brattere, og arbeidspunktet flytter seg mot lavere volumstrøm og høyere trykk.'},
+ {q:'<b>08:30</b> Tank T-2 er lukket med nitrogen på toppen. Etter at nitrogentrykket ble økt, viser nivåmålingen 30 cm mer, selv om ingenting er fylt på. Hva har skjedd?',o:['Væsken har utvidet seg','Nivåtransmitteren er en vanlig trykktransmitter som også måler gasstrykket','Pumpen har startet','Tettheten har økt'],a:1,e:'Del 2: En trykktransmitter i bunnen av en lukket tank måler væsketrykket pluss gasstrykket. Løsningen er en DP-celle som trekker fra gasstrykket.'},
+ {q:'<b>11:15</b> Volumstrømmen har falt gradvis gjennom dagen. Trykket etter pumpen har steget. Ventilene står som før. Hva bør du sjekke først?',o:['Om det er en tilstopping på trykksiden, for eksempel et filter eller en sil','Om sugetanken er tom','Om turtallet har økt','Om væsken er blitt varmere'],a:0,e:'Del 4 og 5: Høyere trykk og lavere strøm betyr at systemkurven har blitt brattere, altså mer motstand etter pumpen. Et tett filter er en vanlig årsak.'},
+ {q:'<b>13:40</b> Væsken i T-1 er varmet opp til 75 °C for en rengjøring. Pumpen begynner å knitre, og trykket etter pumpen varierer. Hva skjer?',o:['Trykkstøt','Kavitasjon fordi damptrykket har økt','Laminær strømning','Feil på regulatoren'],a:1,e:'Del 5: Ved høy temperatur er damptrykket høyt, og NPSH tilgjengelig blir for lav. Væsken koker i sugeøyet. Reduser temperaturen eller volumstrømmen, eller øk nivået i sugetanken.'},
+ {q:'<b>15:05</b> Nivået i T-2 svinger jevnt opp og ned rundt settpunktet, og reguleringsventilen går fra nesten stengt til nesten åpen. Hva gjør du?',o:['Øker forsterkningen','Melder fra om at regulatoren må tunes, for eksempel med lavere forsterkning eller lengre integraltid','Slår av nivåalarmen','Øker settpunktet'],a:1,e:'Del 6: Svingningene tyder på at regulatoren er stilt for aggressivt. Riktig tuning gir rolig regulering og mindre slitasje.'},
+ {q:'<b>15:50</b> Du skal skifte en pakning på en flens etter pumpen. Hva er riktig rekkefølge?',o:['Åpne flensen forsiktig mens pumpen går sakte','Stoppe og sikre pumpen, stenge og sikre ventiler, trykkavlaste og tømme, så åpne flensen','Stenge ventilen på trykksiden og åpne flensen','Be kontrollrommet senke settpunktet'],a:1,e:'Del 6: Utstyret skal være stoppet, sikret mot oppstart med låsing og merking, trykkløst og tømt før det åpnes. Les sikkerhetsdatabladet og bruk riktig verneutstyr.'}
+]);
+
+/* ---- Forklar for hverandre ---- */
+K.peer($('#peer'),{key:'uke6-medelev-v1',title:'del 6, måling, styring og helhet',min:'20–25',cards:[
+ {t:'Velg instrument',p:'Hvilken strømningsmåler og nivåmåler ville du valgt til en tank med hydraulikkolje? Begrunn valget.',h:'Tenk på tabellene i del 1.',link:'#maling',ln:'Måling',
+  c:['Vet at magnetisk måler ikke fungerer på olje','Foreslår en passende strømningsmåler (for eksempel coriolis, måleblende eller ultralyd)','Foreslår en passende nivåmåler og nevner om den avhenger av tettheten','Begrunner med egenskapene til væsken']},
+ {t:'Tagger og sløyfe',p:'Forklar hva LT-101, LIC-101 og LV-101 er, og hvordan de henger sammen.',h:'Tenk på tagg-leseren og blokkskjemaet.',link:'#skjema',ln:'Instrumentskjema',
+  c:['LT er nivåtransmitter, LIC er nivåindikator og regulator, LV er ventil','Samme nummer betyr samme sløyfe','Transmitteren sender 4–20 mA til regulatoren','Regulatoren sammenligner med settpunktet og styrer ventilen']},
+ {t:'PI-regulering',p:'Hva gjør P-leddet og I-leddet? Hva skjer hvis regulatoren er stilt for aggressivt?',h:'Tenk på utforskoppgave A–C i simuleringen.',link:'#simulering',ln:'Simulering',
+  c:['P-leddet reagerer på hvor stort avviket er nå','P alene gir stasjonært avvik','I-leddet summerer avviket og fjerner det over tid','For høy forsterkning eller kort integraltid gir svingninger']},
+ {t:'Sikker jobb',p:'Du skal åpne et rør med væske for vedlikehold. Hva må du passe på?',h:'Tenk på HMS-kortene i del 4.',link:'#hms',ln:'HMS og miljø',
+  c:['Leser sikkerhetsdatablad og bruker riktig verneutstyr','Stopper og sikrer pumper og ventiler mot oppstart (låsing og merking)','Trykkavlaster og tømmer før åpning','Tenker på søl, oppsamling og miljø']},
+ {t:'Hele veien',p:'Følg væsken fra tank T-1 til tank T-2. Hva skjer med trykket og energien underveis, og hva bestemmer volumstrømmen?',h:'Bruk det du har lært i alle ukene. Se gjerne på oppsummeringen.',link:'#oppsummering',ln:'Oppsummering',
+  c:['Pumpen tilfører energi (løftehøyde)','Energien går til å løfte væsken og til trykktap i rør, bend og ventiler','Arbeidspunktet bestemmes av pumpekurven og systemkurven','Nevner viskositet, temperatur eller kavitasjon som noe som kan endre driften']}
+]});
+K.toc();
+})();
+</script>
+
+<div class="wrap"><div class="weeknav"><a href="uke5.html"><span>Forrige del</span><b>Del 5: Pumper</b></a><a class="next" href="index.html"><span>Ferdig med kurset</span><b>Tilbake til kursoversikten</b></a></div></div>
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Del 1: Væskers egenskaper</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="kurs.css">
+
+</head>
+<body>
+<div class="coursebar"><div class="wrap"><a href="index.html">← Væske i prosessindustrien</a><nav class="weeks" aria-label="Deler"><a href="uke1.html" title="Del 1: Væskers egenskaper" aria-current="page">1</a><a href="uke2.html" title="Del 2: Trykk i væsker">2</a><a href="uke3.html" title="Del 3: Strømning i rør">3</a><a href="uke4.html" title="Del 4: Trykktap og energi i rørsystemer">4</a><a href="uke5.html" title="Del 5: Pumper">5</a><a href="uke6.html" title="Del 6: Måling, styring og helhet">6</a></nav></div></div>
+<div class="sitebar"><div class="wrap"><a href="../">← Alle ressurser</a><span>Kjemiprosess <b>læringslab</b></span></div></div>
+<header class="top">
+  <div class="wrap">
+    <div>
+      <div class="tag">Væske i prosessindustrien · Vg2 kjemiprosess · Del 1 av 6</div>
+      <h1 style="margin-top:10px">Væskers egenskaper</h1>
+      <p class="lede">Hvorfor renner sirup tregere enn vann, og hvorfor blir oljen tykk om vinteren? Før vi kan pumpe og transportere væsker, må vi kjenne egenskapene deres.</p>
+      <div class="meta"><span>Tidsbruk <b>ca. 4 økter</b></span><span>Forkunnskaper <b>masse, volum og enheter</b></span></div>
+    </div>
+    <div class="goals">
+      <div class="tag">Etter denne uken skal du kunne</div>
+      <ul>
+        <li>forklare og beregne tetthet og relativ tetthet</li>
+        <li>forklare hva viskositet er</li>
+        <li>forklare at viskositeten til væsker synker når temperaturen øker, mens den øker for gasser</li>
+        <li>forklare hvorfor viskositet og temperatur betyr noe i en prosess</li>
+        <li>forklare hvordan tetthet, viskositet og temperatur påvirker blanding, oppdeling og separering av væsker</li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Innhold"><div class="wrap"><ol id="toc">
+  <li><a href="#tetthet"><span>1</span>Tetthet</a></li>
+  <li><a href="#viskositet"><span>2</span>Viskositet</a></li>
+  <li><a href="#temperatur"><span>3</span>Temperatur</a></li>
+  <li><a href="#simulering"><span>4</span>Viskositetsløpet</a></li>
+  <li><a href="#separering"><span>5</span>Blanding og separering</a></li>
+  <li><a href="#arbeidsark"><span>6</span>Arbeidsark</a></li>
+  <li><a href="#oppgaver"><span>7</span>Oppgaver</a></li>
+  <li><a href="#forklar"><span>8</span>Forklar for hverandre</a></li>
+  <li><a href="#oppsummering"><span>9</span>Oppsummering</a></li>
+</ol></div></nav>
+
+<main>
+<section id="tetthet">
+  <div class="wrap">
+    <div class="sechead"><span class="step">01</span><h2>Tetthet</h2></div>
+    <div class="two">
+      <div class="prose stack">
+        <p>Tetthet forteller hvor mye masse som finnes i et bestemt volum. En liter vann veier omtrent 1 kg, mens en liter hydraulikkolje veier rundt 0,87 kg. Oljen har lavere tetthet og flyter derfor oppå vannet.</p>
+        <p>I prosessindustrien bruker vi tetthet hele tiden: for å regne om mellom volum og masse, for å beregne trykk i tanker (del 2) og for å kontrollere kvaliteten på et produkt. Tetthet måles ofte med aerometer, pyknometer eller med instrumenter direkte i røret.</p>
+        <p><b>Relativ tetthet</b> sammenligner en væske med vann. Den har ingen enhet. En væske med relativ tetthet 0,87 er 0,87 ganger så tung som samme volum vann.</p>
+      </div>
+      <div class="stack">
+        <div class="formula" role="img" aria-label="Tetthet rho er lik masse delt på volum">
+          <div class="tag" style="margin-bottom:8px">Tetthet</div>
+          <div class="eq"><var>ρ</var><span>=</span><span class="frac"><span><var>m</var></span><span><var>V</var></span></span><span class="lbl" style="margin-left:12px">kg/m³</span></div>
+          <p class="note"><var>m</var> masse (kg), <var>V</var> volum (m³). 1 kg/m³ = 0,001 kg/L = 0,001 g/cm³.</p>
+        </div>
+        <div class="formula" role="img" aria-label="Relativ tetthet er rho delt på rho vann">
+          <div class="tag" style="margin-bottom:8px">Relativ tetthet</div>
+          <div class="eq"><var>d</var><span>=</span><span class="frac"><span><var>ρ</var></span><span><var>ρ</var><sub>vann</sub></span></span><span class="lbl" style="margin-left:12px">uten enhet, ρ<sub>vann</sub> = 1000 kg/m³</span></div>
+        </div>
+        <div class="tablebox">
+          <table>
+            <thead><tr><th>Væske ved 20 °C</th><th class="r">ρ (kg/m³)</th><th class="r">d</th></tr></thead>
+            <tbody>
+              <tr><td>Bensin</td><td class="r num">≈ 740</td><td class="r num">0,74</td></tr>
+              <tr><td>Hydraulikkolje VG 46</td><td class="r num">867</td><td class="r num">0,87</td></tr>
+              <tr><td>Vann</td><td class="r num">998</td><td class="r num">1,00</td></tr>
+              <tr><td>Sjøvann</td><td class="r num">≈ 1025</td><td class="r num">1,03</td></tr>
+              <tr><td>Glykol/vann 50 %</td><td class="r num">1070</td><td class="r num">1,07</td></tr>
+              <tr><td>Glyserol</td><td class="r num">1261</td><td class="r num">1,26</td></tr>
+              <tr><td>Svovelsyre 98 %</td><td class="r num">≈ 1830</td><td class="r num">1,83</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="viskositet">
+  <div class="wrap">
+    <div class="sechead"><span class="step">02</span><h2>Viskositet: hvor tyktflytende er væsken?</h2></div>
+    <div class="two">
+      <div class="prose stack">
+        <p>Viskositet beskriver hvor tyktflytende en væske er. Hell vann og honning ut av hvert sitt glass, så ser du forskjellen: Vannet renner med en gang, mens honningen siger sakte ut.</p>
+        <p>Viskositet er væskens <b>indre friksjon</b>. Tenk deg væsken som tynne lag som glir over hverandre. Mellom lagene virker det en motstand. Jo større motstand, jo høyere viskositet, og jo mer kraft trengs for å få væsken til å strømme.</p>
+        <p>Viskositet måles i millipascalsekund (mPa·s). Vann har omtrent 1 mPa·s ved 20 °C. I eldre datablad står ofte centipoise (cP), som er det samme tallet.</p>
+        <p><b>Hvorfor betyr det noe i prosessen?</b> En væske med høy viskositet gir mer friksjon i rørene, større trykktap og tyngre arbeid for pumpen. Det kommer vi tilbake til i del 4 og 5.</p>
+      </div>
+      <div class="stack">
+        <div class="tablebox"><table>
+          <thead><tr><th>Ved 20 °C</th><th class="r">Viskositet (mPa·s)</th><th class="r">× vann</th></tr></thead>
+          <tbody>
+            <tr><td>Luft</td><td class="r num">0,018</td><td class="r num">0,02</td></tr>
+            <tr><td>Vann</td><td class="r num">1,0</td><td class="r num">1</td></tr>
+            <tr><td>Matolje</td><td class="r num">≈ 70</td><td class="r num">70</td></tr>
+            <tr><td>Hydraulikkolje</td><td class="r num">≈ 90</td><td class="r num">90</td></tr>
+            <tr><td>Sirup</td><td class="r num">≈ 4 000</td><td class="r num">4 000</td></tr>
+            <tr><td>Honning</td><td class="r num">≈ 10 000</td><td class="r num">10 000</td></tr>
+          </tbody></table></div>
+        <p class="status">Typiske verdier. Sirup og honning varierer mye fra produkt til produkt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="temperatur">
+  <div class="wrap">
+    <div class="sechead"><span class="step">03</span><h2>Temperaturen endrer viskositeten</h2></div>
+    <div class="two" style="margin-bottom:22px">
+      <div class="prose stack">
+        <p><b>Væsker blir tynnere når de varmes opp.</b> I en væske ligger molekylene tett og holder i hverandre. Når væsken varmes opp, beveger molekylene seg mer og slipper lettere taket i hverandre. Da glir lagene lettere, og viskositeten synker. Honning er mer enn seks ganger tynnere ved 40 °C enn ved 20 °C.</p>
+        <p><b>Gasser gjør det motsatte.</b> I en gass er molekylene langt fra hverandre og holder ikke i hverandre. Motstanden kommer av at molekylene hele tiden kolliderer og dytter på lagene rundt seg. Når gassen varmes opp, går molekylene fortere og kolliderer oftere. Da <b>øker</b> viskositeten. Endringen er mye mindre enn for væsker, men den går i motsatt retning.</p>
+        <p>Derfor oppgis alltid temperaturen sammen med viskositeten, og derfor varmes ofte tyktflytende produkter opp før de pumpes.</p>
+      </div>
+      <div class="stack">
+        <div class="callout"><b>Huskeregel</b>Varmere væske: lavere viskositet.<br>Varmere gass: høyere viskositet.</div>
+        <div class="callout"><b>Tetthet og temperatur</b>Tettheten synker også litt når en væske varmes opp, men mye mindre enn viskositeten. For vann er endringen fra 20 til 60 °C bare 1,5 %.</div>
+      </div>
+    </div>
+    <div class="two">
+      <div class="chart"><h4>Væsker: viskositeten synker</h4><div class="cap">Viskositet i forhold til verdien ved 20 °C. <span style="color:#4C97DB;font-weight:700">■ Vann</span> <span style="color:#D4B13F;font-weight:700">■ Matolje</span> <span style="color:#E0A232;font-weight:700">■ Honning</span></div><svg id="tvLiq" viewBox="0 0 420 250"></svg></div>
+      <div class="chart"><h4>Gass (luft): viskositeten øker</h4><div class="cap">Viskositet i forhold til verdien ved 20 °C. Merk den forstørrede skalaen.</div><svg id="tvGas" viewBox="0 0 420 250"></svg></div>
+    </div>
+  </div>
+</section>
+
+<section id="simulering">
+  <div class="wrap">
+    <div class="sechead"><span class="step">04</span><h2>Viskositetsløpet</h2></div>
+    <div class="two" style="grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)">
+      <div class="schem" style="padding:0"><canvas class="anim" id="race" data-h="400" role="img" aria-label="Fire rør med vann, matolje, sirup og honning der like stålkuler faller samtidig"></canvas></div>
+      <div class="stack">
+        <h3 style="font-size:1.6rem">Hvilken kule kommer først til bunnen?</h3>
+        <p>Like stålkuler slippes samtidig ned i fire væsker. Jo høyere viskositet, jo mer bremser væsken kula. Spå rekkefølgen før du slipper kulene.</p>
+        <div class="btnrow"><button type="button" id="rGo">Slipp kulene</button><button type="button" class="ghost" id="rUp">Hent kulene opp</button></div>
+        <div class="ctrl"><label for="rT">Temperatur <output id="rTo"></output></label><input type="range" id="rT" min="10" max="80" step="5" value="20"></div>
+        <div class="ctrl"><label for="rSpeed">Avspilling</label><select id="rSpeed"><option value="1">Sanntid</option><option value="5">5 ganger raskere</option><option value="20">20 ganger raskere</option></select></div>
+        <div class="tablebox"><table>
+          <thead><tr><th>Væske</th><th class="r">Viskositet</th><th class="r">× vann</th><th class="r">Tid</th></tr></thead>
+          <tbody id="rTab"></tbody></table></div>
+        <div class="callout"><b>Hva viser det?</b>Viskositet er væskens indre motstand mot å flyte. Kula i honningen må presse seg gjennom en væske som holder godt i seg selv, og bruker derfor lengst tid. Når temperaturen øker, synker viskositeten, og alle kulene faller fortere. Forskjellen blir størst for de tykkeste væskene.</div>
+      </div>
+    </div>
+    <h3 style="margin:30px 0 12px">Utforsk: spå først, test etterpå</h3>
+    <div class="explore">
+      <div class="task"><p><b>A.</b> Kjør løpet ved 20 °C. Hvor mange ganger lengre tid bruker kula i honningen enn i vannet?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Rundt 160 ganger lengre tid. Honningen har omtrent 10 000 ganger så høy viskositet som vann. Tiden øker ikke like mye som viskositeten, fordi kula i vannet bremses mest av at den må dytte vannet til side, ikke av viskositeten.</div></details></div>
+      <div class="task"><p><b>B.</b> Øk temperaturen fra 20 til 40 °C. Hvilken væske endrer seg mest?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Honningen og sirupen. Tiden blir mer enn fem ganger kortere. Vannet endrer seg nesten ikke. Jo mer viskøs væsken er, jo mer påvirkes den av temperaturen.</div></details></div>
+      <div class="task"><p><b>C.</b> Sett temperaturen til 10 °C. Hva betyr dette for en pumpe som skal pumpe sirup en kald vintermorgen?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Sirupen er nesten tre ganger så tyktflytende som ved 20 °C. Pumpen får mye større motstand, og volumstrømmen kan falle kraftig. Derfor isoleres og varmes ofte rør og tanker med tyktflytende produkter.</div></details></div>
+      <div class="task"><p><b>D.</b> Hva ville skjedd hvis kulene falt gjennom varm luft i stedet for kald luft?</p>
+        <details><summary>Se forklaring</summary><div class="ans">I luft er viskositeten så lav at kula nesten faller fritt. Men luftens viskositet øker litt når den varmes opp, så den ville bremset kula ørlite grann mer. Det er motsatt av væskene.</div></details></div>
+    </div>
+  </div>
+</section>
+
+<section id="separering">
+  <div class="wrap">
+    <div class="sechead"><span class="step">05</span><h2>Egenskapene i bruk: blanding, oppdeling og separering</h2></div>
+    <p class="prose" style="margin-bottom:20px">Mange prosesser handler om å blande væsker, dele dem opp i små dråper eller skille dem fra hverandre igjen. Alle tre styres av egenskapene du har lært om denne uken: tetthet, viskositet og temperatur.</p>
+    <div class="explore" style="margin-bottom:22px">
+      <div class="task"><h3 style="font-size:1.3rem">Blanding</h3>
+        <p>Væsker som er <b>blandbare</b>, som vann og etanol, blir til én jevn væske. Væsker som <b>ikke er blandbare</b>, som olje og vann, legger seg i lag etter tetthet så snart røringen stopper. Den letteste væsken havner øverst.</p>
+        <p>Viskøse væsker er tunge å blande. Røreverket trenger mer energi, og det tar lengre tid før blandingen blir jevn. Varme gjør blandingen lettere, fordi viskositeten synker.</p></div>
+      <div class="task"><h3 style="font-size:1.3rem">Oppdeling</h3>
+        <p>Oppdeling betyr å dele en væske opp i mange små dråper. Det skjer i dyser som forstøver væske, for eksempel i brennere og sprøytetørkere, og når vi lager emulsjoner som melk, majones og maling.</p>
+        <p>Jo kraftigere røring eller høyere trykk, jo mindre dråper. Små dråper gir stor overflate, som er bra for reaksjoner, fordampning og varmeoverføring. Men små dråper er også mye vanskeligere å skille ut igjen. En viskøs væske er tyngre å dele opp.</p></div>
+      <div class="task"><h3 style="font-size:1.3rem">Separering</h3>
+        <p>Separering betyr å skille stoffer fra hverandre ved å utnytte at de har ulike egenskaper. Olje og vann kan skilles fordi de har ulik <b>tetthet</b>: Oljedråpene stiger, og vannet synker.</p>
+        <p>Det går fortere når tetthetsforskjellen er stor, dråpene er store og viskositeten er lav. Derfor varmes ofte væsken opp før separering, og en sentrifuge kan gjøre jobben tusenvis av ganger raskere enn tyngdekraften.</p></div>
+    </div>
+    <div class="two" style="margin-bottom:24px">
+      <div class="stack">
+        <div class="formula" role="img" aria-label="Stigefarten til en dråpe er proporsjonal med tetthetsforskjell ganger dråpediameter i andre delt på viskositet">
+          <div class="tag" style="margin-bottom:8px">Hvor fort stiger eller synker en dråpe?</div>
+          <div class="eq"><span>fart</span><span>∝</span><span class="frac"><span><var>Δρ</var> · <var>d</var>²</span><span><var>μ</var></span></span></div>
+          <p class="note"><var>Δρ</var> er tetthetsforskjellen mellom dråpen og væsken rundt, <var>d</var> er dråpediameteren og <var>μ</var> er viskositeten til væsken rundt. Dette er Stokes' lov, den samme som styrte kulene i viskositetsløpet.</p>
+        </div>
+        <div class="callout"><b>Legg merke til <var>d</var>²</b>Halveres dråpestørrelsen, stiger dråpene fire ganger saktere. Derfor er det lettere å skille en blanding som er rørt forsiktig, enn en som er homogenisert.</div>
+      </div>
+      <div class="tablebox" style="align-self:start"><table>
+        <thead><tr><th>Metode</th><th>Egenskap som brukes</th><th>Eksempel</th></tr></thead>
+        <tbody>
+          <tr><td>Sedimentering og dekantering</td><td>Tetthet</td><td>Slam i renseanlegg, skilletrakt i laben</td></tr>
+          <tr><td>Oljeutskiller</td><td>Tetthet</td><td>Vaskehaller og verksteder</td></tr>
+          <tr><td>Gravitasjonsseparator</td><td>Tetthet, viskositet og temperatur</td><td>Olje, gass og vann fra brønnstrømmen offshore</td></tr>
+          <tr><td>Sentrifuge</td><td>Tetthet, forsterket mange ganger</td><td>Melkeseparator, oljerensing på skip</td></tr>
+          <tr><td>Destillasjon</td><td>Kokepunkt og damptrykk</td><td>Raffineri, etanolproduksjon</td></tr>
+          <tr><td>Ekstraksjon</td><td>Løselighet</td><td>Utvinning av stoffer med et løsemiddel</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <h3 style="margin-bottom:12px">Simulering: fra blanding til separering</h3>
+    <p class="prose" style="margin-bottom:16px">Olje og vann røres sammen i en tank som er 50 cm høy. Når røringen stopper, begynner oljedråpene å stige. Velg hvor kraftig dere rører, hvilken olje dere bruker og temperaturen, og se hvor lang tid det tar før oljen er skilt fra vannet.</p>
+    <div class="sim">
+      <div class="panel controls">
+        <div class="ctrl"><label for="sMix">1. Blanding og oppdeling</label><select id="sMix"><option value="500">Rolig omrøring (store dråper, ca. 0,5 mm)</option><option value="150" selected>Kraftig omrøring (ca. 0,15 mm)</option><option value="30">Homogenisering (små dråper, ca. 0,03 mm)</option></select></div>
+        <div class="ctrl"><label for="sOil">2. Oljetype</label><select id="sOil"><option value="850">Lett olje (850 kg/m³)</option><option value="900">Middels olje (900 kg/m³)</option><option value="960">Tung olje (960 kg/m³)</option></select></div>
+        <div class="ctrl"><label for="sT">3. Temperatur <output id="sTo"></output></label><input type="range" id="sT" min="10" max="80" step="5" value="20"></div>
+        <div class="ctrl"><label for="sG">4. Separering</label><select id="sG"><option value="1">Tyngdekraft (tanken står i ro)</option><option value="2000">Sentrifuge (2000 × tyngdekraften)</option></select></div>
+        <button type="button" id="sMixBtn">Bland på nytt</button>
+      </div>
+      <div class="stack" style="min-width:0">
+        <div class="gauges">
+          <div class="gauge"><div class="k">Tid i tanken</div><div class="val" id="sgT"></div><div class="sub" id="sgTs"></div></div>
+          <div class="gauge"><div class="k">Olje skilt ut</div><div class="val" id="sgF"></div><div class="sub">%</div></div>
+          <div class="gauge"><div class="k">Stigefart</div><div class="val" id="sgV"></div><div class="sub">mm/min, typisk dråpe</div></div>
+          <div class="gauge total"><div class="k">90 % skilt etter</div><div class="val" id="sg90"></div><div class="sub" id="sg90s"></div></div>
+        </div>
+        <div class="two" style="gap:16px">
+          <div class="schem" style="padding:0"><canvas class="anim" id="sepCan" data-h="340" role="img" aria-label="Tank der oljedråper stiger opp og legger seg som et lag på toppen av vannet"></canvas></div>
+          <div class="chart"><h4>Andel olje skilt ut</h4><div class="cap" id="sepCap"></div><svg id="sepChart" viewBox="0 0 420 260"></svg></div>
+        </div>
+      </div>
+    </div>
+    <h3 style="margin:30px 0 12px">Utforsk: spå først, test etterpå</h3>
+    <div class="explore">
+      <div class="task"><p><b>A.</b> Sammenlign rolig omrøring med homogenisering. Hvor mye lengre tid tar separeringen?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Mer enn hundre ganger lengre. Dråpene etter homogenisering er omtrent 17 ganger mindre, og stigefarten går med diameteren i andre. Det er derfor homogenisert melk ikke får fløtelag på toppen.</div></details></div>
+      <div class="task"><p><b>B.</b> Varm blandingen fra 20 til 60 °C. Hvor mye raskere går separeringen?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Nesten dobbelt så raskt, fordi viskositeten til vannet blir omtrent halvparten. Derfor varmes brønnstrømmen ofte opp før den går inn i separatorer offshore.</div></details></div>
+      <div class="task"><p><b>C.</b> Velg tung olje. Hvorfor tar separeringen så mye lengre tid?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Tetthetsforskjellen mellom tung olje og vann er liten, bare ca. 40 kg/m³ mot ca. 150 kg/m³ for lett olje. Den lille forskjellen gir svak oppdrift, og dråpene stiger sakte.</div></details></div>
+      <div class="task"><p><b>D.</b> Velg homogenisering og deretter sentrifuge. Hva skjer?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Separeringen går på sekunder i stedet for timer. Sentrifugen gir en kraft som er tusenvis av ganger større enn tyngdekraften. Slik skilles fløten fra melka på meieriet, og vann og smuss fra smøreolje på skip.</div></details></div>
+    </div>
+  </div>
+</section>
+
+<section id="arbeidsark">
+  <div class="wrap">
+    <div class="sechead"><span class="step">06</span><h2>Arbeidsark: viskositetsløpet</h2></div>
+    <p class="prose" style="margin-bottom:18px">Kjør viskositetsløpet ved 20, 40 og 60 °C. Skriv inn tiden for hver væske, og svar på spørsmålene. Det du skriver lagres bare i denne nettleseren på denne enheten.</p>
+    <div class="panel lab stack">
+      <div class="tablebox"><table>
+        <thead><tr><th>Temperatur</th><th>Vann (s)</th><th>Matolje (s)</th><th>Sirup (s)</th><th>Honning (s)</th></tr></thead>
+        <tbody id="aRows"></tbody></table></div>
+      <div class="chart"><h4>Dine tider</h4><div class="cap">Falltid mot temperatur for hver væske.</div><svg id="aChart" viewBox="0 0 640 260"></svg></div>
+      <div class="two">
+        <div class="ctrl"><label for="aR1">1. Hvilken væske endret falltiden mest når temperaturen økte? Hvorfor tror du det?</label><textarea id="aR1"></textarea></div>
+        <div class="ctrl"><label for="aR2">2. Hvorfor varmes tyktflytende væsker ofte opp før de pumpes?</label><textarea id="aR2"></textarea></div>
+      </div>
+      <div class="ctrl"><label for="aR3">3. Hvordan ville viskositeten endret seg hvis vi varmet opp en gass i stedet? Forklar forskjellen med det som skjer med molekylene.</label><textarea id="aR3"></textarea></div>
+      <div class="btnrow"><button type="button" id="aCopy">Kopier svarene</button><span class="status" id="aCopied" role="status"></span></div>
+      <textarea id="aFb" hidden readonly style="min-height:160px;font-family:var(--f-mono);font-size:.8rem"></textarea>
+    </div>
+  </div>
+</section>
+
+<section id="oppgaver">
+  <div class="wrap">
+    <div class="sechead"><span class="step">07</span><h2>Oppgaver</h2></div>
+    <h3 style="margin-bottom:12px">Sjekk forståelsen</h3>
+    <div class="stack" id="quiz" style="max-width:780px"></div>
+    <div class="btnrow" style="margin-top:12px"><span class="score" id="qScore"></span></div>
+    <h3 style="margin:36px 0 6px">Regneoppgaver</h3>
+    <p class="prose" style="margin-bottom:14px">Bruk komma eller punktum som desimaltegn.</p>
+    <div class="stack" id="calcs" style="max-width:780px"></div>
+  </div>
+</section>
+
+<section id="forklar">
+  <div class="wrap">
+    <div class="sechead"><span class="step">08</span><h2>Forklar for hverandre</h2></div>
+    <div id="peer"></div>
+  </div>
+</section>
+
+<section id="oppsummering">
+  <div class="wrap">
+    <div class="sechead"><span class="step">09</span><h2>Oppsummering</h2></div>
+    <div class="two">
+      <div class="summary prose">
+        <ul>
+          <li>Tetthet er masse per volum, <var>ρ</var> = <var>m</var>/<var>V</var>. Relativ tetthet sammenligner med vann.</li>
+          <li>Viskositet er væskens indre friksjon og forteller hvor tyktflytende den er. Den måles i mPa·s.</li>
+          <li>Væsker får lavere viskositet når temperaturen øker. Gasser får høyere viskositet.</li>
+          <li>Oppgi alltid temperaturen sammen med viskositeten.</li>
+          <li>Høy viskositet gir mer motstand i rør og tyngre arbeid for pumpen.</li>
+          <li>Blanding, oppdeling og separering styres av de samme egenskapene. Olje og vann skilles raskere når tetthetsforskjellen er stor, dråpene store og viskositeten lav.</li>
+        </ul>
+        <p style="margin-top:18px"><b>Neste del:</b> Trykk i væsker. Tettheten du har lært om her, bestemmer hvor stort trykket blir i bunnen av en tank.</p>
+      </div>
+      <div class="teacher">
+        <div class="tag">Til læreren</div>
+        <h3 style="margin:6px 0 10px">Kobling og forslag til gjennomføring</h3>
+        <p style="font-size:.95rem">Uken støtter kompetansemålet i kjemisk teknologi (KPL02-01) om å anvende grunnleggende fysikk og kjemi til å forklare prosesser og utstyr, og om hvordan fysiske forhold påvirker produksjonsprosesser.</p>
+        <ol style="font-size:.95rem;padding-left:20px;margin:12px 0 0;display:grid;gap:4px">
+          <li>Tetthet og viskositet, felles diskusjon</li>
+          <li>Temperatur, væske og gass, viskositetsløpet med utforskoppgaver i par</li>
+          <li>Blanding, oppdeling og separering med simuleringen</li>
+          <li>Arbeidsark, oppgaver og «Forklar for hverandre» (15–20 min)</li>
+        </ol>
+        <p class="status" style="margin-top:12px">Viskositetsløpet erstatter et labforsøk med viskosimeter. Falltidene er beregnet for en stålkule på 4 mm som faller 25 cm. Stoffdataene er typiske verdier.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<footer><div class="wrap">Væske i prosessindustrien · Del 1 · Stoffdata er typiske verdier og kan avvike fra produktenes datablad.</div></footer>
+
+<script src="kurs.js"></script>
+<script>
+(function(){
+"use strict";
+const {$,nf,num,el,chart}=K;
+const TK=t=>t+273.15;
+const LIQ=[
+  {k:'vann',navn:'Vann',farge:'#4C97DB',rho:t=>K.FLUIDS.vann.rho(t),mu:t=>K.FLUIDS.vann.mu(t)},
+  {k:'matolje',navn:'Matolje',farge:'#D4B13F',rho:t=>920-0.65*(t-20),mu:t=>Math.exp(-13.510+3181/TK(t))},
+  {k:'sirup',navn:'Sirup',farge:'#B8692E',rho:()=>1400,mu:t=>Math.exp(-25.904+8000/TK(t))},
+  {k:'honning',navn:'Honning',farge:'#E0A232',rho:()=>1420,mu:t=>Math.exp(-27.402+8708/TK(t))}];
+const air=t=>1.716e-5*Math.pow(TK(t)/273.15,1.5)*(273.15+110.4)/(TK(t)+110.4);
+const fmu=mu=>{const m=mu*1000;return m<10?nf(m,1):Math.round(m).toLocaleString('nb-NO');};
+
+/* ---- Temperaturkurver ---- */
+(function(){const lines=LIQ.filter(f=>f.k!=='sirup').map(f=>{const pts=[];for(let t=10;t<=80;t++)pts.push([t,f.mu(t)/f.mu(20)]);return {pts,color:f.farge};});
+  chart($('#tvLiq'),{xMin:10,xMax:80,yMax:3,xLabel:'temperatur (°C)',yLabel:'i forhold til 20 °C',lines,hlines:[{y:1,label:'verdien ved 20 °C',color:'var(--muted)',right:true}]});
+  const g=[];for(let t=10;t<=80;t++)g.push([t,air(t)/air(20)]);
+  chart($('#tvGas'),{xMin:10,xMax:80,yMin:0.9,yMax:1.2,xLabel:'temperatur (°C)',yLabel:'i forhold til 20 °C',lines:[{pts:g,color:'var(--signal)',label:'luft'}],hlines:[{y:1,label:'verdien ved 20 °C',color:'var(--muted)',right:true,below:true}]});
+  // gassgrafen skal ikke starte på null
+})();
+
+/* ---- Viskositetsløpet ---- */
+const D=0.004,L=0.25,RK=7850;
+function vterm(rho,mu){const dr=RK-rho;let v=dr*K.g*D*D/(18*mu);for(let i=0;i<80;i++){const Re=Math.max(rho*v*D/mu,1e-9);const Cd=Re<1000?24/Re*(1+0.15*Math.pow(Re,0.687)):0.44;v=0.5*v+0.5*Math.sqrt(4*dr*K.g*D/(3*Cd*rho));}return v;}
+const rT=$('#rT'),rSpeed=$('#rSpeed');
+let race={on:false,t:0};
+function data(){const T=+rT.value,mw=LIQ[0].mu(T);return LIQ.map(f=>{const mu=f.mu(T),v=vterm(f.rho(T),mu);return {...f,mu,x:mu/mw,time:L/v};});}
+function table(){const d=data();$('#rTo').textContent=rT.value+' °C';
+  $('#rTab').innerHTML=d.map(f=>{const done=race.t>=f.time;return `<tr><td><span style="display:inline-block;width:11px;height:11px;border-radius:2px;background:${f.farge};margin-right:8px;vertical-align:-1px"></span>${f.navn}</td><td class="r num">${fmu(f.mu)} mPa·s</td><td class="r num">${f.x<10?nf(f.x,1):Math.round(f.x).toLocaleString('nb-NO')}×</td><td class="r num">${done?nf(f.time,f.time<10?2:1)+' s':race.on?'…':'–'}</td></tr>`;}).join('');}
+const anim=K.animate($('#race'),(c,{W,H},dt)=>{
+  const d=data(),ink=K.css('--ink'),muted=K.css('--muted'),sig=K.css('--signal'),surf=K.css('--surface'),line=K.css('--line'),pipe=K.css('--pipe'),mono=K.css('--f-mono'),body=K.css('--f-body');
+  if(race.on&&dt){race.t+=dt*(+rSpeed.value);const max=Math.max(...d.map(f=>f.time));if(race.t>=max){race.t=max;race.on=false;}table();}
+  c.fillStyle=surf;c.fillRect(0,0,W,H);
+  const n=4,gap=W/n,tw=Math.min(78,gap*0.62),top=40,bot=H-78,liqTop=top+34;
+  c.font='600 13px '+mono;c.fillStyle=ink;c.textAlign='right';c.fillText(rT.value+' °C',W-12,22);
+  c.textAlign='left';c.fillStyle=muted;c.fillText('t = '+nf(race.t,race.t<10?2:1)+' s',12,22);
+  d.forEach((f,i)=>{const cx=gap*i+gap/2,x=cx-tw/2;
+    c.fillStyle=line;c.beginPath();c.roundRect?c.roundRect(x,top,tw,bot-top,10):c.rect(x,top,tw,bot-top);c.fill();
+    c.fillStyle=f.farge;c.globalAlpha=.85;c.fillRect(x+2,liqTop,tw-4,bot-liqTop-2);c.globalAlpha=1;
+    c.strokeStyle=ink;c.lineWidth=2.5;c.beginPath();c.roundRect?c.roundRect(x,top,tw,bot-top,10):c.rect(x,top,tw,bot-top);c.stroke();
+    const p=Math.min(1,race.t/f.time),r=Math.min(13,tw*0.17),y0=liqTop+r+2,y1=bot-r-6,by=y0+(y1-y0)*p;
+    const gr=c.createRadialGradient(cx-r*0.35,by-r*0.35,1,cx,by,r);gr.addColorStop(0,'#F4F6F8');gr.addColorStop(1,'#6E7780');
+    c.fillStyle=gr;c.beginPath();c.arc(cx,by,r,0,7);c.fill();c.strokeStyle='#4A525A';c.lineWidth=1;c.stroke();
+    c.fillStyle=ink;c.textAlign='center';c.font='700 15px '+body;c.fillText(f.navn,cx,bot+24);
+    c.font='600 13px '+mono;c.fillStyle=race.t>=f.time&&(race.t>0)?pipe:muted;c.fillText(race.t>=f.time&&race.t>0?nf(f.time,f.time<10?2:1)+' s':'',cx,bot+44);});
+  c.strokeStyle=sig;c.lineWidth=1.5;c.setLineDash([6,5]);c.beginPath();c.moveTo(14,bot-6);c.lineTo(W-14,bot-6);c.stroke();c.setLineDash([]);
+  c.fillStyle=muted;c.font='11px '+mono;c.textAlign='right';c.fillText('mål',W-14,bot-12);
+  if(+rSpeed.value>1){c.textAlign='left';c.fillText(rSpeed.value+'× raskere enn sanntid',12,H-10);}
+});
+$('#rGo').addEventListener('click',()=>{race={on:true,t:0};if(K.reduce){race.t=Math.max(...data().map(f=>f.time));race.on=false;}table();anim.redraw();});
+$('#rUp').addEventListener('click',()=>{race={on:false,t:0};table();anim.redraw();});
+rT.addEventListener('input',()=>{race={on:false,t:0};table();anim.redraw();});
+rSpeed.addEventListener('input',()=>anim.redraw());
+table();
+
+/* ---- Fra blanding til separering ---- */
+const SH=0.5,SN=260;
+const sMix=$('#sMix'),sOil=$('#sOil'),sTT=$('#sT'),sG=$('#sG');
+let drops=[],sepT=0,sepState=null;
+function randn(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+function vrise(dr,d,rho,mu,G){let v=dr*K.g*G*d*d/(18*mu);for(let i=0;i<60;i++){const Re=Math.max(rho*v*d/mu,1e-9);const Cd=Re<1000?24/Re*(1+0.15*Math.pow(Re,0.687)):0.44;v=0.5*v+0.5*Math.sqrt(4*dr*K.g*G*d/(3*Cd*rho));}return v;}
+function sepSetup(newMix){const w=K.fluid('vann',+sTT.value),ro=+sOil.value,G=+sG.value,d50=+sMix.value*1e-6,dr=w.rho-ro;
+  if(newMix||!drops.length){drops=[];for(let i=0;i<SN;i++)drops.push({z:0.5*randn(),y0:Math.random()*SH*0.98,x:Math.random()});sepT=0;}
+  drops.forEach(p=>{p.d=d50*Math.exp(p.z);p.v=vrise(dr,p.d,w.rho,w.mu,G);});
+  const frac=t=>drops.filter(p=>p.y0+p.v*t>=SH).length/SN;
+  let lo=0,hi=1;while(frac(hi)<0.9&&hi<1e8)hi*=2;for(let i=0;i<50;i++){const m=(lo+hi)/2;frac(m)>=0.9?hi=m:lo=m;}
+  sepState={w,ro,G,d50,dr,frac,t90:hi,vTyp:vrise(dr,d50,w.rho,w.mu,G)};}
+function fmtTime(s){return s<60?[nf(s,s<10?1:0),'sekunder']:s<3600?[nf(s/60,s<600?1:0),'minutter']:[nf(s/3600,1),'timer']}
+function sepRead(){const s=sepState;$('#sTo').textContent=sTT.value+' °C';
+  const [a,u]=fmtTime(sepT);$('#sgT').textContent=a;$('#sgTs').textContent=u;$('#sgF').textContent=nf(s.frac(sepT)*100,0);
+  const vmm=s.vTyp*60000;$('#sgV').textContent=vmm<10?nf(vmm,1):Math.round(vmm).toLocaleString('nb-NO');
+  const [b,u2]=fmtTime(s.t90);$('#sg90').textContent=b;$('#sg90s').textContent=u2;}
+function sepChart(){const s=sepState,tmax=s.t90*1.6,unit=tmax<120?[1,'sekunder']:tmax<7200?[60,'minutter']:[3600,'timer'];const pts=[];for(let i=0;i<=80;i++){const t=tmax*i/80;pts.push([t/unit[0],s.frac(t)*100]);}
+  chart($('#sepChart'),{xMax:tmax/unit[0],yMax:100,xLabel:'tid ('+unit[1]+')',yLabel:'olje skilt ut (%)',lines:[{pts,color:'var(--signal)'}],hlines:[{y:90,label:'90 %',color:'var(--muted)',right:true,below:true}],dots:[{x:Math.min(sepT,tmax)/unit[0],y:s.frac(sepT)*100,fill:'var(--ink)'}]});
+  $('#sepCap').textContent='Avspillingen går '+Math.max(1,Math.round(s.t90/8)).toLocaleString('nb-NO')+' ganger raskere enn virkeligheten.';}
+sepSetup(true);
+let chartTick=0;
+const sepA=K.animate($('#sepCan'),(c,{W,H},dt)=>{
+  const s=sepState,speed=Math.max(1,s.t90/8),ink=K.css('--ink'),muted=K.css('--muted'),soft=K.css('--pipe-soft'),surf=K.css('--surface'),sig=K.css('--signal'),mono=K.css('--f-mono');
+  if(dt&&sepT<s.t90*1.6){sepT+=dt*speed;chartTick+=dt;if(chartTick>0.25){chartTick=0;sepRead();sepChart();}}
+  if(K.reduce&&sepT===0){sepT=s.t90*0.5;sepRead();sepChart();}
+  c.fillStyle=surf;c.fillRect(0,0,W,H);
+  const tw=Math.min(240,W*0.6),x0=(W-tw)/2,top=30,bot=H-30,ih=bot-top;
+  const f=s.frac(sepT),layer=Math.max(0,f*ih*0.14);
+  c.fillStyle=soft;c.fillRect(x0,top+layer,tw,ih-layer);
+  c.fillStyle=sig;c.globalAlpha=.75;c.fillRect(x0,top,tw,layer);c.globalAlpha=1;
+  const dmax=Math.max(...drops.map(p=>p.d));
+  drops.forEach(p=>{const y=p.y0+p.v*sepT;if(y>=SH)return;const py=bot-(y/SH)*(ih-layer);const r=Math.max(1.2,Math.min(5,p.d/1e-4*1.4));
+    c.fillStyle=sig;c.globalAlpha=.85;c.beginPath();c.arc(x0+6+p.x*(tw-12),py,r,0,7);c.fill();});c.globalAlpha=1;
+  c.strokeStyle=ink;c.lineWidth=2.5;c.beginPath();c.moveTo(x0,top-10);c.lineTo(x0,bot);c.lineTo(x0+tw,bot);c.lineTo(x0+tw,top-10);c.stroke();c.lineWidth=1;
+  c.font='11px '+mono;c.fillStyle=muted;c.textAlign='left';
+  if(layer>12){c.fillStyle=ink;c.fillText('oljelag',x0+tw+6,top+layer/2+4);}
+  c.fillStyle=muted;c.fillText('vann med',x0+tw+6,bot-24);c.fillText('oljedråper',x0+tw+6,bot-10);
+  if(+sG.value>1){c.fillStyle=sig;c.textAlign='center';c.fillText('sentrifuge: 2000 × g',W/2,18);}
+});
+function sepRedo(newMix){sepSetup(newMix);sepRead();sepChart();sepA.redraw();}
+[sMix].forEach(e=>e.addEventListener('input',()=>sepRedo(true)));
+[sOil,sTT,sG].forEach(e=>e.addEventListener('input',()=>{sepT=0;sepRedo(false);}));
+$('#sMixBtn').addEventListener('click',()=>sepRedo(true));
+sepRead();sepChart();
+
+/* ---- Arbeidsark ---- */
+const AKEY='uke1-arbeidsark-v1',TEMPS=[20,40,60];
+let A=K.load(AKEY,{rows:[['','','',''],['','','',''],['','','','']],r1:'',r2:'',r3:''});const as=()=>K.save(AKEY,A);
+$('#aRows').innerHTML=TEMPS.map((t,i)=>`<tr><td><b>${t} °C</b></td>${LIQ.map((f,j)=>`<td><input type="text" inputmode="decimal" id="a${i}_${j}" value="${K.esc(A.rows[i][j])}" aria-label="${f.navn} ved ${t} °C, tid i sekunder"></td>`).join('')}</tr>`).join('');
+function aChart(){const lines=LIQ.map((f,j)=>({pts:TEMPS.map((t,i)=>[t,num(A.rows[i][j])]).filter(p=>Number.isFinite(p[1])),color:f.farge,label:f.navn}));
+  const all=lines.flatMap(l=>l.pts.map(p=>p[1]));
+  chart($('#aChart'),{xMin:20,xMax:60,yMax:Math.max(1,...all)*1.1,xLabel:'temperatur (°C)',yLabel:'falltid (s)',lines,dots:lines.flatMap(l=>l.pts.map(p=>({x:p[0],y:p[1],fill:l.color,r:4})))});}
+TEMPS.forEach((t,i)=>LIQ.forEach((f,j)=>$(`#a${i}_${j}`).addEventListener('input',e=>{A.rows[i][j]=e.target.value;as();aChart();})));
+['r1','r2','r3'].forEach((k,i)=>{const e=$('#aR'+(i+1));e.value=A[k]||'';e.addEventListener('input',()=>{A[k]=e.value;as();});});
+$('#aCopy').addEventListener('click',()=>{let t='Arbeidsark del 1 – viskositetsløpet\n\nTemperatur\tVann\tMatolje\tSirup\tHonning\n';
+  TEMPS.forEach((tt,i)=>{t+=`${tt} °C\t${A.rows[i].map(x=>x||'–').join('\t')}\n`;});
+  t+=`\n1. ${A.r1||''}\n\n2. ${A.r2||''}\n\n3. ${A.r3||''}\n`;K.copy(t,$('#aCopied'),$('#aFb'));});
+aChart();
+
+/* ---- Quiz ---- */
+K.quiz($('#quiz'),$('#qScore'),[
+ {q:'En tank inneholder 2,0 m³ væske med masse 1740 kg. Hva er tettheten?',o:['870 kg/m³','1740 kg/m³','3480 kg/m³','0,87 kg/m³'],a:0,e:'ρ = m / V = 1740 kg / 2,0 m³ = 870 kg/m³.'},
+ {q:'Hva er viskositet?',o:['Hvor tung væsken er per liter','Væskens indre friksjon, altså hvor tyktflytende den er','Hvor raskt væsken fordamper','Hvor mye væsken utvider seg ved oppvarming'],a:1,e:'Viskositet er den indre motstanden mot å flyte. Tung væske (høy tetthet) og tyktflytende væske (høy viskositet) er to forskjellige ting.'},
+ {q:'Hva skjer med viskositeten til en olje når temperaturen øker fra 20 til 60 °C?',o:['Den øker','Den er uendret','Den synker kraftig','Den synker litt, omtrent like mye som tettheten'],a:2,e:'Viskositeten til væsker synker kraftig med økende temperatur. Molekylene beveger seg mer og slipper lettere taket i hverandre.'},
+ {q:'Hva skjer med viskositeten til luft når temperaturen øker?',o:['Den synker, akkurat som for væsker','Den øker','Den er alltid lik','Luft har ingen viskositet'],a:1,e:'For gasser øker viskositeten med temperaturen, fordi molekylene går fortere og kolliderer oftere. Det er motsatt av væsker.'},
+ {q:'Hvorfor varmes ofte tyktflytende produkter opp før de pumpes?',o:['For å øke tettheten','For å senke viskositeten slik at de blir lettere å pumpe','For å drepe bakterier','For å få dem til å fordampe'],a:1,e:'Lavere viskositet gir mindre friksjon og mindre trykktap, og pumpen trenger mindre energi.'},
+ {q:'Hvorfor varmes ofte brønnstrømmen fra et oljefelt opp før den går inn i separatoren?',o:['For at oljen skal fordampe','For å senke viskositeten slik at dråpene skilles raskere','For å øke tetthetsforskjellen kraftig','For å drepe bakterier'],a:1,e:'Varme gir lavere viskositet. Da stiger og synker dråpene fortere, og separeringen går raskere.'},
+ {q:'Homogenisert melk får ikke fløtelag på toppen. Hvorfor?',o:['Fettet er fjernet','Fettet er delt opp i så små dråper at de stiger svært sakte','Melka er varmet så viskositeten er høy','Fettet har fått høyere tetthet enn melka'],a:1,e:'Homogenisering er oppdeling. Stigefarten går med dråpediameteren i andre, så svært små fettdråper stiger nesten ikke.'},
+ {q:'I viskositetsløpet kommer kula i honningen sist. Hva er grunnen?',o:['Honningen har høyest tetthet','Honningen har høyest viskositet og bremser kula mest','Honningen er kaldest','Kula i honningen er tyngre'],a:1,e:'Kulene er like. Honningen har klart høyest viskositet, og det er den indre motstanden som bremser kula.'}
+]);
+
+/* ---- Regneoppgaver ---- */
+K.calcs($('#calcs'),[
+ {t:'a) En beholder med 2,50 L væske har en netto masse på 2,18 kg. Beregn tettheten i kg/m³.',u:'kg/m³',a:872,s:'V = 2,50 L = 0,00250 m³. ρ = 2,18 kg / 0,00250 m³ = <b>872 kg/m³</b>.'},
+ {t:'b) Hva er den relative tettheten til væsken i a)?',u:'',a:0.872,s:'d = 872 / 1000 = <b>0,872</b>. Væsken er lettere enn vann og vil flyte oppå.'},
+ {t:'c) En tank inneholder 12,0 m³ glykol/vann med tetthet 1070 kg/m³. Hvor stor er massen?',u:'kg',a:12840,s:'m = ρ · V = 1070 kg/m³ · 12,0 m³ = <b>12 840 kg</b>, altså nesten 13 tonn.'},
+ {t:'d) Matolje har viskositet 70 mPa·s ved 20 °C, og vann har 1,0 mPa·s. Hvor mange ganger mer tyktflytende er matoljen?',u:'ganger',a:70,s:'70 / 1,0 = <b>70 ganger</b>.'},
+ {t:'e) Honning har viskositet 10 000 mPa·s ved 20 °C og 1 500 mPa·s ved 40 °C. Hvor mange ganger lavere er viskositeten ved 40 °C?',u:'ganger',a:10000/1500,s:`10 000 / 1 500 ≈ <b>${nf(10000/1500,1)} ganger</b>. En temperaturøkning på 20 grader gjør honningen mange ganger lettere å pumpe.`},
+ {t:'f) Oljedråpene i en blanding med vann blir delt opp slik at diameteren halveres. Hvor mange ganger saktere stiger dråpene?',u:'ganger',a:4,s:'Stigefarten går med diameteren i andre: (1/2)² = 1/4. Dråpene stiger <b>4 ganger</b> saktere.'}
+]);
+
+/* ---- Forklar for hverandre ---- */
+K.peer($('#peer'),{key:'uke1-medelev-v3',title:'del 1, væskers egenskaper',min:'15–20',cards:[
+ {t:'Tetthet',p:'Hva er tetthet, og hvorfor trenger en prosessoperatør å kjenne tettheten til en væske?',h:'Tenk på formelen og eksempler fra tanker og kvalitetskontroll.',link:'#tetthet',ln:'Tetthet',
+  c:['Tetthet er masse per volum, ρ = m / V','Bruker riktig enhet (kg/m³)','Gir et praktisk eksempel, for eksempel omregning mellom volum og masse','Forklarer relativ tetthet eller hva som flyter oppå hva']},
+ {t:'Viskositet',p:'Hva er viskositet? Gi eksempler på væsker med lav og høy viskositet.',h:'Tenk på tabellen og lagene som glir over hverandre.',link:'#viskositet',ln:'Viskositet',
+  c:['Viskositet er indre friksjon, hvor tyktflytende væsken er','Høy viskositet betyr at væsken strømmer tregt','Gir eksempler, for eksempel vann (lav) og honning (høy)','Skiller mellom viskositet og tetthet']},
+ {t:'Væske og gass',p:'Hvordan endres viskositeten med temperaturen for væsker og for gasser? Forklar hvorfor de er forskjellige.',h:'Tenk på hva molekylene gjør i en væske og i en gass.',link:'#temperatur',ln:'Temperatur',
+  c:['Væsker får lavere viskositet når temperaturen øker','Gasser får høyere viskositet når temperaturen øker','I væsken slipper molekylene lettere taket i hverandre når de beveger seg mer','I gassen kolliderer molekylene oftere når de går fortere']},
+ {t:'Viskositetsløpet',p:'Forklar resultatet av viskositetsløpet. Hva skjedde da temperaturen økte, og hva betyr det i en prosess?',h:'Tenk på utforskoppgavene B og C.',link:'#simulering',ln:'Viskositetsløpet',
+  c:['Kula i væsken med høyest viskositet bruker lengst tid','Høyere temperatur gir kortere falltid for alle væskene','De tykkeste væskene endrer seg mest','Kobler til pumping, for eksempel oppvarming eller kalde morgener']},
+ {t:'Blanding og separering',p:'Olje og vann er rørt sammen. Hva avgjør hvor fort de skiller seg, og hva kan vi gjøre for å skille dem raskere?',h:'Tenk på simuleringen «fra blanding til separering».',link:'#separering',ln:'Blanding og separering',
+  c:['Oljen stiger fordi den har lavere tetthet enn vannet','Kraftig røring eller homogenisering gir små dråper som skilles sakte','Høyere temperatur gir lavere viskositet og raskere separering','Nevner sentrifuge eller lengre oppholdstid som tiltak']}
+]});
+K.toc();
+})();
+</script>
+
+<div class="wrap"><div class="weeknav"><a href="index.html"><span>Tilbake til</span><b>Temaoversikten</b></a><a class="next" href="uke2.html"><span>Neste del</span><b>Del 2: Trykk i væsker</b></a></div></div>
+</body>
+</html>

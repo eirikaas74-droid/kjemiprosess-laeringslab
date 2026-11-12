@@ -52,7 +52,7 @@ h1,h2,h3{font-family:var(--f-display);line-height:1.05;margin:0;text-wrap:balanc
 .topnav a:hover{color:var(--cr-ink)}
 .hero-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:36px;align-items:center;padding:44px 0 56px}
 .eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cr-flow)}
-.hero h1{font-size:clamp(2.5rem,5.6vw,4.1rem);font-weight:700;margin:12px 0 14px;text-transform:uppercase;letter-spacing:.01em}
+.hero h1{font-size:clamp(2.3rem,4.4vw,3.7rem);overflow-wrap:anywhere;font-weight:700;margin:12px 0 14px;text-transform:uppercase;letter-spacing:.01em}
 .hero h1 em{font-style:normal;color:var(--cr-flow)}
 .hero p{color:var(--cr-muted);font-size:1.1rem;max-width:46ch;margin:0 0 22px}
 .search{position:relative;display:block;max-width:480px}
@@ -132,8 +132,11 @@ section.temaer h2{font-size:2.2rem;font-weight:700;text-transform:uppercase;marg
 section.temaer .sub{color:var(--muted);margin:0 0 18px}
 .tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
 .tcard{font:inherit;text-align:left;color:inherit;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;grid-template-columns:52px 1fr;gap:4px 14px;align-items:start}
-button.tcard{cursor:pointer;transition:border-color .15s,transform .15s}
-button.tcard:hover{border-color:var(--c);transform:translateY(-2px)}
+.tcard.live{border-color:color-mix(in srgb,var(--c) 45%,var(--line))}
+.tact{grid-column:2;display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.tact button,.tact a{font:inherit;font-size:.82rem;border-radius:6px;padding:4px 10px;cursor:pointer;text-decoration:none;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.tact a{background:var(--c);border-color:var(--c);color:var(--panel)}
+.tact button:hover{border-color:var(--c)}
 .tcard .ti{grid-row:span 2;width:52px;height:52px;border-radius:10px;background:var(--cs);color:var(--c);display:grid;place-items:center}
 .tcard .ti svg{width:32px;height:32px}
 .tcard b{font-family:var(--f-display);font-size:1.25rem;font-weight:600;line-height:1.15}
@@ -278,7 +281,8 @@ const AREAS={prod:{n:"Produksjon og tjenester",c:"var(--a1)"},tek:{n:"Kjemisk te
 const I=p=>`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
 /* Temaer. live:true = har innhold. */
 const TEMAER={
-  ps:{n:"Prosessikkerhet",live:true,c:"var(--a1)",cs:"var(--a1s)",i:I('<path d="M32 6 52 14v16c0 13-9 22-20 28C21 52 12 43 12 30V14z"/><path d="M32 22c4 5 7 8 7 13a7 7 0 0 1-14 0c0-3 2-5 3-7 1 3 2 4 4 4-1-4 0-7 0-10z"/>')},
+  ps:{n:"Prosessikkerhet",live:true,u:"prosessikkerhet/",c:"var(--a1)",cs:"var(--a1s)",i:I('<path d="M32 6 52 14v16c0 13-9 22-20 28C21 52 12 43 12 30V14z"/><path d="M32 22c4 5 7 8 7 13a7 7 0 0 1-14 0c0-3 2-5 3-7 1 3 2 4 4 4-1-4 0-7 0-10z"/>')},
+  vaeske:{n:"Væske i prosessindustrien",live:true,u:"vaeske/",c:"var(--a2)",cs:"var(--a2s)",i:I('<path d="M32 6C24 18 14 28 14 40a18 18 0 0 0 36 0C50 28 40 18 32 6z"/><path d="M24 42a8 8 0 0 0 8 8"/>')},
   utstyr:{n:"Prosessutstyr og enhetsoperasjoner",c:"var(--a2)",cs:"var(--a2s)",i:I('<circle cx="28" cy="34" r="16"/><path d="M28 18v-8h26M44 34h14"/><path d="M28 24l9 15H19z"/>')},
   reg:{n:"Måling og regulering",c:"var(--a2)",cs:"var(--a2s)",i:I('<path d="M10 44a22 22 0 1 1 44 0"/><path d="M32 44 44 26"/><circle cx="32" cy="44" r="4"/>')},
   pid:{n:"Flytskjema og P&ID",c:"var(--a2)",cs:"var(--a2s)",i:I('<rect x="6" y="20" width="14" height="28" rx="6"/><circle cx="34" cy="40" r="7"/><rect x="46" y="10" width="12" height="44" rx="6"/><path d="M20 40h7M41 40h5"/>')},
@@ -287,7 +291,7 @@ const TEMAER={
   miljo:{n:"Miljø og bærekraft",c:"var(--a1)",cs:"var(--a1s)",i:I('<path d="M12 52C12 26 28 10 54 10c0 26-16 42-42 42z"/><path d="M12 52 38 26"/>')}
 };
 /* Ressurser og aktiviteter. Nye legges til her. */
-const P="prosessikkerhet/#";
+const P="prosessikkerhet/#", V="vaeske/";
 const RES=[
   {t:"Hva er prosessikkerhet?",ty:"fag",tema:"ps",ar:["prod"],u:P+"m1",d:"Forskjellen på personsikkerhet og prosessikkerhet, tap av inneslutning og hvem som passer på.",x:["Med quiz"]},
   {t:"Farlige stoffer og CLP-merking",ty:"fag",tema:"ps",ar:["prod","ana"],u:P+"m2",d:"Farepiktogrammer, sikkerhetsdatablad (SDS) og tiltakshierarkiet.",x:["Med quiz"]},
@@ -315,7 +319,49 @@ const RES=[
 
   {t:"Kartlegg nivåsikringen på skolens anlegg",ty:"pra",tema:"ps",ar:["tek","ana"],u:P+"m4/nivasikring",d:"Arbeidsark: finn instrumentene, tegn flytskjema, lag forriglingsmatrise og gjennomfør funksjonstest.",x:["Skolens anlegg"]},
 
-  {t:"Prøv deg i prosessikkerhet",ty:"test",tema:"ps",ar:["prod","tek"],u:P+"prove",d:"Blandede spørsmål fra hele temaet. Se hva du kan, og hva du bør lese mer om."}
+  {t:"Prøv deg i prosessikkerhet",ty:"test",tema:"ps",ar:["prod","tek"],u:P+"prove",d:"Blandede spørsmål fra hele temaet. Se hva du kan, og hva du bør lese mer om."},
+
+  /* ---- Væske i prosessindustrien ---- */
+  {t:"Væskers egenskaper",ty:"fag",tema:"vaeske",ar:["tek"],u:V+"uke1.html",d:"Tetthet og viskositet, hvordan temperaturen endrer dem, og blanding, oppdeling og separering.",x:["Del 1"]},
+  {t:"Trykk i væsker",ty:"fag",tema:"vaeske",ar:["tek"],u:V+"uke2.html",d:"Hydrostatisk trykk, absolutt- og manometertrykk og nivåmåling med trykk.",x:["Del 2"]},
+  {t:"Strømning i rør",ty:"fag",tema:"vaeske",ar:["tek"],u:V+"uke3.html",d:"Volumstrøm og massestrøm, kontinuitetsligningen og laminær og turbulent strømning.",x:["Del 3"]},
+  {t:"Trykktap og energi i rørsystemer",ty:"fag",tema:"vaeske",ar:["tek"],u:V+"uke4.html",d:"Bernoullis ligning, friksjonstap og engangstap, og hva trykktapet koster i energi.",x:["Del 4"]},
+  {t:"Pumper",ty:"fag",tema:"vaeske",ar:["tek"],u:V+"uke5.html",d:"Pumpetyper, pumpekurve og systemkurve, arbeidspunkt, regulering, kavitasjon og NPSH.",x:["Del 5"]},
+  {t:"Måling, styring og HMS",ty:"fag",tema:"vaeske",ar:["tek","prod"],u:V+"uke6.html",d:"Strømnings- og nivåmålere, instrumentskjema og tagger, reguleringssløyfen, HMS og miljø.",x:["Del 6"]},
+
+  {t:"Viskositetsløpet",ty:"sim",tema:"vaeske",ar:["tek"],u:V+"uke1.html#simulering",d:"Hvilken kule kommer først til bunnen? Endre væske og temperatur. Spå først, test etterpå."},
+  {t:"Fra blanding til separering",ty:"sim",tema:"vaeske",ar:["tek"],u:V+"uke1.html#separering",d:"Simuler hvordan en blanding av væsker skiller seg i en tank, og finn ut hva som får det til å gå raskere."},
+  {t:"Nivåmåling i en tank",ty:"sim",tema:"vaeske",ar:["tek"],u:V+"uke2.html#simulering",d:"Nivåmåling med trykktransmitter. Lag feil med væske, innstilling eller lukket tank, og se hvordan de slår ut."},
+  {t:"Velg riktig rør",ty:"sim",tema:"vaeske",ar:["tek"],u:V+"uke3.html#simulering",d:"Velg væske, volumstrøm og rørdimensjon, og se hastighet, Reynolds tall og hastighetsprofil."},
+  {t:"Din egen rørledning",ty:"sim",tema:"vaeske",ar:["tek"],u:V+"uke4.html#simulering",d:"Bygg en rørledning og se hvor trykket blir av, hva det koster i energi, og hva som betyr mest."},
+  {t:"Pumpen i anlegget",ty:"sim",tema:"vaeske",ar:["tek"],u:V+"uke5.html#simulering",d:"Finn arbeidspunktet der pumpekurven møter systemkurven, og se når pumpen kaviterer."},
+  {t:"Nivåregulering",ty:"sim",tema:"vaeske",ar:["tek"],u:V+"uke6.html#simulering",d:"LIC-101 styrer utløpsventilen. Kjør manuelt eller automatisk, forstyrr prosessen og juster regulatoren."},
+
+  {t:"Venturirøret",ty:"int",tema:"vaeske",ar:["tek"],u:V+"uke4.html#venturi",d:"Se Bernoullis ligning i praksis: hastigheten øker og trykket faller der røret blir smalt."},
+  {t:"Tagg-leseren",ty:"int",tema:"vaeske",ar:["tek","prod"],u:V+"uke6.html#skjema",d:"Lær å lese instrumenttagger som FIC og LT, og hva hver bokstav betyr."},
+  {t:"Case: en vakt i kontrollrommet",ty:"int",tema:"vaeske",ar:["tek","prod"],u:V+"uke6.html#case",d:"Avsluttende case: bruk det du har lært om væsker, pumper og måling på hendelser i kontrollrommet."},
+
+  {t:"Arbeidsark: viskositetsløpet",ty:"opp",tema:"vaeske",ar:["tek","ana"],u:V+"uke1.html#arbeidsark",d:"Kjør viskositetsløpet ved tre temperaturer, skriv inn falltidene og svar på spørsmålene.",x:["Del 1"]},
+
+  {t:"Labark: kontroller transmitteren",ty:"pra",tema:"vaeske",ar:["tek","ana"],u:V+"uke2.html#labark",d:"Mål nivå og trykk på riggen, legg inn målingene og sjekk om transmitteren viser riktig.",x:["Skolens rigg"]},
+  {t:"Labark: volumstrøm og Reynolds tall",ty:"pra",tema:"vaeske",ar:["tek","ana"],u:V+"uke3.html#labark",d:"Mål volumstrømmen med nivåøkning i tanken og regn ut om strømningen er laminær eller turbulent.",x:["Skolens rigg"]},
+  {t:"Labark: trykktap mot teori",ty:"pra",tema:"vaeske",ar:["tek","ana"],u:V+"uke4.html#labark",d:"Sammenlign trykktapet du måler på riggen med det teorien gir.",x:["Skolens rigg"]},
+  {t:"Labark: mål pumpekurven",ty:"pra",tema:"vaeske",ar:["tek","ana"],u:V+"uke5.html#labark",d:"Strup ventilen trinn for trinn, mål trykk og volumstrøm, og tegn pumpens kurve.",x:["Skolens rigg"]},
+  {t:"Labark: sløyfesjekk av transmitteren",ty:"pra",tema:"vaeske",ar:["tek","ana"],u:V+"uke6.html#labark",d:"Kontroller at transmitter, signal og visning henger sammen, og vurder om sløyfen er i orden.",x:["Skolens rigg"]},
+
+  {t:"Forklar for hverandre: væskers egenskaper",ty:"grp",tema:"vaeske",ar:["tek"],u:V+"uke1.html#forklar",d:"Forklar kjernebegrepene for en medelev med begrepskort, og bytt roller.",x:["Par"]},
+  {t:"Forklar for hverandre: trykk",ty:"grp",tema:"vaeske",ar:["tek"],u:V+"uke2.html#forklar",d:"Forklar hydrostatisk trykk og nivåmåling for hverandre med begrepskort.",x:["Par"]},
+  {t:"Forklar for hverandre: strømning",ty:"grp",tema:"vaeske",ar:["tek"],u:V+"uke3.html#forklar",d:"Forklar volumstrøm, kontinuitet og Reynolds tall for hverandre med begrepskort.",x:["Par"]},
+  {t:"Forklar for hverandre: trykktap",ty:"grp",tema:"vaeske",ar:["tek"],u:V+"uke4.html#forklar",d:"Forklar Bernoulli og trykktap for hverandre, og se hva dere bør repetere.",x:["Par"]},
+  {t:"Forklar for hverandre: pumper",ty:"grp",tema:"vaeske",ar:["tek"],u:V+"uke5.html#forklar",d:"Forklar pumpekurve, arbeidspunkt og kavitasjon for hverandre med begrepskort.",x:["Par"]},
+  {t:"Forklar for hverandre: måling og styring",ty:"grp",tema:"vaeske",ar:["tek"],u:V+"uke6.html#forklar",d:"Forklar målere, tagger og reguleringssløyfen for hverandre med begrepskort.",x:["Par"]},
+
+  {t:"Oppgaver: væskers egenskaper",ty:"test",tema:"vaeske",ar:["tek"],u:V+"uke1.html#oppgaver",d:"Flervalg og regneoppgaver om tetthet og viskositet, med fasit.",x:["Med regneoppgaver"]},
+  {t:"Oppgaver: trykk i væsker",ty:"test",tema:"vaeske",ar:["tek"],u:V+"uke2.html#oppgaver",d:"Flervalg og regneoppgaver om hydrostatisk trykk og nivåmåling, med fasit.",x:["Med regneoppgaver"]},
+  {t:"Oppgaver: strømning i rør",ty:"test",tema:"vaeske",ar:["tek"],u:V+"uke3.html#oppgaver",d:"Flervalg og regneoppgaver om volumstrøm, kontinuitet og Reynolds tall, med fasit.",x:["Med regneoppgaver"]},
+  {t:"Oppgaver: trykktap og energi",ty:"test",tema:"vaeske",ar:["tek"],u:V+"uke4.html#oppgaver",d:"Flervalg og regneoppgaver om Bernoulli og trykktap, med fasit.",x:["Med regneoppgaver"]},
+  {t:"Oppgaver: pumper",ty:"test",tema:"vaeske",ar:["tek"],u:V+"uke5.html#oppgaver",d:"Flervalg og regneoppgaver om pumpekurver, arbeidspunkt og NPSH, med fasit.",x:["Med regneoppgaver"]},
+  {t:"Oppgaver: måling og styring",ty:"test",tema:"vaeske",ar:["tek"],u:V+"uke6.html#oppgaver",d:"Flervalg og regneoppgaver om målere og regulering, med fasit.",x:["Med regneoppgaver"]}
 ];
 
 const state={ty:null,ar:null,tema:null,q:""};
@@ -341,7 +387,7 @@ function render(){
   list.forEach(r=>{
     const T=TYPES[r.ty];const el=document.createElement("article");el.className="card";
     el.style.setProperty("--c",T.c);el.style.setProperty("--cs",T.s);
-    const tags=[`<span class="tag">${TEMAER[r.tema].n}</span>`].concat((r.x||[]).map(x=>`<span class="tag${x==="Skolens anlegg"?" hl":""}">${x}</span>`)).join("");
+    const tags=[`<span class="tag">${TEMAER[r.tema].n}</span>`].concat((r.x||[]).map(x=>`<span class="tag${/^Skolens/.test(x)?" hl":""}">${x}</span>`)).join("");
     el.innerHTML=`<div class="ctop"><span class="cic">${T.i}</span><span class="ctype">${T.n}</span></div><h3><a href="${r.u}">${r.t}</a></h3><p>${r.d}</p><div class="meta">${tags}</div>`;
     g.append(el);
   });
@@ -363,11 +409,12 @@ for(const k in TYPES){const n=RES.filter(r=>r.ty===k).length;if(!n)continue;
 /* Temakort */
 const tg=$("tgrid");
 for(const k in TEMAER){const t=TEMAER[k];const n=RES.filter(r=>r.tema===k);
-  const el=document.createElement(t.live?"button":"div");el.className="tcard"+(t.live?"":" soon");
+  const el=document.createElement("div");el.className="tcard"+(t.live?" live":" soon");
   el.style.setProperty("--c",t.c);el.style.setProperty("--cs",t.cs);
   const akt=n.filter(r=>r.ty!=="fag").length,fag=n.length-akt;
-  el.innerHTML=`<span class="ti">${t.i}</span><b>${t.n}</b><span>${t.live?`${fag} fagtekster · ${akt} aktiviteter`:"Kommer"}</span>`;
-  if(t.live) el.onclick=()=>{$("q").value="";set({tema:k,ty:null,ar:null,q:""},true);};
+  el.innerHTML=`<span class="ti">${t.i}</span><b>${t.n}</b><span>${t.live?`${fag} fagtekster · ${akt} aktiviteter`:"Kommer"}</span>`+
+    (t.live?`<div class="tact"><button type="button">Vis ressurser</button><a href="${t.u}">Temaside →</a></div>`:"");
+  if(t.live) el.querySelector("button").onclick=()=>{$("q").value="";set({tema:k,ty:null,ar:null,q:""},true);};
   tg.append(el);}
 
 set({});

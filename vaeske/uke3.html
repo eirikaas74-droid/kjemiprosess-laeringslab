@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Del 3: Strømning i rør</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="kurs.css">
+
+</head>
+<body>
+<div class="coursebar"><div class="wrap"><a href="index.html">← Væske i prosessindustrien</a><nav class="weeks" aria-label="Deler"><a href="uke1.html" title="Del 1: Væskers egenskaper">1</a><a href="uke2.html" title="Del 2: Trykk i væsker">2</a><a href="uke3.html" title="Del 3: Strømning i rør" aria-current="page">3</a><a href="uke4.html" title="Del 4: Trykktap og energi i rørsystemer">4</a><a href="uke5.html" title="Del 5: Pumper">5</a><a href="uke6.html" title="Del 6: Måling, styring og helhet">6</a></nav></div></div>
+<div class="sitebar"><div class="wrap"><a href="../">← Alle ressurser</a><span>Kjemiprosess <b>læringslab</b></span></div></div>
+<header class="top">
+  <div class="wrap">
+    <div>
+      <div class="tag">Væske i prosessindustrien · Vg2 kjemiprosess · Del 3 av 6</div>
+      <h1 style="margin-top:10px">Strømning i rør</h1>
+      <p class="lede">Når pumpen starter, begynner væsken å strømme. Hvor mye renner gjennom røret, hvor fort går det, og hvorfor kan strømningen være rolig i ett rør og kaotisk i et annet?</p>
+      <div class="meta"><span>Tidsbruk <b>ca. 4 økter</b></span><span>Forkunnskaper <b>tetthet og viskositet (del 1)</b></span></div>
+    </div>
+    <div class="goals">
+      <div class="tag">Etter denne uken skal du kunne</div>
+      <ul>
+        <li>beregne volumstrøm og massestrøm og regne om mellom enheter</li>
+        <li>bruke kontinuitetsligningen til å finne hastigheten i et rør</li>
+        <li>forklare forskjellen på laminær og turbulent strømning og beregne Reynolds tall</li>
+        <li>vurdere om en rørdimensjon gir fornuftig hastighet</li>
+        <li>bestemme volumstrøm og Reynolds tall på riggen fra nivåøkning i tanken</li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Innhold"><div class="wrap"><ol id="toc">
+  <li><a href="#volumstrom"><span>1</span>Volumstrøm</a></li>
+  <li><a href="#kontinuitet"><span>2</span>Kontinuitet</a></li>
+  <li><a href="#reynolds"><span>3</span>Laminær og turbulent</a></li>
+  <li><a href="#simulering"><span>4</span>Simulering</a></li>
+  <li><a href="#labark"><span>5</span>Labark</a></li>
+  <li><a href="#oppgaver"><span>6</span>Oppgaver</a></li>
+  <li><a href="#forklar"><span>7</span>Forklar for hverandre</a></li>
+  <li><a href="#oppsummering"><span>8</span>Oppsummering</a></li>
+</ol></div></nav>
+
+<main>
+<section id="volumstrom">
+  <div class="wrap">
+    <div class="sechead"><span class="step">01</span><h2>Volumstrøm og massestrøm</h2></div>
+    <div class="two">
+      <div class="prose stack">
+        <p><b>Volumstrøm</b> forteller hvor stort volum som passerer et punkt i røret per tidsenhet. I industrien oppgis den ofte i m³/h, men på mindre anlegg og i laben brukes L/min eller L/s.</p>
+        <p><b>Massestrøm</b> forteller hvor mye masse som passerer per tidsenhet. Den er ofte viktigere enn volumstrømmen, fordi produkter selges og doseres etter masse, og fordi volumet endrer seg med temperaturen mens massen er den samme.</p>
+        <p>Den enkleste måten å måle volumstrøm på er den du bruker på riggen: Mål hvor mye volum som kommer inn i en tank på en bestemt tid. I et anlegg brukes strømningsmålere, som du lærer mer om i del 6.</p>
+      </div>
+      <div class="stack">
+        <div class="formula" role="img" aria-label="Volumstrøm Q er lik V delt på t">
+          <div class="tag" style="margin-bottom:8px">Volumstrøm</div>
+          <div class="eq"><var>Q</var><span>=</span><span class="frac"><span><var>V</var></span><span><var>t</var></span></span><span class="lbl" style="margin-left:12px">m³/s</span></div>
+        </div>
+        <div class="formula" role="img" aria-label="Massestrøm er lik rho ganger Q">
+          <div class="tag" style="margin-bottom:8px">Massestrøm</div>
+          <div class="eq"><var>ṁ</var><span>=</span><var>ρ</var><span>·</span><var>Q</var><span class="lbl" style="margin-left:12px">kg/s</span></div>
+        </div>
+        <div class="tablebox"><table>
+          <thead><tr><th>Omregning</th><th class="r">Faktor</th></tr></thead>
+          <tbody>
+            <tr><td>1 m³/h til L/min</td><td class="r num">× 16,67</td></tr>
+            <tr><td>1 L/min til m³/s</td><td class="r num">÷ 60 000</td></tr>
+            <tr><td>1 m³/h til m³/s</td><td class="r num">÷ 3 600</td></tr>
+            <tr><td>1 L/s til m³/h</td><td class="r num">× 3,6</td></tr>
+          </tbody></table></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kontinuitet">
+  <div class="wrap">
+    <div class="sechead"><span class="step">02</span><h2>Kontinuitet: det som går inn, må komme ut</h2></div>
+    <div class="two">
+      <div class="prose stack">
+        <p>En væske kan nesten ikke presses sammen. Det som strømmer inn i den ene enden av et rør, må derfor komme ut i den andre enden like fort. Volumstrømmen er den samme gjennom hele røret, selv om røret endrer diameter.</p>
+        <p>Hastigheten finner vi ved å dele volumstrømmen på tverrsnittsarealet. Der røret blir smalere, må væsken gå fortere. Halv diameter gir en firedel av arealet og fire ganger så høy hastighet.</p>
+        <p>Hastigheten bestemmer mye: trykktap, slitasje, støy og risiko for trykkstøt. Derfor finnes det tommelfingerregler for hvor fort væsken bør gå.</p>
+      </div>
+      <div class="stack">
+        <div class="formula" role="img" aria-label="Q er lik A ganger v, og A1 v1 er lik A2 v2">
+          <div class="tag" style="margin-bottom:8px">Kontinuitetsligningen</div>
+          <div class="eq"><var>Q</var><span>=</span><var>A</var><span>·</span><var>v</var><span style="margin-left:18px"><var>A</var><sub>1</sub>·<var>v</var><sub>1</sub></span><span>=</span><span><var>A</var><sub>2</sub>·<var>v</var><sub>2</sub></span></div>
+          <p class="note">Arealet til et rør: <var>A</var> = π · <var>D</var>² / 4, der <var>D</var> er indre diameter.</p>
+        </div>
+        <div class="tablebox"><table>
+          <thead><tr><th>Typisk hastighet for vannlignende væsker</th><th class="r">m/s</th></tr></thead>
+          <tbody>
+            <tr><td>Sugeledning til pumpe</td><td class="r num">0,5–1,5</td></tr>
+            <tr><td>Trykkledning etter pumpe</td><td class="r num">1–3</td></tr>
+            <tr><td>Selvfallsledning</td><td class="r num">0,3–1</td></tr>
+            <tr><td>Viskøse væsker (oljer)</td><td class="r num">0,5–1,5</td></tr>
+          </tbody></table></div>
+        <p class="status">Tommelfingerregler. Datablad og bedriftens egne standarder går foran.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reynolds">
+  <div class="wrap">
+    <div class="sechead"><span class="step">03</span><h2>Laminær og turbulent strømning</h2></div>
+    <div class="two" style="margin-bottom:22px">
+      <div class="prose stack">
+        <p>I 1883 sprøytet den britiske ingeniøren Osborne Reynolds en tynn stråle med fargestoff inn i vann som strømmet gjennom et glassrør. Ved lav hastighet gikk fargestrålen rett gjennom røret som en tråd. Væsken strømmet i ordnede lag. Det kalles <b>laminær</b> strømning.</p>
+        <p>Når hastigheten økte, begynte strålen å bølge, og til slutt ble den revet opp og blandet ut i hele røret. Væsken virvlet. Det kalles <b>turbulent</b> strømning.</p>
+        <p>Reynolds fant at det ikke bare var hastigheten som bestemte dette, men forholdet mellom væskens treghet og viskositet. Dette forholdet kalles <b>Reynolds tall</b>. Det har ingen enhet.</p>
+        <p>I prosessanlegg med vann er strømningen nesten alltid turbulent. Det er bra for blanding og varmeoverføring, men gir høyere trykktap. Laminær strømning ser vi oftest med viskøse væsker som oljer.</p>
+      </div>
+      <div class="stack">
+        <div class="formula" role="img" aria-label="Reynolds tall Re er lik rho v D delt på mu, som er lik v D delt på nu">
+          <div class="tag" style="margin-bottom:8px">Reynolds tall</div>
+          <div class="eq"><span>Re</span><span>=</span><span class="frac"><span><var>ρ</var>·<var>v</var>·<var>D</var></span><span><var>μ</var></span></span><span>=</span><span class="frac"><span><var>v</var>·<var>D</var></span><span><var>ν</var></span></span></div>
+          <p class="note">Bruk SI-enheter: kg/m³, m/s, m og Pa·s. Da blir Re et rent tall.</p>
+        </div>
+        <div class="tablebox"><table>
+          <thead><tr><th>Reynolds tall</th><th>Strømning</th></tr></thead>
+          <tbody>
+            <tr><td class="num">under 2300</td><td><span class="pill lam">Laminær</span></td></tr>
+            <tr><td class="num">2300–4000</td><td><span class="pill ovg">Overgang</span></td></tr>
+            <tr><td class="num">over 4000</td><td><span class="pill tur">Turbulent</span></td></tr>
+          </tbody></table></div>
+      </div>
+    </div>
+    <div class="animbox">
+      <canvas class="anim" id="rey" data-h="300" role="img" aria-label="Reynolds forsøk: fargestråle i et glassrør som blir turbulent ved høy hastighet"></canvas>
+      <aside>
+        <div class="ctrl"><label for="reV">Hastighet <output id="reVo"></output></label><input type="range" id="reV" min="0.02" max="0.5" step="0.005" value="0.08"></div>
+        <div class="kv" id="reRead"></div>
+        <p class="status">Vann ved 20 °C i et glassrør med indre diameter 20 mm.</p>
+      </aside>
+    </div>
+    <div class="explore" style="margin-top:16px">
+      <div class="task"><p><b>Prøv:</b> Øk hastigheten sakte. Ved hvilken hastighet begynner fargestrålen å bølge?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Rundt 0,12 m/s, når Re passerer ca. 2300. Over ca. 0,2 m/s (Re ≈ 4000) blandes fargen ut i hele røret.</div></details></div>
+      <div class="task"><p><b>Prøv:</b> Sammenlign hastighetsprofilene til høyre. Hvorfor er den turbulente profilen flatere?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Virvlene blander væske fra midten og ut mot veggen, så hastigheten jevnes ut over tverrsnittet. I laminær strømning glir lagene forbi hverandre uten å blandes, og profilen blir en parabel der midten går dobbelt så fort som snittet.</div></details></div>
+    </div>
+  </div>
+</section>
+
+<section id="simulering">
+  <div class="wrap">
+    <div class="sechead"><span class="step">04</span><h2>Simulering: velg riktig rør</h2></div>
+    <p class="prose" style="margin-bottom:18px">Velg væske, volumstrøm og rørdimensjon. Simuleringen viser hastighet, Reynolds tall og hastighetsprofilen, og tabellen viser hvilke dimensjoner som gir en fornuftig hastighet.</p>
+    <div class="sim">
+      <div class="panel controls">
+        <div class="ctrl"><label for="sF">Væske</label><select id="sF"><option value="vann">Vann</option><option value="glykol">Glykol/vann 50 %</option><option value="olje">Hydraulikkolje VG 46</option><option value="glyserol">Glyserol</option></select></div>
+        <div class="ctrl"><label for="sT">Temperatur <output id="sTo"></output></label><input type="range" id="sT" min="10" max="80" step="1" value="20"></div>
+        <div class="ctrl"><label for="sQ">Volumstrøm <output id="sQo"></output></label><input type="range" id="sQ" min="1" max="600" step="1" value="120"></div>
+        <div class="ctrl"><label for="sD">Rørdimensjon</label><select id="sD"></select></div>
+        <div class="ctrl"><label for="sSide">Plassering</label><select id="sSide"><option value="trykk">Trykkledning etter pumpe</option><option value="suge">Sugeledning til pumpe</option></select></div>
+      </div>
+      <div class="stack" style="min-width:0">
+        <div class="gauges">
+          <div class="gauge"><div class="k">Hastighet</div><div class="val" id="gV"></div><div class="sub">m/s</div></div>
+          <div class="gauge"><div class="k">Reynolds tall</div><div class="val" id="gRe"></div><div class="sub" id="gReg"></div></div>
+          <div class="gauge"><div class="k">Volumstrøm</div><div class="val" id="gQ"></div><div class="sub">m³/h</div></div>
+          <div class="gauge total"><div class="k">Massestrøm</div><div class="val" id="gM"></div><div class="sub">kg/s</div></div>
+        </div>
+        <div class="two" style="gap:16px">
+          <div class="chart"><h4>Hastighetsprofil i røret</h4><div class="cap" id="profCap"></div><svg id="prof" viewBox="0 0 420 230"></svg></div>
+          <div class="panel"><h3 style="font-size:1.15rem;margin-bottom:8px">Hvilken dimensjon passer?</h3><div class="tablebox" style="border:0"><table id="dnTab"></table></div></div>
+        </div>
+      </div>
+    </div>
+    <h3 style="margin:30px 0 12px">Utforsk: spå først, test etterpå</h3>
+    <div class="explore">
+      <div class="task"><p><b>A.</b> Med vann og 120 L/min: Hvilke rørdimensjoner gir anbefalt hastighet i en trykkledning?</p>
+        <details><summary>Se forklaring</summary><div class="ans">DN32 og DN40 gir 1–3 m/s. DN25 gir over 3 m/s og blir for smalt, mens DN50 gir under 1 m/s og er større og dyrere enn nødvendig.</div></details></div>
+      <div class="task"><p><b>B.</b> Bytt til sugeledning. Hvorfor anbefales lavere hastighet på sugesiden?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Høy hastighet gir trykktap og lavere trykk inn til pumpen. Faller trykket for mye, kan væsken begynne å koke i pumpen (kavitasjon). Det ser vi på i del 5.</div></details></div>
+      <div class="task"><p><b>C.</b> Velg hydraulikkolje. Hvor stor volumstrøm kan du ha i DN25 før strømningen blir turbulent?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Rundt 300 L/min ved 20 °C, fordi oljen er rundt 90 ganger mer viskøs enn vann. For vann i samme rør skjer overgangen allerede ved ca. 3 L/min.</div></details></div>
+      <div class="task"><p><b>D.</b> Varm oljen fra 20 til 60 °C. Hva skjer med Reynolds tall, og hvorfor?</p>
+        <details><summary>Se forklaring</summary><div class="ans">Re blir nesten fem ganger høyere, fordi viskositeten faller kraftig med temperaturen (del 1). Strømningen kan gå fra laminær til turbulent uten at volumstrømmen endres.</div></details></div>
+    </div>
+  </div>
+</section>
+
+<section id="labark">
+  <div class="wrap">
+    <div class="sechead"><span class="step">05</span><h2>Labark: volumstrøm og Reynolds tall på riggen</h2></div>
+    <div class="two" style="margin-bottom:22px">
+      <div class="prose stack">
+        <p>Kjør riggen med ulike ventilåpninger. For hver innstilling måler du hvor mye nivået i tanken stiger på en bestemt tid. Siden regner ut volumstrøm, massestrøm, hastighet i røret og Reynolds tall.</p>
+        <p>Denne målemetoden bruker du igjen i del 4 og 5, så det lønner seg å bli god på den nå.</p>
+        <p class="status">Det du skriver lagres bare i denne nettleseren på denne enheten. Ingenting sendes noe sted.</p>
+      </div>
+      <div class="stack">
+        <div class="formula" role="img" aria-label="Volumstrøm er tankens areal ganger nivåøkning delt på tid">
+          <div class="tag" style="margin-bottom:8px">Volumstrøm fra nivåøkning</div>
+          <div class="eq"><var>Q</var><span>=</span><span class="frac"><span><var>A</var><sub>tank</sub>·<var>Δh</var></span><span><var>Δt</var></span></span></div>
+        </div>
+        <div class="callout"><b>Tips til målingen</b>La riggen gå litt etter hver ventilendring, så strømmen blir stabil. Start tiden når nivået passerer et merke. Mål tankens indre mål.</div>
+      </div>
+    </div>
+    <div class="panel lab stack">
+      <div class="btnrow"><span class="example" id="lEx">Eksempeldata – bytt ut med egne målinger</span></div>
+      <div class="labgrid">
+        <div class="ctrl"><label for="lD">Rørets indre diameter (mm)</label><input type="number" id="lD" step="0.1"></div>
+        <div class="ctrl"><label for="lF">Væske</label><select id="lF"><option value="vann">Vann</option><option value="glykol">Glykol/vann 50 %</option><option value="olje">Hydraulikkolje VG 46</option></select></div>
+        <div class="ctrl"><label for="lT">Væsketemperatur (°C)</label><input type="number" id="lT" step="1"></div>
+        <div class="ctrl"><label for="lS">Tankform</label><select id="lS"><option value="rekt">Rektangulær</option><option value="syl">Sylindrisk</option></select></div>
+        <div class="ctrl"><label for="lA" id="lAlab">Indre lengde (cm)</label><input type="number" id="lA" step="0.1"></div>
+        <div class="ctrl" id="lBW"><label for="lB">Indre bredde (cm)</label><input type="number" id="lB" step="0.1"></div>
+      </div>
+      <p class="status" id="lInfo"></p>
+      <div class="tablebox"><table>
+        <thead><tr><th>Innstilling</th><th>Nivå start (cm)</th><th>Nivå slutt (cm)</th><th>Tid (s)</th><th class="r">Q (L/min)</th><th class="r">Q (m³/h)</th><th class="r">ṁ (kg/s)</th><th class="r">v (m/s)</th><th class="r">Re</th><th>Strømning</th><th></th></tr></thead>
+        <tbody id="lRows"></tbody></table></div>
+      <div class="btnrow">
+        <button type="button" id="lAdd">Legg til måling</button>
+        <button type="button" class="ghost" id="lClear">Tøm og start med egne målinger</button>
+        <span class="status" id="lClearC" hidden>Sikker? <button type="button" class="small" id="lClearY">Ja, tøm</button> <button type="button" class="small ghost" id="lClearN">Avbryt</button></span>
+      </div>
+      <div class="chart"><h4>Reynolds tall ved ulike volumstrømmer</h4><div class="cap">De stiplede linjene viser grensene for laminær (2300) og turbulent (4000) strømning.</div><svg id="lChart" viewBox="0 0 640 260"></svg></div>
+      <div class="two">
+        <div class="ctrl"><label for="lR1">Var strømningen i riggen laminær eller turbulent? Hvilken volumstrøm måtte du hatt for å få laminær strømning?</label><textarea id="lR1"></textarea></div>
+        <div class="ctrl"><label for="lR2">Hvilke feilkilder har målingen av volumstrøm? Hvordan kunne du gjort den mer nøyaktig?</label><textarea id="lR2"></textarea></div>
+      </div>
+      <div class="btnrow"><button type="button" id="lCopy">Kopier resultater</button><span class="status" id="lCopied" role="status"></span></div>
+      <textarea id="lFb" hidden readonly style="min-height:160px;font-family:var(--f-mono);font-size:.8rem"></textarea>
+    </div>
+  </div>
+</section>
+
+<section id="oppgaver">
+  <div class="wrap">
+    <div class="sechead"><span class="step">06</span><h2>Oppgaver</h2></div>
+    <h3 style="margin-bottom:12px">Sjekk forståelsen</h3>
+    <div class="stack" id="quiz" style="max-width:780px"></div>
+    <div class="btnrow" style="margin-top:12px"><span class="score" id="qScore"></span></div>
+    <h3 style="margin:36px 0 6px">Regneoppgaver</h3>
+    <p class="prose" style="margin-bottom:14px">Komma eller punktum som desimaltegn.</p>
+    <div class="stack" id="calcs" style="max-width:780px"></div>
+  </div>
+</section>
+
+<section id="forklar">
+  <div class="wrap">
+    <div class="sechead"><span class="step">07</span><h2>Forklar for hverandre</h2></div>
+    <div id="peer"></div>
+  </div>
+</section>
+
+<section id="oppsummering">
+  <div class="wrap">
+    <div class="sechead"><span class="step">08</span><h2>Oppsummering</h2></div>
+    <div class="two">
+      <div class="summary prose">
+        <ul>
+          <li>Volumstrøm er volum per tid, <var>Q</var> = <var>V</var>/<var>t</var>. Massestrøm er <var>ṁ</var> = <var>ρ</var>·<var>Q</var>.</li>
+          <li>Volumstrømmen er lik gjennom hele røret: <var>Q</var> = <var>A</var>·<var>v</var>. Smalere rør gir høyere hastighet.</li>
+          <li>Reynolds tall Re = <var>ρ</var>·<var>v</var>·<var>D</var>/<var>μ</var> avgjør om strømningen er laminær (under 2300) eller turbulent (over 4000).</li>
+          <li>Vann i prosessrør strømmer nesten alltid turbulent. Viskøse væsker kan strømme laminært.</li>
+          <li>Velg rørdimensjon slik at hastigheten blir fornuftig, for eksempel 1–3 m/s i trykkledninger.</li>
+        </ul>
+        <p style="margin-top:18px"><b>Neste del:</b> Trykktap og energi. Hastigheten og Reynolds tall du har regnet ut her, bestemmer hvor mye trykk som går tapt i røret.</p>
+      </div>
+      <div class="teacher">
+        <div class="tag">Til læreren</div>
+        <h3 style="margin:6px 0 10px">Kobling og forslag til gjennomføring</h3>
+        <p style="font-size:.95rem">Uken støtter kompetansemålene i kjemisk teknologi (KPL02-01) om å anvende grunnleggende fysikk til å forklare prosesser og utstyr, og om hvordan fysiske forhold påvirker produksjonsprosesser. Labarket øver inn målemetoden som brukes i del 4 og 5.</p>
+        <ol style="font-size:.95rem;padding-left:20px;margin:12px 0 0;display:grid;gap:4px">
+          <li>Volumstrøm, massestrøm og kontinuitet med regneeksempler</li>
+          <li>Reynolds' forsøk og simulering med utforskoppgaver i par</li>
+          <li>Måling av volumstrøm på riggen og labark</li>
+          <li>Oppgaver, «Forklar for hverandre» (15–20 min) og innlevering</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<footer><div class="wrap">Væske i prosessindustrien · Del 3 · Stoffdata er tilnærmede lærebokverdier.</div></footer>
+
+<script src="kurs.js"></script>
+<script>
+(function(){
+"use strict";
+const {$,nf,num,el,chart,fluid,FLUIDS,g,DN}=K;
+
+/* ---- Reynolds-forsøk ---- */
+const reV=$('#reV');const W0=fluid('vann',20),D0=0.02;let dye=[],emit=0;
+function reState(){const v=+reV.value,Re=W0.rho*v*D0/W0.mu;return {v,Re};}
+function reRead(){const s=reState();const [n,c]=K.regime(s.Re);$('#reVo').textContent=nf(s.v,3)+' m/s';$('#reRead').innerHTML=`<span>Reynolds tall</span><span>${Math.round(s.Re).toLocaleString('nb-NO')}</span><span>Strømning</span><span><span class="pill ${c}">${n}</span></span><span>Volumstrøm</span><span>${nf(s.v*Math.PI*D0*D0/4*60000,2)} L/min</span>`;}
+const reA=K.animate($('#rey'),(c,{W,H},dt)=>{
+  const s=reState(),pipe=K.css('--pipe'),soft=K.css('--pipe-soft'),ink=K.css('--ink'),muted=K.css('--muted'),sig=K.css('--signal'),surf=K.css('--surface'),mono=K.css('--f-mono');
+  c.fillStyle=surf;c.fillRect(0,0,W,H);
+  const profW=Math.min(150,W*0.28),x0=30,x1=W-profW-20,yc=H/2-10,R=48;
+  c.fillStyle=soft;c.fillRect(x0,yc-R,x1-x0,2*R);c.strokeStyle=ink;c.lineWidth=2;c.beginPath();c.moveTo(x0,yc-R);c.lineTo(x1,yc-R);c.moveTo(x0,yc+R);c.lineTo(x1,yc+R);c.stroke();
+  // dyse
+  c.strokeStyle=muted;c.lineWidth=3;c.beginPath();c.moveTo(x0+10,yc-R-30);c.lineTo(x0+10,yc);c.lineTo(x0+30,yc);c.stroke();c.lineWidth=1;
+  c.fillStyle=muted;c.font='11px '+mono;c.textAlign='left';c.fillText('fargestoff',x0+16,yc-R-34);
+  const Re=s.Re,turb=Re<2300?0:Re<4000?(Re-2300)/1700:1;
+  const pxs=(x1-x0)/0.5/1.0; // piksler per meter, rør 0,5 m langt vist
+  const speed=Math.min(s.v*pxs*0.9,420);
+  if(dt&&!K.reduce){emit+=dt*120;while(emit>1){emit--;dye.push({x:x0+30,y:yc,ph:Math.random()*6.28,age:0,dy:0});}
+    dye.forEach(p=>{p.age+=dt;const rr=(p.y-yc)/R;const local=Re<2300?(1-rr*rr)*2:1.15*Math.pow(Math.max(0,1-Math.abs(rr)),1/7);p.x+=speed*local*dt;
+      if(turb>0){const amp=turb<1?turb*turb:1;p.dy+=(Math.random()-0.5)*amp*900*dt*Math.min(1,p.age*3);p.dy*=0.92;p.y+=p.dy*dt*(1+3*amp)+Math.sin(p.ph+p.x*0.05)*amp*(turb<1?0.6:0);}
+      p.y=Math.max(yc-R+3,Math.min(yc+R-3,p.y));});
+    dye=dye.filter(p=>p.x<x1);if(dye.length>2500)dye.splice(0,dye.length-2500);}
+  if(K.reduce&&!dye.length){for(let x=x0+30;x<x1;x+=3)dye.push({x,y:yc+(turb?(Math.random()-0.5)*2*R*Math.min(1,turb*(x-x0)/(x1-x0)*2):0)});}
+  c.fillStyle=sig;dye.forEach(p=>{c.globalAlpha=turb>0.5?0.35:0.8;c.fillRect(p.x,p.y-1.2,2.4,2.4);});c.globalAlpha=1;
+  // profil
+  const px=x1+40;c.strokeStyle=muted;c.beginPath();c.moveTo(px,yc-R);c.lineTo(px,yc+R);c.stroke();
+  c.strokeStyle=pipe;c.lineWidth=1.5;const L=profW-50;c.beginPath();
+  for(let i=-10;i<=10;i++){const rr=i/10,u=Re<2300?(1-rr*rr):Math.pow(1-Math.abs(rr),1/7)/1.0,len=u*L*(Re<2300?1:0.82),y=yc+rr*R;i===-10?c.moveTo(px+len,y):c.lineTo(px+len,y);}c.stroke();
+  for(let i=-8;i<=8;i+=2){const rr=i/10,u=Re<2300?(1-rr*rr):Math.pow(1-Math.abs(rr),1/7),len=u*L*(Re<2300?1:0.82),y=yc+rr*R;c.beginPath();c.moveTo(px,y);c.lineTo(px+len,y);c.lineTo(px+len-5,y-3);c.moveTo(px+len,y);c.lineTo(px+len-5,y+3);c.stroke();}
+  c.lineWidth=1;c.fillStyle=muted;c.textAlign='left';c.fillText('hastighetsprofil',px-10,yc+R+20);
+  const [n]=K.regime(Re);c.fillStyle=ink;c.font='600 14px '+mono;c.fillText(n+' · Re ≈ '+Math.round(Re).toLocaleString('nb-NO'),x0,H-18);
+});
+reV.addEventListener('input',()=>{reRead();if(K.reduce){dye=[];}reA.redraw();});reRead();
+
+/* ---- Simulering ---- */
+const S={F:$('#sF'),T:$('#sT'),Q:$('#sQ'),D:$('#sD'),Side:$('#sSide')};
+S.D.innerHTML=DN.map(([n,d])=>`<option value="${d}" ${n==='DN32'?'selected':''}>${n} (indre ${nf(d,1)} mm)</option>`).join('');
+const range=side=>side==='suge'?[0.5,1.5]:[1,3];
+function sUpdate(){const F=fluid(S.F.value,+S.T.value),Q=+S.Q.value,D=+S.D.value,q=Q/60000,A=Math.PI*Math.pow(D/1000,2)/4,v=q/A,Re=F.rho*v*D/1000/F.mu,[rn,rc]=K.regime(Re);
+  $('#sTo').textContent=S.T.value+' °C';$('#sQo').textContent=Q+' L/min';
+  $('#gV').textContent=nf(v,2);$('#gRe').textContent=Math.round(Re).toLocaleString('nb-NO');$('#gReg').innerHTML=`<span class="pill ${rc}">${rn}</span>`;$('#gQ').textContent=nf(q*3600,2);$('#gM').textContent=nf(F.rho*q,2);
+  // profil
+  const pts=[],lam=Re<2300;for(let i=-50;i<=50;i++){const rr=i/50,u=lam?2*v*(1-rr*rr):v*1.22*Math.pow(1-Math.abs(rr),1/7);pts.push([u,rr*D/2]);}
+  const svg=$('#prof');svg.innerHTML='';const vb={W:420,H:230},m={l:60,r:20,t:14,b:36},uMax=Math.max(...pts.map(p=>p[0]))*1.1||1;
+  const X=u=>m.l+u/uMax*(vb.W-m.l-m.r),Y=r=>m.t+(1-(r/(D/2)+1)/2)*(vb.H-m.t-m.b);
+  el('rect',{x:m.l-4,y:Y(D/2)-6,width:vb.W-m.l-m.r+4,height:6,fill:'var(--ink)'},svg);el('rect',{x:m.l-4,y:Y(-D/2),width:vb.W-m.l-m.r+4,height:6,fill:'var(--ink)'},svg);
+  el('path',{d:'M'+X(0)+','+Y(D/2)+pts.map(p=>'L'+X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1)).join('')+'L'+X(0)+','+Y(-D/2)+'Z',fill:'var(--pipe)','fill-opacity':.15,stroke:'var(--pipe)','stroke-width':2},svg);
+  el('line',{x1:X(v),x2:X(v),y1:Y(D/2),y2:Y(-D/2),stroke:'var(--signal)','stroke-width':1.5,'stroke-dasharray':'5 4'},svg);
+  el('text',{x:X(v)+4,y:Y(D/2)+16,style:'fill:var(--signal)'},svg,'snitt '+nf(v,2)+' m/s');
+  el('text',{x:X(uMax/1.1),y:vb.H-12,'text-anchor':'end'},svg,'hastighet (m/s), maks '+nf(uMax/1.1,2));
+  el('text',{x:m.l-8,y:Y(0)+4,'text-anchor':'end'},svg,'senter');el('text',{x:m.l-8,y:Y(D/2)+4,'text-anchor':'end'},svg,'vegg');
+  $('#profCap').textContent=lam?'Laminær: parabel, midten går dobbelt så fort som snittet.':'Turbulent: flatere profil, midten går ca. 20 % fortere enn snittet.';
+  // tabell
+  const [lo,hi]=range(S.Side.value);
+  $('#dnTab').innerHTML=`<thead><tr><th>Dim.</th><th class="r">v (m/s)</th><th>Vurdering</th></tr></thead><tbody>`+DN.map(([n,d])=>{const vv=q/(Math.PI*Math.pow(d/1000,2)/4);const st=vv>hi?['For høy','dev-hi']:vv<lo?['For lav','dev-mid']:['Anbefalt','dev-ok'];
+    return `<tr${Math.abs(d-D)<0.01?' style="background:var(--pipe-soft)"':''}><td>${n}</td><td class="r num">${nf(vv,2)}</td><td><span class="${st[1]}">${st[0]}</span></td></tr>`;}).join('')+'</tbody>';}
+Object.values(S).forEach(e=>e.addEventListener('input',sUpdate));sUpdate();
+
+/* ---- Labark ---- */
+const LKEY='uke3-volumstrom-v1';
+const LEX={D:16,F:'vann',T:20,S:'rekt',A:40,B:30,ex:true,rows:[['Helt åpen',10,20.1,30],['3/4 åpen',20.1,27.6,30],['1/2 åpen',27.6,36.8,60],['1/4 åpen',36.8,41.0,60]],r1:'',r2:''};
+let L=K.load(LKEY,LEX);const ls=()=>K.save(LKEY,L);
+const LF={D:$('#lD'),F:$('#lF'),T:$('#lT'),S:$('#lS'),A:$('#lA'),B:$('#lB')};
+function lRow(r){const A=K.tankArea(L.S,L.A,L.B),h0=num(r[1]),h1=num(r[2]),t=num(r[3]);const Q=(A>0&&t>0&&h1>=h0)?A*(h1-h0)/100/t*60000:NaN;
+  const F=fluid(L.F,Number.isFinite(num(L.T))?num(L.T):20),d=num(L.D)/1000,v=Q/60000/(Math.PI*d*d/4),Re=F.rho*v*d/F.mu;return {Q,m:F.rho*Q/60000,v,Re,ok:Number.isFinite(Q)&&d>0};}
+function lShape(){const syl=L.S==='syl';$('#lAlab').textContent=syl?'Indre diameter (cm)':'Indre lengde (cm)';$('#lBW').hidden=syl;
+  const A=K.tankArea(L.S,L.A,L.B),F=fluid(L.F,Number.isFinite(num(L.T))?num(L.T):20),d=num(L.D)/1000,Qlam=2300*F.mu/(F.rho*d)*Math.PI*d*d/4*60000;
+  $('#lInfo').textContent=(A>0?`Tankens tverrsnitt: ${nf(A*1e4,0)} cm². 1 cm nivåøkning tilsvarer ${nf(A*10,2)} liter. `:'Fyll inn tankens mål. ')+(d>0?`Laminær strømning i dette røret krever under ${nf(Qlam,Qlam<10?2:0)} L/min.`:'');}
+function lRender(){for(const k in LF)LF[k].value=L[k]??'';$('#lR1').value=L.r1||'';$('#lR2').value=L.r2||'';$('#lEx').hidden=!L.ex;lShape();
+  const tb=$('#lRows');tb.innerHTML='';const names=['Innstilling','Nivå start','Nivå slutt','Tid'];
+  L.rows.forEach((row,i)=>{const tr=document.createElement('tr');
+    tr.innerHTML=names.map((n,j)=>`<td><input type="text" ${j?'inputmode="decimal"':''} id="lr${i}_${j}" value="${K.esc(row[j]??'')}" aria-label="${n}, måling ${i+1}"></td>`).join('')+
+      `<td class="r num" data-c="q"></td><td class="r num" data-c="qh"></td><td class="r num" data-c="m"></td><td class="r num" data-c="v"></td><td class="r num" data-c="re"></td><td data-c="rg"></td><td><button type="button" class="small ghost" aria-label="Fjern måling ${i+1}">Fjern</button></td>`;
+    tr.querySelectorAll('input').forEach((inp,j)=>inp.addEventListener('input',()=>{L.rows[i][j]=inp.value;L.ex=false;$('#lEx').hidden=true;lCalc();ls();}));
+    tr.querySelector('button').addEventListener('click',()=>{L.rows.splice(i,1);lRender();ls();});tb.appendChild(tr);});
+  lCalc();}
+function lCalc(){const pts=[];[...$('#lRows').children].forEach((tr,i)=>{const r=lRow(L.rows[i]);const c=k=>tr.querySelector(`[data-c="${k}"]`);
+    if(r.ok){pts.push({x:r.Q,y:r.Re});c('q').textContent=nf(r.Q,1);c('qh').textContent=nf(r.Q*0.06,2);c('m').textContent=nf(r.m,3);c('v').textContent=nf(r.v,2);c('re').textContent=Math.round(r.Re).toLocaleString('nb-NO');const [n,cl]=K.regime(r.Re);c('rg').innerHTML=`<span class="pill ${cl}">${n}</span>`;}
+    else['q','qh','m','v','re','rg'].forEach(k=>c(k).textContent='–');});
+  chart($('#lChart'),{xMax:Math.max(5,...pts.map(p=>p.x))*1.1,yMax:Math.max(5000,...pts.map(p=>p.y))*1.08,xLabel:'volumstrøm (L/min)',yLabel:'Reynolds tall',ml:62,hlines:[{y:2300,label:'laminær under 2300',color:'var(--good)',right:true,below:true},{y:4000,label:'turbulent over 4000',color:'var(--signal)',right:true}],dots:pts.map(p=>({x:p.x,y:p.y,fill:'var(--pipe)'}))});}
+Object.entries(LF).forEach(([k,e])=>e.addEventListener('input',()=>{L[k]=e.value;L.ex=false;$('#lEx').hidden=true;lShape();lCalc();ls();}));
+$('#lR1').addEventListener('input',e=>{L.r1=e.target.value;ls();});$('#lR2').addEventListener('input',e=>{L.r2=e.target.value;ls();});
+$('#lAdd').addEventListener('click',()=>{L.rows.push(['','','','']);lRender();ls();const f=$('#lr'+(L.rows.length-1)+'_0');if(f)f.focus();});
+K.confirm($('#lClear'),$('#lClearC'),$('#lClearY'),$('#lClearN'),()=>{L={D:'',F:L.F,T:'',S:L.S,A:'',B:'',ex:false,rows:[['','','',''],['','','',''],['','','','']],r1:'',r2:''};lRender();ls();});
+$('#lCopy').addEventListener('click',()=>{let t=`Labark del 3 – volumstrøm og Reynolds tall\nRør: indre diameter ${L.D} mm. Væske: ${FLUIDS[L.F].navn}, ${L.T} °C\nTank: ${L.S==='syl'?'sylindrisk, diameter '+L.A+' cm':'rektangulær, '+L.A+' × '+L.B+' cm'}\n\nInnstilling\tQ (L/min)\tQ (m³/h)\tṁ (kg/s)\tv (m/s)\tRe\tStrømning\n`;
+  L.rows.forEach(row=>{const r=lRow(row);if(r.ok)t+=`${row[0]}\t${nf(r.Q,1)}\t${nf(r.Q*0.06,2)}\t${nf(r.m,3)}\t${nf(r.v,2)}\t${Math.round(r.Re)}\t${K.regime(r.Re)[0]}\n`;});
+  t+=`\nLaminær eller turbulent: ${L.r1||''}\n\nFeilkilder: ${L.r2||''}\n`;K.copy(t,$('#lCopied'),$('#lFb'));});
+lRender();
+
+/* ---- Quiz ---- */
+K.quiz($('#quiz'),$('#qScore'),[
+ {q:'Et rør går fra DN50 til DN25 (omtrent halv diameter). Hva skjer med hastigheten?',o:['Den halveres','Den dobles','Den blir omtrent fire ganger så høy','Den er uendret fordi volumstrømmen er lik'],a:2,e:'Arealet går som diameteren i andre. Halv diameter gir en firedel av arealet, og da må hastigheten bli fire ganger så høy (Q = A·v).'},
+ {q:'Hvilken strømning har du ved Re = 1500?',o:['Laminær','Overgang','Turbulent','Det kan ikke avgjøres uten å vite væsken'],a:0,e:'Under ca. 2300 er strømningen laminær. Reynolds tall tar allerede hensyn til væsken.'},
+ {q:'Hvorfor er massestrøm ofte viktigere enn volumstrøm i produksjon?',o:['Massestrøm er lettere å måle','Massen endrer seg ikke med temperaturen, men volumet gjør det','Volumstrøm kan bare brukes for gasser','Massestrøm er alltid større'],a:1,e:'Volumet endrer seg når tettheten endrer seg med temperaturen. Massen er den samme, og produkter selges og doseres etter masse.'},
+ {q:'Hva skjer med Reynolds tall når en olje varmes opp?',o:['Det synker fordi tettheten synker','Det øker fordi viskositeten synker','Det er uendret','Det blir negativt'],a:1,e:'Re = ρ·v·D/μ. Viskositeten synker mye mer enn tettheten når oljen varmes opp, så Re øker.'},
+ {q:'Hva kjennetegner hastighetsprofilen ved laminær strømning?',o:['Den er helt flat','Den er en parabel der midten går dobbelt så fort som snittet','Væsken går fortest ved veggen','Den endrer seg tilfeldig'],a:1,e:'Ved laminær strømning glir lagene forbi hverandre. Væsken står stille ved veggen og går fortest i midten, med en parabelformet profil.'},
+ {q:'En trykkledning gir 4,5 m/s. Hva er den beste løsningen?',o:['Velge et mindre rør','Velge et større rør','Bytte til en tyngre væske','Det er helt fint'],a:1,e:'4,5 m/s er over anbefalt område (1–3 m/s). Et større rør gir lavere hastighet, mindre trykktap og mindre slitasje.'}
+]);
+
+/* ---- Regneoppgaver ---- */
+const vB=0.005/(Math.PI*0.0531*0.0531/4);
+K.calcs($('#calcs'),[
+ {t:'a) En tank på 1500 L fylles på 5,0 minutter. Hva er volumstrømmen i m³/h?',u:'m³/h',a:18,s:'Q = 1500 L / 5,0 min = 300 L/min. 300 L/min · 60 = 18 000 L/h = <b>18 m³/h</b>.'},
+ {t:'b) 18 m³/h vann strømmer i et DN50-rør med indre diameter 53,1 mm. Beregn hastigheten.',u:'m/s',a:vB,hint:'Gjør om til m³/s: 18 / 3600. A = π · D² / 4.',s:`Q = 18 / 3600 = 0,005 m³/s. A = π · 0,0531² / 4 = ${nf(Math.PI*0.0531*0.0531/4*1e4,3)} · 10⁻⁴ m². v = Q / A = <b>${nf(vB,2)} m/s</b>.`},
+ {t:'c) Hva er massestrømmen i b) når vannet har tetthet 998 kg/m³?',u:'kg/s',a:4.99,s:'ṁ = ρ · Q = 998 · 0,005 = <b>4,99 kg/s</b>.'},
+ {t:'d) Vann strømmer med 1,5 m/s i et rør med indre diameter 40 mm. Røret smalner inn til 25 mm. Hva blir hastigheten i det smale røret?',u:'m/s',a:1.5*Math.pow(40/25,2),s:`A₁·v₁ = A₂·v₂ gir v₂ = v₁ · (D₁/D₂)² = 1,5 · (40/25)² = <b>${nf(1.5*Math.pow(40/25,2),2)} m/s</b>.`},
+ {t:'e) Hydraulikkolje (ρ = 854 kg/m³, μ = 0,040 Pa·s) strømmer med 1,2 m/s i et rør med indre diameter 50 mm. Beregn Reynolds tall. Er strømningen laminær eller turbulent?',u:'',a:854*1.2*0.05/0.04,s:`Re = 854 · 1,2 · 0,050 / 0,040 = <b>${nf(854*1.2*0.05/0.04,0)}</b>. Det er under 2300, så strømningen er laminær.`}
+]);
+
+/* ---- Forklar for hverandre ---- */
+K.peer($('#peer'),{key:'uke3-medelev-v1',title:'del 3, strømning i rør',min:'15–20',cards:[
+ {t:'Volumstrøm og massestrøm',p:'Hva er forskjellen på volumstrøm og massestrøm? Hvordan målte dere volumstrømmen på riggen?',h:'Tenk på formlene og labarket.',link:'#volumstrom',ln:'Volumstrøm',
+  c:['Volumstrøm er volum per tid, Q = V / t','Massestrøm er masse per tid, ṁ = ρ · Q','Forklarer målingen: tankareal ganger nivåøkning delt på tid','Nevner en vanlig enhet, for eksempel m³/h eller L/min']},
+ {t:'Kontinuitet',p:'Hva skjer med hastigheten når et rør blir smalere? Forklar hvorfor.',h:'Tenk på Q = A · v.',link:'#kontinuitet',ln:'Kontinuitet',
+  c:['Volumstrømmen er den samme gjennom hele røret','Mindre areal gir høyere hastighet (Q = A · v)','Halv diameter gir fire ganger så høy hastighet','Kobler til venturirøret eller trykktap']},
+ {t:'Laminær og turbulent',p:'Beskriv forskjellen på laminær og turbulent strømning. Hva viste Reynolds\' forsøk?',h:'Tenk på fargestrålen i animasjonen.',link:'#reynolds',ln:'Laminær og turbulent',
+  c:['Laminær: væsken strømmer i ordnede lag, fargestrålen holder seg samlet','Turbulent: væsken virvler og fargen blandes ut','Laminær profil er en parabel, turbulent er flatere','Vet at vann i prosessrør nesten alltid er turbulent']},
+ {t:'Reynolds tall',p:'Hva avgjør Reynolds tall, og hvilke størrelser inngår? Hvorfor ble oljen laminær?',h:'Tenk på formelen og utforskoppgave C og D.',link:'#simulering',ln:'Simulering',
+  c:['Re = ρ · v · D / μ','Under 2300 laminær, over 4000 turbulent','Høy viskositet gir lavt Re','Temperatur endrer viskositeten og dermed Re']}
+]});
+K.toc();
+})();
+</script>
+
+<div class="wrap"><div class="weeknav"><a href="uke2.html"><span>Forrige del</span><b>Del 2: Trykk i væsker</b></a><a class="next" href="uke4.html"><span>Neste del</span><b>Del 4: Trykktap og energi i rørsystemer</b></a></div></div>
+</body>
+</html>

@@ -8,7 +8,8 @@ Nettstedet er statiske HTML-sider og publiseres med GitHub Pages.
 
 ```
 index.html              Forside med temaoversikt
-prosessikkerhet/        Nettkurs i prosessikkerhet (7 moduler + prøve)
+prosessikkerhet/        Tema: prosessikkerhet
+vaeske/                 Tema: væske i prosessindustrien (6 deler)
 ```
 
 ## Legge til et nytt tema
