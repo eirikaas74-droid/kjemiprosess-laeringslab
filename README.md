@@ -11,6 +11,8 @@ index.html              Forside med temaoversikt
 prosessikkerhet/        Tema: prosessikkerhet
 vaeske/                 Tema: væske i prosessindustrien (6 deler)
 bransjelaere/           Tema: bransjelære (5 deler, dyplenker #d1/bedrifter osv.)
+oppdrag/felles/         Felles motor for oppdragssider (oppdrag.css, oppdrag.js)
+oppdrag/tank1-overfylling/  Pilotoppdrag AO-01 + laerer.html
 ```
 
 ## Legge til et nytt tema

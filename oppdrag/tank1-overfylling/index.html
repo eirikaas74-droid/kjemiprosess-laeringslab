@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oppdrag: Sikre tank 1 mot overfylling – Kjemiprosess læringslab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../felles/oppdrag.css">
+</head>
+<body data-oppdrag="tank1-overfylling-v1">
+
+<div class="sitebar"><div class="wrap"><a href="../../">← Alle ressurser</a><span>Kjemiprosess <b>læringslab</b></span></div></div>
+
+<header class="ohead"><div class="wrap">
+  <div class="otag">Oppdrag 01 · Prosess · Pilot</div>
+  <h1>Sikre tank 1 mot overfylling</h1>
+  <p>Tank 1 i pumperommet skal startes opp igjen. Før det skjer, må dere vise at overfyllingsvernet virker, og dokumentere det.</p>
+  <div class="ometa"><span>Pumperommet · T-12051</span><span>Par eller gruppe på 2–3</span><span>Rapportmal: prosess</span></div>
+</div></header>
+
+<nav class="fnav" aria-label="Faser i oppdraget"><ol></ol></nav>
+
+<main><div class="wrap">
+<p id="lagreinfo" class="callout warn" hidden></p>
+
+<!-- ============ 1 OPPDRAG ============ -->
+<section class="fase" data-p="1" data-title="Oppdrag" data-sub="Arbeidsordre">
+  <div class="feyebrow">Fase 1</div>
+  <h2>Oppdraget</h2>
+  <p class="lead">Les arbeidsordren nøye. Skriv den med egne ord, og bli enige om hvem som gjør hva.</p>
+
+  <div class="rep" data-rep="Arbeidsordre">
+    <div class="ao">
+      <div class="ao-h"><span>Arbeidsordre AO-01</span><span>Før oppstart</span></div>
+      <div class="ao-grid">
+        <div><small>Fra</small>Skiftleder</div>
+        <div><small>Til</small>Operatør (dere)</div>
+        <div><small>Anlegg</small>Pumperommet</div>
+        <div><small>Utstyr</small>Tank 1, T-12051</div>
+      </div>
+      <div class="ao-body">
+        <p><strong>Bakgrunn:</strong> Tank 1 har vært ute av drift. Før den tas i bruk igjen, skal vi vite at den ikke kan fylles over.</p>
+        <p><strong>Oppgave:</strong> Kartlegg nivåsikringen på tank 1. Test at høy alarm (LAH-12077) og høy-høy (LAHH-12076) slår inn ved riktig nivå, og at pumpen stopper. Dokumenter resultatet, og meld avvik hvis noe ikke virker som det skal.</p>
+        <p><strong>Leveranse:</strong> Instrumentoversikt, flytskjema med tagger, forriglingsmatrise, testlogg, beregning av sikkerhetsmargin og eventuell avviksmelding.</p>
+        <p style="margin:0"><strong>Krav:</strong> Testen gjøres med vann og kontrollert fylling. Ingen settpunkter endres, og ingen sikringer kobles ut eller overstyres.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card rep" data-rep="Deltakere og plan">
+    <div class="row2">
+      <div><label class="f" for="elev">Ditt navn</label><input id="elev" type="text" data-f="elev" autocomplete="name"></div>
+      <div><label class="f" for="gruppe">Gruppe <small>(navn på de andre)</small></label><input id="gruppe" type="text" data-f="gruppe"></div>
+    </div>
+    <label class="f" for="egne">Oppdraget med egne ord <small>Hva skal dere finne ut, og hvorfor er det viktig?</small></label>
+    <textarea id="egne" data-f="egne_ord"></textarea>
+    <label class="f">Roller under testen</label>
+    <table class="t">
+      <thead><tr><th>Rolle</th><th>Oppgave</th><th>Navn</th></tr></thead>
+      <tbody>
+        <tr><td>Operatør</td><td>Styrer fra HMI-skjermen: LIC i manuell, åpner LCV-12022, stopper pumpen ved behov</td><td><input type="text" data-f="rolle_op" aria-label="Navn operatør"></td></tr>
+        <tr><td>Observatør</td><td>Står ved tanken, følger med på nivået hele tiden og sier fra med en gang hvis noe ikke slår inn</td><td><input type="text" data-f="rolle_obs" aria-label="Navn observatør"></td></tr>
+        <tr><td>Loggfører</td><td>Noterer tid, nivå og hva som skjer i testloggen</td><td><input type="text" data-f="rolle_logg" aria-label="Navn loggfører"></td></tr>
+      </tbody>
+    </table>
+    <label class="f" for="plan">Plan <small>Hva gjør dere, i hvilken rekkefølge?</small></label>
+    <textarea id="plan" data-f="plan"></textarea>
+  </div>
+</section>
+
+<!-- ============ 2 RISIKOVURDERING ============ -->
+<section class="fase" data-p="2" data-title="Risikovurdering" data-sub="SJA og godkjenning" data-risk="1" hidden>
+  <div class="feyebrow">Fase 2</div>
+  <h2>Risikovurdering</h2>
+  <p class="lead">Tanken inneholder bare vann, men anlegget har pumper, strøm, trykkluft og varmeelementer. Gå gjennom jobben trinn for trinn før dere starter.</p>
+
+  <div class="callout warn"><p><strong>Før praktisk arbeid:</strong> Vis risikovurderingen til læreren. Læreren godkjenner muntlig, og dere skriver navnet og datoen nederst.</p></div>
+
+  <div class="rep" data-rep="Sikker jobbanalyse (SJA)">
+    <p>Fyll inn farer og tiltak for hvert jobbtrinn. Tenk på mennesker, utstyr og miljø.</p>
+    <div class="tscroll"><table class="t">
+      <thead><tr><th style="width:26%">Jobbtrinn</th><th>Hva kan gå galt?</th><th>Tiltak</th><th style="width:14%">Ansvarlig</th></tr></thead>
+      <tbody>
+        <tr><td>1. Gå gjennom P&amp;ID og finne instrumentene</td><td><textarea data-f="sja1_fare" aria-label="Fare trinn 1"></textarea></td><td><textarea data-f="sja1_tiltak" aria-label="Tiltak trinn 1"></textarea></td><td><input type="text" data-f="sja1_ansv" aria-label="Ansvarlig trinn 1"></td></tr>
+        <tr><td>2. Sjekke anlegget før start: ventiler, varmeelement, overløp og sluk</td><td><textarea data-f="sja2_fare" aria-label="Fare trinn 2"></textarea></td><td><textarea data-f="sja2_tiltak" aria-label="Tiltak trinn 2"></textarea></td><td><input type="text" data-f="sja2_ansv" aria-label="Ansvarlig trinn 2"></td></tr>
+        <tr><td>3. Sette LIC-12094 i manuell og fylle tanken kontrollert</td><td><textarea data-f="sja3_fare" aria-label="Fare trinn 3"></textarea></td><td><textarea data-f="sja3_tiltak" aria-label="Tiltak trinn 3"></textarea></td><td><input type="text" data-f="sja3_ansv" aria-label="Ansvarlig trinn 3"></td></tr>
+        <tr><td>4. Observere at LAH og LAHH slår inn</td><td><textarea data-f="sja4_fare" aria-label="Fare trinn 4"></textarea></td><td><textarea data-f="sja4_tiltak" aria-label="Tiltak trinn 4"></textarea></td><td><input type="text" data-f="sja4_ansv" aria-label="Ansvarlig trinn 4"></td></tr>
+        <tr><td>5. Tilbakestille, sette LIC i automatisk og senke nivået</td><td><textarea data-f="sja5_fare" aria-label="Fare trinn 5"></textarea></td><td><textarea data-f="sja5_tiltak" aria-label="Tiltak trinn 5"></textarea></td><td><input type="text" data-f="sja5_ansv" aria-label="Ansvarlig trinn 5"></td></tr>
+        <tr><td>6. Rydde og melde fra til skiftleder</td><td><textarea data-f="sja6_fare" aria-label="Fare trinn 6"></textarea></td><td><textarea data-f="sja6_tiltak" aria-label="Tiltak trinn 6"></textarea></td><td><input type="text" data-f="sja6_ansv" aria-label="Ansvarlig trinn 6"></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <details class="card no-rep"><summary><strong>Trenger du hjelp til å komme i gang?</strong></summary>
+    <p style="margin-top:10px">Tenk på disse farene: vann på gulvet gir sklifare. Pumpene er elektriske og roterer. Varmeelementene i tank 1 (2 × 3 kW) kan være på. Trykkluften er 6 bar. En pumpe som går mot stengt ventil, blir varm. Og hva skjer hvis LAHH ikke stopper pumpen?</p>
+  </details>
+
+  <div class="card rep" data-rep="Verneutstyr, stopp og godkjenning">
+    <label class="f">Verneutstyr dere bruker</label>
+    <div class="checks">
+      <label><input type="checkbox" data-f="vu_sko"> Vernesko</label>
+      <label><input type="checkbox" data-f="vu_briller"> Vernebriller</label>
+      <label><input type="checkbox" data-f="vu_horsel"> Hørselvern når pumpene går</label>
+      <label><input type="checkbox" data-f="vu_hansker"> Hansker</label>
+    </div>
+    <label class="f" for="vu_annet">Annet verneutstyr eller tiltak</label>
+    <input id="vu_annet" type="text" data-f="vu_annet">
+    <label class="f" for="nodstopp">Hvor er nødstoppen, og hvem trykker på den?</label>
+    <input id="nodstopp" type="text" data-f="nodstopp">
+    <label class="f" for="stopp">Stoppkriterium <small>Når avbryter dere testen, og hvordan?</small></label>
+    <textarea id="stopp" data-f="stoppkriterium"></textarea>
+    <div class="row2">
+      <div><label class="f" for="godkj">Godkjent muntlig av lærer</label><input id="godkj" type="text" data-f="godkjent_av" placeholder="Lærerens navn"></div>
+      <div><label class="f" for="godkjd">Dato</label><input id="godkjd" type="date" data-f="godkjent_dato"></div>
+    </div>
+  </div>
+  <p class="no-rep">Mer om SJA og risiko: <a href="../../prosessikkerhet/#m5/sja">Lag en SJA</a> · <a href="../../prosessikkerhet/#m5/risikomatrise">Risikomatrisen</a></p>
+</section>
+
+<!-- ============ 3 TEORI ============ -->
+<section class="fase" data-p="3" data-title="Teori ved behov" data-sub="Slå opp det du trenger" hidden>
+  <div class="feyebrow">Fase 3</div>
+  <h2>Teori ved behov</h2>
+  <p class="lead">Dette bør du kunne før testen. Kan du det allerede, går du rett videre. Du kan komme tilbake hit når som helst.</p>
+
+  <div class="need">
+    <a href="../../prosessikkerhet/#m4/overfylling"><span class="k sim">Simulering</span><span><b>Hold tanken unna overfylling</b><small>Samme tagger som tank 1. Prøv feilene før dere tester på ekte.</small></span><span class="go">→</span></a>
+    <a href="../../prosessikkerhet/#m4"><span class="k">Fagstoff</span><span><b>Lag på lag-sikring og nivåsikring</b><small>Regulering, alarm, høy-høy og mekanisk sikring.</small></span><span class="go">→</span></a>
+    <a href="../../vaeske/uke2.html"><span class="k">Fagstoff</span><span><b>Nivåmåling med trykk</b><small>Hvordan en DP-celle som LT-12075 måler nivå.</small></span><span class="go">→</span></a>
+    <a href="../../vaeske/uke6.html#skjema"><span class="k">Fagstoff</span><span><b>Instrumentskjema og tagger</b><small>Hva betyr L, T, I, C, A og H i en tagg?</small></span><span class="go">→</span></a>
+    <a href="../../vaeske/uke6.html#simulering"><span class="k sim">Simulering</span><span><b>Nivåregulering</b><small>Manuell og automatisk drift av en nivåsløyfe.</small></span><span class="go">→</span></a>
+    <a href="../../prosessikkerhet/#m6"><span class="k">Fagstoff</span><span><b>Storulykker</b><small>Buncefield 2005: en tank som ble fylt over fordi nivåsikringen sviktet.</small></span><span class="go">→</span></a>
+  </div>
+
+  <h3>Er du klar?</h3>
+  <p>Fem raske spørsmål. Svarene lagres ikke.</p>
+  <div class="quiz">
+    <div class="q" data-a="2"><p>1. Hva gjør LAHH-12076 på tank 1?</p>
+      <div class="opts"><button type="button">Viser nivået på skjermen</button><button type="button">Regulerer nivået ved å styre LCV-12022</button><button type="button">Gir alarm og stopper pumpene ved høy-høy nivå</button></div>
+      <div class="fb" data-fb="LAHH står for Level Alarm High High. På pumperommet stopper HH-nivå pumpene (note 3 på P&amp;ID-en)."></div></div>
+    <div class="q" data-a="1"><p>2. Hvorfor bør LAHH ha sin egen måler, og ikke bruke signalet fra LT-12075?</p>
+      <div class="opts"><button type="button">Fordi det blir billigere</button><button type="button">Fordi én målefeil ellers kan slå ut både reguleringen og pumpestoppet</button><button type="button">Fordi LT-12075 bare måler temperatur</button></div>
+      <div class="fb" data-fb="Hvis alle lagene bruker samme måler, kan én feil slå ut alle på en gang. Det kalles en felles feil."></div></div>
+    <div class="q" data-a="0"><p>3. LCV-12022 er merket FC. Hva skjer med ventilen hvis den mister instrumentluft?</p>
+      <div class="opts"><button type="button">Den stenger</button><button type="button">Den åpner helt</button><button type="button">Den blir stående der den var</button></div>
+      <div class="fb" data-fb="FC betyr fail closed. Fjæren stenger ventilen når lufta forsvinner, slik at tanken ikke fylles ukontrollert."></div></div>
+    <div class="q" data-a="1"><p>4. Tank 1 har diameter 0,79 m. Omtrent hvor mange liter er det per centimeter høyde?</p>
+      <div class="opts"><button type="button">0,5 liter</button><button type="button">4,9 liter</button><button type="button">49 liter</button></div>
+      <div class="fb" data-fb="Areal = π · 0,395² ≈ 0,49 m². 1 cm = 0,01 m gir 0,0049 m³ = 4,9 liter."></div></div>
+    <div class="q" data-a="2"><p>5. Ultralydmåleren LT-120xx sitter på toppen av tanken. Hva måler den egentlig?</p>
+      <div class="opts"><button type="button">Trykket i bunnen av tanken</button><button type="button">Tettheten til væsken</button><button type="button">Avstanden ned til væskeoverflaten</button></div>
+      <div class="fb" data-fb="Ultralydmåleren sender en lydpuls ned og måler tiden til ekkoet kommer tilbake. Nivået regnes ut fra avstanden. DP-cellen LT-12075 måler i stedet trykket fra væskesøylen."></div></div>
+  </div>
+</section>
+
+<!-- ============ 4 PRAKTISK ============ -->
+<section class="fase" data-p="4" data-title="Praktisk gjennomføring" data-sub="Kartlegg og test" hidden>
+  <div class="feyebrow">Fase 4</div>
+  <h2>Praktisk gjennomføring</h2>
+  <p class="lead">Følg prosedyren. Fyll inn underveis, ikke etterpå.</p>
+  <div class="callout warn"><p>Følg skolens prosedyre for anlegget. Ikke endre settpunkter, koble ut sikringer eller overstyre noe. Er dere usikre, stopp og spør.</p></div>
+
+  <div class="card rep" data-rep="A. Sjekk før start">
+    <div class="checks">
+      <label><input type="checkbox" data-f="for_godkjent"> Risikovurderingen er godkjent av lærer</label>
+      <label><input type="checkbox" data-f="for_varme"> Varmeelementene i tank 1 er av</label>
+      <label><input type="checkbox" data-f="for_overlop"> Overløp og sluk er frie</label>
+      <label><input type="checkbox" data-f="for_ventiler"> Ventilene står slik prosedyren sier</label>
+      <label><input type="checkbox" data-f="for_roller"> Alle vet rollen sin, og hvor nødstoppen er</label>
+    </div>
+  </div>
+
+  <div class="rep" data-rep="B. Instrumentoversikt for tank 1">
+    <p>Finn instrumentene på anlegget, på P&amp;ID-en og i styresystemet. Plassering kan være høyde fra bunnen eller hvor på tanken den sitter.</p>
+    <div class="tscroll"><table class="t">
+      <thead><tr><th>Tagg</th><th>Hva gjør den?</th><th>Type eller måleprinsipp</th><th>Plassering</th><th>Settpunkt</th></tr></thead>
+      <tbody>
+        <tr><td class="tag">LT-12075</td><td><input type="text" data-f="i1_hva" aria-label="LT-12075 hva"></td><td><input type="text" data-f="i1_type" aria-label="LT-12075 type"></td><td><input type="text" data-f="i1_plass" aria-label="LT-12075 plassering"></td><td><input type="text" data-f="i1_sp" aria-label="LT-12075 settpunkt"></td></tr>
+        <tr><td class="tag">LT-120xx</td><td><input type="text" data-f="i2_hva" aria-label="LT-120xx hva"></td><td><input type="text" data-f="i2_type" aria-label="LT-120xx type"></td><td><input type="text" data-f="i2_plass" aria-label="LT-120xx plassering"></td><td><input type="text" data-f="i2_sp" aria-label="LT-120xx settpunkt"></td></tr>
+        <tr><td class="tag">LIC-12094</td><td><input type="text" data-f="i3_hva" aria-label="LIC-12094 hva"></td><td><input type="text" data-f="i3_type" aria-label="LIC-12094 type"></td><td><input type="text" data-f="i3_plass" aria-label="LIC-12094 plassering"></td><td><input type="text" data-f="i3_sp" aria-label="LIC-12094 settpunkt"></td></tr>
+        <tr><td class="tag">LCV-12022</td><td><input type="text" data-f="i4_hva" aria-label="LCV-12022 hva"></td><td><input type="text" data-f="i4_type" aria-label="LCV-12022 type"></td><td><input type="text" data-f="i4_plass" aria-label="LCV-12022 plassering"></td><td><input type="text" data-f="i4_sp" aria-label="LCV-12022 settpunkt"></td></tr>
+        <tr><td class="tag">LAH-12077</td><td><input type="text" data-f="i5_hva" aria-label="LAH-12077 hva"></td><td><input type="text" data-f="i5_type" aria-label="LAH-12077 type"></td><td><input type="text" data-f="i5_plass" aria-label="LAH-12077 plassering"></td><td><input type="text" data-f="i5_sp" aria-label="LAH-12077 settpunkt"></td></tr>
+        <tr><td class="tag">LAHH-12076</td><td><input type="text" data-f="i6_hva" aria-label="LAHH-12076 hva"></td><td><input type="text" data-f="i6_type" aria-label="LAHH-12076 type"></td><td><input type="text" data-f="i6_plass" aria-label="LAHH-12076 plassering"></td><td><input type="text" data-f="i6_sp" aria-label="LAHH-12076 settpunkt"></td></tr>
+        <tr><td class="tag">LZ-12078</td><td><input type="text" data-f="i7_hva" aria-label="LZ-12078 hva"></td><td><input type="text" data-f="i7_type" aria-label="LZ-12078 type"></td><td><input type="text" data-f="i7_plass" aria-label="LZ-12078 plassering"></td><td><input type="text" data-f="i7_sp" aria-label="LZ-12078 settpunkt"></td></tr>
+        <tr><td class="tag">P-12002</td><td><input type="text" data-f="i8_hva" aria-label="P-12002 hva"></td><td><input type="text" data-f="i8_type" aria-label="P-12002 type"></td><td><input type="text" data-f="i8_plass" aria-label="P-12002 plassering"></td><td><input type="text" data-f="i8_sp" aria-label="P-12002 settpunkt"></td></tr>
+        <tr><td class="tag">FZ-12072</td><td><input type="text" data-f="i9_hva" aria-label="FZ-12072 hva"></td><td><input type="text" data-f="i9_type" aria-label="FZ-12072 type"></td><td><input type="text" data-f="i9_plass" aria-label="FZ-12072 plassering"></td><td><input type="text" data-f="i9_sp" aria-label="FZ-12072 settpunkt"></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card no-rep">
+    <h4 style="margin-top:0">C. Prosedyre for funksjonstesten</h4>
+    <ol class="b">
+      <li>Noter startnivået på LT-12075 og LT-120xx, og mål nivået manuelt hvis det går.</li>
+      <li>Operatøren setter LIC-12094 i manuell og åpner LCV-12022 litt, slik at tanken fylles sakte.</li>
+      <li>Observatøren følger med på nivået hele tiden og sier fra med en gang hvis et lag ikke slår inn som forventet.</li>
+      <li>Loggføreren noterer tid og nivå når LAH-12077 gir alarm, og når LAHH-12076 stopper pumpen.</li>
+      <li>Prøv å starte pumpen før LAHH er tilbakestilt. Noter hva som skjer.</li>
+      <li>Tilbakestill LAHH, sett LIC-12094 i automatisk, og la nivået gå tilbake til normalt.</li>
+    </ol>
+    <p style="margin:0">Er riggen opptatt? Kjør <a href="../../prosessikkerhet/#m4/overfylling">simuleringen</a> først, så er dere klare når det blir deres tur.</p>
+  </div>
+
+  <div class="rep" data-rep="D. Testlogg">
+    <div class="tscroll"><table class="t">
+      <thead><tr><th style="width:24%">Hendelse</th><th>Kl.</th><th>LT-12075</th><th>LT-120xx</th><th>Manuelt (cm)</th><th>Forventet</th><th>Resultat</th></tr></thead>
+      <tbody>
+        <tr><td>Start av test</td><td><input type="text" data-f="l1_kl" aria-label="Klokkeslett start"></td><td><input type="text" data-f="l1_a" aria-label="LT-12075 start"></td><td><input type="text" data-f="l1_b" aria-label="LT-120xx start"></td><td><input type="text" data-f="l1_m" aria-label="Manuelt start"></td><td>–</td><td><select data-f="l1_ok" aria-label="Resultat start"><option></option><option>OK</option><option>Avvik</option></select></td></tr>
+        <tr><td>LAH-12077 gir alarm</td><td><input type="text" data-f="l2_kl" aria-label="Klokkeslett LAH"></td><td><input type="text" data-f="l2_a" aria-label="LT-12075 ved LAH"></td><td><input type="text" data-f="l2_b" aria-label="LT-120xx ved LAH"></td><td><input type="text" data-f="l2_m" aria-label="Manuelt ved LAH"></td><td><input type="text" data-f="l2_f" aria-label="Forventet LAH"></td><td><select data-f="l2_ok" aria-label="Resultat LAH"><option></option><option>OK</option><option>Avvik</option></select></td></tr>
+        <tr><td>LAHH-12076 stopper pumpen</td><td><input type="text" data-f="l3_kl" aria-label="Klokkeslett LAHH"></td><td><input type="text" data-f="l3_a" aria-label="LT-12075 ved LAHH"></td><td><input type="text" data-f="l3_b" aria-label="LT-120xx ved LAHH"></td><td><input type="text" data-f="l3_m" aria-label="Manuelt ved LAHH"></td><td><input type="text" data-f="l3_f" aria-label="Forventet LAHH"></td><td><select data-f="l3_ok" aria-label="Resultat LAHH"><option></option><option>OK</option><option>Avvik</option></select></td></tr>
+        <tr><td>Start før tilbakestilling</td><td><input type="text" data-f="l4_kl" aria-label="Klokkeslett restart"></td><td colspan="3"><input type="text" data-f="l4_hva" placeholder="Hva skjedde?" aria-label="Hva skjedde ved restart"></td><td>Pumpen starter ikke</td><td><select data-f="l4_ok" aria-label="Resultat restart"><option></option><option>OK</option><option>Avvik</option></select></td></tr>
+        <tr><td>Tilbakestilt, LIC i automatisk</td><td><input type="text" data-f="l5_kl" aria-label="Klokkeslett tilbakestilt"></td><td><input type="text" data-f="l5_a" aria-label="LT-12075 slutt"></td><td><input type="text" data-f="l5_b" aria-label="LT-120xx slutt"></td><td><input type="text" data-f="l5_m" aria-label="Manuelt slutt"></td><td>–</td><td><select data-f="l5_ok" aria-label="Resultat tilbakestilt"><option></option><option>OK</option><option>Avvik</option></select></td></tr>
+      </tbody>
+    </table></div>
+    <label class="f" for="obs">Andre observasjoner under testen</label>
+    <textarea id="obs" data-f="observasjoner"></textarea>
+  </div>
+</section>
+
+<!-- ============ 5 DOKUMENTASJON ============ -->
+<section class="fase" data-p="5" data-title="Dokumentasjon" data-sub="Prosessmal" hidden>
+  <div class="feyebrow">Fase 5 · Rapportmal for prosess</div>
+  <h2>Dokumentasjon</h2>
+  <p class="lead">Sett sammen det dere fant: flytskjema, forriglingsmatrise, beregning og eventuelle avvik. Instrumentoversikten og testloggen fra fase 4 kommer automatisk med i rapporten.</p>
+
+  <div class="card rep" data-rep="Flytskjema">
+    <p>Tegn et enkelt flytskjema av tank 1 på papir eller i et tegneprogram. Ta med pumpen P-12002, LCV-12022, tanken, utløpet, overløpet og instrumentene med riktige tagger. Tegn signallinjene stiplet, og vis med pil hva LAHH-12076 stopper.</p>
+    <div class="no-rep btns"><label class="btn" style="cursor:pointer">Legg ved bilde av flytskjemaet<input type="file" accept="image/*" data-img="flytskjema" hidden></label><button type="button" class="btn ghost" data-img-clear="flytskjema">Fjern bildet</button></div>
+    <div class="imgprev" data-img-show="flytskjema"></div>
+  </div>
+
+  <div class="rep" data-rep="Forriglingsmatrise">
+    <p>Sett kryss der en årsak gir en virkning på skolens anlegg. Bruk notene på P&amp;ID-en og det dere så under testen.</p>
+    <div class="tscroll"><table class="t">
+      <thead><tr><th>Årsak</th><th>Alarm i HMI</th><th>Stopper P-12002</th><th>Stopper alle pumper</th><th>Må tilbakestilles manuelt</th></tr></thead>
+      <tbody>
+        <tr><td class="tag">LAH-12077 (H)</td><td class="c"><input type="checkbox" data-f="m1a" aria-label="LAH alarm"></td><td class="c"><input type="checkbox" data-f="m1b" aria-label="LAH stopper P-12002"></td><td class="c"><input type="checkbox" data-f="m1c" aria-label="LAH stopper alle"></td><td class="c"><input type="checkbox" data-f="m1d" aria-label="LAH tilbakestilling"></td></tr>
+        <tr><td class="tag">LAHH-12076 (HH)</td><td class="c"><input type="checkbox" data-f="m2a" aria-label="LAHH alarm"></td><td class="c"><input type="checkbox" data-f="m2b" aria-label="LAHH stopper P-12002"></td><td class="c"><input type="checkbox" data-f="m2c" aria-label="LAHH stopper alle"></td><td class="c"><input type="checkbox" data-f="m2d" aria-label="LAHH tilbakestilling"></td></tr>
+        <tr><td class="tag">LZ-12078 (L)</td><td class="c"><input type="checkbox" data-f="m3a" aria-label="LZ L alarm"></td><td class="c"><input type="checkbox" data-f="m3b" aria-label="LZ L stopper P-12002"></td><td class="c"><input type="checkbox" data-f="m3c" aria-label="LZ L stopper alle"></td><td class="c"><input type="checkbox" data-f="m3d" aria-label="LZ L tilbakestilling"></td></tr>
+        <tr><td class="tag">FZ-12072 (LL strømning)</td><td class="c"><input type="checkbox" data-f="m4a" aria-label="FZ alarm"></td><td class="c"><input type="checkbox" data-f="m4b" aria-label="FZ stopper P-12002"></td><td class="c"><input type="checkbox" data-f="m4c" aria-label="FZ stopper alle"></td><td class="c"><input type="checkbox" data-f="m4d" aria-label="FZ tilbakestilling"></td></tr>
+        <tr><td>Nødstopp</td><td class="c"><input type="checkbox" data-f="m5a" aria-label="Nødstopp alarm"></td><td class="c"><input type="checkbox" data-f="m5b" aria-label="Nødstopp stopper P-12002"></td><td class="c"><input type="checkbox" data-f="m5c" aria-label="Nødstopp stopper alle"></td><td class="c"><input type="checkbox" data-f="m5d" aria-label="Nødstopp tilbakestilling"></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card rep" data-rep="Beregning: hvor mye tid gir sikringen?">
+    <p>Hvis LAHH ikke stopper pumpen, hvor lang tid tar det fra LAHH-nivå til tanken renner over? Mål avstanden på tanken, og velg pumpen som fyller.</p>
+    <div class="calc">
+      <div><label class="f" for="dh">Fra LAHH til overløp (cm)</label><input id="dh" type="number" min="0" step="0.5" data-f="calc_dh"></div>
+      <div><label class="f" for="dh2">Fra LAH til LAHH (cm)</label><input id="dh2" type="number" min="0" step="0.5" data-f="calc_dh2"></div>
+      <div><label class="f" for="q">Pumpe som fyller</label><select id="q" data-f="calc_q"><option value="20">P-12002: 20 m³/h</option><option value="80">P-12003: 80 m³/h</option><option value="90">P-12001: inntil 90 m³/h</option></select></div>
+    </div>
+    <div class="result" id="calcOut">Fyll inn avstandene for å regne.</div>
+    <p style="font-size:.92rem;color:var(--muted)">Regnet med tankareal A = π · (0,79 m / 2)² ≈ 0,490 m² og pumpens kapasitet fra P&amp;ID-en. Tid = A · Δh / Q. Virkelig strømning gjennom LCV-12022 kan være lavere.</p>
+    <label class="f" for="calc_k">Hva betyr resultatet? <small>Rekker en operatør å gripe inn?</small></label>
+    <textarea id="calc_k" data-f="calc_kommentar"></textarea>
+  </div>
+
+  <div class="card rep" data-rep="Avviksmelding">
+    <label class="f" for="avvik">Fant dere avvik?</label>
+    <select id="avvik" data-f="avvik"><option value=""></option><option>Nei, alt virket som forventet</option><option>Ja, se beskrivelse</option></select>
+    <label class="f" for="av_b">Hva er avviket?</label><textarea id="av_b" data-f="avvik_beskrivelse"></textarea>
+    <label class="f" for="av_a">Mulig årsak</label><textarea id="av_a" data-f="avvik_arsak"></textarea>
+    <div class="row2">
+      <div><label class="f" for="av_s">Strakstiltak</label><textarea id="av_s" data-f="avvik_straks"></textarea></div>
+      <div><label class="f" for="av_v">Forslag til varig tiltak</label><textarea id="av_v" data-f="avvik_varig"></textarea></div>
+    </div>
+    <label class="f" for="av_m">Meldt til</label><input id="av_m" type="text" data-f="avvik_meldt" placeholder="Hvem, og når?">
+  </div>
+</section>
+
+<!-- ============ 6 REFLEKSJON ============ -->
+<section class="fase" data-p="6" data-title="Refleksjon" data-sub="Hva lærte du?" hidden>
+  <div class="feyebrow">Fase 6</div>
+  <h2>Refleksjon</h2>
+  <p class="lead">Diskuter i gruppa, men skriv svarene selv. Refleksjonen er din.</p>
+  <div class="card rep" data-rep="Refleksjon">
+    <label class="f" for="r1">Har LAHH-12076 sin egen måler, eller bruker den signalet fra LT-12075? Hva betyr det for sikkerheten?</label><textarea id="r1" data-f="r1"></textarea>
+    <label class="f" for="r2">Gikk testen som planlagt? Hva var annerledes enn dere trodde?</label><textarea id="r2" data-f="r2"></textarea>
+    <label class="f" for="r3">LCV-12022 er FC. Er det den tryggeste stillingen for denne tanken? Hva skjer med P-12002 da?</label><textarea id="r3" data-f="r3"></textarea>
+    <label class="f" for="r4">Hva ville du endret hvis tanken inneholdt et brennbart eller giftig stoff i stedet for vann?</label><textarea id="r4" data-f="r4"></textarea>
+    <label class="f" for="r5">Hvor ofte bør LAH og LAHH testes, og hva kan skje hvis det ikke gjøres? Tenk på Buncefield.</label><textarea id="r5" data-f="r5"></textarea>
+    <label class="f" for="r6">Hva lærte du, og hva ville du gjort annerledes neste gang?</label><textarea id="r6" data-f="r6"></textarea>
+  </div>
+</section>
+
+<!-- ============ 7 PORTEFØLJE ============ -->
+<section class="fase" data-p="7" data-title="Portefølje" data-sub="Rapport og egenvurdering" hidden>
+  <div class="feyebrow">Fase 7</div>
+  <h2>Portefølje</h2>
+  <p class="lead">Vurder deg selv, og lag oppdragsrapporten. Lagre den som PDF og lever den i skolens læringsplattform.</p>
+
+  <div class="rep" data-rep="Egenvurdering">
+    <div class="tscroll"><table class="t">
+      <thead><tr><th style="width:52%">Jeg kan …</th><th>Vurdering</th><th>Begrunnelse</th></tr></thead>
+      <tbody>
+        <tr><td>forklare hvordan tank 1 er sikret mot overfylling, lag for lag</td><td><select data-f="e1" aria-label="Vurdering 1"><option></option><option>På vei</option><option>Trygg</option><option>Kan forklare for andre</option></select></td><td><textarea data-f="e1b" aria-label="Begrunnelse 1"></textarea></td></tr>
+        <tr><td>lese P&amp;ID-en og tegne flytskjema og forriglingsmatrise med riktige tagger</td><td><select data-f="e2" aria-label="Vurdering 2"><option></option><option>På vei</option><option>Trygg</option><option>Kan forklare for andre</option></select></td><td><textarea data-f="e2b" aria-label="Begrunnelse 2"></textarea></td></tr>
+        <tr><td>gjennomføre testen sikkert og etter prosedyren</td><td><select data-f="e3" aria-label="Vurdering 3"><option></option><option>På vei</option><option>Trygg</option><option>Kan forklare for andre</option></select></td><td><textarea data-f="e3b" aria-label="Begrunnelse 3"></textarea></td></tr>
+        <tr><td>dokumentere målinger og avvik nøyaktig</td><td><select data-f="e4" aria-label="Vurdering 4"><option></option><option>På vei</option><option>Trygg</option><option>Kan forklare for andre</option></select></td><td><textarea data-f="e4b" aria-label="Begrunnelse 4"></textarea></td></tr>
+        <tr><td>vurdere eget arbeid opp mot kravene til helse, miljø og sikkerhet</td><td><select data-f="e5" aria-label="Vurdering 5"><option></option><option>På vei</option><option>Trygg</option><option>Kan forklare for andre</option></select></td><td><textarea data-f="e5b" aria-label="Begrunnelse 5"></textarea></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card no-rep">
+    <h4 style="margin-top:0">Kompetansemål i oppdraget</h4>
+    <ul class="b">
+      <li>kjøre prosesser sikkert og i henhold til prosedyrer for drift og helse, miljø og sikkerhet</li>
+      <li>bruke, tegne og forklare blokkskjemaer, tekniske flytskjemaer og forriglingsmatriser</li>
+      <li>beskrive og forklare virkemåten for måle-, styre- og reguleringsutstyr</li>
+      <li>identifisere og korrigere avvik og mulige feilkilder på måle-, styre- og reguleringsutstyr</li>
+      <li>bruke datablader og oppslagsverk, og foreta risikovurderinger</li>
+      <li>arbeide og evaluere eget arbeid i tråd med gjeldende standarder og regelverk for internkontroll og kvalitet og helse, miljø og sikkerhet</li>
+    </ul>
+    <p style="margin:0;font-size:.9rem;color:var(--muted)">Fra læreplanen for Vg2 kjemiprosess- og laboratoriefag (KPL02-01).</p>
+  </div>
+
+  <div class="btns no-rep">
+    <button type="button" class="btn acc" data-report>Lag oppdragsrapport</button>
+    <button type="button" class="btn ghost" data-reset>Nullstill oppdraget</button>
+  </div>
+  <p class="no-rep" style="font-size:.92rem;color:var(--muted)">Det du skriver, lagres bare i denne nettleseren på denne enheten. Lag rapporten og lagre den som PDF før du bytter maskin.</p>
+</section>
+
+<p style="margin-top:48px;font-size:.88rem"><a href="laerer.html">For læreren: mål, organisering, vurdering og løsningsforslag →</a></p>
+</div></main>
+
+<!-- Rapportvisning -->
+<div id="rapport"><div class="wrap">
+  <div class="rbar"><button type="button" class="btn ghost" data-report-close>← Tilbake til oppdraget</button><button type="button" class="btn pri" data-print>Skriv ut eller lagre som PDF</button></div>
+  <div class="rhead"><div class="otag" style="color:var(--accent)">Oppdragsrapport · Prosess · AO-01</div><h1>Sikre tank 1 mot overfylling</h1><div class="rmeta"></div></div>
+  <div class="rbody"></div>
+</div></div>
+
+<script>
+window.OPPDRAG_CALC = function(get){
+  const A = Math.PI * Math.pow(0.79/2, 2);           /* m² */
+  const dh = parseFloat(String(get("calc_dh")||"").replace(",", "."));
+  const dh2 = parseFloat(String(get("calc_dh2")||"").replace(",", "."));
+  const Q = parseFloat(get("calc_q") || 20);         /* m³/h */
+  const out = document.getElementById("calcOut");
+  const qs = Q / 3600;                                 /* m³/s */
+  const fmt = (x, d) => x.toLocaleString("nb-NO", {maximumFractionDigits: d, minimumFractionDigits: d});
+  const parts = [];
+  if (!isNaN(dh) && dh > 0){ const V = A * dh / 100; parts.push("LAHH → overløp: <b>" + fmt(V*1000, 0) + " L</b> på <b>" + fmt(V/qs, 1) + " s</b>"); }
+  if (!isNaN(dh2) && dh2 > 0){ const V2 = A * dh2 / 100; parts.push("LAH → LAHH: <b>" + fmt(V2*1000, 0) + " L</b> på <b>" + fmt(V2/qs, 1) + " s</b>"); }
+  out.innerHTML = parts.length ? parts.join("<br>") + "<br><span style='opacity:.75'>ved " + fmt(Q, 0) + " m³/h</span>" : "Fyll inn avstandene for å regne.";
+};
+</script>
+<script src="../felles/oppdrag.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lærerside: Sikre tank 1 mot overfylling – Kjemiprosess læringslab</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../felles/oppdrag.css">
+</head>
+<body>
+<div class="sitebar"><div class="wrap"><a href="./">← Til oppdraget</a><span>Kjemiprosess <b>læringslab</b></span></div></div>
+<header class="ohead"><div class="wrap">
+  <div class="otag">Lærerside · Oppdrag 01 · Pilot</div>
+  <h1>Sikre tank 1 mot overfylling</h1>
+  <p>Mål, organisering, forberedelser, vurdering og løsningsforslag. Tagger og pumpedata er hentet fra P&amp;ID-en «Flytskjema PUMPEROM» (17.06.2025).</p>
+</div></header>
+
+<main><div class="wrap"><section class="fase" style="max-width:900px">
+
+<h3 style="margin-top:0">Kompetansemål</h3>
+<ul class="b">
+  <li><strong>Produksjon og tjenester:</strong> kjøre prosesser sikkert og i henhold til prosedyrer for drift og helse, miljø og sikkerhet · bruke, tegne og forklare blokkskjemaer, tekniske flytskjemaer og forriglingsmatriser · beskrive og forklare virkemåten for måle-, styre- og reguleringsutstyr og kunne bruke utstyret i laboratoriet · identifisere og korrigere avvik og mulige feilkilder på måle-, styre- og reguleringsutstyr</li>
+  <li><strong>Analyse, dokumentasjon og kvalitet:</strong> bruke datablader og oppslagsverk, og foreta risikovurderinger · arbeide og evaluere eget arbeid i tråd med gjeldende standarder og regelverk for internkontroll og kvalitet og helse, miljø og sikkerhet</li>
+</ul>
+
+<h3>Organisering</h3>
+<ul class="b">
+  <li>Par eller grupper på 2–3 med rollene operatør, observatør og loggfører. Hver elev lager sin egen oppdragsrapport med egen refleksjon og egenvurdering.</li>
+  <li>Risikovurderingen godkjennes muntlig av lærer før fase 4. Eleven skriver lærerens navn og dato i rapporten.</li>
+  <li>Elevene kan bevege seg fritt mellom fasene. Teorifasen er valgfri for den som kan stoffet.</li>
+  <li>Forslag til tidsbruk, juster etter klassen: én økt til oppdrag, SJA og simulering, én økt på anlegget og én økt til dokumentasjon og refleksjon.</li>
+</ul>
+
+<h3>Forberedelser</h3>
+<div class="checks">
+  <label><input type="checkbox"> Kjenn settpunktene for LAH-12077 og LAHH-12076 i styresystemet. De står ikke på P&amp;ID-en.</label>
+  <label><input type="checkbox"> Sjekk at skolens prosedyre for pumperommet er tilgjengelig for elevene.</label>
+  <label><input type="checkbox"> Sjekk at varmeelementene i tank 1 er av, og at overløp og sluk er frie.</label>
+  <label><input type="checkbox"> Ha målestokk eller målebånd for manuell nivåmåling.</label>
+  <label><input type="checkbox"> Avklar om elevene skal teste HH-stoppet på ekte, eller bare kartlegge og bruke simuleringen.</label>
+</div>
+
+<h3>Løsningsforslag: instrumentoversikt</h3>
+<div class="tscroll"><table class="t">
+  <thead><tr><th>Tagg</th><th>Funksjon</th><th>Type og plassering</th></tr></thead>
+  <tbody>
+    <tr><td class="tag">LT-12075</td><td>Nivåmåling, gir signal til LIC-12094</td><td>DP-celle, nede på tanken. Måler trykket fra væskesøylen.</td></tr>
+    <tr><td class="tag">LT-120xx</td><td>Nivåmåling, uavhengig av LT-12075</td><td>Ultralyd, på toppen av tanken. Måler avstanden ned til overflaten.</td></tr>
+    <tr><td class="tag">LIC-12094</td><td>Nivåregulator. Kan regulere tank 1 eller tank 2, valgt på HMI (note 1)</td><td>I styresystemet</td></tr>
+    <tr><td class="tag">LCV-12022</td><td>Reguleringsventil på utløpet fra P-12002, styrt av LIC-12094 via FY-12093 (I/P)</td><td>FC: stenger ved tap av signal eller luft</td></tr>
+    <tr><td class="tag">LAH-12077</td><td>Høy nivå, alarm til operatør</td><td>Oppe på tanken</td></tr>
+    <tr><td class="tag">LAHH-12076</td><td>Høy-høy nivå, stopper pumpene (note 3)</td><td>Oppe på tanken, over LAH</td></tr>
+    <tr><td class="tag">LZ-12078</td><td>Lavt nivå</td><td>Nede på tanken</td></tr>
+    <tr><td class="tag">P-12002</td><td>Pumpe 2, fyller tanken</td><td>2,2 kW, 1450 o/min, 20 m³/h ved 15 mVs, mykstart</td></tr>
+    <tr><td class="tag">FZ-12072</td><td>Strømningsvakt. LL strømning inn på pumpen stopper den (note 2)</td><td>På innløpet til P-12002</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Løsningsforslag: forriglingsmatrise</h3>
+<div class="tscroll"><table class="t">
+  <thead><tr><th>Årsak</th><th>Alarm</th><th>Stopper P-12002</th><th>Stopper alle pumper</th><th>Manuell tilbakestilling</th></tr></thead>
+  <tbody>
+    <tr><td class="tag">LAH-12077</td><td class="c">✓</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
+    <tr><td class="tag">LAHH-12076</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓ (note 3)</td><td class="c">Sjekk på anlegget</td></tr>
+    <tr><td class="tag">LZ-12078</td><td class="c">Sjekk</td><td class="c" colspan="3">Virkning er ikke beskrevet i notene. Sjekk styresystemet.</td></tr>
+    <tr><td class="tag">FZ-12072</td><td class="c">✓</td><td class="c">✓ (note 2)</td><td class="c"></td><td class="c">Sjekk på anlegget</td></tr>
+    <tr><td>Nødstopp</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓ (typisk)</td></tr>
+  </tbody>
+</table></div>
+<p>Hvis elevenes matrise avviker fra det de observerte på anlegget, er det et godt utgangspunkt for en avviksmelding eller en diskusjon om dokumentasjon mot virkelighet.</p>
+
+<h3>Løsningsforslag: beregning</h3>
+<p>Tankareal A = π · 0,395² ≈ 0,490 m². Eksempel med 10 cm fra LAHH til overløp: V = 0,490 · 0,10 ≈ 0,049 m³ = 49 liter.</p>
+<ul class="b">
+  <li>P-12002, 20 m³/h = 0,0056 m³/s: t ≈ 0,049 / 0,0056 ≈ 8,8 s</li>
+  <li>P-12003, 80 m³/h: t ≈ 2,2 s</li>
+</ul>
+<p>Poenget: marginen er sekunder, ikke minutter. Ingen operatør rekker å gripe inn etter LAHH, derfor må stoppet være automatisk. LAH-alarmen er det som gir operatøren tid.</p>
+
+<h3>Løsningsforslag: refleksjon</h3>
+<ul class="b">
+  <li><strong>Egen måler:</strong> Bruker LAHH samme måler som LT, kan én målefeil slå ut både regulering og pumpestopp (felles feil). LAHH bør ha egen måler, gjerne med et annet måleprinsipp.</li>
+  <li><strong>FC-ventil:</strong> Det er tryggest at innløpsventilen stenger ved tap av luft, så tanken ikke fylles. Da går P-12002 mot stengt ventil, og den bør ikke gjøre det lenge.</li>
+  <li><strong>Farlig stoff:</strong> Overløp til sluk er ikke greit. Overløpet må gå til lukket oppsamling, tanken bør stå i et oppsamlingskar, og det kan trengs flere uavhengige nivåbrytere og gassdetektorer.</li>
+  <li><strong>Testing:</strong> Sikkerhetsfunksjoner testes etter fast program, og testen dokumenteres. En bryter som aldri testes, kan ha vært defekt lenge (skjult feil). Det var en av årsakene til Buncefield-ulykken i 2005.</li>
+</ul>
+
+<h3>Vurderingskriterier</h3>
+<div class="tscroll"><table class="t">
+  <thead><tr><th>Kriterium</th><th>På vei</th><th>Trygg</th><th>Kan forklare for andre</th></tr></thead>
+  <tbody>
+    <tr><td>Lag på lag-sikring</td><td>Kan nevne regulering og alarm</td><td>Forklarer alle lagene på tank 1 og hva hvert lag gjør</td><td>Forklarer felles feil og skjult feil, og vurderer om tank 1 er godt nok sikret</td></tr>
+    <tr><td>Flytskjema og forriglingsmatrise</td><td>Flytskjema med de viktigste delene</td><td>Riktige tagger, signallinjer og matrise som stemmer med anlegget</td><td>Finner og forklarer forskjeller mellom dokumentasjon og anlegg</td></tr>
+    <tr><td>Sikker gjennomføring</td><td>Følger prosedyren med hjelp</td><td>Gjennomfører etter SJA og prosedyre, med tydelige roller</td><td>Tar initiativ til stopp og forbedringer i prosedyren</td></tr>
+    <tr><td>Dokumentasjon og avvik</td><td>Logg med noen hull</td><td>Fullstendig logg og beregning, avvik beskrevet</td><td>Vurderer måleusikkerhet og foreslår varige tiltak</td></tr>
+    <tr><td>Egenvurdering mot HMS-krav</td><td>Beskriver hva som ble gjort</td><td>Vurderer eget arbeid mot SJA og prosedyre</td><td>Kobler egen jobb til regelverk og erfaringer fra storulykker</td></tr>
+  </tbody>
+</table></div>
+
+</section></div></main>
+</body>
+</html>
